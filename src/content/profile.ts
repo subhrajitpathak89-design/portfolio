@@ -4,14 +4,13 @@ import type { Profile } from "@/types";
 export const siteUrl = "https://example.com";
 
 export const profile: Profile = {
-  name: "Alex Rivera",
+  name: "Subhrajit",
   role: "Multidisciplinary Designer",
   tagline:
     "I design brands, interfaces and stories that stay legible at every scale — from a 16px icon to a billboard.",
   bio: [
-    "Alex Rivera is a placeholder designer working across product design, brand identity, motion and editorial. This bio is sample copy: replace it with your own story in src/content/profile.ts.",
-    "The work below spans mobile products, identity systems, motion reels, marketing sites and print — the kind of range a mixed-discipline portfolio is meant to show. Every case study on this site is placeholder content.",
-    "When not pushing pixels, this placeholder person collects type specimens, rides slow bicycles and over-documents their process.",
+    "Placeholder bio copy — replace with your own story in src/content/profile.ts. My journey into design started long before product design, spending years experimenting across different tools and disciplines before finding my focus.",
+    "Today, I work on consumer and enterprise products, where I enjoy turning complex workflows into experiences that feel simple and intuitive. I'm particularly drawn to problems that sit at the intersection of user needs, business goals, and technical constraints.",
   ],
   location: "Lisbon, Portugal (placeholder)",
   email: "hello@example.com",

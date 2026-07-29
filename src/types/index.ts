@@ -12,6 +12,14 @@ export type Project = {
   featured: boolean;
 };
 
+export type Experience = {
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  summary: string;
+};
+
 export type SkillCategory = {
   name: string;
   skills: string[];

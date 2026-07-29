@@ -1,67 +1,39 @@
-"use client";
-
-import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ImageIcon } from "lucide-react";
 import { profile } from "@/content/profile";
-import { revealClass, useInView } from "@/lib/useInView";
-import { cn } from "@/lib/utils";
-
-const approach = [
-  {
-    title: "Start with the constraint",
-    body: "The best answer usually hides inside the hardest limitation — a budget, a viewport, a printing method.",
-  },
-  {
-    title: "Design the system, not the screen",
-    body: "One beautiful artefact is luck. A system that stays beautiful after fifty people touch it is design.",
-  },
-  {
-    title: "Ship, then sharpen",
-    body: "Nothing is finished in the file. Real feedback only arrives once the work is out in the world.",
-  },
-];
 
 export function About() {
-  const { ref, inView } = useInView<HTMLDivElement>();
-
   return (
-    <section id="about" className="border-b border-border py-20 sm:py-28">
-      <Container>
-        <SectionHeading
-          eyebrow="About"
-          title="A designer who works across disciplines, not around them."
-        />
+    <section id="about" className="bg-background py-24 sm:py-32">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2 lg:px-8">
+        <div className="flex justify-center lg:justify-start">
+          <div className="-rotate-3 rounded-sm bg-surface p-3 pb-16 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div className="flex aspect-[4/5] w-64 items-center justify-center bg-muted sm:w-80">
+              <ImageIcon className="h-12 w-12 text-muted-foreground" aria-hidden />
+            </div>
+          </div>
+        </div>
 
-        <div
-          ref={ref}
-          className={cn(
-            "mt-12 grid gap-12 transition-all duration-700 ease-out lg:grid-cols-[1.1fr_0.9fr]",
-            revealClass(inView),
-          )}
-        >
-          <div className="space-y-5">
+        <div>
+          <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-accent">
+            <span className="inline-block h-2.5 w-2.5 rotate-45 bg-accent" aria-hidden />
+            About me
+          </div>
+
+          <h2 className="mt-4 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            a little about myself
+          </h2>
+
+          <div className="mt-8 space-y-6">
             {profile.bio.map((paragraph) => (
-              <p key={paragraph.slice(0, 24)} className="text-base leading-relaxed text-muted-foreground">
+              <p key={paragraph.slice(0, 24)} className="text-lg leading-relaxed text-muted-foreground">
                 {paragraph}
               </p>
             ))}
           </div>
 
-          <ul className="flex flex-col gap-4">
-            {approach.map((item) => (
-              <li
-                key={item.title}
-                className="rounded-2xl border border-border bg-surface p-6 transition-colors duration-300 hover:border-accent/40"
-              >
-                <h3 className="font-display text-base font-semibold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-              </li>
-            ))}
-          </ul>
+          <p className="mt-8 font-script text-4xl text-accent">{profile.name}.</p>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
