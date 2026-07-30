@@ -1,13 +1,16 @@
 import { techStack } from "@/content/techstack";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function TechStack() {
-  const loop = [...techStack, ...techStack];
+  const loop = [...techStack, ...techStack, ...techStack, ...techStack];
 
   return (
-    <section className="border-y border-border bg-background py-14">
-      <p className="text-center text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-        Tools I use every day
-      </p>
+    <section id="skills" className="bg-background py-14">
+      <Reveal>
+        <p className="text-center text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          Tools I use every day
+        </p>
+      </Reveal>
 
       <div
         className="relative mt-8 overflow-hidden"

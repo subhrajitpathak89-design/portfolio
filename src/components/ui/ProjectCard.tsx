@@ -20,11 +20,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <div
-      className={`relative overflow-hidden rounded-[2rem] bg-gradient-to-br ${gradient} px-8 py-10 shadow-[0_30px_60px_rgba(0,0,0,0.4)] sm:px-12 sm:py-12`}
+      className={`relative flex min-h-[560px] flex-col overflow-hidden rounded-[2rem] bg-gradient-to-br ${gradient} shadow-[0_30px_60px_rgba(0,0,0,0.4)] sm:min-h-[600px]`}
     >
-      <div className="relative z-10 flex max-w-xl flex-col">
+      {/* Frosted glass content panel */}
+      <div className="relative z-10 flex max-w-xl flex-col px-8 pt-10 sm:px-12 sm:pt-12">
         <div className="flex items-center justify-between text-white">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-sm font-semibold">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-sm font-semibold backdrop-blur-md">
             {number}
           </span>
           <span className="text-sm font-medium text-white/70">{project.year}</span>
@@ -35,13 +36,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </h3>
 
         <div className="mt-6 flex flex-wrap gap-2 border-t border-white/20 pt-6">
-          <span className="rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white">
+          <span className="rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
             {project.category}
           </span>
           {project.tags.slice(0, 2).map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white"
+              className="rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md"
             >
               {tag}
             </span>
@@ -64,7 +65,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               <span className="font-semibold text-neutral-900">View Case Study</span>
             </Link>
           ) : (
-            <span className="inline-flex items-center gap-3 rounded-full bg-white/20 py-1 pl-1 pr-5 text-white/70">
+            <span className="inline-flex items-center gap-3 rounded-full bg-white/20 py-1 pl-1 pr-5 text-white/70 backdrop-blur-md">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
                 <Lock className="h-4 w-4" aria-hidden />
               </span>
@@ -74,11 +75,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
       </div>
 
-      <div
-        className="pointer-events-none absolute -bottom-10 -right-6 hidden aspect-[9/19] w-48 rounded-[2rem] border border-white/25 bg-white/10 backdrop-blur-sm sm:right-10 sm:flex sm:items-center sm:justify-center md:flex lg:-bottom-16 lg:w-56"
-        aria-hidden
-      >
-        <ImageIcon className="h-10 w-10 text-white/50" />
+      {/* Blurred "screenshot" placeholder peeking in below the text, like a photo bleeding under glass */}
+      <div className="relative mt-8 flex-1 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/20" />
+        <div className="absolute inset-x-6 bottom-0 top-4 rounded-t-2xl border border-white/15 bg-white/10 backdrop-blur-2xl sm:inset-x-10">
+          <div className="flex h-full items-center justify-center">
+            <ImageIcon className="h-16 w-16 text-white/30 blur-[1px]" aria-hidden />
+          </div>
+        </div>
       </div>
     </div>
   );
