@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { navLinks } from "@/content/nav";
@@ -42,9 +43,9 @@ export function Navbar() {
         <Link
           href="/#home"
           aria-label={`${profile.name} — home`}
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent font-display text-sm font-bold text-accent-foreground"
+          className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full"
         >
-          {profile.name.charAt(0)}
+          <Image src="/images/logo.png" alt="" fill priority className="object-cover" />
         </Link>
 
         <nav className="flex items-center gap-5 sm:gap-7" aria-label="Main">

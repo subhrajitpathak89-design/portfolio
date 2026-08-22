@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const GREETINGS = [
   "Hi",
@@ -18,36 +18,39 @@ const GREETINGS = [
   "Merhaba",
 ];
 
+const DURATION_MS = 2000;
+
 export function Preloader() {
   const [done, setDone] = useState(false);
   const [display, setDisplay] = useState(0);
   const [greetingIndex, setGreetingIndex] = useState(0);
-  const progress = useMotionValue(0);
-  const smoothProgress = useSpring(progress, { duration: 1800, bounce: 0 });
-  const rounded = useTransform(smoothProgress, (v) => Math.round(v));
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    progress.set(100);
 
-    const unsubscribe = rounded.on("change", (v) => setDisplay(v));
+    const startedAt = Date.now();
+
+    const progressInterval = setInterval(() => {
+      const elapsed = Date.now() - startedAt;
+      setDisplay(Math.min(100, Math.round((elapsed / DURATION_MS) * 100)));
+    }, 30);
 
     const greetingInterval = setInterval(() => {
       setGreetingIndex((i) => (i + 1) % GREETINGS.length);
     }, 160);
 
     const timeout = setTimeout(() => {
+      setDisplay(100);
       setDone(true);
       document.body.style.overflow = "";
-    }, 2000);
+    }, DURATION_MS);
 
     return () => {
-      unsubscribe();
+      clearInterval(progressInterval);
       clearInterval(greetingInterval);
       clearTimeout(timeout);
       document.body.style.overflow = "";
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

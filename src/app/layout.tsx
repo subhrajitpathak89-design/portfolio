@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, Caveat } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/layout/Navbar";
 import { Preloader } from "@/components/layout/Preloader";
@@ -13,8 +13,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
   display: "swap",
 });
@@ -24,6 +24,7 @@ const caveat = Caveat({
   subsets: ["latin"],
   display: "swap",
 });
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
     images: ["/images/og-image.png"],
   },
   icons: {
-    icon: "/icon.svg",
+    icon: "/favicon.png",
   },
 };
 
@@ -77,7 +78,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${spaceGrotesk.variable} ${caveat.variable} h-full antialiased`}
+      className={`${inter.variable} ${plusJakartaSans.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans">
         <ThemeProvider

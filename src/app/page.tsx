@@ -4,6 +4,7 @@ import { Contact } from "@/components/sections/Contact";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { TechStack } from "@/components/sections/TechStack";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Work } from "@/components/sections/Work";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <TechStack />
       <Work />
       <Bento />
+      <Testimonials />
       <Contact />
     </>
   );

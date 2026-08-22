@@ -1,71 +1,17 @@
-"use client";
-
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/content/projects";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { Reveal } from "@/components/ui/Reveal";
-
-gsap.registerPlugin(ScrollTrigger);
+import { StackCard } from "@/components/ui/StackCard";
 
 const HOME_CASE_STUDY_LIMIT = 3;
 
 export function Work() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const featured = projects.filter((project) => project.featured).slice(0, HOME_CASE_STUDY_LIMIT);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".stack-card");
-
-      cards.forEach((card, i) => {
-        const pinStart = 96 + i * 16;
-
-        // The last card has nothing sliding over it, so pinning it with
-        // pinSpacing:false leaves no reserved scroll space for its pin
-        // duration — the next section renders immediately underneath and
-        // bleeds through while the card is still fixed on screen. Only pin
-        // cards that get physically covered by a following card.
-        if (i === cards.length - 1) return;
-
-        // Pin each card in place, without reserving extra scroll space,
-        // so the next card can scroll up and physically cover it.
-        ScrollTrigger.create({
-          trigger: card,
-          start: `top top+=${pinStart}`,
-          end: () => `+=${card.offsetHeight}`,
-          pin: true,
-          pinSpacing: false,
-        });
-
-        // Ease the outgoing card back slightly as the next one slides over it,
-        // giving the stack some depth instead of a flat, abrupt cut.
-        gsap.to(card, {
-          scale: 0.94,
-          ease: "none",
-          transformOrigin: "50% 0%",
-          scrollTrigger: {
-            trigger: card,
-            start: `top top+=${pinStart}`,
-            end: () => `+=${card.offsetHeight}`,
-            scrub: true,
-          },
-        });
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [featured.length]);
-
   return (
-    <section
-      id="work"
-      ref={containerRef}
-      className="bg-background pb-8 pt-24 sm:pt-32"
-    >
+    <section id="work" className="bg-background pb-8 pt-24 sm:pt-32">
       <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
         <Reveal>
           <div className="flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide text-accent">
@@ -89,16 +35,14 @@ export function Work() {
 
       <div className="relative mt-20">
         {featured.map((project, index) => (
-          <div key={project.slug} className="stack-card relative mb-8" style={{ zIndex: index + 1 }}>
-            <div className="mx-auto max-w-6xl px-6 lg:px-8">
-              <ProjectCard project={project} index={index} />
-            </div>
-          </div>
+          <StackCard key={project.slug} index={index} isLast={index === featured.length - 1}>
+            <ProjectCard project={project} index={index} />
+          </StackCard>
         ))}
 
-        {/* Buffer so the final card's pin transition fully resolves in the
-            viewport before the next section starts — without it the last
-            card can still visually overlap the section below mid-scroll. */}
+        {/* Buffer so the final sticky card fully releases before the CTA
+            below becomes visible — without it the CTA sits right where the
+            last card is still resolving and looks tucked/hidden underneath. */}
         <div className="h-[12vh] sm:h-[16vh]" aria-hidden />
       </div>
 

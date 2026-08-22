@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { projects } from "@/content/projects";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { Reveal } from "@/components/ui/Reveal";
+import { StackCard } from "@/components/ui/StackCard";
 
 export default function CaseStudiesPage() {
   const categories = useMemo(
@@ -72,20 +73,21 @@ export default function CaseStudiesPage() {
           </div>
         </Reveal>
 
-        {filtered.length > 0 ? (
-          <div className="mt-16 grid gap-8 lg:grid-cols-2">
-            {filtered.map((project, index) => (
-              <Reveal key={project.slug} delay={0.05 * index} y={32}>
-                <ProjectCard project={project} index={index} />
-              </Reveal>
-            ))}
-          </div>
-        ) : (
-          <p className="mt-16 text-center text-muted-foreground">
-            No case studies in this category yet.
-          </p>
-        )}
       </div>
+
+      {filtered.length > 0 ? (
+        <div className="relative mt-16">
+          {filtered.map((project, index) => (
+            <StackCard key={project.slug} index={index} isLast={index === filtered.length - 1}>
+              <ProjectCard project={project} index={index} />
+            </StackCard>
+          ))}
+        </div>
+      ) : (
+        <p className="mt-16 text-center text-muted-foreground">
+          No case studies in this category yet.
+        </p>
+      )}
     </main>
   );
 }
