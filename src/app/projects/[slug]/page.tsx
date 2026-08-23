@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check, ImageIcon } from "lucide-react";
@@ -37,6 +38,30 @@ function ImageFrame({ className = "" }: { className?: string }) {
       className={`flex items-center justify-center rounded-xl border border-v2-ink/10 bg-white ${className}`}
     >
       <ImageIcon className="size-9 text-v2-ink/20" strokeWidth={1.5} aria-hidden />
+    </div>
+  );
+}
+
+/**
+ * A screen from the work. These are product UI shots on white or dark chrome,
+ * so they get a hairline frame to stop them bleeding into the cream page.
+ */
+function StepShot({
+  src,
+  alt,
+  className = "",
+}: {
+  src?: string;
+  alt: string;
+  className?: string;
+}) {
+  if (!src) return <ImageFrame className={`aspect-[4/3] w-full ${className}`} />;
+
+  return (
+    <div
+      className={`relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-v2-ink/10 bg-white ${className}`}
+    >
+      <Image src={src} alt={alt} fill sizes="(min-width: 640px) 45vw, 90vw" className="object-cover" />
     </div>
   );
 }
@@ -121,7 +146,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       <Reveal delay={0.1} y={40}>
         <div className="mx-auto mt-12 max-w-5xl px-6 lg:px-8">
-          <ImageFrame className="aspect-[16/9] w-full" />
+          {project.coverImage ? (
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-v2-ink/10 bg-white">
+              <Image
+                src={project.coverImage}
+                alt={`${project.title} cover`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 64rem, 100vw"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <ImageFrame className="aspect-[16/9] w-full" />
+          )}
         </div>
       </Reveal>
 
@@ -212,8 +250,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                           {step.body}
                         </p>
                       </div>
-                      <ImageFrame
-                        className={`aspect-[4/3] w-full ${index % 2 === 1 ? "sm:order-1" : ""}`}
+                      <StepShot
+                        src={step.image}
+                        alt={`${project.title} — ${step.title}`}
+                        className={index % 2 === 1 ? "sm:order-1" : ""}
                       />
                     </div>
                   </Reveal>

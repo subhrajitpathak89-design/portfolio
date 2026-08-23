@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ImageIcon, Lock } from "lucide-react";
 import type { Project } from "@/types";
@@ -69,9 +70,19 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-v2-ink/10 bg-v2-cream lg:aspect-auto lg:h-full lg:min-h-[320px]">
-          <div className="flex h-full w-full items-center justify-center">
-            <ImageIcon className="size-12 text-v2-ink/15" strokeWidth={1.5} aria-hidden />
-          </div>
+          {project.coverImage ? (
+            <Image
+              src={project.coverImage}
+              alt={`${project.title} cover`}
+              fill
+              sizes="(min-width: 1024px) 45vw, 90vw"
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <ImageIcon className="size-12 text-v2-ink/15" strokeWidth={1.5} aria-hidden />
+            </div>
+          )}
         </div>
       </div>
     </div>

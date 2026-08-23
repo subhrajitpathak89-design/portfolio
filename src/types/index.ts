@@ -6,6 +6,8 @@ export type ProjectResult = {
 export type ProjectApproachStep = {
   title: string;
   body: string;
+  /** Screen from the work itself; falls back to a placeholder frame when unset. */
+  image?: string;
 };
 
 export type Project = {
