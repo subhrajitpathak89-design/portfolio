@@ -408,3 +408,9 @@
 .v2-orbit-host:hover .animate-v2-orbit-counter {
   animation-play-state: paused;
 }
+
+/* Pause a ticker on hover, for marquees the reader may want to stop and look
+   at — the hanging works line, rather than the ABOUT strips. */
+.v2-marquee-host:hover .animate-v2-marquee {
+  animation-play-state: paused;
+}
