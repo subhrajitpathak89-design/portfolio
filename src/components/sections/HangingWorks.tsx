@@ -1,9 +1,5 @@
-import Image from "next/image";
-import { ImageIcon } from "lucide-react";
 import { Marquee } from "@/components/ui/Marquee";
 import { SlowOnHover } from "@/components/ui/SlowOnHover";
-import { projects } from "@/content/projects";
-import type { Project } from "@/types";
 
 /*
  * Geometry note.
@@ -45,10 +41,18 @@ function wireY(x: number) {
   );
 }
 
+/**
+ * A washing line of blank pegged photo frames.
+ *
+ * Deliberately carries no imagery or captions: the case-study section directly
+ * above already shows every cover, so putting them here again was repetition
+ * rather than content. With nothing to read, the whole section is decorative —
+ * which is why it exposes nothing to assistive tech.
+ */
 export function HangingWorks() {
   return (
     <section
-      id="gallery"
+      aria-hidden
       className="relative overflow-hidden bg-v2-cream pb-24 pt-20 lg:pb-32 lg:pt-24"
     >
       <header className="mx-auto max-w-6xl px-6 text-center lg:px-8">
@@ -70,20 +74,6 @@ export function HangingWorks() {
           <Panel />
         </Marquee>
       </SlowOnHover>
-
-      {/*
-        The marquee is decorative — it duplicates its content to loop, so
-        exposing it would read every title twice, and its cards are not
-        focusable. This list carries the same information once, for assistive
-        tech only.
-      */}
-      <ul className="sr-only">
-        {projects.map((project) => (
-          <li key={project.slug}>
-            {project.title} — {project.category}
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }
@@ -111,26 +101,13 @@ function Panel() {
       </svg>
 
       {SLOT_XS.map((x, index) => (
-        <PeggedCard
-          key={x}
-          project={projects[index % projects.length]}
-          x={x}
-          rotate={SLOT_ROTATIONS[index]}
-        />
+        <PeggedCard key={x} x={x} rotate={SLOT_ROTATIONS[index]} />
       ))}
     </div>
   );
 }
 
-function PeggedCard({
-  project,
-  x,
-  rotate,
-}: {
-  project: Project;
-  x: number;
-  rotate: number;
-}) {
+function PeggedCard({ x, rotate }: { x: number; rotate: number }) {
   return (
     <div
       className="absolute"
@@ -143,30 +120,12 @@ function PeggedCard({
         transformOrigin: "top center",
       }}
     >
-      <span
-        aria-hidden
-        className="absolute -top-3 left-1/2 z-10 h-7 w-4 -translate-x-1/2 rounded-[3px] bg-v2-green shadow-[0_2px_4px_rgba(17,17,17,0.25)]"
-      />
+      <span className="absolute -top-3 left-1/2 z-10 h-7 w-4 -translate-x-1/2 rounded-[3px] bg-v2-green shadow-[0_2px_4px_rgba(17,17,17,0.25)]" />
 
-      {/* Image only. The deeper bottom border is the one asymmetry kept from
-          the polaroid frame — without it, a captionless card just reads as a
-          plain white box. */}
+      {/* The deeper bottom border is the one asymmetry kept from the polaroid
+          frame — without it, an empty card just reads as a plain white box. */}
       <div className="w-[240px] rounded-xl bg-white p-3 pb-6 shadow-[0_18px_36px_-16px_rgba(17,17,17,0.35)]">
-        <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-v2-ink/5">
-          {project.coverImage ? (
-            <Image
-              src={project.coverImage}
-              alt=""
-              fill
-              sizes="240px"
-              className="object-cover"
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center text-v2-ink/25">
-              <ImageIcon aria-hidden className="size-7" strokeWidth={1.5} />
-            </div>
-          )}
-        </div>
+        <div className="aspect-[3/4] rounded-lg bg-v2-ink/5" />
       </div>
     </div>
   );
