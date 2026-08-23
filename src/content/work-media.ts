@@ -19,7 +19,6 @@ export const workMedia: Record<string, { width: number; height: number }> = {
   "/images/v2/work/saral-04.webp": { width: 1200, height: 900 },
   "/images/v2/work/saral-cover.webp": { width: 1600, height: 1248 },
   "/images/v2/work/wizlo-01.webp": { width: 1200, height: 900 },
-  "/images/v2/work/wizlo-02.webp": { width: 1200, height: 800 },
   "/images/v2/work/wizlo-03.webp": { width: 1200, height: 706 },
   "/images/v2/work/wizlo-04.webp": { width: 1200, height: 900 },
   "/images/v2/work/wizlo-cover.webp": { width: 1600, height: 1200 },

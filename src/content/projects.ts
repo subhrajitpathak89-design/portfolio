@@ -144,11 +144,6 @@ export const projects: Project[] = [
         image: "/images/v2/work/wizlo-01.webp",
       },
       {
-        title: "Mobile first, desktop validated",
-        body: "Every component was built to work at 375px before being extended upward. Most patients open this in a waiting room, not at a desk — treating desktop as primary would have shipped something that felt foreign to the majority on day one.",
-        image: "/images/v2/work/wizlo-02.webp",
-      },
-      {
         title: "Table first for clinic staff, always",
         body: "The all-clients view is a dense data table by design: staff scan by name, filter by status, and need a record fast. Card grids look friendlier but slow down anyone who already knows who they are looking for.",
         image: "/images/v2/work/wizlo-03.webp",
