@@ -17,6 +17,12 @@ type MarqueeProps = {
  * identical copies of its content and slides exactly -50%, so it lands on the
  * start of the second copy and repeats without a visible seam.
  *
+ * IMPORTANT — `repeat` must make one copy at least as wide as the widest
+ * viewport this will run on. At the loop point the second copy alone has to
+ * fill the frame; if it is narrower, the track runs out and a gap opens at the
+ * trailing edge. The seam looks perfect at every other moment, which is what
+ * makes this easy to miss. Sized here for ultrawide (~3440px).
+ *
  * The whole thing is decorative repetition, so it is hidden from assistive
  * tech — the section's real heading carries the meaning.
  */

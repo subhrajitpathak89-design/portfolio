@@ -96,8 +96,13 @@ export function About() {
 function AboutStrips() {
   return (
     <div className="relative h-32 sm:h-40 lg:h-48">
+      {/* repeat/duration scaled together: enough units that one copy covers an
+          ultrawide frame, with the duration grown to match so the on-screen
+          speed is unchanged. These strips are 116% wide for the rotation, so
+          the bar to clear is wider than the viewport itself. */}
       <Marquee
-        duration={26}
+        repeat={20}
+        duration={64}
         className="absolute -left-[8%] top-4 w-[116%] -rotate-[2.5deg] bg-v2-orange py-2.5 sm:top-6 sm:py-3.5"
       >
         <span className="px-6 font-grotesk text-xl font-black uppercase tracking-tight text-white sm:px-10 sm:text-3xl lg:text-4xl">
@@ -107,7 +112,8 @@ function AboutStrips() {
 
       <Marquee
         reverse
-        duration={30}
+        repeat={14}
+        duration={52}
         className="absolute -left-[8%] top-16 w-[116%] rotate-[4deg] bg-v2-ink py-2.5 sm:top-20 sm:py-3.5 lg:top-24"
       >
         <span className="px-6 font-grotesk text-xl font-black uppercase tracking-tight text-white sm:px-10 sm:text-3xl lg:text-4xl">

@@ -60,8 +60,13 @@ export function HangingWorks() {
         </h2>
       </header>
 
+      {/* Three panels per copy (3600px) so one copy still covers an ultrawide
+          frame at the loop point. At repeat={1} a 1200px copy left a 225px gap
+          on a 1440px screen every time the track wrapped. */}
       <SlowOnHover className="mt-16 lg:mt-20">
-        <Marquee repeat={1} duration={40}>
+        {/* 120s keeps the on-screen speed identical to the old 1200px/40s —
+            the track got 3x longer, so the duration has to as well. */}
+        <Marquee repeat={3} duration={120}>
           <Panel />
         </Marquee>
       </SlowOnHover>
