@@ -11,7 +11,8 @@ import type { Project } from "@/types";
  */
 const CARD_COLORS = [
   "bg-v2-periwinkle",
-  "bg-v2-orange",
+  // Deeper than the brand orange: white body copy on #ff5a00 is only 3.13:1.
+  "bg-v2-orange-ink",
   "bg-v2-forest",
   "bg-v2-ink",
 ];
@@ -90,7 +91,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.title}
           </h3>
 
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-white/90 sm:text-lg">
+          <p className="mt-5 max-w-lg text-base leading-relaxed text-white sm:text-lg">
             {project.summary}
           </p>
 
@@ -139,7 +140,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 // Same placeholder contract as the About collage: set
                 // `coverImage` in content/projects.ts and it swaps in with no
                 // layout change.
-                <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-v2-ink/30">
+                <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-v2-ink/65">
                   <ImageIcon aria-hidden className="size-8" strokeWidth={1.5} />
                   <span className="font-mono text-[10px] font-bold uppercase tracking-[0.16em]">
                     cover image

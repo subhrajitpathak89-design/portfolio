@@ -108,7 +108,7 @@ export function VinylPlayer() {
       </button>
 
       <div className="mt-4 px-1 pb-1">
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-600">
           {hasTrack ? music.label : "No track loaded"}
         </p>
         <p className="mt-1 font-grotesk text-base font-black leading-tight text-neutral-900">

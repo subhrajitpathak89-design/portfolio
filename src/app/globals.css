@@ -11,13 +11,15 @@
 @custom-variant stack-scroll (@media (min-width: 80rem) and (min-height: 44rem));
 
 :root {
-  --background: #fbfaf9;
+  /* Aligned with the v2 palette: every route is v2 now, so these carry the
+     page ground, the not-found route and overscroll areas. */
+  --background: #fdfbf6;
   --surface: #ffffff;
-  --foreground: #16161a;
+  --foreground: #111111;
   --muted: #f1efec;
   --muted-foreground: #6d6a66;
   --border: #e4e0da;
-  --accent: #c2410c;
+  --accent: #ff5a00;
   --accent-foreground: #ffffff;
 
   --card: var(--surface);
@@ -221,11 +223,17 @@
 :root {
   --v2-cream: #fdfbf6;
   --v2-orange: #ff5a00;
+  /* Brand orange is only ~3:1 on cream, which fails AA for anything but large
+     display type. This darker cut is for orange *text*; the bright one stays
+     for fills and shapes, where the ratio does not apply the same way. */
+  --v2-orange-ink: #b23f00;
   --v2-ink: #111111;
   --v2-yellow: #f7d046;
   --v2-pink: #f53d8f;
   --v2-green: #12b76a;
-  --v2-periwinkle: #8095f5;
+  /* Deep enough to carry white text at AA (5.3:1). The paler #8095f5 this
+     replaced only reached 2.79:1. */
+  --v2-periwinkle: #4f5fd6;
   --v2-forest: #23795a;
   --v2-lime: #cbe98a;
   --v2-blush: #f3aede;
@@ -236,6 +244,7 @@
 @theme inline {
   --color-v2-cream: var(--v2-cream);
   --color-v2-orange: var(--v2-orange);
+  --color-v2-orange-ink: var(--v2-orange-ink);
   --color-v2-ink: var(--v2-ink);
   --color-v2-yellow: var(--v2-yellow);
   --color-v2-pink: var(--v2-pink);

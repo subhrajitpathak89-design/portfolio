@@ -21,7 +21,14 @@ export function FolderShelf() {
         aria-hidden
         className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${background}), ${BACKDROP_FALLBACK}` }}
-      />
+      >
+        {/* The header sits on open sky, and the image has bright cloud banks —
+            white-on-white survives no text-shadow. Depth is set by the worst
+            case rather than the average: over a white cloud, 45% black puts the
+            16px intro at 3.4:1, short of AA. 60% takes it to 5.7:1. Reads as an
+            ordinary sky vignette either way. */}
+        <div className="absolute inset-x-0 top-0 h-[60vh] bg-gradient-to-b from-black/60 via-black/25 to-transparent" />
+      </div>
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Heading sits directly on the sky — white, with a soft shadow so it
@@ -70,10 +77,10 @@ export function FolderShelf() {
               ))}
             </ul>
 
-            <p className="mt-5 text-xs text-v2-ink/45">{todo.note}</p>
+            <p className="mt-5 text-xs text-v2-ink/65">{todo.note}</p>
           </div>
 
-          <p className="mt-14 text-right font-editorial text-sm italic text-v2-ink/55">
+          <p className="mt-14 text-right font-editorial text-sm italic text-v2-ink/65">
             {profile.name}&rsquo;s creative space
           </p>
         </div>

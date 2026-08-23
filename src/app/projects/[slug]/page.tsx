@@ -9,6 +9,10 @@ type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+// Tag chips borrow the clipped corner from the home case-study cards, so the
+// two views read as the same family.
+const TAG_CLIP = "[clip-path:polygon(0_28%,12%_0,100%_0,100%_100%,0_100%)]";
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
@@ -27,22 +31,22 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   };
 }
 
-function CoverPlaceholder({ className = "" }: { className?: string }) {
+function ImageFrame({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`flex items-center justify-center rounded-2xl border border-border bg-surface transition-colors duration-300 hover:border-accent/30 ${className}`}
+      className={`flex items-center justify-center rounded-xl border border-v2-ink/10 bg-white ${className}`}
     >
-      <ImageIcon className="h-10 w-10 text-muted-foreground/30" aria-hidden />
+      <ImageIcon className="size-9 text-v2-ink/20" strokeWidth={1.5} aria-hidden />
     </div>
   );
 }
 
 function SectionLabel({ children }: { children: string }) {
   return (
-    <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-accent">
-      <span className="inline-block h-2 w-2 rotate-45 bg-accent" aria-hidden />
+    <h2 className="flex items-center gap-2.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-v2-orange-ink">
+      <span aria-hidden className="inline-block size-2 rotate-45 bg-v2-orange" />
       {children}
-    </div>
+    </h2>
   );
 }
 
@@ -67,50 +71,48 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const hasStructuredContent = Boolean(project.problem && project.approach && project.results);
 
   return (
-    <main className="bg-background pb-24 pt-32 sm:pt-40">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
+    <main className="bg-v2-cream pb-28 pt-28 sm:pt-36">
+      {/* Prose sits in a narrower column than the cover deliberately — long
+          body copy stops being readable well before a 16:9 image does. */}
+      <div className="mx-auto max-w-3xl px-6 lg:px-8">
         <Reveal>
           <Link
             href="/#work"
-            className="group inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 hover:text-accent"
+            className="group inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.16em] text-v2-ink/60 transition-colors duration-200 hover:text-v2-orange-ink"
           >
             <ArrowLeft
-              className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5"
+              className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5"
               aria-hidden
             />
-            Back to all work
+            All work
           </Link>
         </Reveal>
 
         <Reveal delay={0.05}>
-          <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-accent">
+          <p className="mt-10 font-mono text-xs font-bold uppercase tracking-[0.2em] text-v2-orange-ink">
             {project.category}
           </p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <h1 className="mt-3 font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
+          <h1 className="mt-4 font-grotesk text-[clamp(2rem,5vw,3.5rem)] font-black leading-[0.98] tracking-[-0.03em] text-v2-ink">
             {project.title}
           </h1>
         </Reveal>
 
         <Reveal delay={0.15}>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            {project.summary}
-          </p>
+          <p className="mt-6 text-lg leading-relaxed text-v2-ink/70">{project.summary}</p>
         </Reveal>
 
-        {/* Meta strip — the four facts a hiring manager scans for first */}
+        {/* The four facts a hiring manager scans for first. */}
         <Reveal delay={0.2}>
-          <dl className="mt-10 grid grid-cols-2 gap-6 border-y border-border py-6 sm:grid-cols-4">
+          <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-7 border-y border-v2-ink/12 py-7 sm:grid-cols-4">
             {meta.map((item) => (
               <div key={item.label}>
-                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-v2-ink/60">
                   {item.label}
                 </dt>
-                <dd className="mt-1.5 text-sm font-medium text-foreground sm:text-base">
-                  {item.value}
-                </dd>
+                <dd className="mt-2 text-sm font-semibold text-v2-ink">{item.value}</dd>
               </div>
             ))}
           </dl>
@@ -118,55 +120,58 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </div>
 
       <Reveal delay={0.1} y={40}>
-        <div className="mx-auto mt-10 max-w-5xl px-6 lg:px-8">
-          <CoverPlaceholder className="aspect-[16/9] w-full" />
+        <div className="mx-auto mt-12 max-w-5xl px-6 lg:px-8">
+          <ImageFrame className="aspect-[16/9] w-full" />
         </div>
       </Reveal>
 
-      <div className="mx-auto mt-20 max-w-4xl px-6 lg:px-8">
+      <div className="mx-auto mt-24 max-w-3xl px-6 lg:px-8">
         {hasStructuredContent ? (
           <>
-            {/* Results up front — the part a hiring manager reads even if
-                they skip everything else. */}
+            {/* Results first — the part that gets read even when everything
+                else is skipped. */}
             <section>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {project.results!.map((result, index) => (
                   <Reveal key={result.label} delay={0.08 * index} y={24}>
-                    <div className="h-full rounded-2xl border border-border bg-surface p-6 text-center transition-colors duration-300 hover:border-accent/30 sm:text-left">
-                      <p className="font-display text-2xl font-bold text-accent sm:text-3xl">
+                    <div className="h-full rounded-xl border border-v2-ink/10 bg-white p-6">
+                      <p className="font-grotesk text-2xl font-black tracking-[-0.02em] text-v2-orange-ink">
                         {result.metric}
                       </p>
-                      <p className="mt-2 text-sm text-muted-foreground">{result.label}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-v2-ink/60">
+                        {result.label}
+                      </p>
                     </div>
                   </Reveal>
                 ))}
               </div>
             </section>
 
-            <section className="mt-20">
+            <section className="mt-24">
               <Reveal>
                 <SectionLabel>The problem</SectionLabel>
               </Reveal>
               <Reveal delay={0.08}>
-                <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                <p className="mt-6 text-base leading-relaxed text-v2-ink/70 sm:text-lg">
                   {project.problem}
                 </p>
               </Reveal>
 
               {project.constraints && project.constraints.length > 0 && (
                 <Reveal delay={0.14}>
-                  <div className="mt-8 rounded-2xl border border-border bg-surface p-6 sm:p-8">
-                    <p className="text-sm font-semibold uppercase tracking-wide text-foreground">
+                  <div className="mt-9 rounded-xl border border-v2-ink/10 bg-white p-6 sm:p-8">
+                    <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-v2-ink">
                       Constraints going in
                     </p>
-                    <ul className="mt-4 space-y-3">
+                    <ul className="mt-5 space-y-3.5">
                       {project.constraints.map((constraint) => (
                         <li key={constraint} className="flex items-start gap-3">
                           <Check
-                            className="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                            className="mt-0.5 size-4 shrink-0 text-v2-orange"
+                            strokeWidth={2.5}
                             aria-hidden
                           />
-                          <span className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                          <span className="text-sm leading-relaxed text-v2-ink/70 sm:text-base">
                             {constraint}
                           </span>
                         </li>
@@ -179,35 +184,35 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
             {project.pullQuote && (
               <Reveal y={40}>
-                <blockquote className="mt-20 border-l-2 border-accent pl-6 sm:pl-8">
-                  <p className="font-display text-xl font-medium italic leading-snug text-foreground sm:text-2xl">
+                <blockquote className="mt-24 border-l-[3px] border-v2-orange pl-6 sm:pl-8">
+                  <p className="font-editorial text-2xl italic leading-snug text-v2-ink sm:text-[1.75rem]">
                     &ldquo;{project.pullQuote}&rdquo;
                   </p>
                 </blockquote>
               </Reveal>
             )}
 
-            <section className="mt-20">
+            <section className="mt-24">
               <Reveal>
                 <SectionLabel>The approach</SectionLabel>
               </Reveal>
 
-              <div className="mt-8 space-y-16">
+              <div className="mt-10 space-y-16">
                 {project.approach!.map((step, index) => (
                   <Reveal key={step.title} delay={0.05} y={32}>
                     <div className="grid gap-6 sm:grid-cols-2 sm:items-center sm:gap-10">
                       <div className={index % 2 === 1 ? "sm:order-2" : ""}>
-                        <span className="font-display text-sm font-semibold text-accent">
+                        <span className="font-mono text-xs font-bold tracking-[0.2em] text-v2-orange-ink">
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <h3 className="mt-2 font-display text-xl font-semibold text-foreground sm:text-2xl">
+                        <h3 className="mt-3 font-grotesk text-xl font-black tracking-[-0.02em] text-v2-ink sm:text-2xl">
                           {step.title}
                         </h3>
-                        <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                        <p className="mt-3 text-base leading-relaxed text-v2-ink/70">
                           {step.body}
                         </p>
                       </div>
-                      <CoverPlaceholder
+                      <ImageFrame
                         className={`aspect-[4/3] w-full ${index % 2 === 1 ? "sm:order-1" : ""}`}
                       />
                     </div>
@@ -217,26 +222,26 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </section>
 
             <Reveal y={32}>
-              <section className="mt-20 rounded-2xl border border-border bg-surface p-8 sm:p-10">
+              {/* Tinted rather than white, so the conclusion reads as the
+                  destination of the page instead of one more card. */}
+              <section className="mt-24 rounded-2xl bg-v2-yellow/25 p-8 sm:p-10">
                 <SectionLabel>The outcome</SectionLabel>
-                <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                <p className="mt-6 text-base leading-relaxed text-v2-ink/75 sm:text-lg">
                   {project.outcome}
                 </p>
               </section>
             </Reveal>
 
             {project.learnings && project.learnings.length > 0 && (
-              <section className="mt-20">
+              <section className="mt-24">
                 <Reveal>
                   <SectionLabel>What I&apos;d take forward</SectionLabel>
                 </Reveal>
-                <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="mt-10 grid gap-4 sm:grid-cols-3">
                   {project.learnings.map((learning, index) => (
                     <Reveal key={learning} delay={0.06 * index} y={24}>
-                      <div className="h-full rounded-2xl border border-border p-6">
-                        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                          {learning}
-                        </p>
+                      <div className="h-full rounded-xl border border-v2-ink/12 p-6">
+                        <p className="text-sm leading-relaxed text-v2-ink/70">{learning}</p>
                       </div>
                     </Reveal>
                   ))}
@@ -249,7 +254,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.description.map((paragraph) => (
               <p
                 key={paragraph.slice(0, 24)}
-                className="text-base leading-relaxed text-muted-foreground sm:text-lg"
+                className="text-base leading-relaxed text-v2-ink/70 sm:text-lg"
               >
                 {paragraph}
               </p>
@@ -258,36 +263,36 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         )}
 
         <Reveal>
-          <div className="mt-20 flex flex-wrap gap-2">
+          <ul className="mt-24 flex flex-wrap gap-2.5">
             {project.tags.map((tag) => (
-              <span
+              <li
                 key={tag}
-                className="rounded-full bg-muted px-4 py-1.5 text-sm font-medium text-muted-foreground"
+                className={`${TAG_CLIP} bg-white px-4 pb-1.5 pt-2 font-mono text-[11px] font-bold uppercase tracking-wide text-v2-ink`}
               >
                 {tag}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </Reveal>
 
         <nav
           aria-label="Project navigation"
-          className="mt-16 border-t border-border pt-8"
+          className="mt-16 border-t border-v2-ink/12 pt-8"
         >
           <Link
             href={`/projects/${nextProject.slug}`}
             className="group flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"
           >
             <span>
-              <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-v2-ink/60">
                 Next project
               </span>
-              <span className="mt-2 block font-display text-2xl font-semibold tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent sm:text-3xl">
+              <span className="mt-2 block font-grotesk text-2xl font-black tracking-[-0.02em] text-v2-ink transition-colors duration-200 group-hover:text-v2-orange-ink-ink sm:text-3xl">
                 {nextProject.title}
               </span>
             </span>
             <ArrowUpRight
-              className="h-6 w-6 text-muted-foreground transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+              className="size-6 shrink-0 text-v2-ink/40 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-v2-orange-ink-ink"
               aria-hidden
             />
           </Link>

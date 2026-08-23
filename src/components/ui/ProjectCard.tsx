@@ -7,67 +7,70 @@ type ProjectCardProps = {
   index: number;
 };
 
+const TAG_CLIP = "[clip-path:polygon(0_28%,12%_0,100%_0,100%_100%,0_100%)]";
+
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-surface shadow-[0_30px_60px_rgba(0,0,0,0.4)]">
-      <div className="grid gap-10 p-8 sm:p-12 lg:grid-cols-2 lg:items-center">
+    <div className="overflow-hidden rounded-[1.75rem] border border-v2-ink/10 bg-white shadow-[0_24px_60px_-30px_rgba(17,17,17,0.35)]">
+      <div className="grid gap-10 p-7 sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div className="flex flex-col">
-          <div className="flex items-center justify-between text-white">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm font-semibold">
+          <div className="flex items-center justify-between">
+            <span className="flex size-9 items-center justify-center rounded-full bg-v2-ink font-mono text-xs font-bold text-white">
               {number}
             </span>
-            <span className="text-sm font-medium text-white/60">{project.year}</span>
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-v2-ink/60">
+              {project.year}
+            </span>
           </div>
 
-          <h3 className="mt-6 font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
+          <h3 className="mt-7 font-grotesk text-3xl font-black leading-[0.98] tracking-[-0.03em] text-v2-ink sm:text-4xl">
             {project.title}
           </h3>
 
-          <div className="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-6">
-            <span className="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white/80">
-              {project.category}
-            </span>
-            {project.tags.slice(0, 2).map((tag) => (
-              <span
+          <ul className="mt-7 flex flex-wrap gap-2.5 border-t border-v2-ink/10 pt-7">
+            {[project.category, ...project.tags.slice(0, 2)].map((tag) => (
+              <li
                 key={tag}
-                className="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white/80"
+                className={`${TAG_CLIP} bg-v2-cream px-3.5 pb-1.5 pt-2 font-mono text-[11px] font-bold uppercase tracking-wide text-v2-ink`}
               >
                 {tag}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <p className="mt-6 text-base leading-relaxed text-white/70 sm:text-lg">
-            {project.summary}
-          </p>
+          <p className="mt-6 text-base leading-relaxed text-v2-ink/70">{project.summary}</p>
 
-          <div className="mt-8">
+          <div className="mt-9">
             {project.liveUrl ? (
               <Link
                 href={`/projects/${project.slug}`}
-                className="group inline-flex items-center gap-3 rounded-full bg-white py-1 pl-1 pr-5 transition-colors duration-200 hover:bg-white/90"
+                className="group inline-flex items-center gap-3 rounded-full bg-v2-ink py-1 pl-1 pr-5 transition-colors duration-200 hover:bg-v2-orange"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900 text-white transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  <ArrowUpRight className="h-4 w-4" aria-hidden />
+                <span className="flex size-10 items-center justify-center rounded-full bg-white text-v2-ink transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                  <ArrowUpRight className="size-4" strokeWidth={2.5} aria-hidden />
                 </span>
-                <span className="font-semibold text-neutral-900">View Case Study</span>
+                <span className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-white">
+                  Read case study
+                </span>
               </Link>
             ) : (
-              <span className="inline-flex items-center gap-3 rounded-full bg-white/10 py-1 pl-1 pr-5 text-white/60">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
-                  <Lock className="h-4 w-4" aria-hidden />
+              <span className="inline-flex items-center gap-3 rounded-full bg-v2-ink/5 py-1 pl-1 pr-5 text-v2-ink/60">
+                <span className="flex size-10 items-center justify-center rounded-full bg-v2-ink/10">
+                  <Lock className="size-4" aria-hidden />
                 </span>
-                <span className="font-semibold">Coming Soon</span>
+                <span className="font-mono text-xs font-bold uppercase tracking-[0.16em]">
+                  Coming soon
+                </span>
               </span>
             )}
           </div>
         </div>
 
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-white/5 lg:aspect-auto lg:h-full lg:min-h-[320px]">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-v2-ink/10 bg-v2-cream lg:aspect-auto lg:h-full lg:min-h-[320px]">
           <div className="flex h-full w-full items-center justify-center">
-            <ImageIcon className="h-16 w-16 text-white/20" aria-hidden />
+            <ImageIcon className="size-12 text-v2-ink/15" strokeWidth={1.5} aria-hidden />
           </div>
         </div>
       </div>

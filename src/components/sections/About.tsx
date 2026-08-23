@@ -7,7 +7,7 @@ import type { AboutPhoto, CaptionTone } from "@/types";
 
 const CAPTION_TONES: Record<CaptionTone, string> = {
   blush: "bg-v2-blush text-v2-ink",
-  orange: "bg-v2-orange text-white",
+  orange: "bg-v2-orange text-v2-ink",
   lime: "bg-v2-lime text-v2-ink",
   periwinkle: "bg-v2-periwinkle text-white",
 };
@@ -151,7 +151,7 @@ function PhotoCard({ photo, index }: { photo: AboutPhoto; index: number }) {
             className="object-cover"
           />
         ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center gap-2 border border-dashed border-v2-ink/20 text-v2-ink/35">
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2 border border-dashed border-v2-ink/20 text-v2-ink/65">
             <ImageIcon aria-hidden className="size-7" strokeWidth={1.5} />
             <span className="px-3 text-center text-[10px] font-medium uppercase tracking-[0.14em]">
               photo {index + 1}

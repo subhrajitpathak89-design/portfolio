@@ -9,6 +9,7 @@ import {
 } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { CustomCursor } from "@/components/layout/CustomCursor";
+import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { Preloader } from "@/components/layout/Preloader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
@@ -117,8 +118,8 @@ export default function RootLayout({
       <body className="min-h-full font-sans">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          forcedTheme="dark"
+          defaultTheme="light"
+          forcedTheme="light"
           disableTransitionOnChange
         >
           <CustomCursor />
@@ -126,6 +127,7 @@ export default function RootLayout({
           <SmoothScroll />
           <Navbar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
