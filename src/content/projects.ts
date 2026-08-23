@@ -47,22 +47,22 @@ export const projects: Project[] = [
     approach: [
       {
         title: "Tokens as the contract, not a palette",
-        body: "313 tokens in three layers — raw primitives, semantic intent, then theme overrides — with a validator that runs before every build and a hard rule that nothing is hardcoded anywhere. This is what made agent output safe: an agent cannot invent a blue if the only way to express colour is a token reference.",
+        body: "313 tokens in three layers — raw primitives, semantic intent, then theme overrides — with a validator in CI and a hard rule that nothing is hardcoded. Every value on this screen resolves through a token: the allocation donut uses chart tokens, the gain figures and the concentration warning use semantic status colours, so an agent has no way to invent a blue.",
         image: "/images/v2/work/nivex-01.webp",
       },
       {
         title: "Five agents, and none of them overlap",
-        body: "Token, component, chart, docs and QA agents, each with a written scope and a file-ownership table — a component agent cannot edit token JSON, a token agent cannot write components. They run in a fixed order: tokens first, components and charts in parallel once tokens are stable, docs after, QA last.",
+        body: "Token, component, chart, docs and QA agents, each with a written scope and a file-ownership table — a component agent cannot edit token JSON, and vice versa. The proof is that the same primitives produced three separate consoles without drifting apart: this admin case pipeline and the investor dashboard were built by different agents in different sessions.",
         image: "/images/v2/work/nivex-02.webp",
       },
       {
         title: "Decisions written down before the code",
-        body: "14 ADRs, each with context, decision, alternatives considered and consequences. They are the project's memory: a fresh agent session picks up the same reasoning instead of re-litigating it, and writing the alternatives out first repeatedly made features smaller than they started.",
+        body: "14 ADRs, each with context, decision, alternatives and consequences — the project's memory, so a fresh session resumes the reasoning instead of re-litigating it. The service-and-status model on this staff screen came straight out of ADRs 0008 through 0012, all written before any of it was built.",
         image: "/images/v2/work/nivex-03.webp",
       },
       {
         title: "AI drafts the prescription; a human still clicks Add",
-        body: "Advisors were typing every recommendation from scratch, so AI drafting was an obvious win — but suggestions live in local component state, render behind a dashed 'review before adding' border, and only become a real step when staff accept them one at a time. No bulk accept, deliberately: reviewing each draft is the feature, not friction to remove.",
+        body: "Advisors were typing every recommendation from scratch, so drafting was an obvious win — but suggestions live in local component state behind a dashed 'review before adding' border, and only become steps like the ones on this screen when staff accept them one at a time. No bulk accept, deliberately: reviewing each draft is the feature, not friction to remove.",
         image: "/images/v2/work/nivex-04.webp",
       },
     ],
