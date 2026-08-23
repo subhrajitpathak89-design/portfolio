@@ -269,3 +269,35 @@
     animation: none;
   }
 }
+
+/* ------------------------------------------------------------------
+   Custom cursor
+   ------------------------------------------------------------------ */
+
+/* The class is only added by CustomCursor once it has confirmed a fine pointer
+   and no reduced-motion preference, so touch and reduced-motion users never
+   lose their native cursor. The descendant selector is needed to beat
+   Tailwind's `cursor-pointer` and the UA styles on links and inputs; it is one
+   class + one element, so it wins on specificity without `!important`. */
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none;
+  }
+}
+
+@keyframes cursor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-cursor-spin {
+  animation: cursor-spin 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-cursor-spin {
+    animation: none;
+  }
+}

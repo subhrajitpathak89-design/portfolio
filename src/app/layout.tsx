@@ -7,6 +7,7 @@ import {
   Playfair_Display,
 } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { CustomCursor } from "@/components/layout/CustomCursor";
 import { Navbar } from "@/components/layout/Navbar";
 import { Preloader } from "@/components/layout/Preloader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
@@ -111,6 +112,7 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
+          <CustomCursor />
           <Preloader />
           <SmoothScroll />
           <Navbar />
