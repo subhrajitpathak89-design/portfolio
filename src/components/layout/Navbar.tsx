@@ -8,6 +8,9 @@ import { navLinks } from "@/content/nav";
 import { profile } from "@/content/profile";
 import type { NavIcon } from "@/types";
 
+/** Matches the header's `h-16`; the active-section line is measured from it. */
+const NAV_HEIGHT = 64;
+
 const NAV_ICONS: Record<NavIcon, typeof Star> = {
   star: Star,
   person: UserRound,
@@ -44,30 +47,67 @@ export function Navbar() {
 
   useEffect(() => {
     const sectionIds = navLinks
-      .map((link) => link.href.replace("/", ""))
-      .filter((hash) => hash.startsWith("#"))
-      .map((hash) => hash.slice(1));
+      .map((link) => link.href.split("#")[1])
+      .filter((id): id is string => Boolean(id));
 
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
+    /**
+     * Resolves the active link by asking which section currently sits under a
+     * reference line just below the navbar.
+     *
+     * This replaces an IntersectionObserver that watched a 5%-tall band in the
+     * middle of the viewport. That approach only reports *changes*, so any
+     * section that failed to register a crossing left the highlight stuck on
+     * whatever was last set — which is what kept Case Study from ever lighting
+     * up. Reading positions directly is stateless: the answer is recomputed
+     * from scratch each frame and cannot drift.
+     *
+     * The page's sections are contiguous siblings, so exactly one of them
+     * contains the line at any scroll offset.
+     */
+    const resolveActive = () => {
+      const line = NAV_HEIGHT + 1;
+      let lastAbove: string | null = null;
 
-    if (sections.length === 0) return;
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (!element) continue;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveHash(`#${entry.target.id}`);
-          }
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
-    );
+        const { top, bottom } = element.getBoundingClientRect();
+        if (top <= line && bottom > line) {
+          setActiveHash(`#${id}`);
+          return;
+        }
+        if (top <= line) lastAbove = id;
+      }
 
-    sections.forEach((section) => observer.observe(section));
+      // Sections without a nav entry of their own — the tool stack, for one —
+      // leave no direct match. Falling back to the last linked section above
+      // the line keeps the result a pure function of scroll position instead
+      // of leaving whatever was set last to go stale.
+      if (lastAbove) setActiveHash(`#${lastAbove}`);
+    };
 
-    return () => observer.disconnect();
+    let frame = 0;
+    const schedule = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        resolveActive();
+      });
+    };
+
+    // Scheduled rather than called inline so the first resolve lands in a
+    // frame callback instead of during the effect.
+    schedule();
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
   }, []);
 
   const socialHref = (platform: string) =>
