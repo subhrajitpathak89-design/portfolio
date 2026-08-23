@@ -22,9 +22,8 @@ const WIRE_END_Y = 40;
 const WIRE_CONTROL_Y = 180;
 
 // Clears the lowest card (hung at the wire's dip) plus the few px its tilt
-// adds. Tightened after the captions came off, so the line does not sit in a
-// pool of empty cream.
-const PANEL_HEIGHT = 320;
+// adds — so it has to track the card's aspect ratio.
+const PANEL_HEIGHT = 450;
 
 /** Card slots along the panel, evenly spaced. */
 const SLOT_XS = [150, 450, 750, 1050];
@@ -145,7 +144,7 @@ function PeggedCard({
           the polaroid frame — without it, a captionless card just reads as a
           plain white box. */}
       <div className="w-[240px] rounded-xl bg-white p-3 pb-6 shadow-[0_18px_36px_-16px_rgba(17,17,17,0.35)]">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-v2-ink/5">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-v2-ink/5">
           {project.coverImage ? (
             <Image
               src={project.coverImage}
