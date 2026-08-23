@@ -6,9 +6,15 @@ import { useMediaQuery } from "@/lib/useMediaQuery";
 import type { ProjectTone } from "@/types";
 
 /**
- * Landscape assets take the full breakout width. Portrait ones — phone
- * captures, mostly — are sized from their height instead and centred, because
- * a 0.42-ratio asset given the full width would render over 2000px tall.
+ * Landscape assets take the full breakout width. Portrait ones are sized from
+ * their height instead and centred, because a 0.42-ratio asset given the full
+ * width would render over 2000px tall.
+ *
+ * This branch assumes a portrait asset is a phone capture. It is a poor fit for
+ * tall *banner* artwork: sizing a 0.42 marketing graphic by height produced a
+ * 227px-wide sliver with its content unreadable. Step imagery should stay
+ * roughly landscape — everything in the manifest now sits between 1.25 and
+ * 2.10 — and genuinely portrait phone captures belong in PhoneStack.
  */
 const PORTRAIT_HEIGHT = "min(34rem, 68svh)";
 
