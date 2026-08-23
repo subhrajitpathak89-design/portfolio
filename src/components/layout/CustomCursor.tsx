@@ -1,37 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const RING_SIZE = 40;
 const DOT_SIZE = 8;
 
 const INTERACTIVE_SELECTOR =
   'a, button, [role="button"], input, textarea, select, label, summary';
-
-/**
- * Subscribes to a media query. Uses `useSyncExternalStore` rather than an
- * effect so there is no state write during render or on mount, and so the
- * result stays live if the user plugs in a mouse or changes their motion
- * preference mid-session. The server snapshot is `false`, which means the
- * cursor is simply absent until hydration.
- */
-function useMediaQuery(query: string) {
-  const subscribe = useCallback(
-    (onChange: () => void) => {
-      const list = window.matchMedia(query);
-      list.addEventListener("change", onChange);
-      return () => list.removeEventListener("change", onChange);
-    },
-    [query]
-  );
-
-  return useSyncExternalStore(
-    subscribe,
-    () => window.matchMedia(query).matches,
-    () => false
-  );
-}
 
 export function CustomCursor() {
   // Touch devices keep their native behaviour, and anyone who asked for less
