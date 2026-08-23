@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { about } from "@/content/about";
 import { Blob, HeartHandsSticker, SpeedLines, Squiggle } from "@/components/ui/Doodles";
+import { Marquee } from "@/components/ui/Marquee";
 import type { AboutPhoto, CaptionTone } from "@/types";
 
 const CAPTION_TONES: Record<CaptionTone, string> = {
@@ -15,8 +16,10 @@ export function About() {
   const { eyebrow, headline, photos } = about;
 
   return (
-    <section id="about" className="relative overflow-hidden bg-v2-cream py-24 lg:py-32">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+    <section id="about" className="relative overflow-hidden bg-v2-cream pb-24 lg:pb-32">
+      <AboutStrips />
+
+      <div className="mx-auto max-w-6xl px-6 pt-20 lg:px-8 lg:pt-24">
         <p className="text-center font-script text-2xl text-v2-ink/70 sm:text-3xl">
           {eyebrow}
         </p>
@@ -67,6 +70,42 @@ export function About() {
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * Two ticker strips crossing at opposing angles across the top of the section.
+ * They run in opposite directions, which is what stops the pair reading as one
+ * thick band and makes the crossing point legible.
+ *
+ * Each strip is over-wide and offset left: rotating a full-bleed strip pulls
+ * its ends inward, and at these angles a 100%-wide strip would leave a wedge
+ * of bare cream at both edges. The section's `overflow-hidden` clips the
+ * excess.
+ */
+function AboutStrips() {
+  return (
+    <div className="relative h-32 sm:h-40 lg:h-48">
+      <Marquee
+        duration={26}
+        className="absolute -left-[8%] top-4 w-[116%] -rotate-[2.5deg] bg-v2-orange py-2.5 sm:top-6 sm:py-3.5"
+      >
+        <span className="px-6 font-grotesk text-xl font-black uppercase tracking-tight text-white sm:px-10 sm:text-3xl lg:text-4xl">
+          About
+        </span>
+      </Marquee>
+
+      <Marquee
+        reverse
+        duration={30}
+        className="absolute -left-[8%] top-16 w-[116%] rotate-[4deg] bg-v2-ink py-2.5 sm:top-20 sm:py-3.5 lg:top-24"
+      >
+        <span className="px-6 font-grotesk text-xl font-black uppercase tracking-tight text-white sm:px-10 sm:text-3xl lg:text-4xl">
+          About
+        </span>
+        <span className="v2-checker w-14 shrink-0 self-stretch sm:w-20" />
+      </Marquee>
+    </div>
   );
 }
 

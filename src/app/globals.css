@@ -320,3 +320,48 @@
     rgba(17, 17, 17, 0.07) 34px
   );
 }
+
+/* ------------------------------------------------------------------
+   Marquee / ticker strips
+   ------------------------------------------------------------------ */
+
+/* The track holds two identical copies of its content, so translating exactly
+   -50% lands on the start of the second copy and the loop is seamless. */
+@keyframes v2-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-v2-marquee {
+  animation: v2-marquee linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-v2-marquee {
+    animation: none;
+  }
+}
+
+/* Two offset diagonal gradients make a checkerboard; the offset copy fills the
+   squares the first one leaves empty. */
+.v2-checker {
+  background-image:
+    linear-gradient(
+      45deg,
+      var(--v2-orange) 25%,
+      transparent 25% 75%,
+      var(--v2-orange) 75%
+    ),
+    linear-gradient(
+      45deg,
+      var(--v2-orange) 25%,
+      transparent 25% 75%,
+      var(--v2-orange) 75%
+    );
+  background-size: 18px 18px;
+  background-position: 0 0, 9px 9px;
+}
