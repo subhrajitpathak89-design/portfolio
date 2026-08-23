@@ -22,6 +22,9 @@ const NAV_ICONS: Record<NavIcon, typeof Star> = {
 // Each social pill carries its own brand-adjacent fill, which is what gives
 // the v2 bar its confetti feel — so the colour lives with the link, not in a
 // shared token.
+//
+// These are hidden below `sm`: on a phone they were what pushed the Contact
+// button off-screen, and the footer carries the same links anyway.
 const SOCIALS = [
   {
     label: "LinkedIn",
@@ -139,7 +142,7 @@ export function Navbar() {
           <Link
             href="/#home"
             aria-label={`${profile.name} — home`}
-            className="flex w-14 shrink-0 items-center justify-center sm:w-[68px]"
+            className="flex w-12 shrink-0 items-center justify-center sm:w-14 lg:w-[68px]"
           >
             <SmileyMark />
           </Link>
@@ -154,7 +157,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`flex items-center gap-2 px-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-v2-ink transition-colors duration-200 lg:gap-2.5 lg:px-6 lg:text-xs ${
+                  className={`flex items-center gap-2 px-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-v2-ink transition-colors duration-200 sm:px-4 lg:gap-2.5 lg:px-6 lg:text-xs ${
                     isActive ? "bg-v2-yellow" : "hover:bg-black/[0.04]"
                   }`}
                 >
@@ -164,9 +167,10 @@ export function Navbar() {
                     strokeWidth={2.25}
                     fill={link.icon === "star" || link.icon === "diamond" ? "currentColor" : "none"}
                   />
-                  {/* The four labels plus the socials and Contact need ~910px,
-                      so labels only unfold at lg — below that the bar stays in
-                      icon-only mode rather than shoving Contact off-screen. */}
+                  {/* Labels only unfold at lg. Below that the bar stays in
+                      icon-only mode: the four labels plus socials and Contact
+                      need ~910px, and at 375px the full set overflowed to
+                      509px, pushing Contact clean off the screen. */}
                   <span className="hidden lg:inline">{link.label}</span>
                 </Link>
               );
@@ -174,7 +178,7 @@ export function Navbar() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-2 pr-3 sm:gap-2.5 sm:pr-4">
+        <div className="flex items-center gap-2 pr-2 sm:gap-2.5 sm:pr-4">
           {SOCIALS.map(({ label, platform, Icon, className }) => (
             <a
               key={label}
@@ -182,7 +186,7 @@ export function Navbar() {
               target="_blank"
               rel="noreferrer noopener"
               aria-label={label}
-              className={`flex size-8 items-center justify-center rounded-full transition-transform duration-200 hover:-translate-y-0.5 sm:size-9 ${className}`}
+              className={`hidden size-8 items-center justify-center rounded-full transition-transform duration-200 hover:-translate-y-0.5 sm:flex sm:size-9 ${className}`}
             >
               <Icon aria-hidden className="size-4" />
             </a>
@@ -190,7 +194,7 @@ export function Navbar() {
 
           <Link
             href="/#contact"
-            className="ml-1 flex items-center gap-2 border-2 border-v2-ink px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-v2-ink transition-colors duration-200 hover:bg-v2-ink hover:text-v2-cream sm:px-5 sm:text-xs"
+            className="ml-0.5 flex shrink-0 items-center gap-1.5 border-2 border-v2-ink px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-v2-ink transition-colors duration-200 hover:bg-v2-ink hover:text-v2-cream sm:ml-1 sm:gap-2 sm:px-5 sm:text-xs sm:tracking-[0.16em]"
           >
             <Heart aria-hidden className="size-3.5 shrink-0" fill="currentColor" strokeWidth={0} />
             Contact

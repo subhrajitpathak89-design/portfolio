@@ -48,12 +48,16 @@ export function Work() {
           underneath shows through.
 
           The gap is what supplies the scroll distance between hand-offs.
-          Pinning is gated behind `stack-scroll` (wide *and* tall enough) —
-          a sticky card taller than its viewport slot would strand its own
-          lower half, tags and all, permanently out of reach. Everywhere else
-          the cards degrade to an ordinary scrolled stack.
+
+          Pinning now runs at every size. It used to be gated behind a
+          wide-and-tall media query because a sticky card taller than its
+          viewport slot strands its own lower half — tags and all —
+          permanently out of reach. The fix was to stop the card growing past
+          the slot instead of switching the effect off: each card is capped to
+          the viewport minus the navbar, and the cover image takes whatever
+          height is left over.
         */}
-        <div className="flex flex-col gap-12 stack-scroll:gap-[12vh]">
+        <div className="flex flex-col gap-10 sm:gap-12 stack-scroll:gap-[12vh]">
           {list.map((project, index) => (
             <ProjectCard key={project.slug} project={project} index={index} />
           ))}
@@ -68,8 +72,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const projectNumber = String(index + 1).padStart(2, "0");
 
   return (
-    <article className="stack-scroll:sticky stack-scroll:top-24">
-      <div className="flex">
+    <article className="sticky top-[4.25rem] flex h-[calc(100svh-5rem)] flex-col lg:top-24 lg:h-[calc(100svh-7rem)]">
+      <div className="flex shrink-0">
         <span
           className={`${color} ${TAB_CLIP} inline-flex items-center gap-2.5 py-3 pr-16 pl-5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white sm:gap-3.5 sm:py-4 sm:pl-8 sm:pr-24 sm:text-xs`}
         >
@@ -78,32 +82,38 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </span>
       </div>
 
+      {/* Two rows below lg — copy on top, cover taking whatever is left — and
+          two columns above it. `minmax(0,1fr)` rather than `1fr` so the cover
+          row is allowed to shrink instead of forcing the card taller. */}
       <div
-        className={`${color} grid grid-cols-1 gap-8 p-6 sm:p-10 lg:grid-cols-[1fr_1.1fr] lg:gap-12 lg:p-14 stack-scroll:min-h-[calc(100svh-13rem)]`}
+        className={`${color} grid min-h-0 flex-1 grid-cols-1 grid-rows-[auto_minmax(0,1fr)] gap-5 p-5 sm:gap-8 sm:p-8 lg:grid-cols-[1fr_1.1fr] lg:grid-rows-1 lg:gap-12 lg:p-14`}
       >
-        <div className="flex flex-col">
+        <div className="flex min-h-0 flex-col">
           <span className="inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white sm:text-sm">
             <span aria-hidden className="size-2.5 shrink-0 rounded-full bg-white" />
             {project.category} · {project.year}
           </span>
 
-          <h3 className="mt-5 font-grotesk text-[clamp(2rem,4.5vw,4rem)] font-black leading-[0.95] tracking-[-0.03em] text-white">
+          <h3 className="mt-4 font-grotesk text-[clamp(1.5rem,4.5vw,4rem)] font-black leading-[0.95] tracking-[-0.03em] text-white">
             {project.title}
           </h3>
 
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-white sm:text-lg">
+          <p className="mt-4 line-clamp-3 max-w-lg text-sm leading-relaxed text-white sm:mt-5 sm:line-clamp-none sm:text-lg">
             {project.summary}
           </p>
 
           <Link
             href={`/projects/${project.slug}`}
-            className="mt-8 inline-flex items-center gap-2.5 self-start border-b-2 border-white pb-1 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white transition-opacity duration-200 hover:opacity-70 sm:text-sm"
+            className="mt-6 inline-flex items-center gap-2.5 self-start border-b-2 border-white pb-1 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white transition-opacity duration-200 hover:opacity-70 sm:mt-8 sm:text-sm"
           >
             View project
             <ArrowUpRight aria-hidden className="size-4 shrink-0" strokeWidth={2.5} />
           </Link>
 
-          <ul className="mt-auto flex flex-wrap gap-2.5 pt-10 lg:pt-12">
+          {/* `mt-auto` only bites once the column is stretched, which happens
+              from lg. Below that the tags just follow the link, so the top
+              padding does the spacing instead. */}
+          <ul className="mt-auto flex flex-wrap gap-2 pt-6 sm:gap-2.5 sm:pt-8 lg:pt-12">
             {project.tags.slice(0, 3).map((tag) => (
               <li
                 key={tag}
@@ -115,8 +125,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </ul>
         </div>
 
-        <div className="lg:self-center">
-          <div className="relative">
+        <div className="min-h-0">
+          {/* Full height of whatever the grid row leaves, so the cover is the
+              part that gives way when the copy runs long — the card itself
+              never outgrows its sticky slot. */}
+          <div className="relative h-full min-h-0">
             {/* Tape strips holding the photo to the card. */}
             <span
               aria-hidden
@@ -127,7 +140,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               className="absolute -right-4 -top-3 z-10 h-6 w-20 rotate-[9deg] bg-white/55 shadow-[0_1px_3px_rgba(17,17,17,0.15)] sm:w-24"
             />
 
-            <div className="relative aspect-square w-full overflow-hidden border-4 border-white bg-v2-cream stack-scroll:aspect-auto stack-scroll:h-[calc(100svh-20rem)]">
+            <div className="relative h-full min-h-[6rem] w-full overflow-hidden border-4 border-white bg-v2-cream">
               {project.coverImage ? (
                 <Image
                   src={project.coverImage}
