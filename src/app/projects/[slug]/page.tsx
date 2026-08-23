@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check, ImageIcon } from "lucide-react";
 import { getProjectBySlug, projects } from "@/content/projects";
 import { Reveal } from "@/components/ui/Reveal";
+import type { ProjectTone } from "@/types";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -43,25 +44,49 @@ function ImageFrame({ className = "" }: { className?: string }) {
 }
 
 /**
- * A screen from the work. These are product UI shots on white or dark chrome,
- * so they get a hairline frame to stop them bleeding into the cream page.
+ * Backdrops sampled from the screenshots themselves, then lifted a little so
+ * the mockup still reads against them. Averages measured off the source files:
+ * RiseAngle #363e47, Wizlo #504969, Saral #7a8990, Mythic #3e556a.
  */
-function StepShot({
-  src,
-  alt,
-  className = "",
-}: {
-  src?: string;
-  alt: string;
-  className?: string;
-}) {
-  if (!src) return <ImageFrame className={`aspect-[4/3] w-full ${className}`} />;
+const TONE_GRADIENTS: Record<ProjectTone, string> = {
+  slate: "linear-gradient(140deg, #4a5464 0%, #251f2c 100%)",
+  violet: "linear-gradient(140deg, #8477bd 0%, #443e60 100%)",
+  mist: "linear-gradient(140deg, #c2ccd2 0%, #839298 100%)",
+  navy: "linear-gradient(140deg, #547598 0%, #22334a 100%)",
+};
 
+/**
+ * A screen from the work, given the width to actually be legible.
+ *
+ * These are laptop mockups with generous built-in margins, so at the old
+ * half-column width the app UI inside them was far too small to read. The
+ * frame breaks out past the prose column to ~60rem and the shot is contained
+ * rather than cropped, which keeps the whole screen visible and lets the
+ * project's own backdrop colour show around it.
+ */
+function StepShot({ src, alt, tone }: { src?: string; alt: string; tone: ProjectTone }) {
   return (
-    <div
-      className={`relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-v2-ink/10 bg-white ${className}`}
-    >
-      <Image src={src} alt={alt} fill sizes="(min-width: 640px) 45vw, 90vw" className="object-cover" />
+    <div className="relative left-1/2 w-[min(92vw,60rem)] -translate-x-1/2">
+      <div
+        className="rounded-2xl p-3 shadow-[0_28px_70px_-30px_rgba(17,17,17,0.5)] sm:p-6 lg:p-10"
+        style={{ backgroundImage: TONE_GRADIENTS[tone] }}
+      >
+        {src ? (
+          <div className="relative aspect-[16/10]">
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              sizes="(min-width: 1024px) 60rem, 92vw"
+              className="object-contain"
+            />
+          </div>
+        ) : (
+          <div className="flex aspect-[16/10] items-center justify-center rounded-xl bg-white/10">
+            <ImageIcon className="size-9 text-white/50" strokeWidth={1.5} aria-hidden />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -147,15 +172,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <Reveal delay={0.1} y={40}>
         <div className="mx-auto mt-12 max-w-5xl px-6 lg:px-8">
           {project.coverImage ? (
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-v2-ink/10 bg-white">
-              <Image
-                src={project.coverImage}
-                alt={`${project.title} cover`}
-                fill
-                priority
-                sizes="(min-width: 1024px) 64rem, 100vw"
-                className="object-cover"
-              />
+            <div
+              className="rounded-2xl p-3 shadow-[0_28px_70px_-30px_rgba(17,17,17,0.5)] sm:p-6 lg:p-10"
+              style={{ backgroundImage: TONE_GRADIENTS[project.tone ?? "slate"] }}
+            >
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src={project.coverImage}
+                  alt={`${project.title} cover`}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 64rem, 100vw"
+                  className="object-contain"
+                />
+              </div>
             </div>
           ) : (
             <ImageFrame className="aspect-[16/9] w-full" />
@@ -235,26 +265,29 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <SectionLabel>The approach</SectionLabel>
               </Reveal>
 
-              <div className="mt-10 space-y-16">
+              {/* Copy above, screen below — rather than side by side, which
+                  capped every shot at half a column. */}
+              <div className="mt-10 space-y-20">
                 {project.approach!.map((step, index) => (
                   <Reveal key={step.title} delay={0.05} y={32}>
-                    <div className="grid gap-6 sm:grid-cols-2 sm:items-center sm:gap-10">
-                      <div className={index % 2 === 1 ? "sm:order-2" : ""}>
-                        <span className="font-mono text-xs font-bold tracking-[0.2em] text-v2-orange-ink">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <h3 className="mt-3 font-grotesk text-xl font-black tracking-[-0.02em] text-v2-ink sm:text-2xl">
-                          {step.title}
-                        </h3>
-                        <p className="mt-3 text-base leading-relaxed text-v2-ink/70">
-                          {step.body}
-                        </p>
+                    <div>
+                      <span className="font-mono text-xs font-bold tracking-[0.2em] text-v2-orange-ink">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="mt-3 font-grotesk text-xl font-black tracking-[-0.02em] text-v2-ink sm:text-2xl">
+                        {step.title}
+                      </h3>
+                      <p className="mt-3 max-w-2xl text-base leading-relaxed text-v2-ink/70">
+                        {step.body}
+                      </p>
+
+                      <div className="mt-8">
+                        <StepShot
+                          src={step.image}
+                          alt={`${project.title} — ${step.title}`}
+                          tone={project.tone ?? "slate"}
+                        />
                       </div>
-                      <StepShot
-                        src={step.image}
-                        alt={`${project.title} — ${step.title}`}
-                        className={index % 2 === 1 ? "sm:order-1" : ""}
-                      />
                     </div>
                   </Reveal>
                 ))}

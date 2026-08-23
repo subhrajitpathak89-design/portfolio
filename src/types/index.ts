@@ -10,8 +10,17 @@ export type ProjectApproachStep = {
   image?: string;
 };
 
+/**
+ * Backdrop family behind a project's screenshots. Each was picked to sit under
+ * that project's own UI chrome, sampled from the images rather than guessed:
+ * RiseAngle's app is dark slate, Wizlo's is violet, Saral's is a light
+ * grey-teal, Mythic's is navy.
+ */
+export type ProjectTone = "slate" | "violet" | "mist" | "navy";
+
 export type Project = {
   slug: string;
+  tone?: ProjectTone;
   title: string;
   category: string;
   summary: string;

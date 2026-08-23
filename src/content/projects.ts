@@ -3,6 +3,7 @@ import type { Project } from "@/types";
 export const projects: Project[] = [
   {
     slug: "riseangle-ai-video-saas",
+    tone: "slate",
     title: "RiseAngle AI Video Platform",
     category: "SaaS",
     summary:
@@ -68,6 +69,7 @@ export const projects: Project[] = [
   {
 
     slug: "wizlo-emr-patient-portal",
+    tone: "violet",
     title: "Wizlo EMR Patient Portal",
     category: "Healthcare",
     summary:
@@ -143,6 +145,7 @@ export const projects: Project[] = [
   {
 
     slug: "saral-funding-crm",
+    tone: "mist",
     title: "Saral Funding CRM",
     category: "Fintech",
     summary:
@@ -214,6 +217,7 @@ export const projects: Project[] = [
   },
   {
     slug: "mythic-boost-marketplace",
+    tone: "navy",
     title: "Mythic Boost Gaming Marketplace",
     category: "Gaming",
     summary:
