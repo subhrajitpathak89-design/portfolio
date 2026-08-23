@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* The case-study cards only pin when there is genuinely room for one to sit
+   below the navbar in full. A sticky element taller than its viewport slot
+   traps its own lower half out of reach, so on short or narrow windows the
+   cards fall back to an ordinary scrolled stack. */
+@custom-variant stack-scroll (@media (min-width: 80rem) and (min-height: 44rem));
+
 :root {
   --background: #fbfaf9;
   --surface: #ffffff;
@@ -241,6 +247,7 @@
 
   --font-grotesk: var(--font-archivo), var(--font-inter), ui-sans-serif, sans-serif;
   --font-editorial: var(--font-playfair-display), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
 /* Faint orange blueprint grid used as the v2 page substrate. */
@@ -300,4 +307,16 @@
   .animate-cursor-spin {
     animation: none;
   }
+}
+
+/* Ruled-paper background for the case-study stack — horizontal lines only,
+   which reads as a notebook rather than the hero's blueprint grid. */
+.v2-ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 33px,
+    rgba(17, 17, 17, 0.07) 33px,
+    rgba(17, 17, 17, 0.07) 34px
+  );
 }

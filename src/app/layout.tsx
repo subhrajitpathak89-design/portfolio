@@ -5,6 +5,7 @@ import {
   Caveat,
   Archivo,
   Playfair_Display,
+  JetBrains_Mono,
 } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { CustomCursor } from "@/components/layout/CustomCursor";
@@ -41,6 +42,14 @@ const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
   subsets: ["latin"],
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+// The case-study cards use a mono for every piece of label copy — project
+// number, date, tags, the CTA — which is what gives them their spec-sheet feel.
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -103,7 +112,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${plusJakartaSans.variable} ${caveat.variable} ${archivo.variable} ${playfairDisplay.variable} h-full antialiased`}
+      className={`${inter.variable} ${plusJakartaSans.variable} ${caveat.variable} ${archivo.variable} ${playfairDisplay.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans">
         <ThemeProvider

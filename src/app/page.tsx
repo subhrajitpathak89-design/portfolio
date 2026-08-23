@@ -1,5 +1,6 @@
 import { About } from "@/components/sections/About";
 import { Hero } from "@/components/sections/Hero";
+import { Work } from "@/components/sections/Work";
 
 export default function Home() {
   // Cream is scoped to this route rather than set on the global theme: the
@@ -9,6 +10,7 @@ export default function Home() {
     <main className="min-h-svh bg-v2-cream">
       <Hero />
       <About />
+      <Work />
     </main>
   );
 }
