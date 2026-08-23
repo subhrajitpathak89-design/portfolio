@@ -219,6 +219,10 @@
   --v2-yellow: #f7d046;
   --v2-pink: #f53d8f;
   --v2-green: #12b76a;
+  --v2-periwinkle: #8095f5;
+  --v2-forest: #23795a;
+  --v2-lime: #cbe98a;
+  --v2-blush: #f3aede;
   --v2-grid-line: rgba(255, 90, 0, 0.07);
   --v2-grid-cell: 132px;
 }
@@ -230,8 +234,13 @@
   --color-v2-yellow: var(--v2-yellow);
   --color-v2-pink: var(--v2-pink);
   --color-v2-green: var(--v2-green);
+  --color-v2-periwinkle: var(--v2-periwinkle);
+  --color-v2-forest: var(--v2-forest);
+  --color-v2-lime: var(--v2-lime);
+  --color-v2-blush: var(--v2-blush);
 
   --font-grotesk: var(--font-archivo), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-editorial: var(--font-playfair-display), ui-serif, Georgia, serif;
 }
 
 /* Faint orange blueprint grid used as the v2 page substrate. */

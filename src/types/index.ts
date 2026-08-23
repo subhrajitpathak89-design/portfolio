@@ -80,3 +80,29 @@ export type Profile = {
   availability: string;
   socials: SocialLink[];
 };
+
+export type CaptionTone = "blush" | "orange" | "lime" | "periwinkle";
+
+export type AboutPhoto = {
+  /** `null` renders a placeholder tile at the real photo's size and angle. */
+  src: string | null;
+  alt: string;
+  caption: string | null;
+  captionTone: CaptionTone;
+  captionSide: "left" | "right";
+  /** Degrees of tilt; the collage reads as scattered rather than gridded. */
+  rotate: number;
+  /** Vertical stagger in px at the collage's base scale. */
+  offsetY: number;
+};
+
+export type AboutContent = {
+  eyebrow: string;
+  headline: {
+    /** Rendered in the heavy grotesque, one entry per line. */
+    lead: string[];
+    /** Rendered in the serif italic. */
+    accent: string;
+  };
+  photos: AboutPhoto[];
+};
