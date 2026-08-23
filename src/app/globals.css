@@ -414,3 +414,38 @@
 .v2-marquee-host:hover .animate-v2-marquee {
   animation-play-state: paused;
 }
+
+/* Vinyl rotation. Play state is driven from the player's React state rather
+   than a class, so the record parks where it stopped instead of snapping. */
+@keyframes v2-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.animate-v2-spin {
+  animation: v2-spin 4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-v2-spin {
+    animation: none;
+  }
+}
+
+/* Shared type for the footer's answer lines, so the three columns can't drift
+   apart. */
+.footer-value {
+  font-family: var(--font-grotesk);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .footer-value {
+    font-size: 1.5rem;
+  }
+}

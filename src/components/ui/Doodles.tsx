@@ -66,3 +66,34 @@ export function SpeedLines({ className }: { className?: string }) {
     </svg>
   );
 }
+
+/** Spiky comic burst, used as the backing shape for sticker labels. */
+export function Burst({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 120 104" className={className} aria-hidden>
+      <path
+        fill="currentColor"
+        d="M60 2l11 17 19-11-4 21 21 3-13 15 17 12-21 7 7 19-20-7-6 19-12-17-17 10 1-20-21-5 14-14L2 51l20-7-6-18 20 6z"
+      />
+    </svg>
+  );
+}
+
+/** Simple round smiley sticker. */
+export function Smiley({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 40 40" className={className} aria-hidden>
+      <circle cx="20" cy="20" r="19" fill="currentColor" />
+      <circle cx="20" cy="20" r="19" fill="none" stroke="var(--v2-ink)" strokeWidth="1.6" />
+      <ellipse cx="14" cy="16" rx="2.1" ry="3" fill="var(--v2-ink)" />
+      <ellipse cx="26" cy="16" rx="2.1" ry="3" fill="var(--v2-ink)" />
+      <path
+        d="M12 25c2 3.6 4.8 5.3 8 5.3s6-1.7 8-5.3"
+        fill="none"
+        stroke="var(--v2-ink)"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
