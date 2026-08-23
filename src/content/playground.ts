@@ -9,6 +9,13 @@ import type { PlaygroundContent } from "@/types";
  * put, so nothing shifts.
  */
 export const playground: PlaygroundContent = {
+  /**
+   * Full-page backdrop. Save the rolling-hills illustration here and it takes
+   * over; until then a sky-to-grass gradient stands in, so the page reads as
+   * intended rather than as a broken image.
+   */
+  background: "/images/v2/playground/hills.jpg",
+
   heading: { lead: "Half a year,", accent: "tucked", tail: "into folders" },
 
   intro:

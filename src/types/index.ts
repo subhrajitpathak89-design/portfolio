@@ -150,6 +150,8 @@ export type PlaygroundFolder = {
 };
 
 export type PlaygroundContent = {
+  /** Path to the full-page backdrop image. */
+  background: string;
   heading: { lead: string; accent: string; tail: string };
   intro: string;
   folders: PlaygroundFolder[];

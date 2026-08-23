@@ -9,9 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function PlaygroundPage() {
+  // No background colour on `main` here — unlike the home route. The section
+  // paints a fixed backdrop behind itself, and an opaque ancestor background
+  // would cover it.
   return (
     <>
-      <main className="min-h-svh bg-v2-cream">
+      <main className="min-h-svh">
         <FolderShelf />
       </main>
       <Footer />
