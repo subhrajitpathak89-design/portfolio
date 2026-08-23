@@ -11,8 +11,8 @@ export default function Home() {
     <main className="min-h-svh bg-v2-cream">
       <Hero />
       <About />
-      <Tools />
       <Work />
+      <Tools />
     </main>
   );
 }
