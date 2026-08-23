@@ -204,3 +204,59 @@
     offset-distance: 100%;
   }
 }
+
+/* ============================================================
+   v2 design language — bright cream canvas, hot orange, sticker
+   collage. Scoped as its own token set (rather than overriding
+   :root) so the v1 dark sections keep rendering while sections
+   are ported over one at a time.
+   ============================================================ */
+
+:root {
+  --v2-cream: #fdfbf6;
+  --v2-orange: #ff5a00;
+  --v2-ink: #111111;
+  --v2-yellow: #f7d046;
+  --v2-pink: #f53d8f;
+  --v2-green: #12b76a;
+  --v2-grid-line: rgba(255, 90, 0, 0.07);
+  --v2-grid-cell: 132px;
+}
+
+@theme inline {
+  --color-v2-cream: var(--v2-cream);
+  --color-v2-orange: var(--v2-orange);
+  --color-v2-ink: var(--v2-ink);
+  --color-v2-yellow: var(--v2-yellow);
+  --color-v2-pink: var(--v2-pink);
+  --color-v2-green: var(--v2-green);
+
+  --font-grotesk: var(--font-archivo), var(--font-inter), ui-sans-serif, sans-serif;
+}
+
+/* Faint orange blueprint grid used as the v2 page substrate. */
+.v2-grid {
+  background-image:
+    linear-gradient(to right, var(--v2-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--v2-grid-line) 1px, transparent 1px);
+  background-size: var(--v2-grid-cell) var(--v2-grid-cell);
+}
+
+@keyframes v2-bob {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(-0.4deg);
+  }
+}
+
+.animate-v2-bob {
+  animation: v2-bob 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-v2-bob {
+    animation: none;
+  }
+}

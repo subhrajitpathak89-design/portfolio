@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans, Caveat } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Caveat, Archivo } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/layout/Navbar";
 import { Preloader } from "@/components/layout/Preloader";
@@ -16,6 +16,15 @@ const inter = Inter({
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// The v2 hero wordmark leans on a heavy italic grotesque; Archivo carries a
+// true italic across the whole variable weight range.
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -78,7 +87,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${plusJakartaSans.variable} ${caveat.variable} h-full antialiased`}
+      className={`${inter.variable} ${plusJakartaSans.variable} ${caveat.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans">
         <ThemeProvider

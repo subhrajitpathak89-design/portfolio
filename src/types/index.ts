@@ -62,9 +62,12 @@ export type SocialLink = {
   platform: SocialPlatform;
 };
 
+export type NavIcon = "star" | "person" | "grid" | "diamond";
+
 export type NavLink = {
   label: string;
   href: string;
+  icon: NavIcon;
 };
 
 export type Profile = {
