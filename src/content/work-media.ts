@@ -23,8 +23,8 @@ export const workMedia: Record<string, { width: number; height: number }> = {
   "/images/v2/work/wizlo-03.webp": { width: 1200, height: 706 },
   "/images/v2/work/wizlo-04.webp": { width: 1200, height: 900 },
   "/images/v2/work/wizlo-cover.webp": { width: 1600, height: 1200 },
-  "/media/work/riseangle-desktop.mp4": { width: 768, height: 432 },
-  "/media/work/riseangle-mobile-library.mp4": { width: 432, height: 768 },
-  "/media/work/riseangle-mobile-preset.mp4": { width: 432, height: 768 },
-  "/media/work/riseangle-mobile-welcome.mp4": { width: 432, height: 768 },
+  "/media/work/riseangle-desktop.mp4": { width: 680, height: 324 },
+  "/media/work/riseangle-mobile-library.mp4": { width: 326, height: 680 },
+  "/media/work/riseangle-mobile-preset.mp4": { width: 326, height: 680 },
+  "/media/work/riseangle-mobile-welcome.mp4": { width: 326, height: 680 },
 };

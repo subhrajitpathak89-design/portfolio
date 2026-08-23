@@ -22,9 +22,33 @@ export type ProjectApproachStep = {
  */
 export type ProjectTone = "slate" | "violet" | "mist" | "navy";
 
+/**
+ * A group of related captures shown as one overlapping stack rather than one
+ * full-width card each — three phone screens in a row of 960px cards left huge
+ * empty gutters and read as three unrelated things.
+ */
+export type ProjectShowcase = {
+  label: string;
+  caption?: string;
+  media: string[];
+};
+
+/** Product flow, rendered as a numbered strip a reader can scan in seconds. */
+export type ProjectFlow = {
+  label: string;
+  steps: string[];
+};
+
 export type Project = {
   slug: string;
   tone?: ProjectTone;
+  /**
+   * Three lines a hiring manager can read before deciding to scroll: what it
+   * was, what I owned, what changed.
+   */
+  tldr?: string[];
+  flow?: ProjectFlow;
+  showcase?: ProjectShowcase;
   title: string;
   category: string;
   summary: string;

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, Check, ImageIcon } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, ChevronRight, ImageIcon } from "lucide-react";
 import { getProjectBySlug, projects } from "@/content/projects";
 import { Reveal } from "@/components/ui/Reveal";
+import { PhoneStack } from "@/components/ui/PhoneStack";
 import { StepMedia } from "@/components/ui/StepMedia";
-import type { ProjectTone } from "@/types";
+import type { ProjectFlow, ProjectTone } from "@/types";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -70,6 +71,60 @@ function StepShot({
         <StepMedia video={video} image={image} poster={poster} alt={alt} tone={tone} />
       ) : (
         <ImageFrame className="aspect-[16/10] w-full" />
+      )}
+    </div>
+  );
+}
+
+/**
+ * Three lines and a flow strip, sitting above everything else.
+ *
+ * A hiring manager skims before they read. This is the part that has to survive
+ * being the only thing they look at: what it was, what I owned, what changed —
+ * then the product flow in one line of chips.
+ */
+function AtAGlance({ tldr, flow }: { tldr?: string[]; flow?: ProjectFlow }) {
+  if (!tldr?.length && !flow) return null;
+
+  return (
+    <div className="mt-10 rounded-2xl border border-v2-ink/10 bg-white p-6 sm:p-8">
+      {tldr && tldr.length > 0 && (
+        <>
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-v2-orange-ink">
+            At a glance
+          </p>
+          <ul className="mt-5 space-y-3">
+            {tldr.map((line) => (
+              <li key={line} className="flex items-start gap-3">
+                <span aria-hidden className="mt-[9px] size-1.5 shrink-0 rounded-full bg-v2-orange" />
+                <span className="text-base leading-relaxed text-v2-ink/80">{line}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {flow && (
+        <div className={tldr?.length ? "mt-8 border-t border-v2-ink/10 pt-6" : ""}>
+          {/* ink/50 measured 3.54:1 on the white card — below AA for 11px. */}
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-v2-ink/65">
+            {flow.label}
+          </p>
+          {/* Wraps rather than scrolls: a flow you have to drag sideways is a
+              flow nobody reads. */}
+          <ol className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2">
+            {flow.steps.map((step, index) => (
+              <li key={step} className="flex items-center gap-2">
+                <span className="rounded-full bg-v2-cream px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-v2-ink">
+                  {step}
+                </span>
+                {index < flow.steps.length - 1 && (
+                  <ChevronRight aria-hidden className="size-3.5 shrink-0 text-v2-ink/30" />
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
       )}
     </div>
   );
@@ -150,6 +205,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </div>
             ))}
           </dl>
+        </Reveal>
+
+        <Reveal delay={0.25}>
+          <AtAGlance tldr={project.tldr} flow={project.flow} />
         </Reveal>
       </div>
 
@@ -270,6 +329,26 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 ))}
               </div>
             </section>
+
+            {project.showcase && (
+              <Reveal y={32}>
+                <section className="mt-24">
+                  <SectionLabel>{project.showcase.label}</SectionLabel>
+                  {project.showcase.caption && (
+                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-v2-ink/70">
+                      {project.showcase.caption}
+                    </p>
+                  )}
+                  <div className="relative left-1/2 mt-10 w-[min(92vw,44rem)] -translate-x-1/2">
+                    <PhoneStack
+                      media={project.showcase.media}
+                      label={project.showcase.label}
+                      tone={project.tone ?? "slate"}
+                    />
+                  </div>
+                </section>
+              </Reveal>
+            )}
 
             <Reveal y={32}>
               {/* Tinted rather than white, so the conclusion reads as the

@@ -3,6 +3,31 @@ import type { Project } from "@/types";
 export const projects: Project[] = [
   {
     slug: "riseangle-ai-video-saas",
+    tldr: [
+      "AI faceless-video SaaS with tens of thousands of creators — built desktop-first while 73% of actual usage was mobile.",
+      "I owned the redesign end to end: analytics audit, then the creation flow, template discovery and the paywall.",
+      "Free-to-paid conversion went 4.2% to 9.1% in six weeks, flow completion 42% to 79%.",
+    ],
+    flow: {
+      label: "Creating a video",
+      steps: [
+        "Pick a preset",
+        "Add prompt or image",
+        "Generate, with live preview",
+        "Track progress",
+        "Publish to Shorts / TikTok",
+      ],
+    },
+    showcase: {
+      label: "The mobile flow",
+      caption:
+        "Preset, generation and library — the three screens that carry the flow on the surface most creators actually use.",
+      media: [
+        "/media/work/riseangle-mobile-welcome.mp4",
+        "/media/work/riseangle-mobile-preset.mp4",
+        "/media/work/riseangle-mobile-library.mp4",
+      ],
+    },
     tone: "slate",
     title: "RiseAngle AI Video Platform",
     category: "SaaS",
@@ -37,28 +62,22 @@ export const projects: Project[] = [
         video: "/media/work/riseangle-desktop.mp4",
         poster: "/media/work/riseangle-desktop-poster.jpg",
         image: "/images/v2/work/riseangle-01.webp",
-        body: "Before touching any screens, I ran an analytics audit to find exactly where users were dropping off, rather than assuming what needed fixing. The 11-step desktop creation flow was the single biggest drop-off point on mobile, with the sharpest cliff right after template selection.",
+        body: "I ran an analytics audit before touching a screen. The 11-step desktop creation flow was the single biggest drop-off on mobile, with the sharpest cliff right after template selection — so that is where the work went.",
       },
       {
         title: "Rebuilt the creation flow mobile-first",
-        video: "/media/work/riseangle-mobile-welcome.mp4",
-        poster: "/media/work/riseangle-mobile-welcome-poster.jpg",
         image: "/images/v2/work/riseangle-02.webp",
-        body: "The 11-step flow became a 4-step mobile-first wizard using bottom sheets and an inline live AI preview, so creators could see their video coming together without losing their place. Generation latency became part of the design: a progress state with real-time captions kept the wait feel intentional instead of broken.",
+        body: "Eleven steps became a four-step wizard with bottom sheets and an inline live preview. Generation latency of 10–40 seconds became part of the design rather than something to hide: a progress state with real-time captions made the wait feel deliberate.",
       },
       {
         title: "Redesigned discovery and monetization",
-        video: "/media/work/riseangle-mobile-preset.mp4",
-        poster: "/media/work/riseangle-mobile-preset-poster.jpg",
         image: "/images/v2/work/riseangle-03.webp",
-        body: "Template browsing moved from a form-based picker to a visual-first gallery. The paywall changed from a hard, contextless lock screen into a value-first upgrade path that showed what you'd get before asking you to pay.",
+        body: "Template browsing moved from a form-based picker to a visual gallery. The paywall changed from a contextless lock screen to a value-first upgrade path that shows what you get before asking for payment — worth roughly a third of the total conversion lift on its own.",
       },
       {
         title: "Shipped in stages, not all at once",
-        video: "/media/work/riseangle-mobile-library.mp4",
-        poster: "/media/work/riseangle-mobile-library-poster.jpg",
         image: "/images/v2/work/riseangle-04.webp",
-        body: "The wizard, gallery and paywall shipped as three sequential releases behind a feature flag, so we could attribute each metric change to a specific change and roll back cleanly if a release underperformed.",
+        body: "Wizard, gallery and paywall went out as three sequential releases behind a feature flag. Each metric change could be attributed to a specific change, and any release could be rolled back cleanly.",
       },
     ],
     results: [
@@ -77,6 +96,21 @@ export const projects: Project[] = [
   {
 
     slug: "wizlo-emr-patient-portal",
+    tldr: [
+      "0 to 1 clinical EMR connecting clinics, medical staff and patients, built by a multi-designer team.",
+      "I owned two modules end to end: the five-section patient portal, and the patient-management module clinic staff work in daily.",
+      "Client-reported: support calls down 34%, record retrieval 40% faster, three phases shipped with no architectural rework.",
+    ],
+    flow: {
+      label: "What a patient actually does",
+      steps: [
+        "Open the portal",
+        "See status at a glance",
+        "Book or reschedule",
+        "Track a medicine order",
+        "Message the clinic",
+      ],
+    },
     tone: "violet",
     title: "Wizlo EMR Patient Portal",
     category: "Healthcare",
@@ -106,22 +140,22 @@ export const projects: Project[] = [
     approach: [
       {
         title: "Home as a status dashboard, not a feature menu",
-        body: "The patient home screen surfaces the three things people actually check: next appointment, active order status, and unread documents. It is not a navigation hub, it gives direct answers. That came out of client calls about where patients were phoning support most — appointment confusion and order status were the top two reasons anyone rang the clinic.",
+        body: "The patient home surfaces the three things people actually open the app for: next appointment, order status, unread documents. Client call logs showed appointment confusion and order status were the top two reasons patients rang the clinic, so the screen answers both before being asked.",
         image: "/images/v2/work/wizlo-01.webp",
       },
       {
         title: "Mobile first, desktop validated",
-        body: "Every component — nav, cards, document list, order tracker — was built to work at 375px before being extended to desktop. Healthcare portal usage skews heavily mobile; most patients open this in a waiting room, not at a desk. Treating desktop as primary would have shipped something that felt foreign to most patients on day one.",
+        body: "Every component was built to work at 375px before being extended upward. Most patients open this in a waiting room, not at a desk — treating desktop as primary would have shipped something that felt foreign to the majority on day one.",
         image: "/images/v2/work/wizlo-02.webp",
       },
       {
         title: "Table first for clinic staff, always",
-        body: "The all-clients view is a dense data table by design. Staff scan for patients by name, filter by status, and need to reach a record fast. Card grids look friendlier but slow down anyone who already knows what they are looking for. The client confirmed it matched how their team actually works.",
+        body: "The all-clients view is a dense data table by design: staff scan by name, filter by status, and need a record fast. Card grids look friendlier but slow down anyone who already knows who they are looking for.",
         image: "/images/v2/work/wizlo-03.webp",
       },
       {
         title: "ID verification as a first-class flow",
-        body: "Client ID verification was originally scoped as a checkbox on the patient record. I pushed for a distinct stepped flow with explicit states — unverified, in review, verified — because clinics carry compliance obligations around patient identity. Surfacing that status at table level let staff triage verification at a glance instead of opening every record.",
+        body: "Verification was scoped as a checkbox. I argued it up into a stepped flow with explicit states — unverified, in review, verified — because clinics carry compliance obligations on patient identity, and surfaced the status at table level so staff could triage at a glance.",
         image: "/images/v2/work/wizlo-04.webp",
       },
     ],
@@ -153,6 +187,21 @@ export const projects: Project[] = [
   {
 
     slug: "saral-funding-crm",
+    tldr: [
+      "A loan-consolidation sales team outgrew spreadsheets; every off-the-shelf CRM was too costly, too complex, or missing WhatsApp.",
+      "I designed both sides of a purpose-built tool: fast action-oriented screens for executives, data-oriented dashboards for management, and a WhatsApp inbox inside the product.",
+      "Sales up 5% shortly after launch, every lead source in one system, third-party CRM cost removed entirely.",
+    ],
+    flow: {
+      label: "Lead lifecycle",
+      steps: [
+        "Lead arrives by form or WhatsApp",
+        "Assigned to an executive",
+        "Qualified on the lead profile",
+        "Moved through the pipeline",
+        "Closed won or lost",
+      ],
+    },
     tone: "mist",
     title: "Saral Funding CRM",
     category: "Fintech",
@@ -182,22 +231,22 @@ export const projects: Project[] = [
     approach: [
       {
         title: "Two dashboards, because there were two users",
-        body: "Sales executives are on calls all day and need today's work: assigned leads, pending follow-ups, recent WhatsApp messages, pipeline at a glance. Admins need team performance: total leads, conversion rates, stage distribution, individual activity. Splitting them let each screen be built for its own mode of thinking rather than compromising between the two.",
+        body: "Executives are on calls all day and need today's work: assigned leads, follow-ups due, unread messages. Management needs conversion rates and pipeline health. One screen serving both would have served neither, so each got its own.",
         image: "/images/v2/work/saral-01.webp",
       },
       {
         title: "Leads management with a view for each job",
-        body: "The central hub carries a list/Kanban toggle — a table for bulk scanning, a pipeline for stage-based management. Status updates, call logging and assignment happen inline without opening the full profile, and multi-parameter filtering covers stage, source, assigned executive and date range.",
+        body: "A list/Kanban toggle covers both jobs — a table for bulk scanning, a pipeline for stage management. Status changes, call logging and assignment all happen inline, without opening the full profile.",
         image: "/images/v2/work/saral-02.webp",
       },
       {
         title: "A lead profile that answers three questions",
-        body: "The single most important screen for an executive. It is built to answer, instantly: who is this person and what do they need, what has happened so far, and what should happen next. Personal and loan details, a timeline of interactions, notes, assigned executive, current stage and the WhatsApp thread all sit in one place.",
+        body: "Who is this person and what do they need, what has happened so far, and what happens next. Loan details, interaction timeline, notes, stage and the WhatsApp thread all sit on one screen so an executive can pick up a call cold.",
         image: "/images/v2/work/saral-03.webp",
       },
       {
         title: "WhatsApp brought inside the CRM",
-        body: "A significant share of leads arrived through a WhatsApp widget. Rather than leave chat in a separate tab, it became an inbox inside the tool: conversation list with unread indicators, the full thread, a quick link to the lead's profile, and the ability to log the outcome straight to the timeline. This removed the biggest context-switch in the executives' day.",
+        body: "A large share of leads arrived through a WhatsApp widget, previously handled in a separate tab. It became an inbox in the tool — thread, unread counts, a jump to the profile, and outcome logged straight to the timeline — removing the biggest context switch in the day.",
         image: "/images/v2/work/saral-04.webp",
       },
     ],
@@ -225,6 +274,21 @@ export const projects: Project[] = [
   },
   {
     slug: "mythic-boost-marketplace",
+    tldr: [
+      "US game-boosting marketplace where players buy rank boosts and coordinate with providers in real time.",
+      "I reworked the two highest-stakes moments in the product: the chat between player and booster, and checkout.",
+      "The brief was trust — demand existed, but the parts handling money and communication were the weakest links.",
+    ],
+    flow: {
+      label: "Order journey",
+      steps: [
+        "Choose a boost",
+        "Checkout",
+        "Matched with a booster",
+        "Track progress in chat",
+        "Delivery and review",
+      ],
+    },
     tone: "navy",
     title: "Mythic Boost Gaming Marketplace",
     category: "Gaming",
