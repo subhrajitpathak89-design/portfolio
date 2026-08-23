@@ -1,7 +1,8 @@
 import type { Profile } from "@/types";
 
-// Placeholder domain — replace with the real deployed URL before going live.
-export const siteUrl = "https://example.com";
+// Drives metadataBase, so it sets every canonical URL, OpenGraph link and
+// sitemap entry. Point it at a custom domain when there is one.
+export const siteUrl = "https://portfolio-teal-seven-7vraz065mz.vercel.app";
 
 export const profile: Profile = {
   name: "Subhrajit",
