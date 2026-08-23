@@ -34,21 +34,29 @@ export const projects: Project[] = [
     approach: [
       {
         title: "Started with data, not a redesign",
+        video: "/media/work/riseangle-desktop.mp4",
+        poster: "/media/work/riseangle-desktop-poster.jpg",
         image: "/images/v2/work/riseangle-01.webp",
         body: "Before touching any screens, I ran an analytics audit to find exactly where users were dropping off, rather than assuming what needed fixing. The 11-step desktop creation flow was the single biggest drop-off point on mobile, with the sharpest cliff right after template selection.",
       },
       {
         title: "Rebuilt the creation flow mobile-first",
+        video: "/media/work/riseangle-mobile-welcome.mp4",
+        poster: "/media/work/riseangle-mobile-welcome-poster.jpg",
         image: "/images/v2/work/riseangle-02.webp",
         body: "The 11-step flow became a 4-step mobile-first wizard using bottom sheets and an inline live AI preview, so creators could see their video coming together without losing their place. Generation latency became part of the design: a progress state with real-time captions kept the wait feel intentional instead of broken.",
       },
       {
         title: "Redesigned discovery and monetization",
+        video: "/media/work/riseangle-mobile-preset.mp4",
+        poster: "/media/work/riseangle-mobile-preset-poster.jpg",
         image: "/images/v2/work/riseangle-03.webp",
         body: "Template browsing moved from a form-based picker to a visual-first gallery. The paywall changed from a hard, contextless lock screen into a value-first upgrade path that showed what you'd get before asking you to pay.",
       },
       {
         title: "Shipped in stages, not all at once",
+        video: "/media/work/riseangle-mobile-library.mp4",
+        poster: "/media/work/riseangle-mobile-library-poster.jpg",
         image: "/images/v2/work/riseangle-04.webp",
         body: "The wizard, gallery and paywall shipped as three sequential releases behind a feature flag, so we could attribute each metric change to a specific change and roll back cleanly if a release underperformed.",
       },

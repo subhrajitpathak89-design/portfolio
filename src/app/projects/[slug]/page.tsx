@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check, ImageIcon } from "lucide-react";
 import { getProjectBySlug, projects } from "@/content/projects";
 import { Reveal } from "@/components/ui/Reveal";
+import { StepMedia } from "@/components/ui/StepMedia";
 import type { ProjectTone } from "@/types";
 
 type ProjectPageProps = {
@@ -44,43 +44,46 @@ function ImageFrame({ className = "" }: { className?: string }) {
 }
 
 /**
- * Backdrops sampled from the screenshots themselves, then lifted a little so
- * the mockup still reads against them. Averages measured off the source files:
- * RiseAngle #363e47, Wizlo #504969, Saral #7a8990, Mythic #3e556a.
+ * Backdrops built from each project's own brand accent.
+ *
+ * A first pass averaged every pixel and produced four near-identical greys —
+ * the chrome dominates these screenshots, not the brand. Averaging only the
+ * saturated mid-tones instead surfaces the real accent: RiseAngle #982d80
+ * (magenta), Wizlo #352872 (violet), Saral #ced5bc (sage), Mythic #0031a9
+ * (blue). Each gradient runs from that accent into the image's own darkest
+ * quarter, so it ends in a shadow the shot actually contains.
  */
 const TONE_GRADIENTS: Record<ProjectTone, string> = {
-  slate: "linear-gradient(140deg, #4a5464 0%, #251f2c 100%)",
-  violet: "linear-gradient(140deg, #8477bd 0%, #443e60 100%)",
-  mist: "linear-gradient(140deg, #c2ccd2 0%, #839298 100%)",
-  navy: "linear-gradient(140deg, #547598 0%, #22334a 100%)",
+  slate: "linear-gradient(140deg, #a54690 0%, #0e0d0e 100%)",
+  violet: "linear-gradient(140deg, #4d4283 0%, #151028 100%)",
+  mist: "linear-gradient(140deg, #e4e8da 0%, #818e92 100%)",
+  navy: "linear-gradient(140deg, #1f4ab3 0%, #121827 100%)",
 };
 
-/**
- * A screen from the work, given the width to actually be legible.
- *
- * These are laptop mockups with generous built-in margins, so at the old
- * half-column width the app UI inside them was far too small to read. The
- * frame breaks out past the prose column to ~60rem and the shot is contained
- * rather than cropped, which keeps the whole screen visible and lets the
- * project's own backdrop colour show around it.
- */
-function StepShot({ src, alt, tone }: { src?: string; alt: string; tone: ProjectTone }) {
+/** The panel a screen or clip sits on, breaking out past the prose column. */
+function StepShot({
+  image,
+  video,
+  poster,
+  alt,
+  tone,
+}: {
+  image?: string;
+  video?: string;
+  poster?: string;
+  alt: string;
+  tone: ProjectTone;
+}) {
+  const hasMedia = Boolean(image || video);
+
   return (
     <div className="relative left-1/2 w-[min(92vw,60rem)] -translate-x-1/2">
       <div
-        className="rounded-2xl p-3 shadow-[0_28px_70px_-30px_rgba(17,17,17,0.5)] sm:p-6 lg:p-10"
+        className="rounded-2xl p-3 shadow-[0_28px_70px_-30px_rgba(17,17,17,0.5)] sm:p-6 lg:p-8"
         style={{ backgroundImage: TONE_GRADIENTS[tone] }}
       >
-        {src ? (
-          <div className="relative aspect-[16/10]">
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              sizes="(min-width: 1024px) 60rem, 92vw"
-              className="object-contain"
-            />
-          </div>
+        {hasMedia ? (
+          <StepMedia video={video} image={image} poster={poster} alt={alt} />
         ) : (
           <div className="flex aspect-[16/10] items-center justify-center rounded-xl bg-white/10">
             <ImageIcon className="size-9 text-white/50" strokeWidth={1.5} aria-hidden />
@@ -173,19 +176,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="mx-auto mt-12 max-w-5xl px-6 lg:px-8">
           {project.coverImage ? (
             <div
-              className="rounded-2xl p-3 shadow-[0_28px_70px_-30px_rgba(17,17,17,0.5)] sm:p-6 lg:p-10"
+              className="rounded-2xl p-3 shadow-[0_28px_70px_-30px_rgba(17,17,17,0.5)] sm:p-6 lg:p-8"
               style={{ backgroundImage: TONE_GRADIENTS[project.tone ?? "slate"] }}
             >
-              <div className="relative aspect-[16/10]">
-                <Image
-                  src={project.coverImage}
-                  alt={`${project.title} cover`}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 64rem, 100vw"
-                  className="object-contain"
-                />
-              </div>
+              <StepMedia image={project.coverImage} alt={`${project.title} cover`} priority />
             </div>
           ) : (
             <ImageFrame className="aspect-[16/9] w-full" />
@@ -283,7 +277,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
                       <div className="mt-8">
                         <StepShot
-                          src={step.image}
+                          image={step.image}
+                          video={step.video}
+                          poster={step.poster}
                           alt={`${project.title} — ${step.title}`}
                           tone={project.tone ?? "slate"}
                         />

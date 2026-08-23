@@ -8,6 +8,10 @@ export type ProjectApproachStep = {
   body: string;
   /** Screen from the work itself; falls back to a placeholder frame when unset. */
   image?: string;
+  /** Looping capture of the real product, preferred over the still when set. */
+  video?: string;
+  /** Poster frame shown before the clip loads, and instead of it under reduced motion. */
+  poster?: string;
 };
 
 /**
