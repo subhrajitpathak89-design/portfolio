@@ -2,6 +2,96 @@ import type { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    slug: "nivex-design-platform",
+    tone: "indigo",
+    title: "Nivex Design Platform",
+    category: "Design Systems",
+    summary:
+      "The design system, component library and working prototype behind India's first prescription-based wealth platform — built by directing a team of AI agents inside one repository.",
+    tldr: [
+      "India's first prescription-based wealth platform needed a whole design layer: token architecture, a component and chart library, and a prototype real developers could hand off from.",
+      "I ran it as an AI-agent workflow — five scoped agents, hard file ownership, and every architectural call written as an ADR before any code was allowed.",
+      "313 tokens, 14 ADRs, 32 components and charts, three apps and 262 commits in roughly two months.",
+    ],
+    flow: {
+      label: "Investor journey",
+      steps: [
+        "Choose a service",
+        "Share holdings",
+        "Automated portfolio audit",
+        "Advisor writes a prescription",
+        "Track goals and score",
+      ],
+    },
+    description: [
+      "Nivex prescribes wealth strategy the way a doctor prescribes treatment — personalised recommendations built on a read of each person's financial health, goals and risk profile, rather than generic products off a shelf.",
+    ],
+    role: "Design Systems & Product Design",
+    year: "2026",
+    coverImage: "/images/v2/work/nivex-cover.webp",
+    tags: ["Design System", "Fintech", "AI Workflow", "Accessibility"],
+    liveUrl: "https://techdome-io.github.io/nivex-project/",
+    featured: true,
+    client: "Nivex, via Techdome",
+    duration: "~2 months, 262 commits",
+    problem:
+      "Nivex needed a complete design layer — tokens, components, charts, financial patterns and a browsable prototype — across web, mobile and Figma, on a timeline a conventional team would not have covered. Using AI agents was the only way to reach that scope, which introduced the actual design problem: agents generate quickly and drift quietly. Two sessions asked for a card will invent two different shadows, two spacing scales and two blues, and nothing in a pull request diff makes that obvious until the system is already inconsistent. The work was less about producing screens than about building the constraints that made generated output trustworthy.",
+    constraints: [
+      "Brand voice explicitly ruled out the obvious fintech defaults: no crypto aesthetics, no gamification, no urgency language, no trend-chasing. It had to still look right in five years.",
+      "WCAG 2.1 AA and mobile-first from 320px were baselines to design against, not a pass at the end.",
+      "The prototype is frontend-only with no backend, so there was no server anywhere to hold an API key.",
+      "Several agents worked the same repository, where the usual failure mode is inconsistent output that no one notices until it is everywhere.",
+    ],
+    pullQuote:
+      "Nothing AI-generated should ever reach a client without a human decision in between.",
+    approach: [
+      {
+        title: "Tokens as the contract, not a palette",
+        body: "313 tokens in three layers — raw primitives, semantic intent, then theme overrides — with a validator that runs before every build and a hard rule that nothing is hardcoded anywhere. This is what made agent output safe: an agent cannot invent a blue if the only way to express colour is a token reference.",
+        image: "/images/v2/work/nivex-01.webp",
+      },
+      {
+        title: "Five agents, and none of them overlap",
+        body: "Token, component, chart, docs and QA agents, each with a written scope and a file-ownership table — a component agent cannot edit token JSON, a token agent cannot write components. They run in a fixed order: tokens first, components and charts in parallel once tokens are stable, docs after, QA last.",
+        image: "/images/v2/work/nivex-02.webp",
+      },
+      {
+        title: "Decisions written down before the code",
+        body: "14 ADRs, each with context, decision, alternatives considered and consequences. They are the project's memory: a fresh agent session picks up the same reasoning instead of re-litigating it, and writing the alternatives out first repeatedly made features smaller than they started.",
+        image: "/images/v2/work/nivex-03.webp",
+      },
+      {
+        title: "AI drafts the prescription; a human still clicks Add",
+        body: "Advisors were typing every recommendation from scratch, so AI drafting was an obvious win — but suggestions live in local component state, render behind a dashed 'review before adding' border, and only become a real step when staff accept them one at a time. No bulk accept, deliberately: reviewing each draft is the feature, not friction to remove.",
+        image: "/images/v2/work/nivex-04.webp",
+      },
+    ],
+    results: [
+      {
+        metric: "313 tokens",
+        label:
+          "One source of truth across three apps — dark mode became a configuration change rather than a redesign",
+      },
+      {
+        metric: "14 ADRs",
+        label:
+          "Every architectural call recorded before implementation, so agent sessions resume the reasoning instead of re-arguing it",
+      },
+      {
+        metric: "262 commits",
+        label:
+          "Empty repository to validated token pipeline, Storybook design system and a handoff-ready prototype in about two months",
+      },
+    ],
+    outcome:
+      "The platform ships as a Storybook design system and a browsable prototype, both deployed, plus a developer handoff document that walks the PWA engineer through every v2 decision and the exact route to see it running. Token validation runs on every pull request, so the contract that keeps the system coherent is enforced by CI rather than by review discipline.",
+    learnings: [
+      "The bottleneck with AI agents was never generation, it was consistency. Ownership boundaries and a token contract did more for output quality than any amount of prompt tuning.",
+      "Writing the ADR before the code changed what got built. The AI drafting feature shipped smaller and safer than first scoped, because writing out the alternatives surfaced that putting a provider key in a Vite bundle ships that key to every visitor.",
+      "The most useful artefact was a running taste log: reference screenshots distilled into named principles, including the ones we explicitly refused to adopt and why. Recording what not to build turned out to matter as much as recording what to build.",
+    ],
+  },
+  {
     slug: "riseangle-ai-video-saas",
     tldr: [
       "AI faceless-video SaaS with tens of thousands of creators — built desktop-first while 73% of actual usage was mobile.",

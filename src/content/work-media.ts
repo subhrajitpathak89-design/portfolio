@@ -8,6 +8,11 @@
  */
 export const workMedia: Record<string, { width: number; height: number }> = {
   "/images/v2/work/mythic-cover.webp": { width: 1600, height: 1250 },
+  "/images/v2/work/nivex-01.webp": { width: 900, height: 600 },
+  "/images/v2/work/nivex-02.webp": { width: 900, height: 600 },
+  "/images/v2/work/nivex-03.webp": { width: 900, height: 720 },
+  "/images/v2/work/nivex-04.webp": { width: 900, height: 600 },
+  "/images/v2/work/nivex-cover.webp": { width: 900, height: 666 },
   "/images/v2/work/riseangle-01.webp": { width: 1200, height: 900 },
   "/images/v2/work/riseangle-02.webp": { width: 1200, height: 960 },
   "/images/v2/work/riseangle-03.webp": { width: 1200, height: 860 },

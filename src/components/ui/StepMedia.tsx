@@ -32,6 +32,9 @@ const TONE_GLOW: Record<ProjectTone, string> = {
   violet: "53, 40, 114",
   mist: "125, 140, 130",
   navy: "0, 49, 169",
+  // Nivex publishes its primary as #444CE7 in tokens/base, so this one is the
+  // brand value rather than a sample.
+  indigo: "68, 76, 231",
 };
 
 type StepMediaProps = {

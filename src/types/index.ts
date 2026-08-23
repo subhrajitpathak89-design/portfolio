@@ -18,9 +18,9 @@ export type ProjectApproachStep = {
  * Backdrop family behind a project's screenshots. Each was picked to sit under
  * that project's own UI chrome, sampled from the images rather than guessed:
  * RiseAngle's app is dark slate, Wizlo's is violet, Saral's is a light
- * grey-teal, Mythic's is navy.
+ * grey-teal, Mythic's is navy. Nivex ships its own documented brand indigo.
  */
-export type ProjectTone = "slate" | "violet" | "mist" | "navy";
+export type ProjectTone = "slate" | "violet" | "mist" | "navy" | "indigo";
 
 /**
  * A group of related captures shown as one overlapping stack rather than one
