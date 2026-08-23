@@ -21,6 +21,11 @@ const PANEL_WIDTH = 1200;
 const WIRE_END_Y = 40;
 const WIRE_CONTROL_Y = 180;
 
+// Clears the lowest card (hung at the wire's dip) plus the few px its tilt
+// adds. Tightened after the captions came off, so the line does not sit in a
+// pool of empty cream.
+const PANEL_HEIGHT = 320;
+
 /** Card slots along the panel, evenly spaced. */
 const SLOT_XS = [150, 450, 750, 1050];
 
@@ -80,7 +85,7 @@ function Panel() {
   return (
     <div
       className="relative shrink-0"
-      style={{ width: PANEL_WIDTH, height: 430 }}
+      style={{ width: PANEL_WIDTH, height: PANEL_HEIGHT }}
     >
       <svg
         className="absolute left-0 top-0 text-v2-ink/25"
@@ -136,7 +141,10 @@ function PeggedCard({
         className="absolute -top-3 left-1/2 z-10 h-7 w-4 -translate-x-1/2 rounded-[3px] bg-v2-green shadow-[0_2px_4px_rgba(17,17,17,0.25)]"
       />
 
-      <figure className="w-[240px] rounded-xl bg-white p-3 pb-5 shadow-[0_18px_36px_-16px_rgba(17,17,17,0.35)]">
+      {/* Image only. The deeper bottom border is the one asymmetry kept from
+          the polaroid frame — without it, a captionless card just reads as a
+          plain white box. */}
+      <div className="w-[240px] rounded-xl bg-white p-3 pb-6 shadow-[0_18px_36px_-16px_rgba(17,17,17,0.35)]">
         <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-v2-ink/5">
           {project.coverImage ? (
             <Image
@@ -152,16 +160,7 @@ function PeggedCard({
             </div>
           )}
         </div>
-
-        <figcaption className="mt-3 px-1">
-          <p className="font-grotesk text-sm font-black leading-tight text-v2-ink">
-            {project.title}
-          </p>
-          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-v2-ink/50">
-            {project.category}
-          </p>
-        </figcaption>
-      </figure>
+      </div>
     </div>
   );
 }
