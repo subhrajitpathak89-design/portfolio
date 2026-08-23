@@ -365,3 +365,46 @@
   background-size: 18px 18px;
   background-position: 0 0, 9px 9px;
 }
+
+/* ------------------------------------------------------------------
+   Tool-stack orbit
+   ------------------------------------------------------------------ */
+
+/* Animates the `rotate` property rather than `transform`, so it composes with
+   the static `transform` each tile uses to place itself on the circle. */
+@keyframes v2-orbit {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* The ring and the counter share one duration on purpose: the tiles cancel the
+   ring's rotation exactly, so logos stay upright all the way round instead of
+   hanging upside down at the bottom of the circle. */
+.animate-v2-orbit,
+.animate-v2-orbit-counter {
+  animation: v2-orbit 48s linear infinite;
+}
+
+.animate-v2-orbit-counter {
+  animation-direction: reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-v2-orbit,
+  .animate-v2-orbit-counter {
+    animation: none;
+  }
+}
+
+/* Pause the orbit on hover. Kept as one plain rule rather than two
+   `group-hover:` utilities so the ring and its counter-rotating tiles can only
+   ever be paused together — pausing one without the other would let the tiles
+   spin out of square. */
+.v2-orbit-host:hover .animate-v2-orbit,
+.v2-orbit-host:hover .animate-v2-orbit-counter {
+  animation-play-state: paused;
+}

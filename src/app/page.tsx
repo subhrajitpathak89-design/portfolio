@@ -1,5 +1,6 @@
 import { About } from "@/components/sections/About";
 import { Hero } from "@/components/sections/Hero";
+import { Tools } from "@/components/sections/Tools";
 import { Work } from "@/components/sections/Work";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
     <main className="min-h-svh bg-v2-cream">
       <Hero />
       <About />
+      <Tools />
       <Work />
     </main>
   );

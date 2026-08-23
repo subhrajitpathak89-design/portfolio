@@ -106,3 +106,23 @@ export type AboutContent = {
   };
   photos: AboutPhoto[];
 };
+
+export type ToolIconName = "figma" | "claude" | "github" | "framer" | "notion";
+
+/**
+ * Tiles are one of two kinds. `icon` uses a real brand mark from Simple Icons;
+ * `mono` is a lettermark tile, used for the brands whose logos Simple Icons
+ * does not carry (Adobe pulled theirs over trademark policy, as did OpenAI).
+ * Adobe's own app icons are lettermarks, so those read authentically.
+ */
+export type Tool =
+  | { name: string; kind: "icon"; icon: ToolIconName; bg: string; fg: string }
+  | { name: string; kind: "mono"; mono: string; bg: string; fg: string };
+
+export type ToolsContent = {
+  eyebrow: string;
+  heading: string;
+  /** Sits in the middle of the ring; one entry per line. */
+  caption: string[];
+  tools: Tool[];
+};
