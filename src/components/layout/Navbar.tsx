@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Diamond, Heart, LayoutGrid, Star, UserRound } from "lucide-react";
 import { FaDribbble, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
@@ -43,9 +44,15 @@ const SOCIALS = [
 ] as const;
 
 export function Navbar() {
+  const pathname = usePathname();
+  const onHome = pathname === "/";
   const [activeHash, setActiveHash] = useState("#home");
 
   useEffect(() => {
+    // Section tracking only means anything on the home page; elsewhere the
+    // route decides which link is lit.
+    if (!onHome) return;
+
     const sectionIds = navLinks
       .map((link) => link.href.split("#")[1])
       .filter((id): id is string => Boolean(id));
@@ -108,7 +115,19 @@ export function Navbar() {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
-  }, []);
+  }, [onHome]);
+
+  /**
+   * Hash links (`/#work`) belong to the home page and are decided by scroll
+   * position; plain routes (`/playground`) are decided by the pathname. Without
+   * the split, a route link could never light up and a section link would stay
+   * lit after navigating away.
+   */
+  const isLinkActive = (href: string) => {
+    const [route, hash] = href.split("#");
+    if (hash) return onHome && `#${hash}` === activeHash;
+    return pathname === route.replace(/\/$/, "");
+  };
 
   const socialHref = (platform: string) =>
     profile.socials.find((social) => social.platform === platform)?.href ?? "#";
@@ -127,7 +146,7 @@ export function Navbar() {
 
           <nav className="flex items-stretch" aria-label="Main">
             {navLinks.map((link) => {
-              const isActive = link.href.replace("/", "") === activeHash;
+              const isActive = isLinkActive(link.href);
               const Icon = NAV_ICONS[link.icon];
 
               return (

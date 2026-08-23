@@ -128,3 +128,30 @@ export type ToolsContent = {
   caption: string[];
   tools: Tool[];
 };
+
+/** One item peeking out of the top of a playground folder. */
+export type FolderPeek = {
+  /** Image path, or null to render a tinted paper chip instead. */
+  src: string | null;
+  alt: string;
+  /** Any CSS colour — these are scrapbook offcuts, not palette roles. */
+  tone: string;
+  rotate: number;
+  /** Width as a percentage of the folder, so peeks scale with the grid. */
+  width: number;
+};
+
+export type PlaygroundFolder = {
+  month: string;
+  /** Front flap, and the darker body behind it. */
+  front: string;
+  back: string;
+  peeks: FolderPeek[];
+};
+
+export type PlaygroundContent = {
+  heading: { lead: string; accent: string; tail: string };
+  intro: string;
+  folders: PlaygroundFolder[];
+  todo: { title: string; items: string[]; note: string };
+};
