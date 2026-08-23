@@ -1,23 +1,13 @@
-import { About } from "@/components/sections/About";
-import { Bento } from "@/components/sections/Bento";
-import { Contact } from "@/components/sections/Contact";
-import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
-import { TechStack } from "@/components/sections/TechStack";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { Work } from "@/components/sections/Work";
 
 export default function Home() {
+  // Cream is scoped to this route rather than set on the global theme: the
+  // case-study and project pages are still on the v1 dark tokens until they
+  // get ported. Without it the dark body would show through below the hero,
+  // which on phones is deliberately shorter than the viewport.
   return (
-    <>
+    <main className="min-h-svh bg-v2-cream">
       <Hero />
-      <About />
-      <Experience />
-      <TechStack />
-      <Work />
-      <Bento />
-      <Testimonials />
-      <Contact />
-    </>
+    </main>
   );
 }
