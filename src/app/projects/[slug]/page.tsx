@@ -44,23 +44,13 @@ function ImageFrame({ className = "" }: { className?: string }) {
 }
 
 /**
- * Backdrops built from each project's own brand accent.
+ * A screen or clip, breaking out past the prose column.
  *
- * A first pass averaged every pixel and produced four near-identical greys —
- * the chrome dominates these screenshots, not the brand. Averaging only the
- * saturated mid-tones instead surfaces the real accent: RiseAngle #982d80
- * (magenta), Wizlo #352872 (violet), Saral #ced5bc (sage), Mythic #0031a9
- * (blue). Each gradient runs from that accent into the image's own darkest
- * quarter, so it ends in a shadow the shot actually contains.
+ * There is deliberately no panel behind the media. These shots ship with their
+ * own backdrop baked into the image, so any surface behind them read as a
+ * second card stacked on the first. The project's colour now comes from a
+ * tinted glow under this single card instead.
  */
-const TONE_GRADIENTS: Record<ProjectTone, string> = {
-  slate: "linear-gradient(140deg, #a54690 0%, #0e0d0e 100%)",
-  violet: "linear-gradient(140deg, #4d4283 0%, #151028 100%)",
-  mist: "linear-gradient(140deg, #e4e8da 0%, #818e92 100%)",
-  navy: "linear-gradient(140deg, #1f4ab3 0%, #121827 100%)",
-};
-
-/** The panel a screen or clip sits on, breaking out past the prose column. */
 function StepShot({
   image,
   video,
@@ -74,22 +64,13 @@ function StepShot({
   alt: string;
   tone: ProjectTone;
 }) {
-  const hasMedia = Boolean(image || video);
-
   return (
     <div className="relative left-1/2 w-[min(92vw,60rem)] -translate-x-1/2">
-      <div
-        className="rounded-2xl p-3 shadow-[0_28px_70px_-30px_rgba(17,17,17,0.5)] sm:p-6 lg:p-8"
-        style={{ backgroundImage: TONE_GRADIENTS[tone] }}
-      >
-        {hasMedia ? (
-          <StepMedia video={video} image={image} poster={poster} alt={alt} />
-        ) : (
-          <div className="flex aspect-[16/10] items-center justify-center rounded-xl bg-white/10">
-            <ImageIcon className="size-9 text-white/50" strokeWidth={1.5} aria-hidden />
-          </div>
-        )}
-      </div>
+      {image || video ? (
+        <StepMedia video={video} image={image} poster={poster} alt={alt} tone={tone} />
+      ) : (
+        <ImageFrame className="aspect-[16/10] w-full" />
+      )}
     </div>
   );
 }
@@ -175,12 +156,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <Reveal delay={0.1} y={40}>
         <div className="mx-auto mt-12 max-w-5xl px-6 lg:px-8">
           {project.coverImage ? (
-            <div
-              className="rounded-2xl p-3 shadow-[0_28px_70px_-30px_rgba(17,17,17,0.5)] sm:p-6 lg:p-8"
-              style={{ backgroundImage: TONE_GRADIENTS[project.tone ?? "slate"] }}
-            >
-              <StepMedia image={project.coverImage} alt={`${project.title} cover`} priority />
-            </div>
+            <StepMedia
+              image={project.coverImage}
+              alt={`${project.title} cover`}
+              tone={project.tone ?? "slate"}
+              priority
+            />
           ) : (
             <ImageFrame className="aspect-[16/9] w-full" />
           )}
