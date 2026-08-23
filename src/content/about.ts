@@ -10,6 +10,13 @@ export const about: AboutContent = {
     accent: "from 16px icons to billboards.",
   },
 
+  // Written from the work in content/projects.ts, so every claim here traces
+  // back to something real — but it is your story, so give it a read.
+  intro: [
+    "I'm a product designer who likes the unglamorous half of the job: reading the analytics before touching a screen, cutting an eleven-step flow down to four, and arguing about the one decision that actually moves a number.",
+    "Most of my work lives where messy workflows meet real constraints — an AI video platform, a patient portal, a funding CRM, a gaming marketplace. Different industries, same problem: make the complicated thing feel obvious.",
+  ],
+
   // Drop your own images into `public/images/v2/about/` and set `src` to the
   // path. Any card left with `src: null` renders as a placeholder tile at the
   // exact size and angle the real photo will occupy, so swapping one in is a

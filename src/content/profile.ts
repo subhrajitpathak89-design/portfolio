@@ -12,9 +12,11 @@ export const profile: Profile = {
     "Placeholder bio copy — replace with your own story in src/content/profile.ts. My journey into design started long before product design, spending years experimenting across different tools and disciplines before finding my focus.",
     "Today, I work on consumer and enterprise products, where I enjoy turning complex workflows into experiences that feel simple and intuitive. I'm particularly drawn to problems that sit at the intersection of user needs, business goals, and technical constraints.",
   ],
-  location: "Lisbon, Portugal (placeholder)",
-  email: "hello@example.com",
-  availability: "Available for select freelance work",
+  // TODO: replace with your real city — the footer shows this and links it to
+  // Google Maps, so a wrong value points people somewhere real but wrong.
+  location: "India",
+  email: "subhrajitpathak89@gmail.com",
+  availability: "Open to product design roles and select freelance",
   socials: [
     {
       label: "GitHub",

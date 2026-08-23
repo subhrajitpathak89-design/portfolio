@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { Marquee } from "@/components/ui/Marquee";
+import { SlowOnHover } from "@/components/ui/SlowOnHover";
 import { projects } from "@/content/projects";
 import type { Project } from "@/types";
 
@@ -48,7 +49,7 @@ export function HangingWorks() {
   return (
     <section
       id="gallery"
-      className="v2-marquee-host relative overflow-hidden bg-v2-cream pb-24 pt-20 lg:pb-32 lg:pt-24"
+      className="relative overflow-hidden bg-v2-cream pb-24 pt-20 lg:pb-32 lg:pt-24"
     >
       <header className="mx-auto max-w-6xl px-6 text-center lg:px-8">
         <p className="font-script text-2xl text-v2-ink/70 sm:text-3xl">
@@ -59,9 +60,11 @@ export function HangingWorks() {
         </h2>
       </header>
 
-      <Marquee repeat={1} duration={40} className="mt-16 lg:mt-20">
-        <Panel />
-      </Marquee>
+      <SlowOnHover className="mt-16 lg:mt-20">
+        <Marquee repeat={1} duration={40}>
+          <Panel />
+        </Marquee>
+      </SlowOnHover>
 
       {/*
         The marquee is decorative — it duplicates its content to loop, so

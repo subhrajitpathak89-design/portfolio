@@ -21,11 +21,14 @@ export function Footer() {
     <footer id="contact" className="bg-v2-cream px-2 pb-2 sm:px-4 sm:pb-4">
       <div className="relative overflow-hidden rounded-[1.75rem] bg-v2-periwinkle px-6 pt-12 sm:px-10 lg:px-14 lg:pt-16">
         <div className="grid gap-10 sm:grid-cols-2 xl:grid-cols-[1fr_1fr_1fr_auto] xl:gap-8">
-          <Column label="looking for a job?">
+          {/* The reference is an agency hiring people; this is one designer
+              looking for work, so the columns are flipped to answer what a
+              visitor here would actually be asking. */}
+          <Column label="open to work">
             <p className="footer-value">{profile.availability}</p>
           </Column>
 
-          <Column label="office">
+          <Column label="based in">
             <p className="footer-value">{profile.location}</p>
             <a
               href={mapsHref}
@@ -37,8 +40,11 @@ export function Footer() {
             </a>
           </Column>
 
-          <Column label="contact">
-            <a href={`mailto:${profile.email}`} className="footer-value block hover:underline">
+          <Column label="say hello">
+            <a
+              href={`mailto:${profile.email}`}
+              className="footer-value block break-all hover:underline"
+            >
               {profile.email}
             </a>
 

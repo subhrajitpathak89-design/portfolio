@@ -1,5 +1,6 @@
 import type { IconType } from "react-icons";
 import { SiClaude, SiFigma, SiFramer, SiGithub, SiNotion } from "react-icons/si";
+import { SlowOnHover } from "@/components/ui/SlowOnHover";
 import { toolsContent } from "@/content/tools";
 import type { Tool, ToolIconName } from "@/types";
 
@@ -25,7 +26,7 @@ export function Tools() {
   return (
     <section
       id="tools"
-      className="v2-orbit-host relative overflow-hidden bg-v2-cream py-20 lg:py-28"
+      className="relative overflow-hidden bg-v2-cream py-20 lg:py-28"
     >
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <header className="text-center">
@@ -43,31 +44,33 @@ export function Tools() {
         >
           {/*
             The ring rotates; each tile counter-rotates by the same amount, so
-            the tiles orbit without tumbling. Hovering anywhere in the section
-            pauses both halves together — pausing only one would let the tiles
-            drift out of square.
+            the tiles orbit without tumbling. Hovering slows the ring and the
+            counters together — they have to share a rate or the tiles drift
+            out of square.
           */}
-          <ul className="animate-v2-orbit absolute inset-0">
-            {tools.map((tool, index) => {
-              const angle = (360 / tools.length) * index;
+          <SlowOnHover className="absolute inset-0">
+            <ul className="animate-v2-orbit absolute inset-0">
+              {tools.map((tool, index) => {
+                const angle = (360 / tools.length) * index;
 
-              return (
-                <li
-                  key={tool.name}
-                  className="absolute left-1/2 top-1/2"
-                  style={{
-                    // Place on the circle, then unwind `angle` so the tile
-                    // starts square rather than tangential to the curve.
-                    transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(calc(var(--ring-r) * -1)) rotate(${-angle}deg)`,
-                  }}
-                >
-                  <div className="animate-v2-orbit-counter">
-                    <ToolTile tool={tool} />
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+                return (
+                  <li
+                    key={tool.name}
+                    className="absolute left-1/2 top-1/2"
+                    style={{
+                      // Place on the circle, then unwind `angle` so the tile
+                      // starts square rather than tangential to the curve.
+                      transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(calc(var(--ring-r) * -1)) rotate(${-angle}deg)`,
+                    }}
+                  >
+                    <div className="animate-v2-orbit-counter">
+                      <ToolTile tool={tool} />
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </SlowOnHover>
 
           <p className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center font-editorial text-xl italic leading-snug text-v2-ink/55 sm:text-2xl lg:text-3xl">
             {caption.map((line) => (

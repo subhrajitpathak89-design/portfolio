@@ -98,6 +98,8 @@ export type AboutPhoto = {
 
 export type AboutContent = {
   eyebrow: string;
+  /** Short bio under the headline; one entry per paragraph. */
+  intro: string[];
   headline: {
     /** Rendered in the heavy grotesque, one entry per line. */
     lead: string[];

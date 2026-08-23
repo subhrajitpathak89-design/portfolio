@@ -13,7 +13,7 @@ const CAPTION_TONES: Record<CaptionTone, string> = {
 };
 
 export function About() {
-  const { eyebrow, headline, photos } = about;
+  const { eyebrow, headline, intro, photos } = about;
 
   return (
     <section id="about" className="relative overflow-hidden bg-v2-cream pb-24 lg:pb-32">
@@ -50,6 +50,16 @@ export function About() {
             />
           </span>
         </h2>
+
+        {/* Narrower than the headline on purpose — body copy this wide stops
+            being readable well before the display type does. */}
+        <div className="mx-auto mt-10 max-w-2xl space-y-4 text-center lg:mt-12">
+          {intro.map((paragraph) => (
+            <p key={paragraph} className="text-base leading-relaxed text-v2-ink/70 sm:text-lg">
+              {paragraph}
+            </p>
+          ))}
+        </div>
 
         <div className="relative mt-20 lg:mt-24">
           <Blob
