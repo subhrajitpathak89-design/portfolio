@@ -3,6 +3,40 @@ export type ProjectResult = {
   label: string;
 };
 
+/**
+ * The four-line summary that opens a case study: what the business is, what
+ * went wrong, what I did, what changed. A reader who only reads this block
+ * should still be able to repeat the story back.
+ */
+export type ProjectSnapshot = {
+  business: string;
+  challenge: string;
+  solution: string;
+  impact: string[];
+};
+
+/** A "before" number that defines the problem, shown large above the prose. */
+export type ProjectBaseline = {
+  metric: string;
+  label: string;
+};
+
+/**
+ * One vector of friction found in the audit, numbered in the order it hurt.
+ * Kept separate from `constraints`: constraints are what I could not change,
+ * frictions are what I was there to remove.
+ */
+export type ProjectFriction = {
+  title: string;
+  body: string;
+};
+
+/** Before/after step lists, rendered as two lines a reader can compare. */
+export type ProjectFlowChange = {
+  before: string[];
+  after: string[];
+};
+
 export type ProjectApproachStep = {
   title: string;
   body: string;
@@ -49,6 +83,8 @@ export type Project = {
   tldr?: string[];
   flow?: ProjectFlow;
   showcase?: ProjectShowcase;
+  /** Two-or-three-word label for tight spots — hero chips, nav, related cards. */
+  shortName?: string;
   title: string;
   category: string;
   summary: string;
@@ -64,12 +100,26 @@ export type Project = {
   // results); otherwise it falls back to rendering `description` as prose.
   client?: string;
   duration?: string;
+  snapshot?: ProjectSnapshot;
+  baseline?: ProjectBaseline[];
+  frictions?: ProjectFriction[];
+  flowChange?: ProjectFlowChange;
   problem?: string;
   constraints?: string[];
   pullQuote?: string;
   approach?: ProjectApproachStep[];
   results?: ProjectResult[];
   outcome?: string;
+  /**
+   * The strongest senior signal in a case study: a call you made that someone
+   * pushed back on, and what happened next. Renders only when every field is
+   * filled, so a half-written one stays off the page.
+   */
+  disagreement?: {
+    decision: string;
+    pushback: string;
+    result: string;
+  };
   learnings?: string[];
 };
 
@@ -112,6 +162,10 @@ export type NavLink = {
 export type Profile = {
   name: string;
   role: string;
+  /** Hero line 1: role + level + domain. One line, four facts. */
+  roleLine: string;
+  /** Hero line 2: companies or scale — the "are you real?" answer. */
+  proofLine: string;
   tagline: string;
   bio: string[];
   location: string;
@@ -166,6 +220,23 @@ export type ToolsContent = {
   /** Sits in the middle of the ring; one entry per line. */
   caption: string[];
   tools: Tool[];
+};
+
+/** One card on the "more work" shelf. */
+export type MoreWorkItem = {
+  title: string;
+  /** Image path, or null to render a tinted gradient panel instead. */
+  src: string | null;
+  alt: string;
+  /** Gradient stops for the placeholder panel — any two CSS colours. */
+  tone: [string, string];
+};
+
+export type MoreWorkContent = {
+  script: string;
+  heading: string;
+  intro: string;
+  items: MoreWorkItem[];
 };
 
 /** One item peeking out of the top of a playground folder. */

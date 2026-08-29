@@ -132,8 +132,13 @@ export function Navbar() {
     return pathname === route.replace(/\/$/, "");
   };
 
-  const socialHref = (platform: string) =>
-    profile.socials.find((social) => social.platform === platform)?.href ?? "#";
+  // Returns null for a platform with no real URL behind it. A "#" href is a
+  // link that goes nowhere, and a reviewer running the technical pass counts
+  // that as a broken link — so the pill is dropped until the URL exists.
+  const socialHref = (platform: string) => {
+    const href = profile.socials.find((social) => social.platform === platform)?.href;
+    return href && href !== "#" ? href : null;
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-16 border-b border-black/10 bg-v2-cream/90 backdrop-blur-md">
@@ -179,10 +184,14 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2 pr-2 sm:gap-2.5 sm:pr-4">
-          {SOCIALS.map(({ label, platform, Icon, className }) => (
+          {SOCIALS.map(({ label, platform, Icon, className }) => {
+            const href = socialHref(platform);
+            if (!href) return null;
+
+            return (
             <a
               key={label}
-              href={socialHref(platform)}
+              href={href}
               target="_blank"
               rel="noreferrer noopener"
               aria-label={label}
@@ -190,7 +199,8 @@ export function Navbar() {
             >
               <Icon aria-hidden className="size-4" />
             </a>
-          ))}
+            );
+          })}
 
           <Link
             href="/#contact"

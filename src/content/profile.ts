@@ -5,36 +5,43 @@ import type { Profile } from "@/types";
 export const siteUrl = "https://portfolio-teal-seven-7vraz065mz.vercel.app";
 
 export const profile: Profile = {
-  name: "Subhrajit",
-  role: "Multidisciplinary Designer",
+  name: "Subhrajit Pathak",
+  // The label a reviewer matches against the req, in the words reqs use.
+  role: "Product Designer",
+  // `roleLine` and `proofLine` are the hero's two lines of text. Between them
+  // they answer the only two questions asked in the first three seconds:
+  // "what are you?" and "are you real?" Keep both to one line.
+  roleLine: "Product Designer · 3 yrs · B2B SaaS, AI & healthcare",
+  proofLine:
+    "Techdome and Calypsu. Shipped an EMR, a funding CRM and a design system running across 3+ live products.",
   tagline:
-    "I design brands, interfaces and stories that stay legible at every scale — from a 16px icon to a billboard.",
+    "Product designer working on B2B SaaS, AI and healthcare tools — turning eleven-step workflows into four.",
   bio: [
-    "Placeholder bio copy — replace with your own story in src/content/profile.ts. My journey into design started long before product design, spending years experimenting across different tools and disciplines before finding my focus.",
-    "Today, I work on consumer and enterprise products, where I enjoy turning complex workflows into experiences that feel simple and intuitive. I'm particularly drawn to problems that sit at the intersection of user needs, business goals, and technical constraints.",
+    "I'm a product designer three years into the work, currently at Techdome in Hyderabad, where I own end-to-end UX across AI tools, B2B SaaS, CRM and consumer products.",
+    "Before that I was at Calypsu Design Studio in Delhi, designing across fintech, AI and ed-tech. The through-line since: messy workflows with real constraints, and the unglamorous half of the job — reading the analytics before touching a screen, then arguing about the one decision that moves a number.",
   ],
-  // TODO: replace with your real city — the footer shows this and links it to
-  // Google Maps, so a wrong value points people somewhere real but wrong.
-  location: "India",
+  location: "Hyderabad, India",
   email: "subhrajitpathak89@gmail.com",
   availability: "Open to product design roles and select freelance",
+  // Only entries with a real `href` render. Paste a URL in and the icon
+  // appears; leaving one blank hides it rather than shipping a dead link.
   socials: [
     {
-      label: "GitHub",
-      handle: "@placeholder-handle",
-      href: "#",
-      platform: "github",
-    },
-    {
       label: "LinkedIn",
-      handle: "in/placeholder-handle",
-      href: "#",
+      handle: "",
+      href: "",
       platform: "linkedin",
     },
     {
+      label: "GitHub",
+      handle: "",
+      href: "",
+      platform: "github",
+    },
+    {
       label: "Dribbble",
-      handle: "@placeholder-handle",
-      href: "#",
+      handle: "",
+      href: "",
       platform: "dribbble",
     },
   ],

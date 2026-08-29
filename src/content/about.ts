@@ -6,15 +6,19 @@ export const about: AboutContent = {
   // The headline deliberately switches voice partway through: `lead` is set in
   // the heavy grotesque, `accent` in the serif italic.
   headline: {
-    lead: ["designing things people", "actually use."],
-    accent: "from 16px icons to billboards.",
+    lead: ["product designer,", "three years in."],
+    accent: "b2b saas, ai and healthcare.",
   },
 
   // Written from the work in content/projects.ts, so every claim here traces
   // back to something real — but it is your story, so give it a read.
+  // Four lines, in the order the checklist says reviewers read them: level and
+  // domain, then where and what shipped, then what the work above proves. The
+  // fourth line — what I want next, where I am, how to reach me — is rendered
+  // by the section itself so the email can be a real mailto link.
   intro: [
-    "I'm a product designer who likes the unglamorous half of the job: reading the analytics before touching a screen, cutting an eleven-step flow down to four, and arguing about the one decision that actually moves a number.",
-    "Most of my work lives where messy workflows meet real constraints — an AI video platform, a patient portal, a funding CRM, a gaming marketplace. Different industries, same problem: make the complicated thing feel obvious.",
+    "Product designer, three years in, working across B2B SaaS, AI tools, CRM and healthcare — the kind of products where a workflow has eleven steps and nobody remembers why.",
+    "What the work above proves: I read the analytics before touching a screen, I cut the eleven steps to four, and I write the decision down before anyone builds it.",
   ],
 
   // Drop your own images into `public/images/v2/about/` and set `src` to the

@@ -79,9 +79,18 @@ export function StepMedia({
 
   return (
     <div
-      className="mx-auto overflow-hidden rounded-2xl bg-v2-ink/5"
+      className="mx-auto overflow-hidden rounded-2xl"
       style={{
         ...frameStyle,
+        // Several shots — the device mockups especially — ship with a
+        // transparent background, so a flat neutral panel left them sitting on
+        // a dead white slab. Tinting that panel with the project's own accent
+        // lets the mockup sit in the same colour world as the UI inside it.
+        backgroundImage: [
+          `radial-gradient(120% 90% at 20% 0%, rgba(${glow}, 0.22) 0%, rgba(${glow}, 0) 62%)`,
+          `radial-gradient(110% 80% at 100% 100%, rgba(${glow}, 0.16) 0%, rgba(${glow}, 0) 58%)`,
+          `linear-gradient(150deg, rgba(${glow}, 0.10) 0%, rgba(17,17,17,0.05) 100%)`,
+        ].join(", "),
         boxShadow: `0 30px 80px -34px rgba(${glow}, 0.55), 0 8px 24px -12px rgba(17,17,17,0.3)`,
       }}
     >

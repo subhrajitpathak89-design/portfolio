@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { about } from "@/content/about";
+import { experience } from "@/content/experience";
+import { profile } from "@/content/profile";
 import { Blob, HeartHandsSticker, SpeedLines, Squiggle } from "@/components/ui/Doodles";
 import { Marquee } from "@/components/ui/Marquee";
 import type { AboutPhoto, CaptionTone } from "@/types";
@@ -60,6 +62,40 @@ export function About() {
             </p>
           ))}
         </div>
+
+        {/* Years, companies and what I want next — the three things reviewers
+            look for on an About page, and the only three the data says they
+            look for at any rate above 44%. Driven by content/experience.ts so
+            there is one place a role is written down. */}
+        <ul className="mx-auto mt-12 grid max-w-2xl gap-3 sm:grid-cols-2">
+          {experience.map((job) => (
+            <li
+              key={job.company}
+              className="border-2 border-v2-ink/12 bg-white/70 px-5 py-4 text-left"
+            >
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-v2-ink/55">
+                {job.period}
+              </p>
+              <p className="mt-2 font-grotesk text-base font-black tracking-[-0.01em] text-v2-ink">
+                {job.role}
+              </p>
+              <p className="mt-1 text-sm text-v2-ink/65">
+                {job.company} · {job.location}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mx-auto mt-8 max-w-2xl text-center text-base leading-relaxed text-v2-ink/70 sm:text-lg">
+          {profile.availability}. Based in {profile.location} —{" "}
+          <a
+            href={`mailto:${profile.email}`}
+            className="border-b-2 border-v2-ink/30 pb-0.5 font-semibold text-v2-ink transition-colors duration-200 hover:border-v2-ink"
+          >
+            {profile.email}
+          </a>
+          .
+        </p>
 
         <div className="relative mt-20 lg:mt-24">
           <Blob

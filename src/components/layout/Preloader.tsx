@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Cherry, Crown, Diamond, Heart, Sparkle, Star, Zap } from "lucide-react";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
@@ -11,17 +10,25 @@ const SYMBOLS = [Star, Cherry, Zap, Heart, Diamond, Crown, Sparkle];
 const JACKPOT = 0;
 
 const REEL_COUNT = 3;
-const SPIN_TICK_MS = 90;
+const SPIN_TICK_MS = 45;
 
 /**
  * Reels stop one at a time. Landing them together would read as a spinner
  * stopping; the stagger is what makes it a jackpot.
  */
-const LOCK_AT_MS = [700, 1050, 1400];
-const FINISH_MS = 1850;
+// Trimmed hard from 1850ms. A reviewer decides in about eight seconds and the
+// clock starts on load, not on render — a two-second hold with the scroll
+// locked was spending a quarter of that budget before anything was visible.
+// The jackpot still reads at this speed because the reels stagger; it just
+// stops being something you wait through.
+const LOCK_AT_MS = [140, 220, 300];
+const FINISH_MS = 380;
 
 /** Reduced motion skips straight to the payout. */
 const REDUCED_FINISH_MS = 350;
+
+/** How long the panel takes to clear the screen; matches the CSS duration. */
+const SLIDE_MS = 500;
 
 export function Preloader() {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
@@ -33,6 +40,11 @@ export function Preloader() {
   // re-run to pick up a changed value.
   const [elapsed, setElapsed] = useState(0);
   const [done, setDone] = useState(false);
+  // Separate from `done` on purpose. AnimatePresence used to own the removal,
+  // but its exit never completed here and the panel sat at y:0 over the page
+  // with the scroll already unlocked. Now `done` starts the slide and
+  // `onAnimationComplete` removes it, so nothing can leave the overlay up.
+  const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
     // `html` is the scrolling element on this page, so locking `body` alone —
@@ -53,6 +65,12 @@ export function Preloader() {
     const startedAt = Date.now();
     const ticker = setInterval(() => setElapsed(Date.now() - startedAt), 40);
     const finish = setTimeout(() => {
+      // Stopping the ticker here, not just in the cleanup, is what lets the
+      // exit animation finish. The overlay stays mounted until AnimatePresence
+      // sees that animation complete, and a setState every 40ms through the
+      // whole exit kept interrupting it — so the panel would sit at y:0 with
+      // the scroll already unlocked, permanently covering the page.
+      clearInterval(ticker);
       setDone(true);
       setLock("");
     }, duration);
@@ -63,6 +81,12 @@ export function Preloader() {
       setLock("");
     };
   }, [duration]);
+
+  useEffect(() => {
+    if (!done) return;
+    const remove = setTimeout(() => setRemoved(true), SLIDE_MS);
+    return () => clearTimeout(remove);
+  }, [done]);
 
   const progress = Math.min(100, Math.round((elapsed / duration) * 100));
 
@@ -79,15 +103,14 @@ export function Preloader() {
 
   const allLocked = reels.every((reel) => reel.locked);
 
+  if (removed) return null;
+
   return (
-    <AnimatePresence>
-      {!done && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-v2-ink px-6"
-          initial={{ y: 0 }}
-          exit={{ y: "-100%" }}
-          transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-        >
+    <div
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-v2-ink px-6 transition-transform duration-500 [transition-timing-function:cubic-bezier(0.76,0,0.24,1)] ${
+        done ? "-translate-y-full" : "translate-y-0"
+      }`}
+    >
           {/* Cabinet */}
           <div className="w-full max-w-sm rounded-[1.75rem] bg-[#1c2a18] p-5 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.8)] sm:p-7">
             {/* Screen. Scanlines are a repeating gradient rather than an image,
@@ -152,11 +175,9 @@ export function Preloader() {
             </div>
           </div>
 
-          <span className="sr-only" role="status">
-            Loading
-          </span>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      <span className="sr-only" role="status">
+        Loading
+      </span>
+    </div>
   );
 }

@@ -49,9 +49,11 @@ export function Footer() {
             </a>
 
             <ul className="mt-5 flex items-center gap-2.5">
+              {/* An unset href is a link that goes nowhere, which reads worse than
+                  no icon at all — so an entry only renders once it has a real URL. */}
               {profile.socials.map((social) => {
                 const Icon = SOCIAL_ICONS[social.platform];
-                if (!Icon) return null;
+                if (!Icon || !social.href || social.href === "#") return null;
 
                 return (
                   <li key={social.platform}>
