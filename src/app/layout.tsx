@@ -8,11 +8,9 @@ import {
   JetBrains_Mono,
 } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { CustomCursor } from "@/components/layout/CustomCursor";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
-import { Preloader } from "@/components/layout/Preloader";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { Footer } from "@/components/v3/Footer";
+import { Navbar } from "@/components/v3/Navbar";
+import { SmoothScroll } from "@/components/v3/SmoothScroll";
 import { profile, siteUrl } from "@/content/profile";
 import "./globals.css";
 
@@ -115,15 +113,13 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${plusJakartaSans.variable} ${caveat.variable} ${archivo.variable} ${playfairDisplay.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-sans">
+      <body className="min-h-full bg-v3-bg font-grotesk text-v3-fg">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          forcedTheme="light"
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
-          <CustomCursor />
-          <Preloader />
           <SmoothScroll />
           <Navbar />
           {children}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FolderShelf } from "@/components/sections/FolderShelf";
+import { Playground } from "@/components/v3/Playground";
 
 export const metadata: Metadata = {
   title: "Playground",
@@ -8,12 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function PlaygroundPage() {
-  // No background colour on `main` here, unlike the other routes: the section
-  // paints a fixed backdrop behind itself and an opaque ancestor background
-  // would cover it.
   return (
-    <main className="min-h-svh">
-      <FolderShelf />
+    <main className="min-h-svh bg-v3-bg">
+      <Playground />
     </main>
   );
 }

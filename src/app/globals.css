@@ -445,3 +445,113 @@
     font-size: 1.5rem;
   }
 }
+
+/* ── v3 ─────────────────────────────────────────────────────────────────────
+   The v3 build is dark-first, so these are plain values rather than entries in
+   the light/dark token pair above. They sit alongside the v2 palette instead of
+   replacing it: v2 still ships on master and its routes still render here.     */
+/* v3 light. The default, because next-themes only stamps a class for dark —
+   an unstyled :root has to be one of the two, and light is the safer one to
+   flash.
+
+   Monochrome by design, not by omission. The orange is the dark theme's
+   signature; on a light ground it turns the whole page into a warning label,
+   so light mode drops it entirely and lets black carry the emphasis. Nothing
+   here has a warm cast — the greys are neutral, so no orange leaks back in
+   through the ground. */
+:root {
+  --v3-bg: #fafafa;
+  --v3-surface: #ffffff;
+  --v3-fg: #0a0a0a;
+  --v3-muted: #6b6b6b;
+  --v3-line: #e4e4e4;
+  --v3-accent: #0a0a0a;
+  --v3-accent-bright: #333333;
+  --v3-select: #0a0a0a;
+  --v3-chip: #f0f0f0;
+  --v3-cursor: #0a0a0a;
+  --v3-scrim: rgba(250, 250, 250, 0.88);
+  /* Terrain, distant range first. Inverted against the dark theme: on white the
+     far range is the faint one and the near range is nearly black. */
+  --v3-dither-1: #dedede;
+  --v3-dither-2: #9e9e9e;
+  --v3-dither-3: #2b2b2b;
+}
+
+/* v3 dark. The ground carries a warm cast rather than a blue one, so the orange
+   sits in the same light as the page instead of on top of it. */
+.dark {
+  --v3-bg: #0a0806;
+  --v3-surface: #14100c;
+  --v3-fg: #f7f4f1;
+  --v3-muted: #9b9188;
+  --v3-line: #251f19;
+  --v3-accent: #ff6b2c;
+  --v3-accent-bright: #ff8951;
+  /* Design-tool furniture. The selection frame is the brand colour, so the
+     collaborator cursor has to sit off it — a violet reads as a second person
+     in the file, which a second orange never would. */
+  --v3-select: #ff6b2c;
+  --v3-chip: #1c1712;
+  --v3-cursor: #7c6bff;
+  --v3-scrim: rgba(10, 8, 6, 0.88);
+  --v3-dither-1: #5c2408;
+  --v3-dither-2: #b84d18;
+  --v3-dither-3: #ff9257;
+}
+
+@theme inline {
+  --color-v3-bg: var(--v3-bg);
+  --color-v3-surface: var(--v3-surface);
+  --color-v3-fg: var(--v3-fg);
+  --color-v3-muted: var(--v3-muted);
+  --color-v3-line: var(--v3-line);
+  --color-v3-accent: var(--v3-accent);
+  --color-v3-accent-bright: var(--v3-accent-bright);
+  --color-v3-select: var(--v3-select);
+  --color-v3-chip: var(--v3-chip);
+  --color-v3-cursor: var(--v3-cursor);
+}
+
+/* Diagonal hatching for the frame margins. */
+.v3-hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--v3-line) 0 1px,
+    transparent 1px 7px
+  );
+  opacity: 0.55;
+}
+
+/*
+ * Playground carousel.
+ *
+ * The track holds the plates twice over, so translating it by exactly half its
+ * width lands the copy where the original started and the loop has no seam.
+ * Running the keyframes from -50% to 0 is what sends the cards rightward.
+ */
+@keyframes v3-drift-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.v3-drift {
+  animation: v3-drift-right 56s linear infinite;
+  will-change: transform;
+}
+
+/* Hovering holds the strip still so a card can actually be looked at. */
+.v3-drift-viewport:hover .v3-drift {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-drift {
+    animation: none;
+    transform: none;
+  }
+}

@@ -73,6 +73,9 @@ export type ProjectFlow = {
   steps: string[];
 };
 
+/** Marks shown on a case-study card. Names are never rendered, only the logo. */
+export type ProjectTool = "figma" | "claude" | "chatgpt";
+
 export type Project = {
   slug: string;
   tone?: ProjectTone;
@@ -92,6 +95,8 @@ export type Project = {
   role: string;
   year: string;
   tags: string[];
+  /** Tools used, rendered as logos on the card. */
+  tools?: ProjectTool[];
   coverImage?: string;
   liveUrl?: string;
   featured: boolean;
@@ -109,6 +114,8 @@ export type Project = {
   pullQuote?: string;
   approach?: ProjectApproachStep[];
   results?: ProjectResult[];
+  /** Extra screens shown as a grid after the approach. */
+  gallery?: string[];
   outcome?: string;
   /**
    * The strongest senior signal in a case study: a call you made that someone
@@ -239,29 +246,22 @@ export type MoreWorkContent = {
   items: MoreWorkItem[];
 };
 
-/** One item peeking out of the top of a playground folder. */
+/** One item peeking out of the bottom edge of a playground plate. */
 export type FolderPeek = {
-  /** Image path, or null to render a tinted paper chip instead. */
+  /** Image path, or null to render an empty chip until the art lands. */
   src: string | null;
   alt: string;
-  /** Any CSS colour — these are scrapbook offcuts, not palette roles. */
-  tone: string;
   rotate: number;
-  /** Width as a percentage of the folder, so peeks scale with the grid. */
+  /** Width as a percentage of the plate, so peeks scale with the grid. */
   width: number;
 };
 
 export type PlaygroundFolder = {
   month: string;
-  /** Front flap, and the darker body behind it. */
-  front: string;
-  back: string;
   peeks: FolderPeek[];
 };
 
 export type PlaygroundContent = {
-  /** Path to the full-page backdrop image. */
-  background: string;
   heading: { lead: string; accent: string; tail: string };
   intro: string;
   folders: PlaygroundFolder[];

@@ -6,7 +6,7 @@ export const about: AboutContent = {
   // The headline deliberately switches voice partway through: `lead` is set in
   // the heavy grotesque, `accent` in the serif italic.
   headline: {
-    lead: ["product designer,", "three years in."],
+    lead: ["product designer,", "2.9 years in."],
     accent: "b2b saas, ai and healthcare.",
   },
 
@@ -17,7 +17,7 @@ export const about: AboutContent = {
   // fourth line — what I want next, where I am, how to reach me — is rendered
   // by the section itself so the email can be a real mailto link.
   intro: [
-    "Product designer, three years in, working across B2B SaaS, AI tools, CRM and healthcare — the kind of products where a workflow has eleven steps and nobody remembers why.",
+    "Product designer, 2.9 years in, working across B2B SaaS, AI tools, CRM and healthcare — the kind of products where a workflow has eleven steps and nobody remembers why.",
     "What the work above proves: I read the analytics before touching a screen, I cut the eleven steps to four, and I write the decision down before anyone builds it.",
   ],
 
