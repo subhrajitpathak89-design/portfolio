@@ -72,7 +72,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
             data-reveal-item
             className="mt-10 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-v3-accent"
           >
-            Product Designer · Fintech · Product + Design System
+            Lead Designer · Fintech · Product + Design System
           </p>
 
           <h1

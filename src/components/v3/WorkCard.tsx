@@ -15,6 +15,14 @@ import type { Project } from "@/types";
 export function WorkCard({ project, index }: { project: Project; index: number }) {
   const headline = project.results?.[0];
 
+  // The highlight leads, then the tags. Built as one list so the two-on-a-
+  // phone, three-from-`sm` rule below counts chips rather than having to know
+  // which kind each one is.
+  const chips = [
+    ...(project.highlight ? [{ label: project.highlight, accent: true }] : []),
+    ...project.tags.map((tag) => ({ label: tag, accent: false })),
+  ];
+
   // A card with nowhere to go is a plain container, not a link. Rendering an
   // anchor and then suppressing it would still put it in the tab order and the
   // accessibility tree as a link to a page that is not ready.
@@ -184,19 +192,25 @@ export function WorkCard({ project, index }: { project: Project; index: number }
           {project.summary}
         </p>
 
-        {/* Two tags on a phone, three from `sm`. Three fit on one line only
+        {/* Two chips on a phone, three from `sm`. Three fit on one line only
             just, and the moment one of them is a long label they wrap to a
             second row and the card gains a band of chrome it does not need.
-            Rendered and hidden rather than sliced, so this stays one tree. */}
+            Rendered and hidden rather than sliced, so this stays one tree.
+
+            A `highlight` takes the first slot and pushes a tag out of view
+            rather than adding a row — it is meant to be read instead of the
+            third tag, not as well as it. */}
         <ul className="mt-4 flex flex-wrap gap-2 sm:mt-5">
-          {project.tags.slice(0, 3).map((tag, tagIndex) => (
+          {chips.slice(0, 3).map((chip, chipIndex) => (
             <li
-              key={tag}
-              className={`rounded-md border border-v3-line bg-v3-bg px-2.5 py-1 font-mono text-[11px] text-v3-muted${
-                tagIndex === 2 ? " hidden sm:block" : ""
-              }`}
+              key={chip.label}
+              className={`rounded-md px-2.5 py-1 font-mono text-[11px] ${
+                chip.accent
+                  ? "bg-v3-accent text-v3-bg"
+                  : "border border-v3-line bg-v3-bg text-v3-muted"
+              }${chipIndex === 2 ? " hidden sm:block" : ""}`}
             >
-              {tag}
+              {chip.label}
             </li>
           ))}
         </ul>

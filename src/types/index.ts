@@ -106,6 +106,16 @@ export type Project = {
   role: string;
   year: string;
   tags: string[];
+  /**
+   * One tag that leads the row on the card, set in the accent rather than as
+   * another outlined chip.
+   *
+   * For the thing about a project that is not a domain or a discipline — how
+   * it was made, say — which would disappear if it were filed alongside
+   * "Fintech" and "Accessibility" in the same grey. Optional, and worth
+   * staying that way: a highlight on every card is just a fourth tag.
+   */
+  highlight?: string;
   /** Tools used, rendered as logos on the card. */
   tools?: ProjectTool[];
   /**

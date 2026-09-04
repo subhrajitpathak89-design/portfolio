@@ -78,9 +78,16 @@ export const projects: Project[] = [
     description: [
       "Nivex prescribes wealth strategy the way a doctor prescribes treatment — examine what someone actually holds, diagnose the real problems in it, then issue specific written steps, rather than selling products off a shelf.",
     ],
-    role: "Product Designer",
+    // Lead on this one, not a contributor: the role field is read by the card,
+    // the case-study meta row and the résumé, so it is stated once here.
+    role: "Lead Designer",
     year: "2026",
     tags: ["Fintech", "Wealth Management", "AI Workflow", "Design System"],
+    // How it was built, which is the thing about this project that no domain
+    // tag conveys: the whole clickable product — investor, advisor, admin —
+    // was built as coded React prototypes conversationally in Claude Code,
+    // 262 commits of it, rather than drawn and handed over.
+    highlight: "Vibe coded",
     tools: ["figma", "claude", "chatgpt"],
     liveUrl: "https://techdome-io.github.io/nivex-project/",
     featured: true,
