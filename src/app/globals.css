@@ -91,6 +91,13 @@
 
   html {
     scroll-padding-top: 5rem;
+    /* The ground goes on the root as well as on `body`.
+       `body` carries `min-h-full`, a percentage against `html`'s height — and
+       while Lenis is driving, `lenis.css` sets `html { height: auto }`, at
+       which point that percentage no longer resolves and a short page's body
+       can stop short of the viewport. Whatever shows through then is this,
+       rather than the browser's default canvas. */
+    background-color: var(--background);
     @apply font-sans;
   }
 

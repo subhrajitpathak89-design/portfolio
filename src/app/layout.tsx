@@ -8,6 +8,26 @@ import { ScrollReveal } from "@/components/v3/ScrollReveal";
 import { SmoothScroll } from "@/components/v3/SmoothScroll";
 import { profile, siteUrl } from "@/content/profile";
 import "./globals.css";
+/*
+ * Lenis's own stylesheet, which was missing — and it is not optional.
+ *
+ * Its first rule is `html.lenis, html.lenis body { height: auto }`, and that
+ * rule is the fix for a real bug rather than a nicety. Lenis decides when to
+ * recompute its scroll limit with a `ResizeObserver` on `documentElement`'s
+ * *box*, while reading the limit from `documentElement.scrollHeight`. This
+ * layout sets `h-full` on `<html>`, so that box was pinned at the viewport
+ * height: when the document grew — media decoding, fonts swapping, reveal
+ * items mounting — the box never changed, the observer never fired, and Lenis
+ * kept clamping the scroll at a limit measured before the page finished
+ * growing. Which reads, from a chair, as "the page stops scrolling part-way
+ * down and a refresh fixes it".
+ *
+ * Scoped to `.lenis`, so it only applies while Lenis is actually driving. With
+ * reduced motion, or no JS, the layout keeps its own heights.
+ *
+ * Imported after `globals.css` so nothing there can win on ordering.
+ */
+import "lenis/dist/lenis.css";
 
 // Three faces, and only three: the grotesque everything UI is set in, the
 // display serif the headlines pivot into, and the mono the spec labels use.

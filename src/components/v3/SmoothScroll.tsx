@@ -35,6 +35,23 @@ export function SmoothScroll() {
     };
     frame = requestAnimationFrame(raf);
 
+    /*
+     * One forced remeasure once everything has loaded.
+     *
+     * Belt and braces on top of importing `lenis.css`: Lenis recomputes its
+     * scroll limit from a `ResizeObserver` on the document, debounced by
+     * 250ms, and a case study finishes growing well after this effect runs —
+     * posters decode, a font swaps, the reveal items mount. If any of that
+     * lands without changing the observed box, the limit stays stale and the
+     * page stops scrolling short of its own end.
+     *
+     * `load` has usually fired by the time this mounts, so the flag covers
+     * both orders rather than relying on one.
+     */
+    const remeasure = () => lenis.resize();
+    if (document.readyState === "complete") remeasure();
+    else window.addEventListener("load", remeasure, { once: true });
+
     const onClick = (event: MouseEvent) => {
       // Let the browser handle anything that is not a plain left click on a
       // same-page hash — modified clicks open tabs, and that should keep working.
@@ -64,6 +81,7 @@ export function SmoothScroll() {
 
     return () => {
       document.removeEventListener("click", onClick);
+      window.removeEventListener("load", remeasure);
       cancelAnimationFrame(frame);
       lenis.destroy();
     };
