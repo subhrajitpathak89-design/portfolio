@@ -22,7 +22,33 @@ export const profile: Profile = {
   ],
   location: "Hyderabad, India",
   email: "subhrajitpathak89@gmail.com",
+  /**
+   * The PDF in `public/`. Named for a human rather than hashed, because this
+   * is a file people save to a desktop and mail on — `resume.pdf` in a
+   * downloads folder is nobody's, and a hash in the filename would follow it
+   * around forever.
+   *
+   * Replacing it means overwriting that file, so it is served with a bounded
+   * cache rather than an immutable one (see `next.config.ts`).
+   */
+  resume: "/Subhrajit-Pathak-Product-Designer-Resume.pdf",
   availability: "Open to product design roles and select freelance",
+  // The hero's tools row. Seeded with what this repo can actually stand
+  // behind: the three that appear on the case studies, and the six this site
+  // is built in. Edit the list to match the real stack — it is a claim a
+  // reviewer may well ask about, so anything aspirational should come out.
+  // Order is reading order; add a mark to `StackMarks` before adding a name.
+  stack: [
+    "figma",
+    "framer",
+    "claude",
+    "chatgpt",
+    "next",
+    "react",
+    "typescript",
+    "tailwind",
+    "gsap",
+  ],
   // Only entries with a real `href` render. Paste a URL in and the icon
   // appears; leaving one blank hides it rather than shipping a dead link.
   socials: [
@@ -33,10 +59,24 @@ export const profile: Profile = {
       platform: "linkedin",
     },
     {
+      label: "X",
+      handle: "Subhrajit_UX",
+      href: "https://x.com/Subhrajit_UX",
+      platform: "x",
+    },
+    {
       label: "GitHub",
       handle: "Subhrajittechdome",
       href: "https://github.com/Subhrajittechdome",
       platform: "github",
+    },
+    // The 3D work lives here rather than on this site: the playground carries
+    // one Blender animation, and the gallery is the rest of it.
+    {
+      label: "Behance",
+      handle: "subhrajitpathak",
+      href: "https://www.behance.net/subhrajitpathak",
+      platform: "behance",
     },
     {
       label: "Dribbble",

@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { ImageSlot } from "@/components/v3/ImageSlot";
+import { LoopVideo } from "@/components/v3/LoopVideo";
 import { ToolMarks } from "@/components/v3/ToolMarks";
 import type { Project } from "@/types";
 
@@ -36,12 +38,23 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
   const d = project.disagreement;
   const fight = d?.decision && d?.pushback && d?.result ? d : null;
 
-  return (
-    <article className="relative bg-v3-bg">
-      <div className="v3-hatch absolute inset-y-0 left-0 w-4 sm:w-8 lg:w-14" aria-hidden />
-      <div className="v3-hatch absolute inset-y-0 right-0 w-4 sm:w-8 lg:w-14" aria-hidden />
+  // Repainting the page in the product's colour is one variable rather than a
+  // prop threaded through every child: everything below already reads the
+  // accent tokens, and `.v3-brand` in globals.css maps this to them — including
+  // the deepening light mode needs to keep the button legible.
+  const brand = project.brand
+    ? ({ "--v3-brand": project.brand } as React.CSSProperties)
+    : undefined;
 
-      <div className="mx-4 border-x border-v3-line px-5 pb-24 pt-28 sm:mx-8 sm:px-10 lg:mx-14 lg:px-16 lg:pb-32 lg:pt-36">
+  return (
+    <article
+      className={`relative bg-v3-bg${project.brand ? " v3-brand" : ""}`}
+      style={brand}
+    >
+      <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
+      <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
+
+      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
         {/* ── First screen ─────────────────────────────────────────────── */}
         <header className={WIDE}>
           <Link
@@ -60,7 +73,7 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
             {project.category} · {project.year}
           </p>
 
-          <h1 className="mt-5 max-w-[18ch] font-grotesk text-[clamp(1.875rem,4.4vw,3.5rem)] font-medium leading-[1.03] tracking-[-0.035em] text-v3-fg">
+          <h1 className="mt-5 max-w-[18ch] font-editorial-display text-[clamp(1.875rem,4.4vw,3.5rem)] font-normal leading-[1.03] tracking-[-0.02em] text-v3-fg">
             {project.title}
           </h1>
 
@@ -111,8 +124,28 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
 
         {/* ── Hero screen ──────────────────────────────────────────────── */}
         <div className={`${WIDE} mt-14 lg:mt-20`}>
+          {/* An authored hero still keeps the slot; the loop fills it only when
+              there is no still to keep. RiseAngle is the case that needs the
+              rule — it has both, and its portrait mockup was chosen for this
+              frame, so the loop stays on its card and the hero stays put. A
+              project with only a capture, like Wizlo, gets the capture here
+              instead of an empty labelled hole.
+
+              `fit` follows whichever is showing. A wide desktop window and a
+              portrait mockup want opposite answers, which is why they are
+              separate fields. */}
           <ImageSlot
             src={project.coverImage}
+            video={project.coverImage ? undefined : project.coverVideo}
+            poster={project.coverPoster}
+            fit={project.coverImage ? project.coverFit : project.coverVideoFit}
+            // A loop is cut to the card's 16:10, so the hero takes that ratio
+            // when one is filling it rather than its usual 16:9 — otherwise the
+            // frame it was measured for is not the frame it lands in, and the
+            // fit that was exact on the card mattes or crops here.
+            aspect={
+              !project.coverImage && project.coverVideo ? "aspect-[16/10]" : undefined
+            }
             alt={project.title}
             label={`The screen that says what ${project.client ?? "this product"} is, cropped tight`}
             spec="2400 × 1350"
@@ -185,7 +218,7 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
                     <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-v3-accent">
                       {String(index + 1).padStart(2, "0")}
                     </p>
-                    <h3 className="mt-3 font-grotesk text-xl font-medium tracking-[-0.025em] text-v3-fg sm:text-2xl">
+                    <h3 className="mt-3 font-editorial-display text-xl font-normal tracking-[-0.012em] text-v3-fg sm:text-2xl">
                       {step.title}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-v3-muted sm:text-base">
@@ -205,6 +238,66 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
                 </div>
               ))}
             </div>
+          </Section>
+        )}
+
+        {/* ── Final design ─────────────────────────────────────────────── */}
+        {project.showcase && project.showcase.media.length > 0 && (
+          <Section label={project.showcase.label} className={WIDE}>
+            <div className={PROSE}>
+              <h3 className="font-editorial-display text-xl font-normal tracking-[-0.012em] text-v3-fg sm:text-2xl">
+                {project.showcase.heading}
+              </h3>
+              {project.showcase.caption && (
+                <p className="mt-3 text-sm leading-relaxed text-v3-muted sm:text-base">
+                  {project.showcase.caption}
+                </p>
+              )}
+            </div>
+
+            {/* Three flows side by side rather than stacked full-width: the
+                point of the section is that they are one experience, and a
+                reader only sees that if they are in one glance. */}
+            <ul className="mt-10 grid gap-6 sm:grid-cols-3 lg:mt-14 lg:gap-8">
+              {project.showcase.media.map((item) => (
+                <li key={item.label}>
+                  {/* The captures are a phone on white, cropped to the handset.
+                      Rounding the frame to the handset's own radius is what
+                      keeps the corners of that white ground from showing.
+                      Two percentages, not one: a single value would be read as
+                      14% of the width horizontally and 14% of the *height*
+                      vertically, stretching the corner into an ellipse and
+                      eating the bezel. 14%/6.8% of 330x684 is square at any
+                      size the grid renders it. */}
+                  <div
+                    className="relative aspect-[330/684] overflow-hidden border border-v3-line bg-white"
+                    style={{ borderRadius: "14% / 6.8%" }}
+                  >
+                    {item.video ? (
+                      <LoopVideo
+                        src={item.video}
+                        poster={item.poster}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    ) : (
+                      item.image && (
+                        <Image
+                          src={item.image}
+                          alt={item.label}
+                          fill
+                          sizes="(min-width: 640px) 20rem, 100vw"
+                          className="object-cover"
+                        />
+                      )
+                    )}
+                  </div>
+
+                  <p className="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-v3-muted">
+                    {item.label}
+                  </p>
+                </li>
+              ))}
+            </ul>
           </Section>
         )}
 

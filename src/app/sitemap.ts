@@ -12,11 +12,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
-    ...projects.map((project) => ({
-      url: `${siteUrl}/projects/${project.slug}`,
+    {
+      url: `${siteUrl}/case-studies`,
       lastModified,
-      changeFrequency: "yearly" as const,
-      priority: 0.7,
-    })),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    // Unwritten ones are left out: their route renders the shared template
+    // against empty content, and there is nothing there worth indexing yet.
+    ...projects
+      .filter((project) => !project.comingSoon)
+      .map((project) => ({
+        url: `${siteUrl}/projects/${project.slug}`,
+        lastModified,
+        changeFrequency: "yearly" as const,
+        priority: 0.7,
+      })),
   ];
 }

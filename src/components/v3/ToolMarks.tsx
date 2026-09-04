@@ -20,14 +20,27 @@ const MARKS: Record<ProjectTool, { Icon: IconType; label: string }> = {
   chatgpt: { Icon: RiOpenaiFill, label: "ChatGPT" },
 };
 
-export function ToolMarks({ tools }: { tools: ProjectTool[] }) {
+export function ToolMarks({
+  tools,
+  /**
+   * Off where the surrounding layout already labels the row — the Nivex hero
+   * puts these in a definition list whose `dt` says "Built with", and two of
+   * that phrase in one cell reads as a bug.
+   */
+  showLabel = true,
+}: {
+  tools: ProjectTool[];
+  showLabel?: boolean;
+}) {
   if (tools.length === 0) return null;
 
   return (
     <div className="flex items-center gap-3">
-      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-v3-muted/70">
-        Built with
-      </span>
+      {showLabel && (
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-v3-muted/70">
+          Built with
+        </span>
+      )}
 
       <ul className="flex items-center gap-2">
         {tools.map((tool) => {

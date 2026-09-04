@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -21,32 +19,8 @@
   --border: #e4e0da;
   --accent: #ff5a00;
   --accent-foreground: #ffffff;
-
-  --card: var(--surface);
-  --card-foreground: var(--foreground);
-  --popover: var(--surface);
-  --popover-foreground: var(--foreground);
-  --primary: var(--accent);
-  --primary-foreground: var(--accent-foreground);
-  --secondary: var(--muted);
-  --secondary-foreground: var(--foreground);
-  --destructive: oklch(0.577 0.245 27.325);
-  --input: var(--border);
   --ring: var(--accent);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
   --radius: 0.75rem;
-  --sidebar: var(--surface);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--accent);
-  --sidebar-primary-foreground: var(--accent-foreground);
-  --sidebar-accent: var(--muted);
-  --sidebar-accent-foreground: var(--foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--accent);
 }
 
 .dark {
@@ -58,31 +32,7 @@
   --border: #26262b;
   --accent: #fb7a4b;
   --accent-foreground: #16161a;
-
-  --card: var(--surface);
-  --card-foreground: var(--foreground);
-  --popover: var(--surface);
-  --popover-foreground: var(--foreground);
-  --primary: var(--accent);
-  --primary-foreground: var(--accent-foreground);
-  --secondary: var(--muted);
-  --secondary-foreground: var(--foreground);
-  --destructive: oklch(0.704 0.191 22.216);
-  --input: var(--border);
   --ring: var(--accent);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: var(--surface);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--accent);
-  --sidebar-primary-foreground: var(--accent-foreground);
-  --sidebar-accent: var(--muted);
-  --sidebar-accent-foreground: var(--foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--accent);
 }
 
 @theme inline {
@@ -94,34 +44,31 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-plus-jakarta-sans), var(--font-inter), ui-sans-serif, sans-serif;
-  --font-script: var(--font-caveat), cursive;
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-destructive: var(--destructive);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
+
+  /* The four faces the site actually sets.
+   *
+   * `--font-sans` is the fallback layer only: `body` sets `--font-grotesk`, so
+   * anything that inherits normally lands on Archivo. It points at the same
+   * stack rather than a face of its own, because a second sans that shows up
+   * on one stray element is a bug, not a voice.
+   */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-grotesk: var(--font-archivo), ui-sans-serif, sans-serif;
+  /*
+   * The page headings.
+   *
+   * Display only — headlines and section titles. Everything that behaves like
+   * UI stays on `--font-grotesk`: the wordmark, buttons, eyebrows, tags, the
+   * mono labels. A serif that spreads into the controls stops being a voice
+   * and starts being a costume, and the spec-drawing chrome only reads as
+   * drafting because its labels are set in machine type.
+   *
+   * One line to swap the face for the whole site.
+   */
+  --font-editorial-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -162,295 +109,16 @@
 
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-25%);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes scroll-plane-fly {
-  from {
-    offset-distance: 0%;
-  }
-  to {
-    offset-distance: 100%;
-  }
-}
-
-.scroll-plane {
-  offset-anchor: center;
-  offset-distance: 100%;
-}
-
-@supports (animation-timeline: view()) {
-  .scroll-plane {
-    animation: scroll-plane-fly linear both;
-    animation-timeline: view();
-    animation-range: entry 10% contain 45%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-plane {
-    animation: none;
-    offset-distance: 100%;
-  }
-}
-
-/* ============================================================
-   v2 design language — bright cream canvas, hot orange, sticker
-   collage. Scoped as its own token set (rather than overriding
-   :root) so the v1 dark sections keep rendering while sections
-   are ported over one at a time.
-   ============================================================ */
-
-:root {
-  --v2-cream: #fdfbf6;
-  --v2-orange: #ff5a00;
-  /* Brand orange is only ~3:1 on cream, which fails AA for anything but large
-     display type. This darker cut is for orange *text*; the bright one stays
-     for fills and shapes, where the ratio does not apply the same way. */
-  --v2-orange-ink: #b23f00;
-  --v2-ink: #111111;
-  --v2-yellow: #f7d046;
-  --v2-pink: #f53d8f;
-  --v2-green: #12b76a;
-  /* Deep enough to carry white text at AA (5.3:1). The paler #8095f5 this
-     replaced only reached 2.79:1. */
-  --v2-periwinkle: #4f5fd6;
-  --v2-forest: #23795a;
-  --v2-lime: #cbe98a;
-  --v2-blush: #f3aede;
-  --v2-grid-line: rgba(255, 90, 0, 0.07);
-  --v2-grid-cell: 132px;
-}
-
-@theme inline {
-  --color-v2-cream: var(--v2-cream);
-  --color-v2-orange: var(--v2-orange);
-  --color-v2-orange-ink: var(--v2-orange-ink);
-  --color-v2-ink: var(--v2-ink);
-  --color-v2-yellow: var(--v2-yellow);
-  --color-v2-pink: var(--v2-pink);
-  --color-v2-green: var(--v2-green);
-  --color-v2-periwinkle: var(--v2-periwinkle);
-  --color-v2-forest: var(--v2-forest);
-  --color-v2-lime: var(--v2-lime);
-  --color-v2-blush: var(--v2-blush);
-
-  --font-grotesk: var(--font-archivo), var(--font-inter), ui-sans-serif, sans-serif;
-  --font-editorial: var(--font-playfair-display), ui-serif, Georgia, serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
-}
-
-/* Faint orange blueprint grid used as the v2 page substrate. */
-.v2-grid {
-  background-image:
-    linear-gradient(to right, var(--v2-grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--v2-grid-line) 1px, transparent 1px);
-  background-size: var(--v2-grid-cell) var(--v2-grid-cell);
-}
-
-@keyframes v2-bob {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-18px) rotate(-0.4deg);
-  }
-}
-
-.animate-v2-bob {
-  animation: v2-bob 7s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-v2-bob {
-    animation: none;
-  }
-}
-
-/* ------------------------------------------------------------------
-   Custom cursor
-   ------------------------------------------------------------------ */
-
-/* The class is only added by CustomCursor once it has confirmed a fine pointer
-   and no reduced-motion preference, so touch and reduced-motion users never
-   lose their native cursor. The descendant selector is needed to beat
-   Tailwind's `cursor-pointer` and the UA styles on links and inputs; it is one
-   class + one element, so it wins on specificity without `!important`. */
-@media (pointer: fine) {
-  html.has-custom-cursor,
-  html.has-custom-cursor * {
-    cursor: none;
-  }
-}
-
-@keyframes cursor-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-cursor-spin {
-  animation: cursor-spin 6s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-cursor-spin {
-    animation: none;
-  }
-}
-
-/* Ruled-paper background for the case-study stack — horizontal lines only,
-   which reads as a notebook rather than the hero's blueprint grid. */
-.v2-ruled {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 33px,
-    rgba(17, 17, 17, 0.07) 33px,
-    rgba(17, 17, 17, 0.07) 34px
-  );
-}
-
-/* ------------------------------------------------------------------
-   Marquee / ticker strips
-   ------------------------------------------------------------------ */
-
-/* The track holds two identical copies of its content, so translating exactly
-   -50% lands on the start of the second copy and the loop is seamless. */
-@keyframes v2-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-v2-marquee {
-  animation: v2-marquee linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-v2-marquee {
-    animation: none;
-  }
-}
-
-/* Two offset diagonal gradients make a checkerboard; the offset copy fills the
-   squares the first one leaves empty. */
-.v2-checker {
-  background-image:
-    linear-gradient(
-      45deg,
-      var(--v2-orange) 25%,
-      transparent 25% 75%,
-      var(--v2-orange) 75%
-    ),
-    linear-gradient(
-      45deg,
-      var(--v2-orange) 25%,
-      transparent 25% 75%,
-      var(--v2-orange) 75%
-    );
-  background-size: 18px 18px;
-  background-position: 0 0, 9px 9px;
-}
-
-/* ------------------------------------------------------------------
-   Tool-stack orbit
-   ------------------------------------------------------------------ */
-
-/* Animates the `rotate` property rather than `transform`, so it composes with
-   the static `transform` each tile uses to place itself on the circle. */
-@keyframes v2-orbit {
-  from {
-    rotate: 0deg;
-  }
-  to {
-    rotate: 360deg;
-  }
-}
-
-/* The ring and the counter share one duration on purpose: the tiles cancel the
-   ring's rotation exactly, so logos stay upright all the way round instead of
-   hanging upside down at the bottom of the circle. */
-.animate-v2-orbit,
-.animate-v2-orbit-counter {
-  animation: v2-orbit 48s linear infinite;
-}
-
-.animate-v2-orbit-counter {
-  animation-direction: reverse;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-v2-orbit,
-  .animate-v2-orbit-counter {
-    animation: none;
-  }
-}
-
-
-
-/* Vinyl rotation. Play state is driven from the player's React state rather
-   than a class, so the record parks where it stopped instead of snapping. */
-@keyframes v2-spin {
-  to {
-    rotate: 360deg;
-  }
-}
-
-.animate-v2-spin {
-  animation: v2-spin 4s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-v2-spin {
-    animation: none;
-  }
-}
-
-/* Shared type for the footer's answer lines, so the three columns can't drift
-   apart. */
-.footer-value {
-  font-family: var(--font-grotesk);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  color: #fff;
-  font-size: 1.25rem;
-}
-
-@media (min-width: 1024px) {
-  .footer-value {
-    font-size: 1.5rem;
-  }
-}
-
 /* ── v3 ─────────────────────────────────────────────────────────────────────
    The v3 build is dark-first, so these are plain values rather than entries in
    the light/dark token pair above. They sit alongside the v2 palette instead of
    replacing it: v2 still ships on master and its routes still render here.     */
-/* v3 light. The default, because next-themes only stamps a class for dark —
+/* v3 light. The only theme the site ships — nothing applies `.dark` any more,
+   so this is simply the palette. It reads as "the default" below because it
+   was written when there was a dark theme to default away from; the block
+   further down is kept, inert, in case that comes back.
+
+   Was: the default, because next-themes only stamps a class for dark —
    an unstyled :root has to be one of the two, and light is the safer one to
    flash.
 
@@ -478,26 +146,89 @@
   --v3-dither-3: #2b2b2b;
 }
 
-/* v3 dark. The ground carries a warm cast rather than a blue one, so the orange
-   sits in the same light as the page instead of on top of it. */
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ * RETIRED — dark mode is off.
+ *
+ * Nothing sets `.dark` any more: the theme provider, the toggle and every
+ * `dark:` variant in the v3 components are gone, so every rule in this block
+ * is inert. It is kept rather than deleted because the palette is the
+ * expensive part to rebuild and switching back means restoring the provider
+ * and the toggle, not re-deriving these values.
+ *
+ * The one thing not preserved here is the hero's spectrum overlay, which lived
+ * in the markup rather than in tokens — it is in git history if it is wanted
+ * back. The `--v3-spectrum-*` values it read are still below.
+ * ─────────────────────────────────────────────────────────────────────────────
+ *
+ * v3 dark.
+ *
+ * A neutral charcoal ground. This used to carry a warm cast so the orange sat
+ * in the same light as the page — defensible in theory, but in practice a
+ * ground mixed toward the accent reads as a tint rather than as black, and
+ * every neutral on the page inherited it: the surfaces, the rules, the chips
+ * and the body text all came out faintly orange.
+ *
+ * So the ground family is neutral and the accent is the only warm thing on the
+ * page. That is the contrast the accent is for. Greys are true greys — equal
+ * channels — so nothing downstream can reintroduce a cast. */
 .dark {
-  --v3-bg: #0a0806;
-  --v3-surface: #14100c;
-  --v3-fg: #f7f4f1;
-  --v3-muted: #9b9188;
-  --v3-line: #251f19;
-  --v3-accent: #ff6b2c;
-  --v3-accent-bright: #ff8951;
+  --v3-bg: #0a0a0a;
+  --v3-surface: #131313;
+  --v3-fg: #f4f4f4;
+  --v3-muted: #949494;
+  --v3-line: #262626;
+  /*
+   * Violet, not the reference's own violet.
+   *
+   * `#7c3aed` is the hue that dominates that gradient, and it measures 3.47:1
+   * against this ground — under the 4.5:1 it needs, and this token has to
+   * clear that bar twice over: as accent text on the charcoal, and as a solid
+   * button ground with near-black text on top of it. `#a855f7` is the same
+   * hue carried up to 5.00:1, and the hover state to 7.49:1.
+   *
+   * The magenta end of the ramp lands at 4.20:1 and so is confined to the
+   * decorative stops below, where nothing has to be read off it.
+   */
+  --v3-accent: #a855f7;
+  --v3-accent-bright: #c084fc;
   /* Design-tool furniture. The selection frame is the brand colour, so the
-     collaborator cursor has to sit off it — a violet reads as a second person
-     in the file, which a second orange never would. */
-  --v3-select: #ff6b2c;
-  --v3-chip: #1c1712;
-  --v3-cursor: #7c6bff;
-  --v3-scrim: rgba(10, 8, 6, 0.88);
-  --v3-dither-1: #5c2408;
-  --v3-dither-2: #b84d18;
-  --v3-dither-3: #ff9257;
+     collaborator cursor has to sit off it — and now that the brand is violet,
+     the violet cursor this used to be would read as the same person. Cyan is
+     outside the ramp entirely, which is the only thing the colour has to do. */
+  --v3-select: #a855f7;
+  --v3-chip: #1c1c1c;
+  --v3-cursor: #22d3ee;
+  /* Must track --v3-bg exactly: the hero scrims fade the photograph into this,
+     and a scrim off by a few points of hue leaves a visible seam. */
+  --v3-scrim: rgba(10, 10, 10, 0.88);
+
+  /*
+   * The spectrum: cool to warm, deep violet through magenta into the accent.
+   *
+   * Sampled off the reference gradient and taken the whole way: the ramp used
+   * to resolve into the site's orange at its warm end, and there is no orange
+   * left in this theme, so the hot end is magenta now. Deep violet through
+   * violet into fuchsia — the accent sits at the third stop, so the palette
+   * and the accent are the same decision rather than two.
+   *
+   * Dark only, deliberately. The same spectrum on a white page is a novelty
+   * gradient; against charcoal it reads as light in a dark room, which is what
+   * the reference is actually doing. The ground stays neutral either way — a
+   * tinted ground was the thing that made the page look washed rather than
+   * lit.
+   */
+  --v3-spectrum-1: #2e1065;
+  --v3-spectrum-2: #6d28d9;
+  --v3-spectrum-3: #a855f7;
+  --v3-spectrum-4: #d946ef;
+
+  /* The dither ramp is a three-stop gradient already, so it carries the
+     spectrum for free — deep violet where the field thins out, the accent
+     through the mid-densities, fuchsia where it resolves solid. */
+  --v3-dither-1: #2e1065;
+  --v3-dither-2: #a855f7;
+  --v3-dither-3: #e879f9;
 }
 
 @theme inline {
@@ -521,6 +252,117 @@
     transparent 1px 7px
   );
   opacity: 0.55;
+}
+
+/*
+ * The measured column, and the hatched bleed either side of it.
+ *
+ * The column is capped rather than full-bleed. Uncapped it ran the width of
+ * the window, which on a 1900px monitor is ~1800px of content — and every
+ * proportion inside it stretches to match: the two-up card grid becomes two
+ * 800px slabs, a summary line runs past 100 characters, and a headline sized
+ * for its column reads small against all that empty room. The cap is a
+ * measure, so the layout stops growing and starts centring.
+ *
+ * The bleed has to widen by exactly what the column gives up, or a centred
+ * column leaves a bare gap between its rule and the hatch. Both are written
+ * from the same two numbers so they meet at every width: the column is
+ * `100% - 2 * gutter` until the cap catches it, and the bleed is the gutter
+ * until the cap starts holding the column back, then half of what is left
+ * over. At the crossover width the two expressions agree, so there is no jump.
+ *
+ * Percentages, not `100vw` — these resolve against the section, which unlike
+ * the viewport does not include the scrollbar.
+ */
+:root {
+  --v3-measure: 88rem;
+  --v3-gutter: 1rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --v3-gutter: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --v3-gutter: 3.5rem;
+  }
+}
+
+/*
+ * Scroll reveal.
+ *
+ * The hidden state is gated on `html[data-reveal]`, which an inline script in
+ * the document sets before first paint. That ordering is the whole design:
+ *
+ *  - No script (or a bundle that failed to load) means the attribute is never
+ *    set, so nothing is ever hidden and the page reads exactly as it does now.
+ *    A reveal effect must not be able to blank the site.
+ *  - Setting it inline before paint rather than in an effect avoids the flash
+ *    of the opposite problem — content painting visible, then hiding, then
+ *    fading back in.
+ *
+ * `translate` and `opacity` only, both compositor properties, so a page full
+ * of these costs no layout.
+ */
+[data-reveal-item] {
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 0.61, 0.24, 1),
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.24, 1);
+  /* Stagger, in units of one step. Set `--reveal-delay` on the item. */
+  transition-delay: calc(var(--reveal-delay, 0) * 70ms);
+}
+
+html[data-reveal] [data-reveal-item]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* Someone who asked for less motion gets the content, immediately and still.
+   Overriding the hidden state rather than just the transition — a disabled
+   transition on a hidden element would leave it hidden forever. */
+@media (prefers-reduced-motion: reduce) {
+  html[data-reveal] [data-reveal-item]:not(.is-revealed) {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-reveal-item] {
+    transition: none;
+  }
+}
+
+/*
+ * Stack-row logo colour.
+ *
+ * Two hexes rather than one, because a brand colour is picked against a
+ * background and several of these were picked against a dark one. React's
+ * cyan, Tailwind's cyan and GreenSock's green all but vanish on a white chip,
+ * so each mark carries an optional light-mode value — usually the darker
+ * variant the brand itself publishes for light grounds.
+ *
+ * Marks that set neither fall through to `currentColor`, which is the right
+ * answer for a monochrome logo: it follows the theme instead of fighting it.
+ */
+.v3-mark {
+  color: var(--mark, currentColor);
+}
+
+:root:not(.dark) .v3-mark {
+  color: var(--mark-light, var(--mark, currentColor));
+}
+
+.v3-column {
+  width: calc(100% - 2 * var(--v3-gutter));
+  max-width: var(--v3-measure);
+  margin-inline: auto;
+  border-inline: 1px solid var(--v3-line);
+}
+
+.v3-bleed {
+  width: max(var(--v3-gutter), calc((100% - var(--v3-measure)) / 2));
 }
 
 /*
@@ -553,5 +395,195 @@
   .v3-drift {
     animation: none;
     transform: none;
+  }
+}
+
+/*
+ * Per-project brand.
+ *
+ * A case study sets `--v3-brand` and the page's accent tokens follow, so one
+ * hex repaints every eyebrow, step number, rule and button on it.
+ *
+ * Light mode deepens the colour rather than using it raw, for the same reason
+ * the theme drops the orange up top: a saturated brand on white is a warning
+ * label, and it fails on the solid accent button — RiseAngle's magenta reads
+ * 3.7:1 against white there, under the 4.5:1 it needs. Mixing toward black
+ * keeps the hue recognisable and takes it past 6:1.
+ */
+.v3-brand {
+  --v3-accent: var(--v3-brand);
+  --v3-accent-bright: color-mix(in oklab, var(--v3-brand) 76%, white);
+  --v3-select: var(--v3-brand);
+}
+
+:root:not(.dark) .v3-brand {
+  --v3-accent: color-mix(in oklab, var(--v3-brand) 66%, black);
+  --v3-accent-bright: var(--v3-brand);
+}
+
+/*
+ * Playground stream: one row of work, running right to left, forever.
+ *
+ * This replaced a perspective corridor — two rails leaving a vanishing point,
+ * rebuilt from a 21st.dev component. It was a lot of geometry for a band that
+ * ends up showing four pieces at a legible size, and the turn worked against
+ * the thing being shown: a clip is harder to read once it is rotated 30deg and
+ * scaled by depth. Flat and moving is the version where the work is the point.
+ *
+ * `translate3d` on a single track, so a row of playing video costs one
+ * composited layer to move rather than a transform per card.
+ */
+.v3-stream {
+  /* The track is wider than the page by design; this is what keeps the rest of
+     the document from acquiring a horizontal scrollbar because of it. */
+  overflow: hidden;
+}
+
+.v3-stream-track {
+  display: flex;
+  width: max-content;
+  animation: v3-stream-left 64s linear infinite;
+  will-change: transform;
+}
+
+/*
+ * The loop shifts by exactly half the track, which is only seamless because
+ * the cards carry their gutter as `margin-right` rather than the flex `gap`.
+ * A gap sits *between* items, so a doubled list has one fewer gap than card,
+ * and half the width lands half a gutter out — enough to see it jump once a
+ * minute.
+ */
+@keyframes v3-stream-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Same bargain as the drift strip: hovering holds it still so a piece can
+   actually be watched rather than chased. */
+.v3-stream:hover .v3-stream-track {
+  animation-play-state: paused;
+}
+
+.v3-stream-card {
+  position: relative;
+  flex: none;
+  height: var(--v3-stream-h);
+  /* The gutter, and the reason the loop meets itself exactly. */
+  margin-right: 12px;
+  overflow: hidden;
+  border: 1px solid var(--v3-line);
+  border-radius: 0.75rem;
+  background: var(--v3-surface);
+}
+
+/* Fades both ends into the page's own background, so cards arrive and leave
+   instead of being sliced off at the viewport edge. */
+.v3-stream-scrim {
+  background: linear-gradient(
+    90deg,
+    var(--v3-bg) 0%,
+    transparent 13%,
+    transparent 87%,
+    var(--v3-bg) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-stream-track {
+    animation: none;
+  }
+}
+
+/*
+ * The site cursor: a design-tool pointer with an optional label.
+ *
+ * `.v3-cursor-on` is set by script, and only on a device with a real pointer,
+ * so hiding the native cursor can never happen on a touch screen or in a
+ * browser where the script did not run. That ordering matters more than it
+ * looks: `cursor: none` in a plain rule would strand anyone whose JS failed
+ * with no pointer at all.
+ */
+.v3-cursor-on,
+.v3-cursor-on * {
+  cursor: none !important;
+}
+
+/*
+ * `!important` and a universal selector, reluctantly. Components set their own
+ * cursors — `cursor-default` on a coming-soon card, `cursor-pointer` on
+ * buttons, the browser's own I-beam on text — and every one of them would
+ * otherwise win against a rule on `html` and flash the native pointer back for
+ * as long as the mouse was over it.
+ */
+
+.v3-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  /* Never a target: the cursor sits over every element on the page, and one
+     that took the pointer would make the whole document unclickable. */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  will-change: transform;
+}
+
+/* Hidden until the pointer's real position is known, and again when it leaves
+   the window — a cursor parked in the corner of a page nobody is pointing at
+   reads as a rendering bug. */
+.v3-cursor[data-visible="on"] {
+  opacity: 1;
+}
+
+.v3-cursor-arrow {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex: none;
+  fill: var(--v3-cursor);
+  transition: transform 140ms cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+/* A press is the one piece of feedback the native cursor gave for free. */
+.v3-cursor[data-pressed="on"] .v3-cursor-arrow {
+  transform: scale(0.8);
+}
+
+.v3-cursor-tag {
+  margin-left: 0.25rem;
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  background: var(--v3-cursor);
+  padding: 0.25rem 0.5rem;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  /* Scaled from the arrow's corner rather than faded alone, so the tag reads
+     as unfolding from the cursor instead of appearing beside it. */
+  transform-origin: 0 0;
+  transform: scale(0.7);
+  opacity: 0;
+  transition:
+    opacity 140ms ease,
+    transform 140ms cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+.v3-cursor[data-labelled="on"] .v3-cursor-tag {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-cursor,
+  .v3-cursor-arrow,
+  .v3-cursor-tag {
+    transition: none;
   }
 }

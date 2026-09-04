@@ -10,6 +10,10 @@ export type V3NavLink = { label: string; href: string };
 
 export const v3NavLinks: V3NavLink[] = [
   { label: "Work", href: "/#work" },
+  // Sits next to Work on purpose, and they are not the same destination: Work
+  // scrolls to the shortlist on the homepage, this is the full index including
+  // the ones still being written.
+  { label: "Case studies", href: "/case-studies" },
   { label: "About", href: "/#about" },
   { label: "Playground", href: "/playground" },
 ];

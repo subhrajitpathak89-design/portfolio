@@ -4,6 +4,7 @@ export const experience: Experience[] = [
   {
     role: "Associate UX Designer",
     company: "Techdome Solutions Pvt. Limited",
+    logo: "/images/v3/logos/techdome.jpg",
     location: "Hyderabad, India",
     period: "Nov 2024 — Present",
     summary:
@@ -12,6 +13,7 @@ export const experience: Experience[] = [
   {
     role: "Junior UX Designer",
     company: "Calypsu Design Studio",
+    logo: "/images/v3/logos/calypsu.jpg",
     location: "Delhi, India",
     period: "Oct 2023 — Oct 2024",
     summary:

@@ -21,16 +21,18 @@ export async function Commits() {
 
   return (
     <section className="relative bg-v3-bg">
-      <div className="v3-hatch absolute inset-y-0 left-0 w-4 sm:w-8 lg:w-14" aria-hidden />
-      <div className="v3-hatch absolute inset-y-0 right-0 w-4 sm:w-8 lg:w-14" aria-hidden />
+      <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
+      <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
 
-      <div className="mx-4 border-x border-t border-v3-line px-5 py-20 sm:mx-8 sm:px-10 lg:mx-14 lg:px-16 lg:py-24">
+      <div className="v3-column border-t border-v3-line px-5 py-20 sm:px-10 lg:px-16 lg:py-24">
         <header className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-v3-accent">
               Lately
             </p>
-            <h2 className="mt-4 max-w-[24ch] font-grotesk text-[clamp(1.5rem,3vw,2.25rem)] font-medium leading-[1.05] tracking-[-0.03em] text-v3-fg">
+            <h2
+              data-reveal-item
+              className="mt-4 max-w-[24ch] font-editorial-display text-[clamp(1.5rem,3vw,2.25rem)] font-normal leading-[1.05] tracking-[-0.015em] text-v3-fg">
               What I have been pushing.
             </h2>
           </div>
