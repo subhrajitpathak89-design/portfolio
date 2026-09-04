@@ -2,16 +2,20 @@ import Image from "next/image";
 import { LoopVideo } from "@/components/v3/LoopVideo";
 
 /**
- * A screen, or the labelled hole where one goes.
+ * A screen.
  *
  * A slot takes a still or a loop. `video` wins when both are set; callers that
  * want the opposite precedence decide it themselves by not passing one — see
  * the case-study hero, where an authored still outranks a capture.
  *
- * The empty state is deliberately explicit rather than decorative: it names
- * what belongs in the slot and the size to export at, so filling the page is a
- * checklist rather than a guessing game. A vague grey rectangle would read as a
- * broken image to a visitor and tell the author nothing.
+ * With neither, it renders nothing.
+ *
+ * It used to draw a labelled dashed frame instead — "Screen", the step's title,
+ * and the size to export at — on the argument that an explicit hole is a
+ * checklist for whoever is filling the page. That is true for the author and
+ * wrong for everyone else: a visitor reads a dashed box on a finished case
+ * study as work that was never done. The checklist belongs in the content file,
+ * where a step with no `image` is already visible as a step with no `image`.
  */
 type ImageSlotProps = {
   src?: string;
@@ -20,10 +24,8 @@ type ImageSlotProps = {
   /** The still behind `video` — shown under reduced motion, and before it loads. */
   poster?: string;
   alt?: string;
-  /** What this screen should show. Shown in the empty state. */
+  /** Fallback alt text, and a note on what belongs in the slot. */
   label: string;
-  /** Suggested export size, e.g. "2400 × 1350". */
-  spec?: string;
   /** How the image fills the slot. `contain` keeps a mockup whole. */
   fit?: "cover" | "contain";
   /** Tailwind aspect utility. */
@@ -38,7 +40,6 @@ export function ImageSlot({
   poster,
   alt,
   label,
-  spec,
   fit = "cover",
   aspect = "aspect-[16/9]",
   priority = false,
@@ -77,19 +78,7 @@ export function ImageSlot({
     );
   }
 
-  return (
-    <div
-      className={`relative ${aspect} overflow-hidden rounded-2xl border border-dashed border-v3-line bg-v3-surface`}
-    >
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 px-6 text-center">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-v3-muted/60">
-          Screen
-        </span>
-        <span className="max-w-sm text-sm leading-relaxed text-v3-muted">{label}</span>
-        {spec && (
-          <span className="font-mono text-[11px] text-v3-muted/50">{spec}</span>
-        )}
-      </div>
-    </div>
-  );
+  // Nothing to show. A slot with no media is simply absent, so a page can be
+  // published half-illustrated without announcing which half.
+  return null;
 }

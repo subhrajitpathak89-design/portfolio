@@ -148,7 +148,6 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
             }
             alt={project.title}
             label={`The screen that says what ${project.client ?? "this product"} is, cropped tight`}
-            spec="2400 × 1350"
             priority
           />
         </div>
@@ -226,15 +225,22 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
                     </p>
                   </div>
 
-                  <div className="mt-8">
-                    <ImageSlot
-                      src={step.image}
-                      alt={step.title}
-                      label={step.title}
-                      spec="2000 × 1250"
-                      aspect="aspect-[16/10]"
-                    />
-                  </div>
+                  {/* Guarded here as well as inside the slot: the slot
+                      returning `null` still leaves this wrapper on the page,
+                      and an empty div with a 32px top margin is a gap nobody
+                      can explain. A step with no screen is just its copy. */}
+                  {(step.image || step.video) && (
+                    <div className="mt-8">
+                      <ImageSlot
+                        src={step.image}
+                        video={step.video}
+                        poster={step.poster}
+                        alt={step.title}
+                        label={step.title}
+                        aspect="aspect-[16/10]"
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -311,24 +317,27 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
           </Section>
         )}
 
-        {/* ── Gallery ──────────────────────────────────────────────────── */}
-        <Section label="More screens" className={WIDE}>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {(project.gallery?.length ? project.gallery : [undefined, undefined]).map(
-              (src, index) => (
+        {/* ── Gallery ──────────────────────────────────────────────────────
+            Only when there is one. This used to fall back to
+            `[undefined, undefined]`, which drew two labelled dashed frames
+            under a "More screens" heading — a section that promised more
+            screens and then said there were none. */}
+        {project.gallery && project.gallery.length > 0 && (
+          <Section label="More screens" className={WIDE}>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {project.gallery.map((src, index) => (
                 <ImageSlot
-                  key={src ?? index}
+                  key={src}
                   src={src}
                   alt={`${project.title} screen ${index + 1}`}
-                  label="Any screen worth a second look"
-                  spec="1600 × 1200"
+                  label={`${project.title} screen ${index + 1}`}
                   aspect="aspect-[4/3]"
                   sizes="(min-width: 640px) 30rem, 100vw"
                 />
-              )
-            )}
-          </div>
-        </Section>
+              ))}
+            </div>
+          </Section>
+        )}
 
         {/* ── The fight ────────────────────────────────────────────────── */}
         {fight && (
