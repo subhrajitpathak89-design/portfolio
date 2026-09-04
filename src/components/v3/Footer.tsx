@@ -83,7 +83,7 @@ export function Footer() {
 
             <a
               href={`mailto:${profile.email}`}
-              className="group relative mt-8 inline-flex max-w-full items-start gap-3 font-grotesk text-[clamp(1.5rem,5vw,3.75rem)] font-medium leading-[1.05] tracking-[-0.035em] text-v3-fg transition-colors duration-200 hover:text-v3-accent"
+              className="group relative mt-8 inline-flex max-w-full items-start gap-3 py-1 font-grotesk text-[clamp(1.5rem,5vw,3.75rem)] font-medium leading-[1.05] tracking-[-0.035em] text-v3-fg transition-colors duration-200 hover:text-v3-accent"
             >
               <span className="break-all">{profile.email}</span>
               <ArrowUpRight
@@ -113,7 +113,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+                    className="inline-block min-w-8 py-1.5 text-sm text-v3-muted transition-colors duration-200 hover:text-v3-fg"
                   >
                     {link.label}
                   </Link>
@@ -132,7 +132,7 @@ export function Footer() {
                   download="Subhrajit-Pathak-Product-Designer-Resume.pdf"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="text-sm text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+                  className="inline-block min-w-8 py-1.5 text-sm text-v3-muted transition-colors duration-200 hover:text-v3-fg"
                 >
                   Resume
                 </a>
@@ -147,7 +147,7 @@ export function Footer() {
                       href={social.href}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="text-sm text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+                      className="inline-block min-w-8 py-1.5 text-sm text-v3-muted transition-colors duration-200 hover:text-v3-fg"
                     >
                       {social.label}
                     </a>
@@ -179,7 +179,7 @@ export function Footer() {
 
           <Link
             href="/#home"
-            className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+            className="group inline-flex items-center gap-2 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
           >
             Back to top
             <ArrowUp

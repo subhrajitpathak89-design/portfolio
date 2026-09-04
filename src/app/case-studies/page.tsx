@@ -41,7 +41,7 @@ export default function CaseStudiesPage() {
           <header className="mx-auto w-full max-w-[70rem]">
             <Link
               href="/"
-              className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+              className="group inline-flex items-center gap-2 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
             >
               <ArrowLeft
                 aria-hidden

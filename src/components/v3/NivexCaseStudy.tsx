@@ -41,7 +41,7 @@ const RATIO = "aspect-[16/10]";
  * re-encode under a stable name would be invisible behind the image and
  * browser caches.
  */
-const HERO_VIDEO = "/images/v3/nivex/hero-loop.6a0daa95.mp4";
+const HERO_VIDEO = "/images/v3/nivex/hero-loop.bc6cfc61.mp4";
 const HERO_POSTER = "/images/v3/nivex/hero-loop-poster.b886d85c.webp";
 
 export function NivexCaseStudy({ project, next }: { project: Project; next: Project }) {
@@ -58,7 +58,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
         <header className={COLUMN}>
           <Link
             href="/#work"
-            className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+            className="group inline-flex items-center gap-2 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
           >
             <ArrowLeft
               aria-hidden
@@ -786,8 +786,14 @@ function Decision({
   return (
     <div data-reveal-item>
       <Shot src={shot} alt={alt} />
+      {/* Sentence case at 11px, not uppercase at 10px.
+          Every other 10px mono on this site is a label — an eyebrow, a `dt`, a
+          two-word tag — where uppercase and wide tracking are legible because
+          there is nothing to read. These captions are full sentences, and a
+          sentence set in 10px letterspaced caps is the least readable thing on
+          a phone. */}
       {caption && (
-        <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-v3-muted/70">
+        <p className="mt-3 max-w-[68ch] font-mono text-[11px] leading-relaxed tracking-[0.02em] text-v3-muted">
           {caption}
         </p>
       )}

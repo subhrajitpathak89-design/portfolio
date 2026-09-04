@@ -101,7 +101,7 @@ export function PlaygroundStream() {
 
         <Link
           href="/playground"
-          className="group mt-10 inline-flex items-center gap-1.5 font-mono text-xs text-v3-muted transition-colors duration-200 hover:text-v3-accent lg:mt-12"
+          className="group mt-10 inline-flex items-center gap-1.5 py-2 font-mono text-xs text-v3-muted transition-colors duration-200 hover:text-v3-accent lg:mt-12"
         >
           {teaser.cta}
           <ArrowUpRight
@@ -136,7 +136,18 @@ function Card({ tile }: { tile: CollageTile }) {
           src={tile.src}
           alt=""
           fill
-          sizes="(min-width: 1024px) 28vw, 45vw"
+          /*
+           * A width in px, computed per card, because a fraction of the
+           * viewport is the wrong unit here: these cards take their height
+           * from the row and their width from their own aspect, so the width
+           * has nothing to do with how wide the window is.
+           *
+           * `28vw` was the guess before, and at 1920 it claimed 503px for a
+           * portrait board that renders 246 — a 2x oversize. The row height
+           * caps at 320, so this is the widest the card can ever be, and the
+           * browser still doubles it for a retina screen.
+           */
+          sizes={`${Math.round((320 * tile.w) / tile.h)}px`}
           className="object-cover"
         />
       ) : null}

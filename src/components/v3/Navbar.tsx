@@ -101,7 +101,7 @@ export function Navbar() {
       <div className="v3-column relative flex items-center justify-between gap-4 border-b border-v3-line px-5 py-5 sm:px-10 lg:px-16">
         <Link
           href="/#home"
-          className="font-grotesk text-lg font-bold tracking-[-0.02em] text-v3-fg transition-colors duration-200 hover:text-v3-accent"
+          className="inline-block py-1 font-grotesk text-lg font-bold tracking-[-0.02em] text-v3-fg transition-colors duration-200 hover:text-v3-accent"
         >
           {profile.name.split(" ")[0]}
           <span className="text-v3-accent">.</span>
@@ -112,7 +112,7 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-grotesk text-sm font-medium tracking-[-0.005em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+              className="inline-block py-1.5 font-grotesk text-sm font-medium tracking-[-0.005em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
             >
               {link.label}
             </Link>

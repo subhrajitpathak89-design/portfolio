@@ -42,7 +42,7 @@ export async function Commits() {
               href={github.href}
               target="_blank"
               rel="noreferrer noopener"
-              className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+              className="group inline-flex items-center gap-2 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
             >
               <SiGithub aria-hidden className="size-3.5" />
               {github.handle || "GitHub"}

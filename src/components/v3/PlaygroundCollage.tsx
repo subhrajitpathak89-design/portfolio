@@ -110,7 +110,14 @@ function Tab({
       type="button"
       onClick={onSelect}
       aria-pressed={active}
-      className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors duration-200 ${
+      /* `py-2.5` up to `lg`, tightening to `py-1.5` only where there is
+         certainly a mouse. The compact padding measured 31px tall, which is
+         fine to click and mean to thumb — and the chips sit in a wrapped grid
+         where every neighbour is another filter, so a mis-tap silently changes
+         what you are looking at rather than doing nothing.
+         The breakpoint is `lg`, not `sm`: a tablet at 768 is a touch device
+         and was being handed the mouse-sized target. */
+      className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2.5 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors duration-200 lg:py-1.5 ${
         active
           ? "border-v3-accent bg-v3-accent text-v3-bg"
           : "border-v3-line bg-v3-chip text-v3-muted hover:border-v3-accent/40 hover:text-v3-fg"

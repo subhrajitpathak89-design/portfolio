@@ -52,7 +52,7 @@ export function Work() {
               which is the only honest way to show a shortlist. */}
           <Link
             href="/case-studies"
-            className="group inline-flex items-center gap-1.5 font-mono text-xs text-v3-muted transition-colors duration-200 hover:text-v3-accent"
+            className="group inline-flex items-center gap-1.5 py-2 font-mono text-xs text-v3-muted transition-colors duration-200 hover:text-v3-accent"
           >
             All {String(total).padStart(2, "0")} case studies
             <ArrowUpRight

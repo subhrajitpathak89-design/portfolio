@@ -58,7 +58,18 @@ export function Hero() {
             alt=""
             fill
             priority
-            sizes="88rem"
+            /*
+             * This was `88rem` flat, which is a promise that the image is
+             * always 1408px wide — so a 375px phone at 2x asked for the 1920
+             * variant and downloaded the desktop hero. It is why the phone was
+             * pulling *more* than the desktop: 673KB against 616KB, for a
+             * picture rendered at a fifth of the area.
+             *
+             * 88rem is the column cap, so above that the image really is
+             * fixed; below it the image fills the viewport less the gutters,
+             * and `100vw` is the honest answer.
+             */
+            sizes="(min-width: 88rem) 88rem, 100vw"
             // 55, not the default 75. This is the largest image on the site and
             // it is the one that can least afford detail: it renders at 42%
             // opacity, desaturated, under two gradient scrims. Compression

@@ -121,7 +121,7 @@ export function About() {
           <Cell label="Email">
             <a
               href={`mailto:${profile.email}`}
-              className="group inline-flex items-center gap-1.5 break-all text-v3-fg transition-colors duration-200 hover:text-v3-accent"
+              className="group inline-flex items-center gap-1.5 break-all py-1 text-v3-fg transition-colors duration-200 hover:text-v3-accent"
             >
               {profile.email}
               <ArrowUpRight
