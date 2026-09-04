@@ -878,6 +878,9 @@ export const projects: Project[] = [
     year: "2024",
     tags: ["Gaming", "Marketplace", "Payments", "Chat"],
     tools: ["figma", "claude", "chatgpt"],
+    // Locked, like Saral: the tile stays on /case-studies as a blurred
+    // coming-soon card, and nothing routes to the page.
+    comingSoon: true,
     featured: false,
     client: "Mythic Boost",
     duration: "Focused engagement",

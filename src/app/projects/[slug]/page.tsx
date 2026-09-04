@@ -22,8 +22,19 @@ type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+/**
+ * Only the readable ones get a route.
+ *
+ * A locked project used to be built here like any other, so its page was a
+ * complete, publicly readable case study that simply had no link pointing at
+ * it — the blur and the "coming soon" badge on the card were decoration over a
+ * page anyone with the URL could read in full. `comingSoon` is a statement
+ * about whether the writing is finished, so it has to gate the route too.
+ */
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return projects
+    .filter((project) => !project.comingSoon)
+    .map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
@@ -44,7 +55,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
-  if (!project) notFound();
+  // Unknown, or locked. `generateStaticParams` already leaves the locked ones
+  // unbuilt, but a direct request still reaches this handler, so the guard has
+  // to be here as well or the lock only holds for links the site renders.
+  if (!project || project.comingSoon) notFound();
 
   // Wraps around, so the last study still offers somewhere to go.
   // Skips anything marked `comingSoon`, so "next case study" never sends a

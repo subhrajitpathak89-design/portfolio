@@ -161,16 +161,17 @@
  * this block is the entire theme — flipping these values flips the whole site,
  * including the cursor, the hatch and the dither fields.
  *
- * The one thing not restored is the hero's spectrum overlay, which lived in
- * the markup rather than in tokens; it is in git history if it is wanted back.
- * The `--v3-spectrum-*` values it read are still below.
+ * Black and white, like light — the same monochrome decision seen from the
+ * other side, not a second personality. Every value here is a true grey with
+ * equal channels, so nothing downstream can introduce a cast.
  *
- * A neutral charcoal ground with a violet accent, and no orange anywhere —
- * this theme's ground used to carry a warm cast so an orange accent would sit
- * in the same light as the page, which in practice tinted every neutral on it:
- * the surfaces, the rules, the chips and the body text all came out faintly
- * orange. Greys are true greys now, equal channels, so nothing downstream can
- * reintroduce a cast.
+ * This theme has been two other things and both are gone: an orange accent on
+ * a warm-tinted ground, which pulled a cast through every neutral on the page,
+ * and then a violet accent with a cyan cursor and a violet-to-fuchsia dither
+ * ramp, which made a monochrome site turn saturated the moment it went dark.
+ * The `--v3-spectrum-*` stops that fed the hero's old overlay went with them;
+ * nothing read them, and they are in git history if that overlay is wanted
+ * back.
  */
 .dark {
   color-scheme: dark;
@@ -181,56 +182,39 @@
   --v3-muted: #949494;
   --v3-line: #262626;
   /*
-   * Violet, not the reference's own violet.
+   * The accent is the foreground. Black and white, both ways round — light
+   * emphasises with black on near-white, dark with near-white on black, and
+   * neither theme has a hue in it.
    *
-   * `#7c3aed` is the hue that dominates that gradient, and it measures 3.47:1
-   * against this ground — under the 4.5:1 it needs, and this token has to
-   * clear that bar twice over: as accent text on the charcoal, and as a solid
-   * button ground with near-black text on top of it. `#a855f7` is the same
-   * hue carried up to 5.00:1, and the hover state to 7.49:1.
-   *
-   * The magenta end of the ramp lands at 4.20:1 and so is confined to the
-   * decorative stops below, where nothing has to be read off it.
+   * `--v3-accent-bright` is the hover state, and in both themes it steps
+   * toward the page ground rather than away from it: light goes #0a0a0a to
+   * #333333, dark goes #f4f4f4 to #d4d4d4. Same gesture, mirrored.
    */
-  --v3-accent: #a855f7;
-  --v3-accent-bright: #c084fc;
-  /* Design-tool furniture. The selection frame is the brand colour, so the
-     collaborator cursor has to sit off it — and now that the brand is violet,
-     the violet cursor this used to be would read as the same person. Cyan is
-     outside the ramp entirely, which is the only thing the colour has to do. */
-  --v3-select: #a855f7;
+  --v3-accent: #f4f4f4;
+  --v3-accent-bright: #d4d4d4;
+  /* Design-tool furniture — the selection frame and the collaborator cursor.
+     Both take the foreground here, exactly as they both take black in light:
+     in a monochrome theme there is no second colour to tell them apart with,
+     and their shapes already do it. */
+  --v3-select: #f4f4f4;
   --v3-chip: #1c1c1c;
-  --v3-cursor: #22d3ee;
+  --v3-cursor: #f4f4f4;
   /* Must track --v3-bg exactly: the hero scrims fade the photograph into this,
      and a scrim off by a few points of hue leaves a visible seam. */
   --v3-scrim: rgba(10, 10, 10, 0.88);
 
   /*
-   * The spectrum: cool to warm, deep violet through magenta into the accent.
+   * Terrain, distant range first — the same order as light, with the ramp
+   * turned over. Light puts the faint stop near white (#dedede) and the strong
+   * one near black; on this ground the faint stop is the one near black and
+   * the far range resolves light.
    *
-   * Sampled off the reference gradient and taken the whole way: the ramp used
-   * to resolve into the site's orange at its warm end, and there is no orange
-   * left in this theme, so the hot end is magenta now. Deep violet through
-   * violet into fuchsia — the accent sits at the third stop, so the palette
-   * and the accent are the same decision rather than two.
-   *
-   * Dark only, deliberately. The same spectrum on a white page is a novelty
-   * gradient; against charcoal it reads as light in a dark room, which is what
-   * the reference is actually doing. The ground stays neutral either way — a
-   * tinted ground was the thing that made the page look washed rather than
-   * lit.
+   * These were a violet-through-fuchsia ramp, which made the hero and footer
+   * dither fields the most saturated thing on an otherwise monochrome page.
    */
-  --v3-spectrum-1: #2e1065;
-  --v3-spectrum-2: #6d28d9;
-  --v3-spectrum-3: #a855f7;
-  --v3-spectrum-4: #d946ef;
-
-  /* The dither ramp is a three-stop gradient already, so it carries the
-     spectrum for free — deep violet where the field thins out, the accent
-     through the mid-densities, fuchsia where it resolves solid. */
-  --v3-dither-1: #2e1065;
-  --v3-dither-2: #a855f7;
-  --v3-dither-3: #e879f9;
+  --v3-dither-1: #2b2b2b;
+  --v3-dither-2: #6b6b6b;
+  --v3-dither-3: #e4e4e4;
 }
 
 @theme inline {
