@@ -136,6 +136,32 @@ export default function RootLayout({
           }}
         />
 
+        {/*
+          Applies the theme before the first paint.
+
+          It has to be inline and it has to be here, above the content: the
+          theme lives in `localStorage` and in an OS setting, neither of which
+          the server can see, so a React effect would run after the page had
+          already painted in the wrong one. That flash is the whole reason this
+          script exists.
+
+          No stored value means follow the system, which is also what
+          `ThemeToggle` does — the two have to agree or the first paint and the
+          first render disagree.
+
+          Wrapped in try/catch because reading `localStorage` throws outright
+          in a browser set to block site data, and a theme is not worth taking
+          the page down for.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('theme');" +
+              "if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))" +
+              "document.documentElement.classList.add('dark')}catch(e){}",
+          }}
+        />
+
         {/* Last in the body would be tidier, but it has to outlive nothing and
             paint over everything — it is `position: fixed` at the top of the
             stacking order, so document order does not decide what it covers.

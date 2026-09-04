@@ -8,31 +8,36 @@
    cards fall back to an ordinary scrolled stack. */
 @custom-variant stack-scroll (@media (min-width: 80rem) and (min-height: 44rem));
 
+/*
+ * The legacy palette, now aliases onto the v3 tokens below.
+ *
+ * These names are still consumed — `@apply bg-background text-foreground` on
+ * `body`, `::selection`, `:focus-visible`, and the `@theme inline` block that
+ * turns them into Tailwind colours — so they cannot simply be deleted. But
+ * they used to hold their own values, and two of them were the orange the rest
+ * of the site had already dropped: `#ff5a00` in light and `#fb7a4b` in dark.
+ *
+ * Nothing looked orange, so it survived a redesign unnoticed. Selecting any
+ * text on the page painted it orange, and so did every focus ring — the two
+ * places a visitor sees a colour they never chose to look at.
+ *
+ * Aliasing rather than re-stating the hexes means one palette, and a theme
+ * switch that cannot leave half the page behind. Custom properties resolve at
+ * use rather than at declaration, so pointing back at tokens defined further
+ * down this file is fine.
+ */
 :root {
-  /* Aligned with the v2 palette: every route is v2 now, so these carry the
-     page ground, the not-found route and overscroll areas. */
-  --background: #fdfbf6;
-  --surface: #ffffff;
-  --foreground: #111111;
-  --muted: #f1efec;
-  --muted-foreground: #6d6a66;
-  --border: #e4e0da;
-  --accent: #ff5a00;
-  --accent-foreground: #ffffff;
+  --background: var(--v3-bg);
+  --surface: var(--v3-surface);
+  --foreground: var(--v3-fg);
+  --muted: var(--v3-chip);
+  --muted-foreground: var(--v3-muted);
+  --border: var(--v3-line);
+  --accent: var(--v3-accent);
+  /* Text sitting on the accent, not a second accent. */
+  --accent-foreground: var(--v3-bg);
   --ring: var(--accent);
   --radius: 0.75rem;
-}
-
-.dark {
-  --background: #0c0c0e;
-  --surface: #141417;
-  --foreground: #f2f1ef;
-  --muted: #1c1c20;
-  --muted-foreground: #a3a09b;
-  --border: #26262b;
-  --accent: #fb7a4b;
-  --accent-foreground: #16161a;
-  --ring: var(--accent);
 }
 
 @theme inline {
@@ -110,24 +115,26 @@
 }
 
 /* ── v3 ─────────────────────────────────────────────────────────────────────
-   The v3 build is dark-first, so these are plain values rather than entries in
-   the light/dark token pair above. They sit alongside the v2 palette instead of
-   replacing it: v2 still ships on master and its routes still render here.     */
-/* v3 light. The only theme the site ships — nothing applies `.dark` any more,
-   so this is simply the palette. It reads as "the default" below because it
-   was written when there was a dark theme to default away from; the block
-   further down is kept, inert, in case that comes back.
+   The palette. Every colour on the site resolves to one of these, and the
+   legacy names at the top of this file alias onto them, so these two blocks
+   are the whole theme.                                                        */
 
-   Was: the default, because next-themes only stamps a class for dark —
-   an unstyled :root has to be one of the two, and light is the safer one to
-   flash.
-
-   Monochrome by design, not by omission. The orange is the dark theme's
-   signature; on a light ground it turns the whole page into a warning label,
-   so light mode drops it entirely and lets black carry the emphasis. Nothing
-   here has a warm cast — the greys are neutral, so no orange leaks back in
-   through the ground. */
+/*
+ * v3 light — the default, and the state of an unstyled root element. Only dark
+ * gets a class, so light is what a visitor sees if the theme script never
+ * runs, which is the right way round: a flash of light is survivable and a
+ * flash of dark on a light page is not.
+ *
+ * Monochrome by design, not by omission. Black carries the emphasis and the
+ * greys are true greys — equal channels — so nothing downstream can introduce
+ * a warm cast.
+ */
 :root {
+  /* Tells the browser which way round its own furniture goes: scrollbars, form
+     controls, and the canvas behind an overscroll. Without it a dark page
+     keeps a light scrollbar. */
+  color-scheme: light;
+
   --v3-bg: #fafafa;
   --v3-surface: #ffffff;
   --v3-fg: #0a0a0a;
@@ -147,32 +154,27 @@
 }
 
 /*
- * ─────────────────────────────────────────────────────────────────────────────
- * RETIRED — dark mode is off.
+ * Dark mode, back on. `ThemeToggle` sets `.dark` on the root element and an
+ * inline script in the layout restores the choice before first paint.
  *
- * Nothing sets `.dark` any more: the theme provider, the toggle and every
- * `dark:` variant in the v3 components are gone, so every rule in this block
- * is inert. It is kept rather than deleted because the palette is the
- * expensive part to rebuild and switching back means restoring the provider
- * and the toggle, not re-deriving these values.
+ * Every v3 component reads tokens and nothing carries a `dark:` variant, so
+ * this block is the entire theme — flipping these values flips the whole site,
+ * including the cursor, the hatch and the dither fields.
  *
- * The one thing not preserved here is the hero's spectrum overlay, which lived
- * in the markup rather than in tokens — it is in git history if it is wanted
- * back. The `--v3-spectrum-*` values it read are still below.
- * ─────────────────────────────────────────────────────────────────────────────
+ * The one thing not restored is the hero's spectrum overlay, which lived in
+ * the markup rather than in tokens; it is in git history if it is wanted back.
+ * The `--v3-spectrum-*` values it read are still below.
  *
- * v3 dark.
- *
- * A neutral charcoal ground. This used to carry a warm cast so the orange sat
- * in the same light as the page — defensible in theory, but in practice a
- * ground mixed toward the accent reads as a tint rather than as black, and
- * every neutral on the page inherited it: the surfaces, the rules, the chips
- * and the body text all came out faintly orange.
- *
- * So the ground family is neutral and the accent is the only warm thing on the
- * page. That is the contrast the accent is for. Greys are true greys — equal
- * channels — so nothing downstream can reintroduce a cast. */
+ * A neutral charcoal ground with a violet accent, and no orange anywhere —
+ * this theme's ground used to carry a warm cast so an orange accent would sit
+ * in the same light as the page, which in practice tinted every neutral on it:
+ * the surfaces, the rules, the chips and the body text all came out faintly
+ * orange. Greys are true greys now, equal channels, so nothing downstream can
+ * reintroduce a cast.
+ */
 .dark {
+  color-scheme: dark;
+
   --v3-bg: #0a0a0a;
   --v3-surface: #131313;
   --v3-fg: #f4f4f4;
@@ -563,7 +565,11 @@ html[data-reveal] [data-reveal-item]:not(.is-revealed) {
   padding: 0.25rem 0.5rem;
   font-size: 11px;
   font-weight: 600;
-  color: #ffffff;
+  /* The page ground, not white. In dark mode the cursor is cyan and the
+     selection frame violet, and white text on either is around 2:1 — the
+     ground colour is the contrasting one against both accents in both
+     themes, which is the same pairing the accent buttons already use. */
+  color: var(--v3-bg);
   white-space: nowrap;
   /* Scaled from the arrow's corner rather than faded alone, so the tag reads
      as unfolding from the cursor instead of appearing beside it. */

@@ -120,7 +120,7 @@ export function SelectionFrame({ children, cursorLabel }: SelectionFrameProps) {
 
         {/* Dimension badge, centred under the bottom edge. */}
         {size && (
-          <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded bg-v3-select px-2 py-0.5 font-mono text-[11px] font-medium tracking-wide text-white">
+          <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded bg-v3-select px-2 py-0.5 font-mono text-[11px] font-medium tracking-wide text-v3-bg">
             {size.width} × {size.height}
           </span>
         )}
@@ -134,7 +134,7 @@ export function SelectionFrame({ children, cursorLabel }: SelectionFrameProps) {
           <svg viewBox="0 0 12 14" className="size-3.5 shrink-0 fill-v3-cursor">
             <path d="M0 0l12 6.2-5.1 1.2L4.4 14z" />
           </svg>
-          <span className="ml-1 mt-2 rounded bg-v3-cursor px-2 py-1 text-[11px] font-semibold text-white">
+          <span className="ml-1 mt-2 rounded bg-v3-cursor px-2 py-1 text-[11px] font-semibold text-v3-bg">
             {cursorLabel}
           </span>
         </span>

@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import type { IconType } from "react-icons";
 import { RiLinkedinFill } from "react-icons/ri";
 import { SiGithub } from "react-icons/si";
+import { ThemeToggle } from "@/components/v3/ThemeToggle";
 import { v3NavLinks } from "@/content/v3-nav";
 import { profile } from "@/content/profile";
 
@@ -140,6 +141,8 @@ export function Navbar() {
             </a>
           ))}
 
+          <ThemeToggle />
+
           <a
             href={`mailto:${profile.email}`}
             className="rounded-lg bg-v3-accent px-5 py-2.5 font-grotesk text-sm font-semibold tracking-[-0.005em] text-v3-bg transition-colors duration-200 hover:bg-v3-accent-bright"
@@ -202,6 +205,8 @@ export function Navbar() {
                 <span className="sr-only">{social.label}</span>
               </a>
             ))}
+
+            <ThemeToggle />
 
             {/* Takes the rest of the row: it is the one thing in this panel
                 anyone opened it hoping to find. */}
