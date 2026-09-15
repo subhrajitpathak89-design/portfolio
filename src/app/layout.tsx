@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/v3/Footer";
 import { FloatingDock } from "@/components/v3/FloatingDock";
 import { GlobalCursor } from "@/components/v3/GlobalCursor";
@@ -194,6 +195,7 @@ export default function RootLayout({
         <FloatingDock />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
