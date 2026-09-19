@@ -235,4 +235,41 @@ export const terrain: Scene = (u, v, _aspect, t) => {
   return density * smooth(Math.min(1, Math.max(0, (u - 0.02) / 0.72)));
 };
 
-export const SCENES: Record<string, Scene> = { globe, flower, terrain };
+/**
+ * A sparse field that twinkles — the one scene here that is not a picture.
+ *
+ * The blink is the point, and it comes from the dither rather than from any
+ * fading drawn into the scene. Each cell's density is parked near the Bayer
+ * matrix's threshold and pushed gently across it by a slow wave; a cell that
+ * crosses turns its dot on, a cell that falls back turns it off. Because the
+ * threshold is a fixed ordered pattern, neighbours cross at different moments,
+ * so the field flickers cell by cell instead of pulsing as one mass.
+ *
+ * Two frequencies rather than one. The spatial noise decides *where* there is
+ * anything at all, and a second term decides *when* each of those places is
+ * lit, so the pattern never resolves into a shape you can learn — which is
+ * what separates a texture from a picture you end up watching.
+ */
+export const particles: Scene = (u, v, aspect, t) => {
+  // Coarse sampling, so the noise varies over a handful of cells rather than
+  // per-cell. Per-cell noise is just static; this gives the twinkle clumps.
+  const field = noise2(u * 7 * aspect, v * 7, 41);
+
+  // Only the top of the noise range lights at all. Below this the field is
+  // empty, which is what keeps it sparse — a scene that fills its box is a
+  // background, and this one is meant to read as scattered marks.
+  if (field < 0.52) return 0;
+
+  // Each place gets its own phase from a second noise lookup, so the blinks
+  // are not in step. 0.9 rad/s is slow enough to read as drifting rather than
+  // strobing.
+  const phase = noise2(u * 13 * aspect, v * 13, 907) * Math.PI * 2;
+  const pulse = 0.5 + 0.5 * Math.sin(t * 0.9 + phase);
+
+  // Centred on 0.5 — the middle of the Bayer range — with a narrow swing, so
+  // the wave carries cells back and forth across their thresholds instead of
+  // saturating them on or off.
+  return (field - 0.52) * 2.1 * (0.34 + pulse * 0.42);
+};
+
+export const SCENES: Record<string, Scene> = { globe, flower, terrain, particles };

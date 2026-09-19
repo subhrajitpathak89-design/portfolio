@@ -584,3 +584,56 @@ html[data-reveal] [data-reveal-item]:not(.is-revealed) {
     transition: none;
   }
 }
+
+/*
+ * The hero's stack ticker.
+ *
+ * Same bargain as `.v3-stream`: one composited track, doubled content, and a
+ * loop that shifts by exactly half. The chips carry their overlap as a uniform
+ * negative `margin-right` rather than as `-ml-2` with a `first:ml-0` exception
+ * — a doubled list with one item's margin missing lands half an overlap out,
+ * which is a visible jump every cycle.
+ */
+.v3-ticker {
+  overflow: hidden;
+  /* Without this a flex child refuses to shrink below its content width, and
+     a track of nine chips would push the row wider than the column instead of
+     being clipped by it. */
+  min-width: 0;
+}
+
+.v3-ticker-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: v3-ticker-left 26s linear infinite;
+  will-change: transform;
+}
+
+@keyframes v3-ticker-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Holds still so a mark under the cursor can actually be read, and so the
+   hover lift on a chip is not chasing a moving target. */
+.v3-ticker:hover .v3-ticker-track {
+  animation-play-state: paused;
+}
+
+/* Fades the right edge into the page ground so chips leave rather than being
+   sliced off. The left edge needs no fade: the "My stack" label is already
+   sitting there, and a scrim under it would only grey the label. */
+.v3-ticker-scrim {
+  background: linear-gradient(90deg, transparent 88%, var(--v3-bg) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-ticker-track {
+    animation: none;
+  }
+}
