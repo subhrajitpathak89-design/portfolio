@@ -55,8 +55,8 @@ portfolio/
 All copy lives in `src/content/*.ts` — no component edits needed for a content refresh.
 
 - `src/content/profile.ts` — name, role, tagline, bio, location, email, social links, and
-  `siteUrl` (currently `https://example.com`; replace it with the real domain, since it feeds
-  `metadataBase`, the sitemap and robots.txt).
+  `siteUrl` (currently `https://www.subhrajitpathak.online`). Keep it matching the host the
+  site is actually served on, since it feeds `metadataBase`, the sitemap and robots.txt.
 - `src/content/projects.ts` — the case-study entries. Each `Project` needs `slug`, `title`,
   `category`, `summary`, `description` (array of paragraphs), `role`, `year`, `tags` and
   `featured`; `coverImage` and `liveUrl` are optional.

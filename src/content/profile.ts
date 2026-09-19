@@ -1,8 +1,19 @@
 import type { Profile } from "@/types";
 
 // Drives metadataBase, so it sets every canonical URL, OpenGraph link and
-// sitemap entry. Point it at a custom domain when there is one.
-export const siteUrl = "https://portfolio-teal-seven-7vraz065mz.vercel.app";
+// sitemap entry.
+//
+// The `www.` host, not the bare domain: `subhrajitpathak.online` answers with
+// a 308 to `www.subhrajitpathak.online`, so the bare form is a redirect rather
+// than an address. Naming it here would put a redirect hop in front of every
+// crawl and every social-preview fetch.
+//
+// This has to track the domain the site is actually served on. While it
+// pointed at the old `*.vercel.app` alias, the custom domain was serving pages
+// whose own metadata named a different site as the canonical one — and that
+// alias still resolves, so the two were live copies of the same content
+// pointing at each other.
+export const siteUrl = "https://www.subhrajitpathak.online";
 
 export const profile: Profile = {
   name: "Subhrajit Pathak",

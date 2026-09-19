@@ -8,7 +8,7 @@ content so the structure/design can be reviewed before real projects/bio are dro
 
 ## Where things live
 - **GitHub repo:** https://github.com/subhrajitpathak89-design/portfolio (public, `master` branch)
-- **Live site:** https://portfolio-teal-seven-7vraz065mz.vercel.app
+- **Live site:** https://www.subhrajitpathak.online — the `*.vercel.app` alias still resolves and serves the same build
   - Auto-deployed via Vercel's GitHub integration — every push to `master` redeploys automatically.
   - Vercel project lives under the `subhrajitpathak89-4064's projects` team (Hobby plan).
 - Both GitHub and Vercel are logged in under the **`subhrajitpathak89-design`** account/identity — use that account (or get it re-added as a collaborator) to push or manage the Vercel project from elsewhere.
@@ -25,9 +25,9 @@ content so the structure/design can be reviewed before real projects/bio are dro
 - No CMS, no contact-form backend, no analytics, no tests/CI — all intentionally deferred (see README's "not included in v1" section).
 
 ## Known TODOs / things not yet done
-1. **`siteUrl` in `src/content/profile.ts` is still `https://example.com`.** Update it to the real Vercel URL (or a custom domain once added) — it feeds `metadataBase`, `sitemap.ts`, and `robots.ts`.
+1. ~~**`siteUrl` in `src/content/profile.ts` is still `https://example.com`.**~~ Done — it points at `https://www.subhrajitpathak.online`. The `www.` host specifically: the bare domain answers with a 308 redirect to it.
 2. **All content is placeholder** — name "Alex Rivera", fake email `hello@example.com`, `#` social links, 6 made-up case studies. Swap these in `src/content/*.ts` before treating this as a real public portfolio.
-3. **No custom domain configured** — currently on Vercel's auto-generated subdomain. Add one under the Vercel project's Settings → Domains whenever ready.
+3. ~~**No custom domain configured**~~ Done — `subhrajitpathak.online` is live. The auto-generated `*.vercel.app` subdomain still resolves, so the same site answers on two addresses; disable that alias under Settings → Domains if you would rather it did not.
 4. Real project images: drop files into `public/images/projects/` and set `coverImage` on the relevant entry in `src/content/projects.ts`; `ProjectCard` and the detail page fall back to the gradient placeholder whenever `coverImage` is unset.
 
 ## Local dev
