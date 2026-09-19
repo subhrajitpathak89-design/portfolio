@@ -194,10 +194,17 @@ export function Hero() {
             // and `100vw` is the honest answer. A flat `88rem` here would send
             // a 375px phone at 2x after the 1920 variant.
             sizes="(min-width: 88rem) 88rem, 100vw"
-            // Higher than the 55 this ran at when it was a 42%-opacity bed
-            // under two scrims. At full strength in a band of its own the
-            // compression has nowhere to hide.
-            quality={72}
+            // No `quality` prop, which means 75 — and 75 is what this wants.
+            // It ran at 55 while it was a 42%-opacity bed under two scrims,
+            // where the detail could not show; at full strength in a band of
+            // its own the compression has nowhere to hide.
+            //
+            // Worth stating plainly, because it is a silent failure: Next 16
+            // only honours the qualities allowlisted in `next.config.ts`
+            // (`[55, 75]` here) and drops anything else back to 75 without a
+            // warning. A `quality={72}` sitting here would look deliberate and
+            // do nothing. Either number in that list is fine; a number outside
+            // it is a lie in the source.
             className="object-cover"
           />
 
