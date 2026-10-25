@@ -237,14 +237,13 @@
   --color-v3-cursor: var(--v3-cursor);
 }
 
-/* Diagonal hatching for the frame margins. */
+/*
+ * The hatched frame margins are retired site-wide: the page now runs on open
+ * ground either side of the column rather than a drawn bleed. The class stays
+ * so the margin elements in each section are harmless no-ops.
+ */
 .v3-hatch {
-  background-image: repeating-linear-gradient(
-    45deg,
-    var(--v3-line) 0 1px,
-    transparent 1px 7px
-  );
-  opacity: 0.55;
+  display: none;
 }
 
 /*
@@ -351,7 +350,21 @@ html[data-reveal] [data-reveal-item]:not(.is-revealed) {
   width: calc(100% - 2 * var(--v3-gutter));
   max-width: var(--v3-measure);
   margin-inline: auto;
-  border-inline: 1px solid var(--v3-line);
+}
+
+/*
+ * Tokens for chrome set over the home hero's illustration: light type on a
+ * picture in both themes. The `@theme inline` mapping means the usual
+ * `text-v3-fg` etc. utilities pick these up without any class changes.
+ */
+.v3-on-image {
+  --v3-fg: #ffffff;
+  --v3-muted: rgba(255, 255, 255, 0.78);
+  --v3-line: rgba(255, 255, 255, 0.35);
+  --v3-accent: #ffffff;
+  --v3-accent-bright: #e6e6e6;
+  --v3-bg: #0a0a0a;
+  --v3-surface: #111111;
 }
 
 .v3-bleed {

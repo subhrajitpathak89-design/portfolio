@@ -41,6 +41,7 @@ const HEADER_MARKS: Partial<Record<string, IconType>> = {
  */
 export function Navbar() {
   const pathname = usePathname();
+  const onHero = pathname === "/";
 
   // The state is the route the menu was opened on, and `open` is derived from
   // whether that is still the route we are on. Storing a boolean and resetting
@@ -96,10 +97,18 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-40">
+    <header className={`absolute inset-x-0 top-0 z-40 ${onHero ? "v3-on-image" : ""}`}>
       {/* Inset to the same rhythm as the hero frame, so the rules line up
-          rather than nearly lining up. */}
-      <div className="v3-column relative flex items-center justify-between gap-4 border-b border-v3-line px-5 py-5 sm:px-10 lg:px-16">
+          rather than nearly lining up. On the home page the hero is a
+          full-bleed picture with no frame, so the header goes full width and
+          drops its rules to match. */}
+      <div
+        className={
+          onHero
+            ? "relative flex items-center justify-between gap-4 px-5 py-5 sm:px-10 lg:px-16"
+            : "v3-column relative flex items-center justify-between gap-4 border-b border-v3-line px-5 py-5 sm:px-10 lg:px-16"
+        }
+      >
         <Link
           href="/#home"
           className="inline-block py-1 font-grotesk text-lg font-bold tracking-[-0.02em] text-v3-fg transition-colors duration-200 hover:text-v3-accent"

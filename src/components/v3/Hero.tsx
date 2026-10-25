@@ -1,240 +1,119 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownToLine, ArrowRight } from "lucide-react";
-import { DitherField } from "@/components/v3/DitherField";
-import { LocalTime } from "@/components/v3/LocalTime";
-import { StackMarks } from "@/components/v3/StackMarks";
 import { profile } from "@/content/profile";
 
 /**
- * The studio-site hero: a quiet type block over an off-white ground, then a
- * full-width image band pinned under it.
+ * The studio-site hero: the type block set directly over a full-bleed pixel
+ * illustration — the corner shop by day in light mode, the same scene lit up
+ * at night in dark mode.
  *
- * The structural idea is a single 12-column grid used twice. The headline
- * starts at column 5 and runs to the right edge; under it the same offset
- * splits a short muted tagline on the left from the real paragraph on the
- * right. That one repeated indent is what makes the block read as set type
- * rather than as centred copy — nothing is centred here, and the left margin
- * is deliberately left mostly empty so the eye enters at the same x-position
- * twice.
+ * The copy is one left-aligned stack in the sky, above the shop, so every
+ * line reads against dark ground rather than the lit windows.
  *
- * The photograph is no longer a bed the text sits on. It was previously
- * full-bleed behind the copy at 42% opacity under two scrims, which is a lot
- * of machinery spent making a picture quiet enough to read over. Given a band
- * of its own it can run at full strength, and the copy gets flat ground.
+ * The picture runs edge to edge of the viewport, and the copy sits on the same
+ * edge padding as the header rather than inside the column measure.
  */
 export function Hero() {
   return (
     <section id="home" className="relative isolate overflow-hidden bg-v3-bg text-v3-fg">
-      {/* Hatched margins outside the column rules, the way a spec drawing
-          leaves its bleed visible.
+      <div className="relative isolate flex min-h-[100svh] flex-col justify-start">
+        {/* Both scenes are rendered and the theme class picks one, so a
+            theme switch is instant and never waits on a fetch. */}
+        <Image
+          src="/images/v3/hero-day.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 object-cover object-[center_85%] dark:hidden"
+        />
+        <Image
+          src="/images/v3/hero-night.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 hidden object-cover object-[center_85%] dark:block"
+        />
+        {/* Dark across the sky where the copy sits, clearing toward the shop
+            so the picture still carries the bottom of the hero. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7),rgba(0,0,0,0.45)_45%,rgba(0,0,0,0)_75%)]"
+        />
 
-          These are not decoration that the hero can opt out of: About, Work,
-          the case studies, Commits and the Footer all draw them, so a hero
-          without them makes the hatch appear from nowhere at the first section
-          boundary — the rules read as starting halfway down the page rather
-          than running its full height. */}
-      <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
-      <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
+        {/* Dissolves the picture's foot into the page ground, so the hero
+            ends in a fade rather than a hard horizontal cut. */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-b from-transparent to-v3-bg sm:h-64"
+        />
 
-      <div className="v3-column">
-        {/* ── The type block ───────────────────────────────────────────── */}
-        {/* Horizontal padding on the type block only, not on the column. The
-            frame rules are the column's own edges, and text set flush against
-            a rule reads as an overflow rather than as a margin — the buttons
-            especially, since a pill's rounded edge touching a straight line
-            looks like a collision. The image band below deliberately keeps no
-            padding: a photograph running edge to edge between the rules is the
-            contrast that makes the inset type read as inset. */}
-        <div className="px-5 pb-14 pt-28 sm:px-8 sm:pt-32 lg:px-12 lg:pb-20 lg:pt-40">
-          <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-8">
-            {/* Scattered dither marks in the space the headline's indent
-                leaves empty.
+        {/* Full width, on the same edge padding as the header, and stacked
+            in the sky so no line of copy crosses the lit shop front. */}
+        <div className="w-full px-5 pb-[38vh] pt-28 text-white sm:px-10 sm:pt-32 lg:px-16 lg:pt-36">
+          {/* No name in the headline. The wordmark, page title and footer
+              all carry it; the line states the work instead. */}
+          <h1
+            data-reveal-item
+            className="max-w-[20ch] text-balance font-editorial-display text-[clamp(2.5rem,5.6vw,5rem)] font-normal leading-[1.0] tracking-[-0.01em] [text-shadow:0_2px_24px_rgba(0,0,0,0.45)]"
+          >
+            Turning complex workflows into{" "}
+            <span className="text-white/75">clear, usable products.</span>
+          </h1>
 
-                A grid child in columns 1–4 rather than an absolute layer, so
-                it occupies the empty space instead of floating over the block
-                — and on a phone, where there are no spare columns, it is
-                hidden outright. A decorative field stacked above the headline
-                on a small screen is just something in the way. */}
-            <div
-              aria-hidden
-              className="hidden lg:col-span-4 lg:col-start-1 lg:block"
-            >
-              <DitherField
-                scenes={["particles"]}
-                timeOffset={17}
-                // Coarser than the 4px page default. These are meant to be
-                // countable marks; at the default pitch the same field reads
-                // as grain.
-                cell={9}
-                // Fades toward the headline on both axes, so the density is in
-                // the outer corner and nothing is competing with the first
-                // line of type where the two meet.
-                className="h-52 w-full opacity-70 [mask-image:linear-gradient(to_right,black_30%,transparent_92%),linear-gradient(to_top,black_40%,transparent_95%)] [mask-composite:intersect]"
-              />
+          <p
+            data-reveal-item
+            style={{ "--reveal-delay": 1 } as React.CSSProperties}
+            className="mt-6 max-w-[60ch] text-[15px] leading-relaxed text-white/90 [text-shadow:0_1px_12px_rgba(0,0,0,0.5)] sm:text-base"
+          >
+            Product design across B2B SaaS, AI and healthcare — from the research that
+            precedes a screen to the shipped interface and the design system underneath
+            it. {profile.proofLine}
+          </p>
+
+          <div
+            data-reveal-item
+            style={{ "--reveal-delay": 2 } as React.CSSProperties}
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4"
+          >
+            {/* The résumé is the one document a reviewer came for, so it
+                stays a first-class action beside the work. */}
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/#work"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-grotesk text-[14px] font-medium tracking-[-0.01em] text-black transition-colors duration-200 hover:bg-white/85"
+              >
+                See the work
+                <ArrowRight
+                  aria-hidden
+                  className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                  strokeWidth={2}
+                />
+              </Link>
+
+              {/* `download` names the file rather than letting it save as
+                  whatever the URL ends in. */}
+              <a
+                href={profile.resume}
+                download="Subhrajit-Pathak-Product-Designer-Resume.pdf"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-black/25 px-5 py-2.5 font-grotesk text-[14px] font-medium tracking-[-0.01em] text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/15"
+              >
+                Resume
+                <ArrowDownToLine aria-hidden className="size-3.5" strokeWidth={2} />
+              </a>
             </div>
 
-            {/* `text-balance` matters more than usual here: the line is set to
-                break three times at desktop, and an unbalanced ragged edge on
-                a headline this size is the difference between set type and a
-                paragraph that happens to be large. */}
-            {/* `font-editorial-display`, the same Instrument Serif every other
-                heading on the site is set in. The reference this layout came
-                from sets its headline in a grotesk, and matching that here
-                would have made the hero the one page element speaking in a
-                different voice — a display face is only a voice if it is used
-                everywhere it applies.
-
-                Tracking is looser than the grotesk wanted: -0.03em is a
-                correction for a sans at display size, and applied to a serif
-                it closes the counters and starts fusing letter pairs. Leading
-                comes down to compensate for the serif's smaller apparent
-                size at the same px. */}
-            <h1
-              data-reveal-item
-              className="text-pretty font-editorial-display text-[clamp(2.5rem,5.2vw,4.5rem)] font-normal leading-[1.0] tracking-[-0.01em] text-v3-fg lg:col-span-8 lg:col-start-5"
-            >
-              {/* No name in the headline. The wordmark carries it, the page
-                  title carries it, and the footer carries it — a hero that
-                  opens by introducing itself spends its largest line on the
-                  one fact a reader already has. The line states the work
-                  instead, which is what a reviewer is actually scanning for. */}
-              Turning complex workflows into{" "}
-              <span className="text-v3-muted">clear, usable products.</span>
-            </h1>
-          </div>
-
-          {/* The second row repeats the column-5 indent. The gap above it is
-              large on purpose — the reference sets roughly a headline's worth
-              of air between the claim and its supporting text, and closing it
-              up makes the two read as one stacked paragraph. */}
-          <div className="mt-14 grid grid-cols-1 gap-y-10 lg:mt-24 lg:grid-cols-12 lg:gap-x-8">
-            <div
-              data-reveal-item
-              style={{ "--reveal-delay": 1 } as React.CSSProperties}
-              className="lg:col-span-4 lg:col-start-1"
-            >
-              <p className="max-w-[24ch] text-sm leading-relaxed text-v3-muted sm:text-[15px]">
-                {profile.roleLine}
-              </p>
-
-              {/* The two calls to action live in the left column rather than
-                  under the paragraph. The reference hero carries none at all,
-                  but the résumé is the one document a reviewer actually came
-                  for, and dropping it to match a layout would be trading the
-                  page's job for its looks. Parked here they fill the empty
-                  left margin instead of interrupting the reading column. */}
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/#work"
-                  className="group inline-flex items-center gap-2 rounded-full bg-v3-accent px-5 py-2.5 font-grotesk text-[14px] font-medium tracking-[-0.01em] text-v3-bg transition-colors duration-200 hover:bg-v3-accent-bright"
-                >
-                  See the work
-                  <ArrowRight
-                    aria-hidden
-                    className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-                    strokeWidth={2}
-                  />
-                </Link>
-
-                {/* `download` names the file rather than letting it save as
-                    whatever the URL ends in, and it opens in a new tab when
-                    the browser would rather preview a PDF than save it. */}
-                <a
-                  href={profile.resume}
-                  download="Subhrajit-Pathak-Product-Designer-Resume.pdf"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-flex items-center gap-2 rounded-full border border-v3-line px-5 py-2.5 font-grotesk text-[14px] font-medium tracking-[-0.01em] text-v3-fg transition-colors duration-200 hover:border-v3-muted hover:bg-v3-chip"
-                >
-                  Resume
-                  <ArrowDownToLine aria-hidden className="size-3.5" strokeWidth={2} />
-                </a>
-              </div>
-            </div>
-
-            <p
-              data-reveal-item
-              style={{ "--reveal-delay": 2 } as React.CSSProperties}
-              className="text-[15px] leading-relaxed text-v3-fg sm:text-base lg:col-span-7 lg:col-start-5"
-            >
-              {/* Not `profile.tagline` any more. That string is also the meta
-                  description in three places, so it has to keep naming the
-                  domains and the workflow claim — which is now exactly what
-                  the headline above says. Repeating it here would make the
-                  first two things a reader sees the same sentence twice. This
-                  says what the headline cannot: the span of the work, and the
-                  evidence for it. */}
-              Product design across B2B SaaS, AI and healthcare — from the research that
-              precedes a screen to the shipped interface and the design system underneath
-              it. <span className="text-v3-muted">{profile.proofLine}</span>
+            <p className="text-sm text-white/80 [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+              {profile.roleLine}
             </p>
           </div>
         </div>
-
-        {/* ── The image band ───────────────────────────────────────────────
-            Same width as the type above it, so the whole hero reads as one
-            block with a picture at its foot rather than a page with a banner
-            across it. The aspect ratio is wide and short by design: tall
-            enough to be a picture, short enough that the next section's top
-            edge stays in view, which is the cheapest hint that there is more
-            page. */}
-        <div
-          data-reveal-item
-          style={{ "--reveal-delay": 3 } as React.CSSProperties}
-          className="relative aspect-[16/9] w-full overflow-hidden sm:aspect-[2/1] lg:aspect-[16/5.5]"
-        >
-          <Image
-            src="/images/v3/hero-hills.webp"
-            alt=""
-            fill
-            priority
-            // 88rem is the column cap, so above that the image really is
-            // fixed; below it the image fills the viewport less the gutters,
-            // and `100vw` is the honest answer. A flat `88rem` here would send
-            // a 375px phone at 2x after the 1920 variant.
-            sizes="(min-width: 88rem) 88rem, 100vw"
-            // No `quality` prop, which means 75 — and 75 is what this wants.
-            // It ran at 55 while it was a 42%-opacity bed under two scrims,
-            // where the detail could not show; at full strength in a band of
-            // its own the compression has nowhere to hide.
-            //
-            // Worth stating plainly, because it is a silent failure: Next 16
-            // only honours the qualities allowlisted in `next.config.ts`
-            // (`[55, 75]` here) and drops anything else back to 75 without a
-            // warning. A `quality={72}` sitting here would look deliberate and
-            // do nothing. Either number in that list is fine; a number outside
-            // it is a lie in the source.
-            className="object-cover"
-          />
-
-          {/* One scrim, bottom only, and just enough to seat the two marks
-              below. The picture is the point of this band now; dimming it
-              whole would put us back where we started. */}
-          <div
-            aria-hidden
-            className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(to_top,rgba(0,0,0,0.38),transparent)]"
-          />
-
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-4 pb-4 font-mono text-[11px] tracking-[0.02em] text-white/85 sm:px-6 sm:pb-5 sm:text-xs">
-            <LocalTime city="Hyderabad" timeZone="Asia/Kolkata" />
-            <span aria-hidden>(Scroll)</span>
-          </div>
-        </div>
-
-        {/* The stack sits under the band, small and quiet — a footnote to the
-            hero rather than a third button in the call-to-action row, which is
-            what it read as when it shared spacing with them. */}
-        <div
-          data-reveal-item
-          style={{ "--reveal-delay": 4 } as React.CSSProperties}
-        >
-          <StackMarks
-            tools={profile.stack}
-            className="mt-8 mb-14 px-5 sm:px-8 lg:mb-20 lg:px-12"
-          />
-        </div>
       </div>
+
     </section>
   );
 }
