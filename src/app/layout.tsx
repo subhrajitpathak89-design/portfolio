@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Archivo, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/v3/Footer";
 import { FloatingDock } from "@/components/v3/FloatingDock";
@@ -47,19 +48,18 @@ const archivo = Archivo({
   display: "swap",
 });
 
-// The display serif the page headings are set in.
-//
-// Instrument Serif rather than a Didone like Playfair: a Didone's stroke
-// contrast goes spindly at the sizes a hero headline
-// wants. Instrument sits in the moderate-contrast register the reference is in
-// and holds up large. It ships one weight, which is the whole point — a display
-// serif used at two weights stops reading as a voice and starts reading as a
-// mistake. Swap the face in one place: `--font-editorial-display` in
-// globals.css.
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
+// The display face the page headings are set in: Clash Display, from
+// Fontshare (free for commercial use under the ITF Free Font License).
+// Self-hosted from `app/fonts/` so headings render in it on the first paint
+// rather than swapping in from a third-party stylesheet. Swap the face in one
+// place: `--font-editorial-display` in globals.css.
+const clashDisplay = localFont({
+  variable: "--font-clash-display",
+  src: [
+    { path: "./fonts/ClashDisplay-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ClashDisplay-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
+  ],
   display: "swap",
 });
 
@@ -123,7 +123,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${instrumentSerif.variable} ${jetBrainsMono.variable} h-full antialiased`}
+      className={`${archivo.variable} ${clashDisplay.variable} ${jetBrainsMono.variable} h-full antialiased`}
       // The reveal script below stamps `data-reveal` on this element before
       // React hydrates, which is the entire point of it — but it means the
       // server HTML and the client tree disagree about this one attribute, and

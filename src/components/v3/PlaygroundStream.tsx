@@ -6,52 +6,42 @@ import { playground } from "@/content/playground";
 import type { CollageTile } from "@/types";
 
 /**
- * The playground as one row of work, running right to left under About.
+ * The playground on the homepage, as a small bento grid: one large piece,
+ * three smaller ones, and a fifth cell that is the way through to the full
+ * playground. A taste rather than the whole collage — the page it links to
+ * is where every piece gets its own ratio, alt text and tags.
  *
- * Everything that moves, moves — the clips play here rather than standing in
- * as poster frames. That is the point of putting this on the homepage: a still
- * of a Blender render is a picture of a car, and the render is the work.
+ * Tiles crop to their cell here (`object-cover`). That is the trade a bento
+ * makes: fixed cells in exchange for a section that reads as one block.
+ * Clips still play, gated by `LoopVideo`'s own visibility check.
  *
- * This replaced a perspective corridor of stills. Two things were wrong with
- * it: the turn fought the thing being shown, since a clip is harder to read
- * once it is rotated 30 degrees and scaled by depth, and it was a page of
- * geometry to end up showing four pieces at a legible size.
- *
- * The cost of playing everything is real and worth stating. Thirteen of the
- * sixteen pieces are video, doubled by the marquee, so the row holds
- * twenty-six video elements. Three things keep that affordable: `LoopVideo`
- * gates each clip on an intersection observer, so only the few actually inside
- * the viewport decode and the rest sit paused on their posters;
- * `preload="metadata"` means a clip off to the side has not been downloaded at
- * all; and the files are deliberately small — the whole set is under 3MB,
- * which is one stock hero photo.
- *
- * A server component. The row is markup plus one keyframe, and `LoopVideo`
- * brings its own client boundary.
+ * A server component. `LoopVideo` brings its own client boundary.
  */
 
 /**
- * Height of the row, and the only size control here: cards take their width
- * from it, so raising this shows fewer, larger pieces.
+ * Which pieces make the cut, by label, and where each sits. Picked for
+ * range — a branded product loop, a UI micro-interaction, a 3D render and an app
+ * concept — so four cells say four different things.
  */
-const ROW_HEIGHT = "clamp(180px, 23vw, 320px)";
+const BENTO: { label: string; cell: string }[] = [
+  { label: "Face wash", cell: "col-span-2 row-span-2" },
+  { label: "Balance toggle", cell: "" },
+  { label: "Mustang render", cell: "" },
+  { label: "Journal app", cell: "" },
+];
 
 export function PlaygroundStream() {
   const { collage, teaser } = playground;
 
-  if (collage.length === 0) return null;
+  const tiles = BENTO.flatMap(({ label, cell }) => {
+    const tile = collage.find((t) => t.label === label);
+    return tile ? [{ tile, cell }] : [];
+  });
+
+  if (tiles.length === 0) return null;
 
   return (
     <section className="relative bg-v3-bg">
-      <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
-      <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
-
-      {/* One column wrapper for all of it, like every other section. The row
-          used to sit outside this on purpose, to bleed off both edges of the
-          page — but `v3-column` draws the site's vertical rules as its own
-          borders, so bleeding meant the strip visibly broke out of the frame
-          the rest of the page is built on. Inside it, the row starts and ends
-          on the same margin as the heading. */}
       <div className="v3-column px-5 pb-20 pt-20 sm:px-10 lg:px-16 lg:pb-24 lg:pt-24">
         <header className="max-w-2xl">
           <p
@@ -78,79 +68,81 @@ export function PlaygroundStream() {
           </p>
         </header>
 
-        <div
-          className="v3-stream relative mt-12 w-full lg:mt-16"
-          style={{ "--v3-stream-h": ROW_HEIGHT } as React.CSSProperties}
-          /* Decoration assembled from work that is listed properly on
-             /playground, with its own alt text and tags. Announcing thirty-two
-             more items here would make the page longer to listen to and no
-             more informative. */
-          aria-hidden
-        >
-          <div className="v3-stream-track">
-            {/* Twice through: the keyframe slides the row by exactly half its
-                width, so the second copy is sitting where the first one
-                started at the moment it wraps. */}
-            {[...collage, ...collage].map((tile, index) => (
-              <Card key={`${tile.label}-${index}`} tile={tile} />
-            ))}
+        {/* Four columns by two rows of fixed height on desktop: the large
+            piece takes a 2x2 block, the other cells are 1x1. On a phone it
+            folds to two columns and the large piece spans both. */}
+        <div className="mt-12 grid auto-rows-[clamp(140px,18vw,240px)] grid-cols-2 gap-3 sm:gap-4 lg:mt-16 lg:grid-cols-4">
+          {tiles.map(({ tile, cell }) => (
+            <div key={tile.label} className={`group/glow relative isolate ${cell}`}>
+            <span aria-hidden className="v3-glow">
+              {(tile.poster ?? tile.src) && (
+                <Image src={(tile.poster ?? tile.src)!} alt="" fill sizes="16rem" />
+              )}
+            </span>
+            <Link
+              href="/playground"
+              data-cursor-label="Open playground"
+              className="group/tile relative block size-full overflow-hidden rounded-2xl border border-v3-line bg-v3-chip"
+            >
+              <Card tile={tile} />
+              {/* The label rides in on hover, over a short scrim, so the grid
+                  reads as pictures first. */}
+              <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-1 bg-gradient-to-t from-black/60 to-transparent px-4 pb-3 pt-8 font-mono text-[11px] uppercase tracking-[0.12em] text-white opacity-0 transition duration-300 group-hover/tile:translate-y-0 group-hover/tile:opacity-100">
+                {tile.label}
+              </span>
+            </Link>
+            </div>
+          ))}
+
+          {/* The fifth cell is the button. It fills the grid's last slot
+              rather than hanging under it as a text link. */}
+          <div className="group/glow relative isolate">
+          <span aria-hidden className="v3-glow">
+            <span className="bg-v3-fg/40" />
+          </span>
+          <Link
+            href="/playground"
+            className="group/all flex size-full flex-col justify-between rounded-2xl border border-v3-line bg-v3-chip p-5 transition-colors duration-300 hover:border-v3-fg sm:p-6"
+          >
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-v3-muted">
+              {String(collage.length).padStart(2, "0")} pieces
+            </span>
+            <span className="flex items-end justify-between gap-3">
+              <span className="font-editorial-display text-[clamp(1.5rem,2.4vw,2.25rem)] leading-none text-v3-fg">
+                View all
+              </span>
+              <ArrowUpRight
+                aria-hidden
+                className="size-6 shrink-0 text-v3-fg transition-transform duration-300 group-hover/all:-translate-y-1 group-hover/all:translate-x-1"
+                strokeWidth={1.75}
+              />
+            </span>
+          </Link>
           </div>
-
-          <div className="v3-stream-scrim pointer-events-none absolute inset-0" />
         </div>
-
-        <Link
-          href="/playground"
-          className="group mt-10 inline-flex items-center gap-1.5 py-2 font-mono text-xs text-v3-muted transition-colors duration-200 hover:text-v3-accent lg:mt-12"
-        >
-          {teaser.cta}
-          <ArrowUpRight
-            aria-hidden
-            className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            strokeWidth={2}
-          />
-        </Link>
       </div>
     </section>
   );
 }
 
-/**
- * One piece in the row, at its own ratio.
- *
- * Same rule as the collage: the row sets the height, the piece sets the width,
- * and nothing is cropped to ride in it — which is why a 2.37 cinemascope cut
- * and a 9:16 phone capture can sit side by side with neither one trimmed.
- */
+/** One piece, cropped to fill its cell. */
 function Card({ tile }: { tile: CollageTile }) {
-  return (
-    <figure style={{ aspectRatio: `${tile.w} / ${tile.h}` }} className="v3-stream-card">
-      {tile.video ? (
-        <LoopVideo
-          src={tile.video}
-          poster={tile.poster}
-          className="absolute inset-0 size-full object-cover"
-        />
-      ) : tile.src ? (
-        <Image
-          src={tile.src}
-          alt=""
-          fill
-          /*
-           * A width in px, computed per card, because a fraction of the
-           * viewport is the wrong unit here: these cards take their height
-           * from the row and their width from their own aspect, so the width
-           * has nothing to do with how wide the window is.
-           *
-           * `28vw` was the guess before, and at 1920 it claimed 503px for a
-           * portrait board that renders 246 — a 2x oversize. The row height
-           * caps at 320, so this is the widest the card can ever be, and the
-           * browser still doubles it for a retina screen.
-           */
-          sizes={`${Math.round((320 * tile.w) / tile.h)}px`}
-          className="object-cover"
-        />
-      ) : null}
-    </figure>
-  );
+  return tile.video ? (
+    <LoopVideo
+      src={tile.video}
+      poster={tile.poster}
+      className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover/tile:scale-[1.03]"
+    />
+  ) : tile.src ? (
+    <Image
+      src={tile.src}
+      alt=""
+      fill
+      // The large cell tops out around 40rem on a wide screen, the small
+      // ones at half that; this covers both at 2x without fetching a
+      // full-viewport file.
+      sizes="(min-width: 1024px) 40rem, 100vw"
+      className="object-cover transition-transform duration-500 group-hover/tile:scale-[1.03]"
+    />
+  ) : null;
 }

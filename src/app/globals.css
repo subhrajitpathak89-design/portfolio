@@ -65,13 +65,13 @@
    *
    * Display only — headlines and section titles. Everything that behaves like
    * UI stays on `--font-grotesk`: the wordmark, buttons, eyebrows, tags, the
-   * mono labels. A serif that spreads into the controls stops being a voice
+   * mono labels. A display face that spreads into the controls stops being a voice
    * and starts being a costume, and the spec-drawing chrome only reads as
    * drafting because its labels are set in machine type.
    *
    * One line to swap the face for the whole site.
    */
-  --font-editorial-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-editorial-display: var(--font-clash-display), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) * 0.6);
@@ -350,21 +350,6 @@ html[data-reveal] [data-reveal-item]:not(.is-revealed) {
   width: calc(100% - 2 * var(--v3-gutter));
   max-width: var(--v3-measure);
   margin-inline: auto;
-}
-
-/*
- * Tokens for chrome set over the home hero's illustration: light type on a
- * picture in both themes. The `@theme inline` mapping means the usual
- * `text-v3-fg` etc. utilities pick these up without any class changes.
- */
-.v3-on-image {
-  --v3-fg: #ffffff;
-  --v3-muted: rgba(255, 255, 255, 0.78);
-  --v3-line: rgba(255, 255, 255, 0.35);
-  --v3-accent: #ffffff;
-  --v3-accent-bright: #e6e6e6;
-  --v3-bg: #0a0a0a;
-  --v3-surface: #111111;
 }
 
 .v3-bleed {
@@ -648,5 +633,72 @@ html[data-reveal] [data-reveal-item]:not(.is-revealed) {
 @media (prefers-reduced-motion: reduce) {
   .v3-ticker-track {
     animation: none;
+  }
+}
+
+/*
+ * Short fade-up used when the work section's sticky column swaps to the next
+ * project. Keyed elements re-mount, so the animation re-runs on each change.
+ */
+@keyframes v3-swap {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.v3-swap {
+  animation: v3-swap 320ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-swap {
+    animation: none;
+  }
+}
+
+/*
+ * Soft hover glow that takes its colour from the thing it sits behind.
+ *
+ * Place `<span aria-hidden class="v3-glow">…</span>` as the first child of a
+ * `group/glow relative isolate` wrapper and put a copy of the box's own
+ * picture (or a fill in its own colour) inside it. The copy is blurred into a
+ * halo, so a pink photo glows pink and a green card glows green, with no
+ * colours to keep in sync by hand.
+ */
+.v3-glow {
+  position: absolute;
+  inset: -1.25rem;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 2.5rem;
+  filter: blur(40px);
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
+}
+
+.v3-glow > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.group\/glow:hover > .v3-glow,
+.group\/glow:focus-within > .v3-glow {
+  /* Held well under full strength: the blurred copy is the picture at full
+     colour, and the earlier gradient glow peaked around half that. */
+  opacity: 0.55;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-glow {
+    transition: none;
   }
 }

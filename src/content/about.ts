@@ -28,7 +28,7 @@ export const about: AboutContent = {
   // thing here sound like a tic. These carry the facts the headline dropped
   // (title, tenure, domains) and the proofs that are not about step counts.
   intro: [
-    "Product designer, 2.9 years in, working across B2B SaaS, AI tools, CRM and healthcare — the kind of products where the workflow grew by accident and nobody remembers why.",
+    "Product designer, 2.11 years in, working across B2B SaaS, AI tools, CRM and healthcare — the kind of products where the workflow grew by accident and nobody remembers why.",
     "What the work above proves: I read the analytics before touching a screen, I fix the structure before the surface, and I write the decision down before anyone builds it.",
   ],
 

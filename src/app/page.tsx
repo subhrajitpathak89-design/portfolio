@@ -1,6 +1,8 @@
 import { About } from "@/components/v3/About";
 import { Commits } from "@/components/v3/Commits";
+import { ContactCta } from "@/components/v3/ContactCta";
 import { Hero } from "@/components/v3/Hero";
+import { PhotoGallery } from "@/components/v3/PhotoGallery";
 import { PlaygroundStream } from "@/components/v3/PlaygroundStream";
 import { Work } from "@/components/v3/Work";
 
@@ -14,6 +16,8 @@ export default function Home() {
           this is the answer to "what else". Before it, it competes with the
           case studies for the same attention. */}
       <PlaygroundStream />
+      <ContactCta />
+      <PhotoGallery />
       <Commits />
     </main>
   );

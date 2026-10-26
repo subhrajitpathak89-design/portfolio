@@ -1,8 +1,7 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 import { about } from "@/content/about";
 import { experience } from "@/content/experience";
-import { profile } from "@/content/profile";
+
 
 /**
  * About, built to answer the three things a reviewer opens this page for —
@@ -109,41 +108,8 @@ export function About() {
             </ol>
           </div>
         </div>
-
-        {/* What I want next, where I am, how to reach me — the last three things
-            checked before an interview decision, kept on one line. */}
-        <div
-          data-reveal-item
-          className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-v3-line bg-v3-line sm:grid-cols-3 lg:mt-20"
-        >
-          <Cell label="Open to">{profile.availability}</Cell>
-          <Cell label="Based in">{profile.location}</Cell>
-          <Cell label="Email">
-            <a
-              href={`mailto:${profile.email}`}
-              className="group inline-flex items-center gap-1.5 break-all py-1 text-v3-fg transition-colors duration-200 hover:text-v3-accent"
-            >
-              {profile.email}
-              <ArrowUpRight
-                aria-hidden
-                className="size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                strokeWidth={2.5}
-              />
-            </a>
-          </Cell>
-        </div>
       </div>
     </section>
   );
 }
 
-function Cell({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="bg-v3-surface p-6 sm:p-7">
-      <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-v3-muted">
-        {label}
-      </p>
-      <p className="mt-3 text-sm leading-relaxed text-v3-fg">{children}</p>
-    </div>
-  );
-}

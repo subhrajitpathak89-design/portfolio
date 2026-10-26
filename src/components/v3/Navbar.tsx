@@ -97,15 +97,15 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className={`absolute inset-x-0 top-0 z-40 ${onHero ? "v3-on-image" : ""}`}>
+    <header className="absolute inset-x-0 top-0 z-40">
       {/* Inset to the same rhythm as the hero frame, so the rules line up
           rather than nearly lining up. On the home page the hero is a
-          full-bleed picture with no frame, so the header goes full width and
+          full-width split with no frame, so the header goes full width and
           drops its rules to match. */}
       <div
         className={
           onHero
-            ? "relative flex items-center justify-between gap-4 px-5 py-5 sm:px-10 lg:px-16"
+            ? "v3-column relative flex items-center justify-between gap-4 border-b border-v3-line px-5 py-5 sm:px-10 lg:px-16"
             : "v3-column relative flex items-center justify-between gap-4 border-b border-v3-line px-5 py-5 sm:px-10 lg:px-16"
         }
       >
