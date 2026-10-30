@@ -54,12 +54,12 @@
   /* The four faces the site actually sets.
    *
    * `--font-sans` is the fallback layer only: `body` sets `--font-grotesk`, so
-   * anything that inherits normally lands on Archivo. It points at the same
+   * anything that inherits normally lands on Geist. It points at the same
    * stack rather than a face of its own, because a second sans that shows up
    * on one stray element is a bug, not a voice.
    */
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-grotesk: var(--font-archivo), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-grotesk: var(--font-geist), ui-sans-serif, sans-serif;
   /*
    * The page headings.
    *
@@ -71,8 +71,10 @@
    *
    * One line to swap the face for the whole site.
    */
-  --font-editorial-display: var(--font-clash-display), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-editorial-display: var(--font-newsreader), ui-serif, Georgia, serif;
+  /* The hero headline's serif. */
+  --font-hero-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
