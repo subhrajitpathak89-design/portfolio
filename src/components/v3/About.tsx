@@ -1,115 +1,67 @@
-import Image from "next/image";
-import { about } from "@/content/about";
+import { ArrowUpRight } from "lucide-react";
 import { experience } from "@/content/experience";
+import { profile } from "@/content/profile";
 
+/** "Techdome Solutions Pvt. Limited" reads as "Techdome" in a row this large. */
+const shortCompany = (company: string) =>
+  company.replace(/\s+(Solutions|Design Studio|Pvt\.?|Limited|Ltd\.?).*$/i, "");
 
 /**
- * About, built to answer the three things a reviewer opens this page for —
- * years, companies, and what you want next — in that order and without making
- * anyone hunt.
- *
- * Deliberately calmer than the hero. The selection frame and the drifting
- * terrain are the hero's argument; repeating them here would spend the gag
- * twice and leave the page with no second gear.
+ * About as a "where I've been" list: a short note on the left, a large
+ * two-line serif heading on the right, then one ruled row per role —
+ * company large in the serif, role in the middle, dates on the right.
  */
 export function About() {
   return (
     <section id="about" className="relative scroll-mt-24 bg-v3-bg">
-      <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
-      <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
-
       <div className="v3-column px-5 py-24 sm:px-10 lg:px-16 lg:py-32">
-        <p
-          data-reveal-item
-          className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-v3-accent"
-        >
-          {about.eyebrow}
-        </p>
+        <div className="flex flex-col-reverse gap-10 md:flex-row md:items-start md:justify-between">
+          <p data-reveal-item className="max-w-[30ch] text-[15px] leading-snug text-v3-muted">
+            Based in <span className="text-v3-fg">{profile.location}</span>.{" "}
+            {profile.availability}.
+          </p>
 
-        <h2
-          data-reveal-item
-          style={{ "--reveal-delay": 1 } as React.CSSProperties}
-          className="mt-6 max-w-[22ch] font-editorial-display text-[clamp(1.75rem,4.4vw,3.5rem)] font-normal leading-[1.02] tracking-[-0.015em] text-v3-fg">
-          {about.headline.lead.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
-          <span className="block text-v3-accent">{about.headline.accent}</span>
-        </h2>
-
-        <div className="mt-16 grid gap-14 lg:mt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
-          <div className="space-y-6" data-reveal-item>
-            {about.intro.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="max-w-xl text-base leading-relaxed text-v3-muted sm:text-lg"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div>
-            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-v3-muted">
-              Experience
-            </p>
-
-            {/* A rule down the left with a marker per role. The current job's
-                marker is filled and the past one is hollow, so "where are they
-                now" is answerable without reading a single date. */}
-            <ol className="mt-8 border-l border-v3-line" data-reveal-item style={{ "--reveal-delay": 1 } as React.CSSProperties}>
-              {experience.map((job, index) => (
-                <li
-                  key={job.company}
-                  className={`relative pb-10 last:pb-0 ${job.logo ? "pl-12" : "pl-7"}`}
-                >
-                  {job.logo ? (
-                    // The logo replaces the dot rather than sitting beside it:
-                    // two markers on one row is one marker too many, and the
-                    // mark already says which company this is better than a
-                    // dot ever could. Straddling the rule is what keeps it
-                    // reading as a timeline node — a logo set inside the
-                    // padding would just be an icon next to some text.
-                    <span className="absolute -left-[17px] top-0 flex size-8 items-center justify-center overflow-hidden rounded-lg bg-v3-surface ring-1 ring-v3-line">
-                      <Image
-                        src={job.logo}
-                        alt={`${job.company} logo`}
-                        width={32}
-                        height={32}
-                        className="size-full object-contain"
-                      />
-                    </span>
-                  ) : (
-                    <span
-                      aria-hidden
-                      className={`absolute -left-[5px] top-1.5 size-2.5 rounded-full border ${
-                        index === 0
-                          ? "border-v3-accent bg-v3-accent"
-                          : "border-v3-line bg-v3-bg"
-                      }`}
-                    />
-                  )}
-
-                  <p className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-v3-accent">
-                    {job.period}
-                  </p>
-                  <h3 className="mt-2.5 font-editorial-display text-xl font-normal tracking-[-0.02em] text-v3-fg">
-                    {job.role}
-                  </h3>
-                  <p className="mt-1.5 text-sm text-v3-muted">
-                    {job.company} · {job.location}
-                  </p>
-                  <p className="mt-3 max-w-md text-sm leading-relaxed text-v3-muted/80">
-                    {job.summary}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <h2
+            data-reveal-item
+            style={{ "--reveal-delay": 1 } as React.CSSProperties}
+            className="font-editorial-display text-[clamp(3rem,7vw,5.5rem)] font-light leading-[0.95] tracking-[-0.03em] text-v3-fg md:text-right"
+          >
+            <span className="block">Where</span>
+            <span className="block">I&rsquo;ve been</span>
+          </h2>
         </div>
+
+        <ol className="mt-16 lg:mt-24" data-reveal-item>
+          {experience.map((job) => (
+            <li
+              key={job.company}
+              className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-2 border-b border-v3-line py-8 md:grid-cols-[1.2fr_1fr_auto] md:py-10"
+            >
+              <h3 className="font-editorial-display text-[clamp(2rem,3.6vw,3rem)] font-light leading-none tracking-[-0.02em] text-v3-fg">
+                {shortCompany(job.company)}
+              </h3>
+              <p className="order-3 col-span-2 text-[15px] text-v3-muted md:order-none md:col-span-1">
+                {job.role}
+              </p>
+              <p className="text-right text-[15px] text-v3-muted">{job.period}</p>
+            </li>
+          ))}
+        </ol>
+
+        <a
+          href={profile.resume}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="group mt-10 inline-flex items-center gap-1.5 text-[15px] text-v3-fg underline decoration-v3-line underline-offset-4 transition-colors duration-200 hover:decoration-v3-fg"
+        >
+          View resume
+          <ArrowUpRight
+            aria-hidden
+            className="size-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            strokeWidth={1.75}
+          />
+        </a>
       </div>
     </section>
   );
 }
-

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/v3/Footer";
-import { FloatingDock } from "@/components/v3/FloatingDock";
 import { GlobalCursor } from "@/components/v3/GlobalCursor";
 import { Navbar } from "@/components/v3/Navbar";
 import { ScrollReveal } from "@/components/v3/ScrollReveal";
@@ -31,42 +29,25 @@ import "./globals.css";
  */
 import "lenis/dist/lenis.css";
 
-// Three faces, and only three: the grotesque everything UI is set in, the
-// display serif the headlines pivot into, and the mono the spec labels use.
-// Every family loaded here is a blocking font fetch on first paint, so a face
-// that no rule actually names is pure cost — Inter, Plus Jakarta, Caveat and
-// Playfair were all still being downloaded for tokens nothing consumed.
-
-// Normal only. This and the serif below were both loading their italic ranges
-// as well, on the strength of comments describing an italic wordmark and an
-// italic accent — and nothing in the markup or the stylesheet asks for italic
-// anywhere. Two extra variable font files, blocking first paint, for a style
-// the page never uses.
-const archivo = Archivo({
-  variable: "--font-archivo",
+// Three faces, and only three: Geist for UI and body copy, a light text serif
+// (Newsreader) for every heading, and Geist Mono for labels. Every family
+// loaded here is a blocking font fetch on first paint, so a face that no rule
+// names is pure cost. Swap any of them in one place: the `--font-*` tokens in
+// globals.css.
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
   display: "swap",
 });
 
-// The display face the page headings are set in: Clash Display, from
-// Fontshare (free for commercial use under the ITF Free Font License).
-// Self-hosted from `app/fonts/` so headings render in it on the first paint
-// rather than swapping in from a third-party stylesheet. Swap the face in one
-// place: `--font-editorial-display` in globals.css.
-const clashDisplay = localFont({
-  variable: "--font-clash-display",
-  src: [
-    { path: "./fonts/ClashDisplay-Regular.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/ClashDisplay-Medium.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
-  ],
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
   display: "swap",
 });
 
-// The case-study cards use a mono for every piece of label copy — project
-// number, date, tags, the CTA — which is what gives them their spec-sheet feel.
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -123,7 +104,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${clashDisplay.variable} ${jetBrainsMono.variable} h-full antialiased`}
+      className={`${geist.variable} ${newsreader.variable} ${geistMono.variable} h-full antialiased`}
       // The reveal script below stamps `data-reveal` on this element before
       // React hydrates, which is the entire point of it — but it means the
       // server HTML and the client tree disagree about this one attribute, and
@@ -192,7 +173,6 @@ export default function RootLayout({
         <ScrollReveal />
         <SmoothScroll />
         <Navbar />
-        <FloatingDock />
         {children}
         <Footer />
         <Analytics />

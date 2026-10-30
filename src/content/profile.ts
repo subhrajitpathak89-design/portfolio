@@ -24,7 +24,7 @@ export const profile: Profile = {
   // "what are you?" and "are you real?" Keep both to one line.
   roleLine: "Product Designer · 2.11 yrs · B2B SaaS, AI & healthcare",
   proofLine:
-    "Techdome and Calypsu. Shipped an EMR, a funding CRM and a design system running across 3+ live products.",
+    "Shipped an EMR, a funding CRM and a design system running across 3+ live products.",
   tagline:
     "Product designer working on B2B SaaS, AI and healthcare tools — turning eleven-step workflows into four.",
   bio: [

@@ -41,7 +41,6 @@ const HEADER_MARKS: Partial<Record<string, IconType>> = {
  */
 export function Navbar() {
   const pathname = usePathname();
-  const onHero = pathname === "/";
 
   // The state is the route the menu was opened on, and `open` is derived from
   // whether that is still the route we are on. Storing a boolean and resetting
@@ -102,59 +101,36 @@ export function Navbar() {
           rather than nearly lining up. On the home page the hero is a
           full-width split with no frame, so the header goes full width and
           drops its rules to match. */}
-      <div
-        className={
-          onHero
-            ? "v3-column relative flex items-center justify-between gap-4 border-b border-v3-line px-5 py-5 sm:px-10 lg:px-16"
-            : "v3-column relative flex items-center justify-between gap-4 border-b border-v3-line px-5 py-5 sm:px-10 lg:px-16"
-        }
-      >
+      <div className="v3-column relative flex items-center justify-between gap-4 px-5 py-5 sm:px-10 lg:px-16">
+        {/* Full name in the hero's serif, so the wordmark and headline read
+            as one voice. */}
         <Link
           href="/#home"
-          className="inline-block py-1 font-grotesk text-lg font-bold tracking-[-0.02em] text-v3-fg transition-colors duration-200 hover:text-v3-accent"
+          className="inline-block py-1 font-hero-serif text-xl tracking-[-0.02em] text-v3-fg transition-opacity duration-200 hover:opacity-70"
         >
-          {profile.name.split(" ")[0]}
-          <span className="text-v3-accent">.</span>
+          {profile.name}
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {v3NavLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="inline-block py-1.5 font-grotesk text-sm font-medium tracking-[-0.005em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* The cluster that used to overflow. `hidden md:flex` now, which is
-            the treatment the nav links always had. */}
-        <div className="hidden shrink-0 items-center gap-2.5 md:flex">
-          {/* Marks rather than labels, for the same reason the case-study cards
-              use them: the profile links are a destination a reviewer already
-              knows the shape of, and two wordmarks here would pull against the
-              nav. Only the ones with a real URL render. */}
-          {headerSocials.map(({ social, Icon }) => (
-            <a
-              key={social.platform}
-              href={social.href}
-              target="_blank"
-              rel="noreferrer noopener"
-              title={social.label}
-              className="flex size-9 items-center justify-center rounded-lg border border-v3-line text-v3-muted transition-colors duration-200 hover:border-v3-muted/40 hover:text-v3-fg"
-            >
-              <Icon aria-hidden className="size-4" />
-              <span className="sr-only">{social.label}</span>
-            </a>
-          ))}
+        {/* Links and the one action sit together on the right; socials live
+            in the footer and the mobile panel. */}
+        <div className="hidden shrink-0 items-center gap-7 md:flex">
+          <nav className="flex items-center gap-7">
+            {v3NavLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-block py-1.5 font-grotesk text-[15px] tracking-[-0.005em] text-v3-muted transition-colors duration-200 hover:text-v3-fg"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
           <ThemeToggle />
 
           <a
             href={`mailto:${profile.email}`}
-            className="rounded-lg bg-v3-accent px-5 py-2.5 font-grotesk text-sm font-semibold tracking-[-0.005em] text-v3-bg transition-colors duration-200 hover:bg-v3-accent-bright"
+            className="rounded-full bg-v3-accent px-5 py-2 font-grotesk text-[15px] font-medium tracking-[-0.005em] text-v3-bg transition-colors duration-200 hover:bg-v3-accent-bright"
           >
             Get in touch
           </a>
