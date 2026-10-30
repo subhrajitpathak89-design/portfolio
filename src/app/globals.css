@@ -704,3 +704,52 @@ html[data-reveal] [data-reveal-item]:not(.is-revealed) {
     transition: none;
   }
 }
+
+/*
+ * Hero cursors. Two slow, out-of-step wanders so they read as people
+ * moving around the file, never in sync. Still under reduced motion.
+ */
+@keyframes v3-cursor-a {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-48px, 22px); }
+  50% { transform: translate(-18px, 54px); }
+  75% { transform: translate(26px, 18px); }
+}
+
+@keyframes v3-cursor-b {
+  0%, 100% { transform: translate(0, 0); }
+  30% { transform: translate(64px, -14px); }
+  60% { transform: translate(22px, 18px); }
+  80% { transform: translate(-30px, -6px); }
+}
+
+.v3-cursor-a {
+  animation: v3-cursor-a 9s ease-in-out infinite;
+}
+
+.v3-cursor-b {
+  animation: v3-cursor-b 11s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-cursor-a,
+  .v3-cursor-b {
+    animation: none;
+  }
+}
+
+/* Phones and tablets: the cursors sit outside the headline, so keep the wander short
+   enough that they never cross onto the words. */
+@media (max-width: 1023px) {
+  .v3-cursor-a,
+  .v3-cursor-b {
+    animation-name: v3-cursor-small;
+  }
+}
+
+@keyframes v3-cursor-small {
+  0%, 100% { transform: translate(0, 0); }
+  35% { transform: translate(-28px, -4px); }
+  70% { transform: translate(-10px, 6px); }
+}

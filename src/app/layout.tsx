@@ -91,9 +91,6 @@ export const metadata: Metadata = {
     description: profile.tagline,
     images: ["/images/og-image.png"],
   },
-  icons: {
-    icon: "/favicon.png",
-  },
 };
 
 export default function RootLayout({
