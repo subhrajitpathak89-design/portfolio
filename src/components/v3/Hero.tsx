@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { HeroReel } from "@/components/v3/HeroReel";
 import { FigmaCursor } from "@/components/v3/FigmaCursor";
 import { profile } from "@/content/profile";
 
@@ -83,16 +83,9 @@ export function Hero() {
         className="relative mt-12 px-5 sm:px-10 lg:ml-[36%] lg:px-16 lg:pl-0"
       >
         {/* The ratio sits on the inner box, so the wrapper's padding narrows
-            the image without making it taller. Kept to the right two-thirds so it reads as a plate, not a banner. */}
+            the reel without making it taller. Kept to the right two-thirds so it reads as a plate, not a banner. */}
         <div className="relative aspect-[2/1] w-full overflow-hidden">
-          <Image
-            src="/images/v3/hero-card.webp"
-            alt="Abstract orchid illustration in pink, green and blue"
-            fill
-            priority
-            sizes="(min-width: 1024px) 84vw, 100vw"
-            className="object-cover object-center"
-          />
+          <HeroReel />
         </div>
       </div>
     </section>
