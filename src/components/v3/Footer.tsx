@@ -14,12 +14,12 @@ export function Footer() {
 
   return (
     <footer id="contact" className="relative scroll-mt-24 overflow-hidden bg-v3-bg">
-      <div className="px-3 pt-32 text-center lg:pt-40">
+      <div className="@container px-3 pt-32 text-center lg:pt-40">
         <p className="text-[15px] text-v3-muted">Still here?</p>
 
         <a
           href={`mailto:${profile.email}`}
-          className="mt-8 block whitespace-nowrap font-editorial-display text-[clamp(3.5rem,15.5vw,16rem)] font-light leading-[0.9] tracking-[-0.045em] text-v3-fg transition-opacity duration-200 hover:opacity-80"
+          className="mt-8 block whitespace-nowrap font-editorial-display text-[clamp(2.5rem,14cqi,16rem)] font-light leading-[0.9] tracking-[-0.045em] text-v3-fg transition-opacity duration-200 hover:opacity-80"
         >
           Work with me.
         </a>

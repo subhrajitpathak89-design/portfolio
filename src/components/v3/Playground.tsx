@@ -26,7 +26,7 @@ export function Playground() {
       <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
       <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
 
-      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
+      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-9">
         <header>
           <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-v3-accent">
             Playground

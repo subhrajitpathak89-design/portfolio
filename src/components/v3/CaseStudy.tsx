@@ -29,7 +29,7 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
 
   const meta = [
     { label: "Role", value: project.role },
-    { label: "Client", value: project.client ?? "—" },
+    { label: "Client", value: project.client ?? "-" },
     { label: "Duration", value: project.duration ?? project.year },
     { label: "Year", value: project.year },
   ];
@@ -54,7 +54,7 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
       <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
       <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
 
-      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
+      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-9">
         {/* ── First screen ─────────────────────────────────────────────── */}
         <header className={WIDE}>
           <Link

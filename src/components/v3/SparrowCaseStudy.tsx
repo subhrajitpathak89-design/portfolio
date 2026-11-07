@@ -33,7 +33,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
       <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
       <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
 
-      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
+      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-9">
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <header className={COLUMN}>
           <Link
@@ -76,7 +76,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
           >
             {[
               ["Role", project.role],
-              ["Company", project.client ?? "—"],
+              ["Company", project.client ?? "-"],
               ["Year", project.year],
             ].map(([label, value]) => (
               <div key={label}>
@@ -142,7 +142,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
 
           <p className={`${NARROW} mt-10 text-base leading-relaxed text-v3-muted`}>
             Developers don&rsquo;t just send requests. They manage environments,
-            collections, reusable configurations and shared workflows — and every
+            collections, reusable configurations and shared workflows. And every
             one of those is a place work can get lost.
           </p>
         </Section>
@@ -207,7 +207,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
               { from: [2, 0], to: [3, 0], accent: true },
               { from: [3, 0], to: [4, 0], accent: true },
             ]}
-            caption="Sparrow separates the broader API ecosystem — hubs, members, public workspaces — from the individual workspace where a developer actually does the work."
+            caption="Sparrow separates the broader API ecosystem (hubs, members, public workspaces) from the individual workspace where a developer actually does the work."
           />
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -313,7 +313,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
               { from: [1, 0], to: [2, 0], accent: true },
               { from: [2, 0], to: [3, 0], accent: true },
             ]}
-            caption="The marketplace is a discovery layer over public workspaces — a payment gateway collection someone has already built and documented, copied into your own workspace rather than rebuilt in it."
+            caption="The marketplace is a discovery layer over public workspaces: a payment gateway collection someone has already built and documented, copied into your own workspace rather than rebuilt in it."
           />
         </Section>
 
@@ -366,7 +366,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
               index={1}
               title="Structure before features"
               problem="API tooling turns into a pile of disconnected features fast."
-              decision="Establish one hierarchy — hubs, then workspaces — and hang everything off it."
+              decision="Establish one hierarchy (hubs, then workspaces) and hang everything off it."
               result="Developers get a predictable answer to where a piece of API work belongs."
               name="hub"
             />
@@ -446,7 +446,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
               ["Navigation", "Where things live. Left rail and tree, always in the same place."],
               ["Context", "Which hub, workspace and environment you are in."],
               ["Primary task", "The request. Centre, widest, unobstructed."],
-              ["Supporting", "Params, headers, scripts, assertions — tabbed, not stacked."],
+              ["Supporting", "Params, headers, scripts, assertions: tabbed, not stacked."],
               ["Status", "Response, method and state, read without leaving the task."],
             ].map(([title, body]) => (
               <li key={title} data-reveal-item className="border-t border-v3-line pt-4">
@@ -475,7 +475,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
               ] as const
             ).map(([name, title, caption]) => (
               <figure key={name} data-reveal-item>
-                <Shot name={name} alt={`Sparrow — ${title}`} />
+                <Shot name={name} alt={`Sparrow: ${title}`} />
                 <figcaption className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
                   <span className="font-grotesk text-base font-medium tracking-[-0.01em] text-v3-fg">
                     {title}
@@ -636,7 +636,7 @@ function Figure({
 }) {
   return (
     <figure data-reveal-item>
-      <Shot name={name} alt={`Sparrow — ${label}`} sizes="(min-width: 640px) 34rem, 100vw" />
+      <Shot name={name} alt={`Sparrow: ${label}`} sizes="(min-width: 640px) 34rem, 100vw" />
       <figcaption className="mt-3">
         <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-v3-muted">
           {label}
@@ -665,7 +665,7 @@ function Decision({
 }) {
   return (
     <div data-reveal-item>
-      <Shot name={name} alt={`Sparrow — ${title}`} />
+      <Shot name={name} alt={`Sparrow: ${title}`} />
 
       <div className="mt-7 flex items-baseline gap-4">
         <span className="font-mono text-[11px] font-medium tracking-[0.2em] text-v3-accent">

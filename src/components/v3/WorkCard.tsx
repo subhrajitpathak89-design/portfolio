@@ -36,7 +36,7 @@ export function WorkCard({ project, index }: { project: Project; index: number }
   // promise the tile has no way to keep, which is the same reason it is not a
   // link in the first place.
   const tileProps = project.comingSoon
-    ? { "aria-label": `${project.title} — case study coming soon` }
+    ? { "aria-label": `${project.title}: case study coming soon` }
     : {
         href: `/projects/${project.slug}`,
         "data-cursor-label": "Read case study",

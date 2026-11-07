@@ -13,7 +13,7 @@ const sectors = ["B2B SaaS", "AI tools", "Healthcare", "Design systems"];
 export function Hero() {
   return (
     <section id="home" className="v3-column relative isolate overflow-x-clip bg-v3-bg text-v3-fg">
-      <div className="px-5 pt-32 sm:px-10 sm:pt-36 lg:px-16 lg:pt-40">
+      <div className="px-5 pt-32 sm:px-10 sm:pt-36 lg:px-16 lg:pt-9">
         <p data-reveal-item className="font-grotesk text-[13px] text-v3-muted">
           {profile.roleLine}
         </p>
@@ -52,8 +52,7 @@ export function Hero() {
           style={{ "--reveal-delay": 2 } as React.CSSProperties}
           className="mt-10 max-w-[60ch] text-[15px] leading-relaxed sm:text-base lg:mt-6"
         >
-          I design B2B, AI and healthcare products people pick up without a manual —
-          from the first research call to the shipped screen.
+          I design B2B, AI and healthcare products people pick up without a manual, from the first research call to the shipped screen.
         </p>
 
         <div
@@ -75,16 +74,17 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Indented on the left, flush to the copy's right edge, like a
-          plate set into the page. Full width on a phone. */}
+      {/* Aligned to the copy, capped at 880px: the clips are 880px wide, so any
+          wider and the browser upscales them into visible pixelation.
+          */}
       <div
         data-reveal-item
         style={{ "--reveal-delay": 3 } as React.CSSProperties}
-        className="relative mt-12 px-5 sm:px-10 lg:ml-[36%] lg:px-16 lg:pl-0"
+        className="relative mt-12 px-5 sm:px-10 lg:px-16"
       >
         {/* The ratio sits on the inner box, so the wrapper's padding narrows
-            the reel without making it taller. Kept to the right two-thirds so it reads as a plate, not a banner. */}
-        <div className="relative aspect-[2/1] w-full overflow-hidden">
+            the reel without making it taller. */}
+        <div className="relative aspect-[2/1] w-full max-w-[880px] overflow-hidden">
           <HeroReel />
         </div>
       </div>

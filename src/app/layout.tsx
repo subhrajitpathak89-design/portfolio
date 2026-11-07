@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { Geist, Geist_Mono, Libre_Baskerville } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/v3/Footer";
 import { GlobalCursor } from "@/components/v3/GlobalCursor";
@@ -40,8 +40,10 @@ const geist = Geist({
   display: "swap",
 });
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const libreBaskerville = Libre_Baskerville({
+  weight: "variable",
+  style: ["normal", "italic"],
+  variable: "--font-libre-baskerville",
   subsets: ["latin"],
   display: "swap",
 });
@@ -56,8 +58,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${profile.name} — ${profile.role}`,
-    template: `%s — ${profile.name}`,
+    default: `${profile.name} | ${profile.role}`,
+    template: `%s | ${profile.name}`,
   },
   description: profile.tagline,
   keywords: [
@@ -73,21 +75,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: `${profile.name} — Portfolio`,
-    title: `${profile.name} — ${profile.role}`,
+    siteName: `${profile.name} | Portfolio`,
+    title: `${profile.name} | ${profile.role}`,
     description: profile.tagline,
     images: [
       {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: `${profile.name} — ${profile.role}`,
+        alt: `${profile.name} | ${profile.role}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} — ${profile.role}`,
+    title: `${profile.name} | ${profile.role}`,
     description: profile.tagline,
     images: ["/images/og-image.png"],
   },
@@ -101,7 +103,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${newsreader.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geist.variable} ${libreBaskerville.variable} ${geistMono.variable} h-full antialiased`}
       // The reveal script below stamps `data-reveal` on this element before
       // React hydrates, which is the entire point of it — but it means the
       // server HTML and the client tree disagree about this one attribute, and
@@ -170,8 +172,10 @@ export default function RootLayout({
         <ScrollReveal />
         <SmoothScroll />
         <Navbar />
-        {children}
-        <Footer />
+        <div className="lg:pl-[var(--sidebar-w)]">
+          {children}
+          <Footer />
+        </div>
         <Analytics />
       </body>
     </html>

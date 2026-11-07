@@ -189,7 +189,7 @@ export const playground: PlaygroundContent = {
   // case studies never show.
   teaser: {
     eyebrow: "Playground",
-    lead: "Renders, film and packaging —",
+    lead: "Renders, film and packaging:",
     accent: "the other half.",
     intro:
       "Blender and Cinema 4D, two cinematic edits, a coffee brand, and interface motion that never had a brief.",

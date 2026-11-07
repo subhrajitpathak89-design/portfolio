@@ -10,6 +10,7 @@ import { SiGithub } from "react-icons/si";
 import { ThemeToggle } from "@/components/v3/ThemeToggle";
 import { v3NavLinks } from "@/content/v3-nav";
 import { profile } from "@/content/profile";
+import { Sidebar } from "@/components/v3/Sidebar";
 
 /**
  * Only the platforms the header carries; the footer lists the rest.
@@ -30,7 +31,7 @@ const HEADER_MARKS: Partial<Record<string, IconType>> = {
  * It had to: the actions cluster was `shrink-0` at 259px, which with the 80px
  * wordmark and the gap needed 355px against the 342px a 375px screen actually
  * offers — so "Get in touch" was clipped off the right edge of every phone.
- * The nav links had a `md:flex` treatment already; the cluster never got one,
+ * The nav links had a `lg:flex` treatment already; the cluster never got one,
  * which is why the two disagreed about whether this bar was responsive.
  *
  * A panel rather than a full-screen overlay: there are six things in here, and
@@ -96,7 +97,9 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-40">
+    <>
+    <Sidebar />
+    <header className="absolute inset-x-0 top-0 z-40 lg:hidden">
       {/* Inset to the same rhythm as the hero frame, so the rules line up
           rather than nearly lining up. On the home page the hero is a
           full-width split with no frame, so the header goes full width and
@@ -113,7 +116,7 @@ export function Navbar() {
 
         {/* Links and the one action sit together on the right; socials live
             in the footer and the mobile panel. */}
-        <div className="hidden shrink-0 items-center gap-7 md:flex">
+        <div className="hidden shrink-0 items-center gap-7 lg:flex">
           <nav className="flex items-center gap-7">
             {v3NavLinks.map((link) => (
               <Link
@@ -143,7 +146,7 @@ export function Navbar() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-v3-line bg-v3-surface text-v3-fg transition-colors duration-200 hover:border-v3-muted md:hidden"
+          className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-v3-line bg-v3-surface text-v3-fg transition-colors duration-200 hover:border-v3-muted lg:hidden"
         >
           {open ? (
             <X aria-hidden className="size-[18px]" strokeWidth={2} />
@@ -159,7 +162,7 @@ export function Navbar() {
           ref={panelRef}
           id="mobile-menu"
           inert={!open}
-          className={`absolute left-0 right-0 top-full origin-top border-b border-v3-line bg-v3-surface/95 backdrop-blur-xl transition-all duration-200 ease-out motion-reduce:transition-none md:hidden ${
+          className={`absolute left-0 right-0 top-full origin-top border-b border-v3-line bg-v3-surface/95 backdrop-blur-xl transition-all duration-200 ease-out motion-reduce:transition-none lg:hidden ${
             open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0"
           }`}
         >
@@ -206,5 +209,6 @@ export function Navbar() {
         </div>
       </div>
     </header>
+    </>
   );
 }

@@ -53,7 +53,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
       <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
       <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
 
-      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
+      <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-9">
         {/* ── 01 Hero ──────────────────────────────────────────────────── */}
         <header className={COLUMN}>
           <Link
@@ -96,7 +96,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
           >
             {[
               ["Role", project.role],
-              ["Company", project.client ?? "—"],
+              ["Company", project.client ?? "-"],
               ["Year", project.year],
             ].map(([label, value]) => (
               <div key={label}>
@@ -288,7 +288,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
               { from: [5, 0], to: [6, 2] },
               { from: [5, 0], to: [6, 3] },
             ]}
-            caption="Highlighted: the audit path, which is the one most investors arrive on. Build My Portfolio skips the import entirely — it has nothing to upload — and that fork is why the dashboard had to be shaped by the services you own rather than by a fixed menu."
+            caption="Highlighted: the audit path, which is the one most investors arrive on. Build My Portfolio skips the import entirely (it has nothing to upload), and that fork is why the dashboard had to be shaped by the services you own rather than by a fixed menu."
           />
 
           <div className="mt-16 space-y-16 lg:space-y-24">
@@ -348,7 +348,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
               body="The product moved from assuming one service per investor to supporting several, without fragmenting the experience."
               shot="advisor-clients"
               alt="The advisor queue showing one investor holding three separate services"
-              caption="Harsh Sharma, three times — Portfolio Audit, Build Portfolio and Trades Audit as separate cases under one investor."
+              caption="Harsh Sharma, three times: Portfolio Audit, Build Portfolio and Trades Audit as separate cases under one investor."
             >
               {/* The whole decision is the fan-out, so the diagram has to
                   branch. Three services under one investor, each its own case
@@ -409,7 +409,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
                   { from: [2, 0], to: [3, 0], accent: true },
                   { from: [3, 0], to: [4, 0], accent: true },
                 ]}
-                caption="Nothing passes the filled step automatically. No bulk accept either — an advisor accepts one draft at a time, which is the feature rather than the friction."
+                caption="Nothing passes the filled step automatically. No bulk accept either: an advisor accepts one draft at a time, which is the feature rather than the friction."
               />
             </Decision>
           </div>
@@ -448,7 +448,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
               { from: [3, 0], to: [4, 2], accent: true },
               { from: [3, 0], to: [4, 3], accent: true },
             ]}
-            caption="313 tokens resolving in that order, with a lint on every pull request and nothing hardcoded — which is why dark mode was a configuration change rather than a redesign."
+            caption="313 tokens resolving in that order, with a lint on every pull request and nothing hardcoded. That is why dark mode was a configuration change rather than a redesign."
           />
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -472,7 +472,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
 
           <p className={`${NARROW} mt-12 text-base leading-relaxed text-v3-muted`}>
             The design system wasn&rsquo;t a standalone library. It was built to
-            ship the product — shared tokens and components keeping every surface
+            ship the product: shared tokens and components keeping every surface
             consistent in look and in behaviour.
           </p>
         </Section>
@@ -547,7 +547,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
               [
                 "import-portfolio",
                 "Data import",
-                "Holdings pulled from a CAS statement, PAN or tradebook — nothing typed twice.",
+                "Holdings pulled from a CAS statement, PAN or tradebook. Nothing typed twice.",
               ],
               [
                 "audit-prescription",
@@ -572,7 +572,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
               [
                 "trades",
                 "Trades",
-                "Holding period, win rate and capital deployed — the habits behind the tradebook.",
+                "Holding period, win rate and capital deployed: the habits behind the tradebook.",
               ],
               [
                 "advisor-clients",
@@ -586,7 +586,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
               ],
             ] as const).map(([shot, title, caption]) => (
               <figure key={shot} data-reveal-item>
-                <Shot src={shot} alt={`Nivex — ${title}`} />
+                <Shot src={shot} alt={`Nivex: ${title}`} />
                 <figcaption className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
                   <span className="font-grotesk text-base font-medium tracking-[-0.01em] text-v3-fg">
                     {title}

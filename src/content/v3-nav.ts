@@ -14,6 +14,7 @@ export const v3NavLinks: V3NavLink[] = [
   // scrolls to the shortlist on the homepage, this is the full index including
   // the ones still being written.
   { label: "Case studies", href: "/case-studies" },
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
+  { label: "Resources", href: "/resources" },
   { label: "Playground", href: "/playground" },
 ];

@@ -18,7 +18,7 @@ import { projects } from "@/content/projects";
 export const metadata: Metadata = {
   title: "Case studies",
   description:
-    "Product design case studies — fintech, developer tools, healthcare and AI, with the decisions behind each.",
+    "Product design case studies: fintech, developer tools, healthcare and AI, with the decisions behind each.",
 };
 
 export default function CaseStudiesPage() {
@@ -37,7 +37,7 @@ export default function CaseStudiesPage() {
         <div className="v3-hatch v3-bleed absolute inset-y-0 left-0" aria-hidden />
         <div className="v3-hatch v3-bleed absolute inset-y-0 right-0" aria-hidden />
 
-        <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
+        <div className="v3-column px-5 pb-24 pt-28 sm:px-10 lg:px-16 lg:pb-32 lg:pt-9">
           <header className="mx-auto w-full max-w-[70rem]">
             <Link
               href="/"
@@ -69,7 +69,7 @@ export default function CaseStudiesPage() {
               data-reveal-item
               className="mt-7 max-w-[42rem] text-base leading-relaxed text-v3-muted sm:text-lg"
             >
-              {categories.join(" · ")} — the problem each product had, the calls
+              {categories.join(" · ")}. The problem each product had, the calls
               I made, and what shipped.
             </p>
           </header>

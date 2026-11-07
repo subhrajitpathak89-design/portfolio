@@ -8,19 +8,19 @@ export const projects: Project[] = [
     // The old `nivex-design-platform` URL redirects (see `next.config.ts`).
     slug: "nivex-wealth-platform",
     tldr: [
-      "Nivex is India's first prescription-based wealth platform: rather than selling a fund, it examines what someone actually holds, diagnoses it, and hands back a written prescription — numbered steps, each with a reason, in plain language.",
+      "Nivex is India's first prescription-based wealth platform: rather than selling a fund, it examines what someone actually holds, diagnoses it, and hands back a written prescription: numbered steps, each with a reason, in plain language.",
       "I led the design end to end: the information architecture, the five stages from financial data to diagnosis to prescription to execution to monitoring, and the diagnosis view that reads income, expenses, loans, insurance, goals and investments as one picture instead of six screens.",
-      "Investor, advisor and admin surfaces, built as coded React prototypes on a token-driven system — 25 components and 18 chart patterns — and verified to WCAG 2.1 AA from 320px up.",
+      "Investor, advisor and admin surfaces, built as coded React prototypes on a token-driven system (25 components and 18 chart patterns) and verified to WCAG 2.1 AA from 320px up.",
     ],
     snapshot: {
       business:
-        "Nivex is India's first prescription-based wealth platform, built by Techdome. Retail investing here is product-led — the industry's answer to \"what should I do with my money?\" is a fund to buy or a SIP to start. Nivex borrows the model from medicine instead: you do not walk into a pharmacy and pick a drug, you get examined, diagnosed and prescribed. It runs three services — auditing a portfolio someone already holds, building one from scratch around what they are saving for, and reviewing an active trader's whole tradebook.",
+        "Nivex is India's first prescription-based wealth platform, built by Techdome. Retail investing here is product-led: the industry's answer to \"what should I do with my money?\" is a fund to buy or a SIP to start. Nivex borrows the model from medicine instead: you do not walk into a pharmacy and pick a drug, you get examined, diagnosed and prescribed. It runs three services, auditing a portfolio someone already holds, building one from scratch around what they are saving for, and reviewing an active trader's whole tradebook.",
       challenge:
-        "Nobody diagnoses first. An investor holding eight overlapping mutual funds, 40% of their net worth in a single stock and a loss-making F&O habit gets shown more products — rather than being told that those three things are the actual problem. A real advisor can read a portfolio properly, but only for a handful of clients a day, and the output ends up in a PDF or a WhatsApp voice note nobody acts on. On top of that, every surface in the category looks like a trading terminal: urgency, streaks, green numbers everywhere. That is exactly the wrong register for the moment someone hands over their financial future.",
+        "Nobody diagnoses first. An investor holding eight overlapping mutual funds, 40% of their net worth in a single stock and a loss-making F&O habit gets shown more products rather than being told that those three things are the actual problem. A real advisor can read a portfolio properly, but only for a handful of clients a day, and the output ends up in a PDF or a WhatsApp voice note nobody acts on. On top of that, every surface in the category looks like a trading terminal: urgency, streaks, green numbers everywhere. That is exactly the wrong register for the moment someone hands over their financial future.",
       solution:
-        "Three things at once. A diagnosis layer that computes real signals — concentration share, fund overlap, cost drag, holdings below cost, F&O share of capital, win rate, goals with no money mapped to them. An advisor surface where AI drafts prescription steps from those signals but a person accepts each one individually. And a token-driven system covering investor, advisor and admin, so one language held three roles instead of three products emerging.",
+        "Three things at once. A diagnosis layer that computes real signals: concentration share, fund overlap, cost drag, holdings below cost, F&O share of capital, win rate, goals with no money mapped to them. An advisor surface where AI drafts prescription steps from those signals but a person accepts each one individually. And a token-driven system covering investor, advisor and admin, so one language held three roles instead of three products emerging.",
       impact: [
-        "One path a person can finish — financial data, diagnosis, prescription, execution, monitoring — where the category offers a catalogue and calls it advice.",
+        "One path a person can finish (financial data, diagnosis, prescription, execution, monitoring) where the category offers a catalogue and calls it advice.",
         "A diagnosis view that reads income, expenses, loans, insurance, goals and investments together, which is the step no product-led competitor performs at all.",
         "AI drafts each prescription step and a human accepts them one at a time, recorded as a decision record so the limit outlives whoever built it.",
       ],
@@ -29,7 +29,7 @@ export const projects: Project[] = [
       {
         metric: "8 funds",
         label:
-          "Overlapping holdings in one portfolio, next to 40% of net worth in a single stock — the diagnosis nobody was performing",
+          "Overlapping holdings in one portfolio, next to 40% of net worth in a single stock: the diagnosis nobody was performing",
       },
       {
         metric: "1 PDF",
@@ -74,9 +74,9 @@ export const projects: Project[] = [
     title: "Prescription, not product",
     category: "Fintech",
     summary:
-      "India's first prescription-based wealth platform: the journey, the diagnosis view and the whole clickable product — investor, advisor and admin — for a service that examines a portfolio instead of selling to it.",
+      "India's first prescription-based wealth platform: the journey, the diagnosis view and the whole clickable product (investor, advisor and admin) for a service that examines a portfolio instead of selling to it.",
     description: [
-      "Nivex prescribes wealth strategy the way a doctor prescribes treatment — examine what someone actually holds, diagnose the real problems in it, then issue specific written steps, rather than selling products off a shelf.",
+      "Nivex prescribes wealth strategy the way a doctor prescribes treatment: examine what someone actually holds, diagnose the real problems in it, then issue specific written steps, rather than selling products off a shelf.",
     ],
     // Lead on this one, not a contributor: the role field is read by the card,
     // the case-study meta row and the résumé, so it is stated once here.
@@ -110,11 +110,11 @@ export const projects: Project[] = [
     client: "Nivex, via Techdome",
     duration: "~2 months, 262 commits",
     problem:
-      "Retail investing in India is product-led: the default answer to \"what should I do with my money?\" is a fund to buy, an app to open, a SIP to start. Three things break because of it. Nobody diagnoses first — an investor with eight overlapping funds, 40% of net worth in one stock and a loss-making F&O habit is shown more products rather than told those are the problem. Advice does not scale — an advisor can read a portfolio properly for a handful of clients a day, and the output lives in a PDF nobody acts on. And the category has a trust gap: every surface looks like a trading terminal, which is the wrong aesthetic for the moment someone hands over their financial future. Nivex needed a product built on the opposite premise, and a design layer that could hold three different roles — investor, advisor, admin — plus a marketing site, without any of them drifting into a different product.",
+      "Retail investing in India is product-led: the default answer to \"what should I do with my money?\" is a fund to buy, an app to open, a SIP to start. Three things break because of it. Nobody diagnoses first: an investor with eight overlapping funds, 40% of net worth in one stock and a loss-making F&O habit is shown more products rather than told those are the problem. Advice does not scale, an advisor can read a portfolio properly for a handful of clients a day, and the output lives in a PDF nobody acts on. And the category has a trust gap: every surface looks like a trading terminal, which is the wrong aesthetic for the moment someone hands over their financial future. Nivex needed a product built on the opposite premise, and a design layer that could hold three different roles, investor, advisor, admin, plus a marketing site, without any of them drifting into a different product.",
     frictions: [
       {
         title: "Diagnosis had no surface to live on",
-        body: "Signals like fund overlap, concentration share and cost drag are the actual findings, but a product-led interface has nowhere to put a finding — only somewhere to put an offer. The information architecture had to lead with what is wrong before it could say what to do.",
+        body: "Signals like fund overlap, concentration share and cost drag are the actual findings, but a product-led interface has nowhere to put a finding, only somewhere to put an offer. The information architecture had to lead with what is wrong before it could say what to do.",
       },
       {
         title: "The output had to be worth acting on",
@@ -122,12 +122,12 @@ export const projects: Project[] = [
       },
       {
         title: "Three roles, one language, no time",
-        body: "Investor, advisor and admin want opposite things from an interface — reassurance, authoring speed, and oversight. Designing three products would have been the honest way to fail; the system had to be the shared thing so the surfaces could differ without diverging.",
+        body: "Investor, advisor and admin want opposite things from an interface: reassurance, authoring speed and oversight. Designing three products would have been the honest way to fail; the system had to be the shared thing so the surfaces could differ without diverging.",
       },
     ],
     constraints: [
-      "Brand voice ruled out the category's defaults explicitly: no crypto aesthetics, no gaming UI or streaks, no noisy dashboards, no decorative illustration, no urgency language, no trend-chasing. The written reference was \"Bloomberg meets Apple\" — data-dense where it needs to be, breathable where it does not.",
-      "Slate carries the entire interface. Blue and green are permitted only where they mean something — trust and growth — and red and yellow are reserved for status, never decoration.",
+      "Brand voice ruled out the category's defaults explicitly: no crypto aesthetics, no gaming UI or streaks, no noisy dashboards, no decorative illustration, no urgency language, no trend-chasing. The written reference was \"Bloomberg meets Apple\": data-dense where it needs to be, breathable where it does not.",
+      "Slate carries the entire interface. Blue and green are permitted only where they mean something (trust and growth), and red and yellow are reserved for status, never decoration.",
       "Two fonts only, SF Pro falling back to Inter. Motion held to 100–200ms and purposeful, with prefers-reduced-motion respected. WCAG 2.1 AA and mobile-first from 375px, nothing allowed to break at 320px.",
       "Frontend-only with no backend, so no API key could sit anywhere in the bundle. The AI seam is one function returning Promise<string[]>; when a backend exists, only its body changes.",
     ],
@@ -136,23 +136,23 @@ export const projects: Project[] = [
     approach: [
       {
         title: "Diagnose first, and give the diagnosis somewhere to live",
-        body: "The platform computes the findings before it offers anything: concentration share, fund overlap, cost drag, holdings below cost, biggest loss, F&O share of capital, win rate, and goals with no money mapped to them. Three services front it — audit a portfolio someone already holds, build one from a short set of questions, or review an active trader's whole tradebook — and the investor's dashboard is then shaped by the services they actually own, showing progress against their prescription rather than a generic feed.",
+        body: "The platform computes the findings before it offers anything: concentration share, fund overlap, cost drag, holdings below cost, biggest loss, F&O share of capital, win rate, and goals with no money mapped to them. Three services front it: audit a portfolio someone already holds, build one from a short set of questions, or review an active trader's whole tradebook, and the investor's dashboard is then shaped by the services they actually own, showing progress against their prescription rather than a generic feed.",
       },
       {
         title: "Tokens as the contract, not a palette",
-        body: "313 tokens in three layers — raw primitives, then semantic intent, then theme overrides — authored in W3C DTCG JSON and built through Style Dictionary into light and dark custom properties. A token lint runs on every pull request and nothing is hardcoded anywhere, so every value resolves through the contract: the allocation donut uses chart tokens, the gain figures and the concentration warning use semantic status colours. shadcn/ui re-skinned on those tokens gave the component base; Recharts carries the financial charts; Storybook is the documentation site.",
+        body: "313 tokens in three layers (raw primitives, then semantic intent, then theme overrides), authored in W3C DTCG JSON and built through Style Dictionary into light and dark custom properties. A token lint runs on every pull request and nothing is hardcoded anywhere, so every value resolves through the contract: the allocation donut uses chart tokens, the gain figures and the concentration warning use semantic status colours. shadcn/ui re-skinned on those tokens gave the component base; Recharts carries the financial charts; Storybook is the documentation site.",
       },
       {
         title: "Constraints written down before any code",
-        body: "A CLAUDE.md the agent reads before every change — kebab-case, BEM, the nine-section component doc template, the no-hardcoded-values rule, mobile-first, WCAG AA, and the brand voice in as many words: no crypto energy, no FOMO, no exclamation points. On top of it, 14 ADRs with context, decision, alternatives and consequences, covering repository structure, token architecture, why shadcn, the admin console, the separate staff login door, the dashboard gate, service-shaped dashboards and chart colours. The ADR is the design rationale; the code is its consequence.",
+        body: "A CLAUDE.md the agent reads before every change: kebab-case, BEM, the nine-section component doc template, the no-hardcoded-values rule, mobile-first, WCAG AA, and the brand voice in as many words: no crypto energy, no FOMO, no exclamation points. On top of it, 14 ADRs with context, decision, alternatives and consequences, covering repository structure, token architecture, why shadcn, the admin console, the separate staff login door, the dashboard gate, service-shaped dashboards and chart colours. The ADR is the design rationale; the code is its consequence.",
       },
       {
         title: "AI drafts the prescription; a person still clicks Add",
-        body: "Advisors were typing every recommendation from scratch, so drafting from the computed signals was an obvious win — but suggestions live in local component state behind a dashed \"review before adding\" border, and only become plan steps when a human accepts them one at a time. No bulk accept, deliberately: reviewing each draft is the feature, not friction to remove. Cross-sell follows the same rule — a second service is only ever recommended when an advisor has written a human reason for it, which is what stops it being a banner ad.",
+        body: "Advisors were typing every recommendation from scratch, so drafting from the computed signals was an obvious win. But suggestions live in local component state behind a dashed \"review before adding\" border, and only become plan steps when a human accepts them one at a time. No bulk accept, deliberately: reviewing each draft is the feature, not friction to remove. Cross-sell follows the same rule, a second service is only ever recommended when an advisor has written a human reason for it, which is what stops it being a banner ad.",
       },
       {
         title: "Decisions that came out of building, not drawing",
-        body: "Prototypes were the deliverable, so the product argued back. The v1 splash CTA was a full pill; v2 removed pill-shaped primary CTAs entirely, because a pill reads consumer-app and this is someone's retirement. More usefully, a hook named useInvestorCase quietly assumed one service per investor — anyone who bought two saw the wrong dashboard. Making it useInvestorCases meant the nav, the home hero and the cross-sell offer all read from one seam. Neither of those is a decision I would have reached by drawing screens.",
+        body: "Prototypes were the deliverable, so the product argued back. The v1 splash CTA was a full pill; v2 removed pill-shaped primary CTAs entirely, because a pill reads consumer-app and this is someone's retirement. More usefully, a hook named useInvestorCase quietly assumed one service per investor, so anyone who bought two saw the wrong dashboard. Making it useInvestorCases meant the nav, the home hero and the cross-sell offer all read from one seam. Neither of those is a decision I would have reached by drawing screens.",
       },
     ],
     // Product outcomes first, the system third. These used to be three
@@ -163,7 +163,7 @@ export const projects: Project[] = [
       {
         metric: "5 stages",
         label:
-          "Financial data, diagnosis, prescription, execution, monitoring — one path from what someone holds to what they do about it",
+          "Financial data, diagnosis, prescription, execution, monitoring: one path from what someone holds to what they do about it",
       },
       {
         metric: "One view",
@@ -173,24 +173,24 @@ export const projects: Project[] = [
       {
         metric: "313 tokens",
         label:
-          "Across investor, advisor and admin, so three surfaces read as one product — and dark mode was a configuration change, not a redesign",
+          "Across investor, advisor and admin, so three surfaces read as one product, and dark mode was a configuration change, not a redesign",
       },
     ],
     outcome:
-      "It shipped as a browsable product rather than a deck: the information architecture, the pre-auth and onboarding journeys, and the diagnosis experience for the PWA, plus three role-based prototypes — investor, advisor, admin — and the marketing site, all built on the same system. A floating Prototype Navigator drops a stakeholder straight into a fully-populated dashboard without walking the onboarding first, which is the difference between a demo someone watches and a product they poke at. The system underneath is what let two months cover that much coherently: 25 components, 18 chart patterns, a Style Dictionary pipeline generating themed CSS from one source, and 14 ADRs so the reasoning is legible to someone who was not in the room.",
+      "It shipped as a browsable product rather than a deck: the information architecture, the pre-auth and onboarding journeys, and the diagnosis experience for the PWA, plus three role-based prototypes (investor, advisor, admin) and the marketing site, all built on the same system. A floating Prototype Navigator drops a stakeholder straight into a fully-populated dashboard without walking the onboarding first, which is the difference between a demo someone watches and a product they poke at. The system underneath is what let two months cover that much coherently: 25 components, 18 chart patterns, a Style Dictionary pipeline generating themed CSS from one source, and 14 ADRs so the reasoning is legible to someone who was not in the room.",
     disagreement: {
       decision:
-        "Keeping AI-drafted prescriptions one-at-a-time. Suggestions sit behind a dashed 'review before adding' border and only become plan steps when staff accept them individually — no bulk accept, deliberately.",
+        "Keeping AI-drafted prescriptions one-at-a-time. Suggestions sit behind a dashed 'review before adding' border and only become plan steps when staff accept them individually. No bulk accept, deliberately.",
       // TODO: who pushed back, and on what grounds. One or two sentences.
       pushback: "",
       // TODO: what actually happened after. Include the number if there is one.
       result: "",
     },
     learnings: [
-      "The reframe did more work than any screen. Once the answer was \"diagnose, then prescribe\" rather than \"recommend a product\", the information architecture, the tone and even the colour rules followed from it — slate everywhere, colour only where it means something.",
+      "The reframe did more work than any screen. Once the answer was \"diagnose, then prescribe\" rather than \"recommend a product\", the information architecture, the tone and even the colour rules followed from it: slate everywhere, colour only where it means something.",
       "Designing the constraints beat designing the screens: once CLAUDE.md and the token contract existed, consistency stopped being something I had to police on every change.",
       "Writing the decision down before the code is what made AI-assisted work reviewable. Without the ADR, a diff is just a diff.",
-      "The most defensible product decision here is the one that limits the AI. The review step is the feature, not friction — speed is easy to add later, trust is not.",
+      "The most defensible product decision here is the one that limits the AI. The review step is the feature, not friction. Speed is easy to add later, trust is not.",
       "Building instead of drawing found things drawing would not have. A hook name assuming one service per investor was a design bug wearing a code costume, and it only surfaced because the prototype was real enough to be wrong.",
     ],
   },
@@ -205,9 +205,9 @@ export const projects: Project[] = [
     title: "A clearer workspace for working with APIs",
     category: "Developer Tools",
     summary:
-      "An API platform for developers, organised around hubs and workspaces — with a marketplace so common API work starts from something that already exists.",
+      "An API platform for developers, organised around hubs and workspaces, with a marketplace so common API work starts from something that already exists.",
     description: [
-      "Sparrow is an API client and workspace platform: developers send and script requests, group them into collections, run them as flows, and share the whole workspace with a team. The design problem was never the request pane — it was giving all of that somewhere predictable to live.",
+      "Sparrow is an API client and workspace platform: developers send and script requests, group them into collections, run them as flows, and share the whole workspace with a team. The design problem was never the request pane; it was giving all of that somewhere predictable to live.",
     ],
     role: "Product Designer",
     year: "2025",
@@ -231,18 +231,18 @@ export const projects: Project[] = [
       business:
         "Sparrow is Techdome's API platform: a client for sending, scripting and asserting on requests, wrapped in a workspace model teams can share. It covers REST, GraphQL, WebSocket and Socket.IO, plus mock collections and chained test flows.",
       challenge:
-        "The hard problem in a tool like this is not the request pane, it is everything around it. A developer is simultaneously managing requests, collections, environments, variables, test flows, workspaces, hubs and teammates — and every one of those is somewhere work can get lost. Add features to that without adding structure and you get a pile.",
+        "The hard problem in a tool like this is not the request pane, it is everything around it. A developer is simultaneously managing requests, collections, environments, variables, test flows, workspaces, hubs and teammates, and every one of those is somewhere work can get lost. Add features to that without adding structure and you get a pile.",
       solution:
         "One hierarchy, applied everywhere: a hub holds an organisation's workspaces and members, a workspace holds the collections and environments for one body of work, and a request lives inside a collection. On top of it, a marketplace of public workspaces so common API work starts from something that exists, and recent APIs and workspaces kept permanently in reach so the structure never gets in the way of live work.",
       impact: [
         "A predictable answer to where a piece of API work belongs, at every level from hub down to request.",
         "Reuse made first-class rather than incidental: publish a workspace, or start from someone else's.",
-        "The same components — request panels, collection trees, workspace cards, tables, status pills — across workspace, hub, marketplace and admin.",
+        "The same components (request panels, collection trees, workspace cards, tables, status pills) across workspace, hub, marketplace and admin.",
       ],
     },
     constraints: [
-      "A developer tool, so density is a feature. The answer could not be to hide capability behind progressive disclosure — the people using it want it all reachable.",
-      "Four protocols in one surface — REST, GraphQL, WebSocket, Socket.IO — which the request pane has to absorb without becoming four different screens.",
+      "A developer tool, so density is a feature. The answer could not be to hide capability behind progressive disclosure; the people using it want it all reachable.",
+      "Four protocols in one surface (REST, GraphQL, WebSocket, Socket.IO), which the request pane has to absorb without becoming four different screens.",
       "Both a desktop app and a web app, from the same design.",
       "Public and private workspaces in the same model, since a workspace can be published to the marketplace without becoming a different object.",
     ],
@@ -252,7 +252,7 @@ export const projects: Project[] = [
       {
         metric: "2 levels",
         label:
-          "Hub then workspace — the whole organising idea, applied everywhere so a developer never has to guess where something belongs",
+          "Hub then workspace: the whole organising idea, applied everywhere so a developer never has to guess where something belongs",
       },
       {
         metric: "4 protocols",
@@ -268,7 +268,7 @@ export const projects: Project[] = [
     outcome:
       "Sparrow ships as a desktop and web app with the hub-and-workspace model, the marketplace, mock collections and test flows in it, and its documentation is public. What I can point at is the architecture and the screens it produced; I have no post-launch measurement of adoption or productivity, so there are no numbers here claiming either.",
     learnings: [
-      "Complexity in B2B is usually not optional. What design decides is whether it feels structured and predictable, or whether it feels like a pile — and that is an information-architecture question long before it is a visual one.",
+      "Complexity in B2B is usually not optional. What design decides is whether it feels structured and predictable, or whether it feels like a pile. And that is an information-architecture question long before it is a visual one.",
       "The densest screen is the one the architecture is for. Every decision about hubs, workspaces and recents exists so the request pane can stay the widest, calmest thing on screen.",
       "Reuse only works if it is first-class. A template system nobody can find is the same as no template system, which is why the marketplace is a destination rather than a menu item.",
     ],
@@ -276,13 +276,13 @@ export const projects: Project[] = [
   {
     slug: "riseangle-ai-video-saas",
     tldr: [
-      "AI faceless-video SaaS with tens of thousands of creators — built desktop-first while 73% of actual usage was mobile.",
+      "AI faceless-video SaaS with tens of thousands of creators, built desktop-first while 73% of actual usage was mobile.",
       "I owned the redesign end to end: analytics audit, then the creation flow, template discovery and the paywall.",
       "Free-to-paid conversion went 4.2% to 9.1% in six weeks, flow completion 42% to 79%.",
     ],
     snapshot: {
       business:
-        "RiseAngle lets creators make and schedule faceless TikTok and YouTube Shorts using AI — no filming, no editing. It had grown to tens of thousands of active creators on a product built desktop-first.",
+        "RiseAngle lets creators make and schedule faceless TikTok and YouTube Shorts using AI. No filming, no editing. It had grown to tens of thousands of active creators on a product built desktop-first.",
       challenge:
         "73% of usage was mobile, on an interface designed for a desktop browser. Creating one video took eleven steps, template browsing was a form rather than a gallery, and the paywall was a lock screen with no explanation attached. Free users were not converting, and many were abandoning the creation flow before finishing a single video.",
       solution:
@@ -332,8 +332,8 @@ export const projects: Project[] = [
     summary:
       "A redesign of an AI faceless-video SaaS that took free-to-paid conversion from 4.2% to 9.1% by rebuilding the creation flow mobile-first.",
     description: [
-      "RiseAngle lets creators make and schedule faceless TikTok and YouTube Shorts using AI — no filming, no editing. The product had grown to tens of thousands of active creators, but it was built desktop-first while 73% of users were actually on mobile, and growth was stalling.",
-      "I redesigned the creation flow, template library and monetisation UX across both platforms — starting with an analytics audit rather than jumping straight to redesign. The 11-step creation flow became a 4-step mobile-first wizard with bottom sheets and an inline live AI preview; template browsing moved from a form-based picker to a visual-first gallery; and the paywall changed from a hard, contextless lock screen into a value-first upgrade path.",
+      "RiseAngle lets creators make and schedule faceless TikTok and YouTube Shorts using AI. No filming, no editing. The product had grown to tens of thousands of active creators, but it was built desktop-first while 73% of users were actually on mobile, and growth was stalling.",
+      "I redesigned the creation flow, template library and monetisation UX across both platforms, starting with an analytics audit rather than jumping straight to redesign. The 11-step creation flow became a 4-step mobile-first wizard with bottom sheets and an inline live AI preview; template browsing moved from a form-based picker to a visual-first gallery; and the paywall changed from a hard, contextless lock screen into a value-first upgrade path.",
       "Six weeks post-launch: free-to-paid conversion rose from 4.2% to 9.1%, flow completion rate went from 42% to 79%, and mobile session drop-off fell from 58% to 24%.",
     ],
     role: "End-to-End Product Designer",
@@ -351,7 +351,7 @@ export const projects: Project[] = [
       label: "Final design",
       heading: "Three flows. One experience that works on every screen.",
       caption:
-        "The creation wizard, the visual template gallery and the upgrade path — the three screens the analytics pointed at, running on a phone.",
+        "The creation wizard, the visual template gallery and the upgrade path: the three screens the analytics pointed at, running on a phone.",
       media: [
         {
           video: "/images/v3/riseangle/create-video.mp4",
@@ -402,11 +402,11 @@ export const projects: Project[] = [
     client: "RiseAngle",
     duration: "3 months",
     problem:
-      "RiseAngle lets creators make and schedule faceless TikTok and YouTube Shorts using AI — no filming, no editing. The product had grown to tens of thousands of active creators, but it was built desktop-first while 73% of users were actually on mobile, and growth was stalling. Free users weren't converting, and a lot of them were dropping out of the creation flow entirely before finishing a single video.",
+      "RiseAngle lets creators make and schedule faceless TikTok and YouTube Shorts using AI. No filming, no editing. The product had grown to tens of thousands of active creators, but it was built desktop-first while 73% of users were actually on mobile, and growth was stalling. Free users weren't converting, and a lot of them were dropping out of the creation flow entirely before finishing a single video.",
     frictions: [
       {
         title: "A desktop flow on a phone",
-        body: "Eleven steps meant eleven chances to leave, and each one was a form field sized for a mouse. The drop-off curve did not have one cliff — it leaked at every step, which is the signature of an interface fighting its device rather than one broken screen.",
+        body: "Eleven steps meant eleven chances to leave, and each one was a form field sized for a mouse. The drop-off curve did not have one cliff; it leaked at every step, which is the signature of an interface fighting its device rather than one broken screen.",
       },
       {
         title: "Waiting with nothing to look at",
@@ -419,15 +419,15 @@ export const projects: Project[] = [
     ],
     constraints: [
       "An existing user base of tens of thousands meant the redesign had to be recognisable, not a reset.",
-      "AI generation latency is a real technical floor — it could be designed around, not removed.",
+      "AI generation latency is a real technical floor. It could be designed around, not removed.",
       "Both platforms had to ship, so nothing could depend on mobile-only or desktop-only behaviour.",
     ],
     pullQuote:
-      "The analytics audit came first for a reason. Redesigning the screens I thought were broken would have missed the paywall entirely — and the paywall turned out to be about a third of the lift.",
+      "The analytics audit came first for a reason. Redesigning the screens I thought were broken would have missed the paywall entirely, and the paywall turned out to be about a third of the lift.",
     approach: [
       {
         title: "Audit before redesign",
-        body: "I started in the analytics rather than in Figma: where sessions ended, which steps were abandoned, what device they were on. That is what surfaced the 73% mobile split and pointed at the paywall — a screen I would not have prioritised on instinct.",
+        body: "I started in the analytics rather than in Figma: where sessions ended, which steps were abandoned, what device they were on. That is what surfaced the 73% mobile split and pointed at the paywall, a screen I would not have prioritised on instinct.",
       },
       {
         title: "Eleven steps down to four",
@@ -436,7 +436,7 @@ export const projects: Project[] = [
       },
       {
         title: "Generation latency as a design surface",
-        body: "Rather than hiding the wait, the flow shows an inline live preview while the video builds. The wait becomes the moment the creator sees it working, which is the opposite of a spinner — and it turned the product's biggest technical constraint into a reason to stay on the screen.",
+        body: "Rather than hiding the wait, the flow shows an inline live preview while the video builds. The wait becomes the moment the creator sees it working, which is the opposite of a spinner. It turned the product's biggest technical constraint into a reason to stay on the screen.",
         image: "/images/v3/riseangle/library-progress.webp",
       },
       {
@@ -471,7 +471,7 @@ export const projects: Project[] = [
     },
     learnings: [
       "Analytics before Figma: the highest-return screen on this project was not the one my instinct pointed at.",
-      "Designing around a real technical constraint — generation latency — produced a better experience than hiding it would have.",
+      "Designing around a real technical constraint (generation latency) produced a better experience than hiding it would have.",
       "Value-first framing at the paywall mattered more than expected, and it cost nothing to build.",
     ],
   },
@@ -484,14 +484,14 @@ export const projects: Project[] = [
     ],
     snapshot: {
       business:
-        "Wizlo is a clinical and patient SaaS — EMR and telehealth — used by clinics running care paths like TRT, HRT, GLP-1 weight management and hair restoration, across a provider app and a patient portal. Forms are its front door: intake is the first clinical touchpoint, collecting PHI, medical and medication history, contraindications and consent before a patient ever speaks to a clinician.",
+        "Wizlo is a clinical and patient SaaS (EMR and telehealth) used by clinics running care paths like TRT, HRT, GLP-1 weight management and hair restoration, across a provider app and a patient portal. Forms are its front door: intake is the first clinical touchpoint, collecting PHI, medical and medication history, contraindications and consent before a patient ever speaks to a clinician.",
       challenge:
-        "Forms 1.0 was a step-by-step wizard. Editing a field opened a popup; authoring a rule opened another, so the form was never on screen beside the thing being changed. That was merely slow for a ten-field form and actively risky for a fourteen-page branching intake, because conditional logic in a telehealth clinic is not cosmetic — a rule like \"history of thyroid carcinoma → disqualify\" is a clinical safety gate, and it was the most buried thing in the product.",
+        "Forms 1.0 was a step-by-step wizard. Editing a field opened a popup; authoring a rule opened another, so the form was never on screen beside the thing being changed. That was merely slow for a ten-field form and actively risky for a fourteen-page branching intake, because conditional logic in a telehealth clinic is not cosmetic: a rule like \"history of thyroid carcinoma → disqualify\" is a clinical safety gate, and it was the most buried thing in the product.",
       solution:
-        "I replaced the wizard with a three-panel direct-manipulation canvas, then built the logic layer twice over: inline rule cards in the properties panel that read back as plain English, and a full-screen node canvas where every page is a node and every arrow a real condition — with a simulate mode that walks a branch as a patient would, before anything is published.",
+        "I replaced the wizard with a three-panel direct-manipulation canvas, then built the logic layer twice over: inline rule cards in the properties panel that read back as plain English, and a full-screen node canvas where every page is a node and every arrow a real condition, with a simulate mode that walks a branch as a patient would, before anything is published.",
       impact: [
         "Field and rule editing left dialogs entirely: the form stays visible while you change it, and edits render live on the canvas.",
-        "A form's branching became visible and testable — the canvas draws every condition, and simulate mode evaluates them live without publishing.",
+        "A form's branching became visible and testable: the canvas draws every condition, and simulate mode evaluates them live without publishing.",
         "Migration was designed as a non-event: 1.0's operator and action set maps into the new panel unchanged, so a rule a clinician already knew is authored the same way.",
       ],
     },
@@ -499,7 +499,7 @@ export const projects: Project[] = [
       {
         metric: "2 dialogs",
         label:
-          "One to edit a field, another to author a rule — and neither showed you the form you were changing",
+          "One to edit a field, another to author a rule, and neither showed you the form you were changing",
       },
       {
         metric: "14 pages",
@@ -547,9 +547,9 @@ export const projects: Project[] = [
     title: "Modal wizard to a visible decision tree",
     category: "Healthcare",
     summary:
-      "Owned the Form Builder 2.0 redesign for a clinical EMR — the tool a non-technical clinic uses to author intake, encode its eligibility gates and take an order, without an engineer.",
+      "Owned the Form Builder 2.0 redesign for a clinical EMR: the tool a non-technical clinic uses to author intake, encode its eligibility gates and take an order, without an engineer.",
     description: [
-      "Wizlo is a clinical and patient SaaS for telehealth clinics — an EMR running care paths like GLP-1 weight management, TRT, HRT and hair restoration across a provider app and a patient portal. Its form builder is the tool clinics use to author intake: the PHI a form collects, the conditional logic that decides eligibility, and the checkout and identity verification it ends in.",
+      "Wizlo is a clinical and patient SaaS for telehealth clinics: an EMR running care paths like GLP-1 weight management, TRT, HRT and hair restoration across a provider app and a patient portal. Its form builder is the tool clinics use to author intake: the PHI a form collects, the conditional logic that decides eligibility, and the checkout and identity verification it ends in.",
     ],
     role: "Product Designer",
     year: "2026",
@@ -583,25 +583,25 @@ export const projects: Project[] = [
     client: "Wizlo",
     duration: "~13 prototype variants across 8 tickets",
     problem:
-      "In async telehealth the intake form is not a CMS nicety, it is the clinical encounter. It collects PHI, medical and medication history and contraindications; it encodes the eligibility gates that decide whether a patient can be treated at all; it carries product, subscription and bundle fields; and it terminates in checkout and identity verification. Every clinic needs a different one — per care path, per state's regulations, per protocol — and clinics are not engineers. If authoring a form needs a developer, the platform does not scale, which puts this tool's usability directly on the critical path for onboarding a clinic. Around a quarter of users are tenant admins, and the internal onboarding team lives in this interface daily. Forms 1.0 was a step-by-step wizard: slow for the common case of a five-to-fifteen field form, modal-heavy so the form was never visible beside the field being edited, and with no spatial model at all for a fourteen-page branching intake. Its logic existed — show/hide, jump-to-page, required/optional — but was buried in popups, so clinics under-used it or got it wrong. The brief set targets to design against: halve median creation time, one-click field reordering, a ten-field intake published in under three minutes, and full parity with 1.0's logic. Those were the bar the work was reviewed against, not numbers measured after launch.",
+      "In async telehealth the intake form is not a CMS nicety, it is the clinical encounter. It collects PHI, medical and medication history and contraindications; it encodes the eligibility gates that decide whether a patient can be treated at all; it carries product, subscription and bundle fields; and it terminates in checkout and identity verification. Every clinic needs a different one, per care path, per state's regulations, per protocol, and clinics are not engineers. If authoring a form needs a developer, the platform does not scale, which puts this tool's usability directly on the critical path for onboarding a clinic. Around a quarter of users are tenant admins, and the internal onboarding team lives in this interface daily. Forms 1.0 was a step-by-step wizard: slow for the common case of a five-to-fifteen field form, modal-heavy so the form was never visible beside the field being edited, and with no spatial model at all for a fourteen-page branching intake. Its logic existed, show/hide, jump-to-page, required/optional, but was buried in popups, so clinics under-used it or got it wrong. The brief set targets to design against: halve median creation time, one-click field reordering, a ten-field intake published in under three minutes, and full parity with 1.0's logic. Those were the bar the work was reviewed against, not numbers measured after launch.",
     frictions: [
       {
         title: "The form was never on screen with the edit",
-        body: "Every field change happened in a dialog stacked on top of the thing it was changing. You made an edit, dismissed the popup, then looked to see what you had done — a loop that turns authoring into guess-and-check, and gets slower the longer the form gets.",
+        body: "Every field change happened in a dialog stacked on top of the thing it was changing. You made an edit, dismissed the popup, then looked to see what you had done: a loop that turns authoring into guess-and-check, and gets slower the longer the form gets.",
       },
       {
         title: "A decision tree with no picture of itself",
-        body: "A branching intake is a graph, and the builder only ever showed it as a list. Nothing in the interface could answer whether a patient could reach a dead end, whether a disqualification gate actually fired, or whether a branch had orphaned a page — the questions that matter most and were the hardest to ask.",
+        body: "A branching intake is a graph, and the builder only ever showed it as a list. Nothing in the interface could answer whether a patient could reach a dead end, whether a disqualification gate actually fired, or whether a branch had orphaned a page. Those are the questions that matter most and were the hardest to ask.",
       },
       {
         title: "The safety-critical part was the most buried",
-        body: "In a GLP-1 or TRT clinic the conditional rules are the eligibility gates: they decide who gets treated. That logic lived at the bottom of the deepest popup in the product, which is precisely backwards — the feature carrying clinical consequence had the worst access of anything in the tool.",
+        body: "In a GLP-1 or TRT clinic the conditional rules are the eligibility gates: they decide who gets treated. That logic lived at the bottom of the deepest popup in the product, which is precisely backwards: the feature carrying clinical consequence had the worst access of anything in the tool.",
       },
     ],
     constraints: [
       "A multi-designer initiative. I authored the foundational redesign, the forms hub and the whole logic and AI layer; the later refinement passes, the sprint-scoped template gallery and the Brand Studio styling integration were colleagues' work.",
       "Parity before expansion. The migration pass was explicitly forbidden from adding operators, because a clinician who already knew a 1.0 rule had to be able to author it in the new panel without training.",
-      "Checkout and identity verification are Gr4vy's and Vouched's interfaces at runtime, so the builder could only ever show placeholders for those pages — never a mockup that would not match production.",
+      "Checkout and identity verification are Gr4vy's and Vouched's interfaces at runtime, so the builder could only ever show placeholders for those pages, never a mockup that would not match production.",
       "Clinical eligibility rides on the output. An authoring mistake here is not a cosmetic bug, so the tool had to make a wrong rule hard to write and easy to see.",
     ],
     pullQuote:
@@ -614,27 +614,27 @@ export const projects: Project[] = [
       },
       {
         title: "Rules that read back in plain English",
-        body: "Every field and page gets a Logic tab: numbered three-step cards of trigger, operator and value, with Show, Hide, Require, Jump to and Disqualify as actions, chained by an AND/OR toggle. Under each rule sits a live sentence restating it in plain language, so nobody has to mentally compile a condition. The value input is field-type aware — pick a radio field and it offers that field's own options, a date field gets a date picker, a checkbox defaults to \"is checked\" — so a nonsense comparison cannot be authored in the first place.",
+        body: "Every field and page gets a Logic tab: numbered three-step cards of trigger, operator and value, with Show, Hide, Require, Jump to and Disqualify as actions, chained by an AND/OR toggle. Under each rule sits a live sentence restating it in plain language, so nobody has to mentally compile a condition. The value input is field-type aware: pick a radio field and it offers that field's own options, a date field gets a date picker, a checkbox defaults to \"is checked\", so a nonsense comparison cannot be authored in the first place.",
         image: "/images/v3/wizlo/logic-rules.3227b263.webp",
       },
       {
         title: "Guardrails built into what the picker offers",
-        body: "A rule is three numbered steps — what question triggers this, when the answer is, this value — then an action: show, hide, jump to, disqualify. The guardrail is in the pickers. Choose Show and the \"which field?\" list only offers fields that come after the trigger, so a rule cannot reach backwards and depend on an answer the patient has not given yet. The constraint is enforced by what the interface hands you, not by a validation message after the fact.",
+        body: "A rule is three numbered steps (what question triggers this, when the answer is, this value), then an action: show, hide, jump to, disqualify. The guardrail is in the pickers. Choose Show and the \"which field?\" list only offers fields that come after the trigger, so a rule cannot reach backwards and depend on an answer the patient has not given yet. The constraint is enforced by what the interface hands you, not by a validation message after the fact.",
         image: "/images/v3/wizlo/field-rule-editor.5086b15c.webp",
       },
       {
         title: "A canvas that shows the form's shape, and lets you walk it",
-        body: "A full-screen node view: each page a draggable node, each arrow a real condition. There is deliberately no separate \"default flow\" concept — sequential connections are seeded on first open and share the same code path as conditional ones, so grey means unconfigured sequence and violet means conditional, and the author holds one mental model instead of two. Nodes expand to show their fields with a badge counting the rules each carries, and one page can branch to several targets, evaluated in order, first match wins. Simulate mode is the payoff: walk the form as a patient from inside the canvas, with the active node highlighted and visibility evaluated live against the real conditions. You author an eligibility gate and confirm it fires without publishing to find out — which, for a rule that decides who gets treated, is the difference between a design and a safeguard.",
+        body: "A full-screen node view: each page a draggable node, each arrow a real condition. There is deliberately no separate \"default flow\" concept: sequential connections are seeded on first open and share the same code path as conditional ones, so grey means unconfigured sequence and violet means conditional, and the author holds one mental model instead of two. Nodes expand to show their fields with a badge counting the rules each carries, and one page can branch to several targets, evaluated in order, first match wins. Simulate mode is the payoff: walk the form as a patient from inside the canvas, with the active node highlighted and visibility evaluated live against the real conditions. You author an eligibility gate and confirm it fires without publishing to find out, which, for a rule that decides who gets treated, is the difference between a design and a safeguard.",
         image: "/images/v3/wizlo/logic-canvas.f01db6b1.webp",
       },
       {
         title: "AI that refuses to guess",
-        body: "The assistant can build a form from a description, add a field, add a page or author a condition — and the part I would defend hardest is what it does when it cannot. Asked something it cannot parse, it says so and names what it does handle, rather than attaching a rule to the nearest question it can find. In a tool where a condition decides whether a patient is eligible for treatment, an AI that is confidently wrong is worse than one that admits it did not understand. Everything it does produce lands in the same editable primitives a human would have made, so nothing it touches is a black box.",
+        body: "The assistant can build a form from a description, add a field, add a page or author a condition. The part I would defend hardest is what it does when it cannot. Asked something it cannot parse, it says so and names what it does handle, rather than attaching a rule to the nearest question it can find. In a tool where a condition decides whether a patient is eligible for treatment, an AI that is confidently wrong is worse than one that admits it did not understand. Everything it does produce lands in the same editable primitives a human would have made, so nothing it touches is a black box.",
         image: "/images/v3/wizlo/ai-refusal.1683a2b1.webp",
       },
       {
         title: "Parity as the migration plan, and rollback as a requirement",
-        body: "A dedicated pass mirrored 1.0's operators and actions into the new shell with no additions, so the redesign asked nobody to relearn a rule they already knew — it only removed the friction around it. Alongside it, version history keeps named snapshots of full form state with save, restore and rename, and takes an automatic backup of the current state before any restore. For a form that gates clinical eligibility, being able to undo a bad edit is a safety requirement rather than a convenience.",
+        body: "A dedicated pass mirrored 1.0's operators and actions into the new shell with no additions, so the redesign asked nobody to relearn a rule they already knew; it only removed the friction around it. Alongside it, version history keeps named snapshots of full form state with save, restore and rename, and takes an automatic backup of the current state before any restore. For a form that gates clinical eligibility, being able to undo a bad edit is a safety requirement rather than a convenience.",
         image: "/images/v3/wizlo/version-history.b93a1ca6.webp",
       },
     ],
@@ -662,7 +662,7 @@ export const projects: Project[] = [
       {
         metric: "8 operators",
         label:
-          "In the inline rule builder, with the value input adapting to the trigger field's type — a radio field offers its own options, a date field a date picker — so a nonsense comparison cannot be authored",
+          "In the inline rule builder, with the value input adapting to the trigger field's type (a radio field offers its own options, a date field a date picker), so a nonsense comparison cannot be authored",
       },
       {
         metric: "99 fields",
@@ -671,7 +671,7 @@ export const projects: Project[] = [
       },
     ],
     outcome:
-      "Handed off dev-ready as coded prototypes rather than static frames: every variant is genuinely usable — the CTA opens the modal, the toast fires, the branch evaluates — and each is prefixed with the ticket it came from, so any prototype maps back to the story that asked for it. What I can report is the state of the work at handoff, not its effect in production. The brief set four targets — halve median form-creation time, reorder a field in one click, publish a ten-field intake in under three minutes, and full parity with 1.0's logic. Parity I can show you in the operator mapping. The other three were the bar the design was reviewed against, and I have no post-launch measurement to say whether it cleared them. When that data exists it belongs in this section; until then, claiming it would be fiction.",
+      "Handed off dev-ready as coded prototypes rather than static frames: every variant is genuinely usable (the CTA opens the modal, the toast fires, the branch evaluates), and each is prefixed with the ticket it came from, so any prototype maps back to the story that asked for it. What I can report is the state of the work at handoff, not its effect in production. The brief set four targets, halve median form-creation time, reorder a field in one click, publish a ten-field intake in under three minutes, and full parity with 1.0's logic. Parity I can show you in the operator mapping. The other three were the bar the design was reviewed against, and I have no post-launch measurement to say whether it cleared them. When that data exists it belongs in this section; until then, claiming it would be fiction.",
     disagreement: {
       decision:
         "Making the AI flow builder return nothing when no field clears the match threshold, rather than falling back to the closest field it can find. An author who types a vague rule gets told it was not understood, instead of getting a rule attached to a question they did not mean.",
@@ -682,9 +682,9 @@ export const projects: Project[] = [
       result: "",
     },
     learnings: [
-      "There are no post-launch numbers here, and I would rather say so than invent them. The metrics in the brief were design targets; what I can evidence is the work itself — the operator set, the parity mapping, the stress-test template. A case study that presents a goal as a result makes the same mistake as a form that presents a guess as an answer.",
+      "There are no post-launch numbers here, and I would rather say so than invent them. The metrics in the brief were design targets; what I can evidence is the work itself: the operator set, the parity mapping, the stress-test template. A case study that presents a goal as a result makes the same mistake as a form that presents a guess as an answer.",
       "The safety-critical feature was the buried one. Logic carried the clinical eligibility gates and lived in the deepest popup in the product, which taught me to read information architecture as a safety concern and not only a convenience one.",
-      "Parity is a feature. The instinct on a redesign is to improve everything, and the migration pass deliberately added no operators — asking a clinician to relearn a rule they already knew would have cost more than the new capability was worth.",
+      "Parity is a feature. The instinct on a redesign is to improve everything, and the migration pass deliberately added no operators. Asking a clinician to relearn a rule they already knew would have cost more than the new capability was worth.",
       "Refusing to guess is a design decision. The most defensible thing in the AI layer is what it declines to do, and that only reads as rigour rather than as a bug because the interface says plainly that it did not understand.",
     ],
   },
@@ -697,11 +697,11 @@ export const projects: Project[] = [
     ],
     snapshot: {
       business:
-        "Saral Funding is a Chartered Accountant's practice helping individuals consolidate loans at lower interest rates — high-trust, high-touch work where the whole business turns on following up at the right moment.",
+        "Saral Funding is a Chartered Accountant's practice helping individuals consolidate loans at lower interest rates: high-trust, high-touch work where the whole business turns on following up at the right moment.",
       challenge:
         "Growth had outrun the process. Leads arrived from website forms and a WhatsApp widget with nothing tracking them, executives worked from spreadsheets and memory so deals slipped, and management had no view of where any lead stood. Every off-the-shelf option was too expensive, too complex for a non-technical team, or missing WhatsApp entirely.",
       solution:
-        "A purpose-built CRM designed around the fact that there were two users, not one: action-oriented screens for executives working a call list, data-oriented dashboards for management reading pipeline health — and the WhatsApp thread pulled inside the tool so the biggest context switch of the day disappeared.",
+        "A purpose-built CRM designed around the fact that there were two users, not one: action-oriented screens for executives working a call list, data-oriented dashboards for management reading pipeline health, and the WhatsApp thread pulled inside the tool so the biggest context switch of the day disappeared.",
       impact: [
         "5% sales increase measured in a short period after launch.",
         "Every lead source handled in one system for the first time, WhatsApp included.",
@@ -711,7 +711,7 @@ export const projects: Project[] = [
     baseline: [
       {
         metric: "Spreadsheets",
-        label: "And memory — the system of record for a growing sales pipeline",
+        label: "And memory: the system of record for a growing sales pipeline",
       },
       {
         metric: "2 channels",
@@ -746,7 +746,7 @@ export const projects: Project[] = [
     summary:
       "A purpose-built CRM for a fintech loan-consolidation sales team, unifying pipeline management with an integrated WhatsApp inbox.",
     description: [
-      "Saral Funding helps individuals secure loans at lower interest rates — a high-trust, high-touch business that lives or dies on timely follow-ups.",
+      "Saral Funding helps individuals secure loans at lower interest rates: a high-trust, high-touch business that lives or dies on timely follow-ups.",
     ],
     role: "UI/UX Designer",
     year: "2024",
@@ -761,11 +761,11 @@ export const projects: Project[] = [
     client: "Saral Funding",
     duration: "End-to-end build",
     problem:
-      "The client is a Chartered Accountant who helps individuals secure loans at lower interest rates — high-trust, high-touch work that depends entirely on timely follow-ups. The business was growing and the process was not keeping up. Leads arrived from website forms and a WhatsApp widget with no single system to track or qualify them, sales executives worked from spreadsheets and memory so deals slipped through the cracks, and management had no visibility into where any lead stood. WhatsApp conversations lived entirely outside the workflow, forcing constant context-switching.",
+      "The client is a Chartered Accountant who helps individuals secure loans at lower interest rates: high-trust, high-touch work that depends entirely on timely follow-ups. The business was growing and the process was not keeping up. Leads arrived from website forms and a WhatsApp widget with no single system to track or qualify them, sales executives worked from spreadsheets and memory so deals slipped through the cracks, and management had no visibility into where any lead stood. WhatsApp conversations lived entirely outside the workflow, forcing constant context-switching.",
     frictions: [
       {
         title: "The follow-up lived in someone's head",
-        body: "In a business where timing is the product, the reminder to call back was a note in a spreadsheet or nothing at all. Leads did not fail on qualification — they failed on being forgotten for three days.",
+        body: "In a business where timing is the product, the reminder to call back was a note in a spreadsheet or nothing at all. Leads did not fail on qualification; they failed on being forgotten for three days.",
       },
       {
         title: "The busiest channel was outside the tool",
@@ -783,7 +783,7 @@ export const projects: Project[] = [
       "Tailwind CSS was the shared foundation with engineering, so components had to be specced in that vocabulary.",
     ],
     pullQuote:
-      "This two-tier user model shaped every design decision that followed. Staff need action-oriented UIs, admins need data-oriented ones — a single interface serving both would have served neither well.",
+      "This two-tier user model shaped every design decision that followed. Staff need action-oriented UIs, admins need data-oriented ones. A single interface serving both would have served neither well.",
     approach: [
       {
         title: "Two dashboards, because there were two users",
@@ -791,11 +791,11 @@ export const projects: Project[] = [
       },
       {
         title: "WhatsApp brought inside the CRM",
-        body: "A large share of leads arrived through a WhatsApp widget, previously handled in a separate tab. It became an inbox in the tool — thread, unread counts, a jump to the profile, and outcome logged straight to the timeline — removing the biggest context switch in the day.",
+        body: "A large share of leads arrived through a WhatsApp widget, previously handled in a separate tab. It became an inbox in the tool (thread, unread counts, a jump to the profile, outcome logged straight to the timeline), removing the biggest context switch in the day.",
       },
       {
         title: "Leads management with a view for each job",
-        body: "A list/Kanban toggle covers both jobs — a table for bulk scanning, a pipeline for stage management. Status changes, call logging and assignment all happen inline, without opening the full profile.",
+        body: "A list/Kanban toggle covers both jobs: a table for bulk scanning, a pipeline for stage management. Status changes, call logging and assignment all happen inline, without opening the full profile.",
       },
       {
         title: "A lead profile that answers three questions",
@@ -805,7 +805,7 @@ export const projects: Project[] = [
     results: [
       {
         metric: "+5%",
-        label: "Sales increase — measurable conversion growth in a short period post-launch",
+        label: "Sales increase: measurable conversion growth in a short period post-launch",
       },
       {
         metric: "One tool",
@@ -817,10 +817,10 @@ export const projects: Project[] = [
       },
     ],
     outcome:
-      "The sales team reported closing leads more efficiently with everything centralised, and every lead source was handled inside one system for the first time. Because it was built to be market-ready rather than bespoke, the CRM also unlocked an upsell path — the client can productise it and sell it on to other fintech businesses.",
+      "The sales team reported closing leads more efficiently with everything centralised, and every lead source was handled inside one system for the first time. Because it was built to be market-ready rather than bespoke, the CRM also unlocked an upsell path: the client can productise it and sell it on to other fintech businesses.",
     disagreement: {
       decision:
-        "Building two separate dashboards — one for sales executives, one for management — instead of one role-switched view.",
+        "Building two separate dashboards (one for sales executives, one for management) instead of one role-switched view.",
       // TODO: who pushed back, and on what grounds. One or two sentences.
       pushback: "",
       // TODO: what actually happened after. Include the number if there is one.
@@ -828,7 +828,7 @@ export const projects: Project[] = [
     },
     learnings: [
       "Designing a data-heavy SaaS product takes a different UX mindset: every pixel of space carries information weight.",
-      "Understanding the business model — loan consolidation, the CA's workflow, the lead lifecycle — mattered as much as knowing the UI patterns.",
+      "Understanding the business model (loan consolidation, the CA's workflow, the lead lifecycle) mattered as much as knowing the UI patterns.",
       "This was my first large product with a deep database architecture behind it, and it changed how I think about systems-level UX.",
     ],
   },
@@ -837,24 +837,24 @@ export const projects: Project[] = [
     tldr: [
       "US game-boosting marketplace where players buy rank boosts and coordinate with providers in real time.",
       "I reworked the two highest-stakes moments in the product: the chat between player and booster, and checkout.",
-      "The brief was trust — demand existed, but the parts handling money and communication were the weakest links.",
+      "The brief was trust. Demand existed, but the parts handling money and communication were the weakest links.",
     ],
     snapshot: {
       business:
         "Mythic Boost is a US-based game-boosting marketplace where players buy rank boosts and services, then coordinate with operators and providers in real time while the work is carried out on their own game account.",
       challenge:
-        "Demand was not the problem. The two moments carrying the most risk — handing over money, and trusting the stranger playing on your account — were the weakest parts of the product. Both read as unreliable at exactly the point a player needed reassurance.",
+        "Demand was not the problem. The two moments carrying the most risk (handing over money, and trusting the stranger playing on your account) were the weakest parts of the product. Both read as unreliable at exactly the point a player needed reassurance.",
       solution:
         "I treated chat and checkout as trust surfaces rather than utilities: making order state legible inside the conversation, and making the payment step state what was being bought, from whom, and what happens next.",
       impact: [
         "Chat and checkout redesigned as the two trust-critical flows in the product.",
-        "Order state made visible in the place players were already looking — the conversation.",
+        "Order state made visible in the place players were already looking: the conversation.",
       ],
     },
     baseline: [
       {
         metric: "2 flows",
-        label: "Chat and payments — the highest-stakes moments, and the weakest screens",
+        label: "Chat and payments: the highest-stakes moments, and the weakest screens",
       },
       {
         metric: "Account access",
@@ -878,8 +878,8 @@ export const projects: Project[] = [
     summary:
       "Fixed chat and payments UX for a US game-boosting marketplace to rebuild trust and drive conversions.",
     description: [
-      "Mythic Boost is a US-based game boosting platform where players purchase rank boosts and services, then coordinate with operators and providers in real time. The product had real demand, but its core workflows — chat and payments — were actively hurting trust and conversions.",
-      "The work centered on making the two highest-stakes moments of the experience — talking to your booster and paying for the service — feel reliable and transparent instead of like the weakest links in the product.",
+      "Mythic Boost is a US-based game boosting platform where players purchase rank boosts and services, then coordinate with operators and providers in real time. The product had real demand, but its core workflows (chat and payments) were actively hurting trust and conversions.",
+      "The work centered on making the two highest-stakes moments of the experience (talking to your booster and paying for the service) feel reliable and transparent instead of like the weakest links in the product.",
     ],
     role: "Product Designer",
     year: "2024",
@@ -892,7 +892,7 @@ export const projects: Project[] = [
     client: "Mythic Boost",
     duration: "Focused engagement",
     problem:
-      "Mythic Boost had real demand and a real trust problem. Players were being asked to pay upfront for work carried out on their own game account by someone they had never met, and the two screens carrying that weight were the two weakest in the product. Checkout gave no account of what was being bought or what happened after paying. Chat, where the entire relationship with the booster lived, showed messages but not order state — so the question every player actually had, is this progressing, was the one thing the screen would not answer.",
+      "Mythic Boost had real demand and a real trust problem. Players were being asked to pay upfront for work carried out on their own game account by someone they had never met, and the two screens carrying that weight were the two weakest in the product. Checkout gave no account of what was being bought or what happened after paying. Chat, where the entire relationship with the booster lived, showed messages but not order state, so the question every player actually had, is this progressing, was the one thing the screen would not answer.",
     frictions: [
       {
         title: "Paying before understanding",
@@ -904,11 +904,11 @@ export const projects: Project[] = [
       },
       {
         title: "No visible proof of progress",
-        body: "Between purchase and delivery there was a silent gap. Silence in a marketplace where you have already paid and surrendered account access does not read as neutral — it reads as something going wrong.",
+        body: "Between purchase and delivery there was a silent gap. Silence in a marketplace where you have already paid and surrendered account access does not read as neutral; it reads as something going wrong.",
       },
     ],
     constraints: [
-      "Real-time coordination between three parties — player, operator and provider — had to stay workable for all of them.",
+      "Real-time coordination between three parties (player, operator and provider) had to stay workable for all of them.",
       "A live marketplace with existing orders in flight, so the flows had to change without stranding anyone mid-order.",
     ],
     pullQuote:
@@ -916,7 +916,7 @@ export const projects: Project[] = [
     approach: [
       {
         title: "Checkout that states the deal",
-        body: "The payment step was rebuilt to say what is being bought, what it costs, roughly how long it takes and what happens immediately after paying — so the moment of highest risk is also the moment with the most information on screen.",
+        body: "The payment step was rebuilt to say what is being bought, what it costs, roughly how long it takes and what happens immediately after paying, so the moment of highest risk is also the moment with the most information on screen.",
       },
       {
         title: "Order state inside the conversation",
@@ -932,7 +932,7 @@ export const projects: Project[] = [
       result: "",
     },
     learnings: [
-      "Trust is not a visual style — it is produced by telling someone what is happening before they have to ask.",
+      "Trust is not a visual style. It is produced by telling someone what is happening before they have to ask.",
       "The two screens nobody wants to design, payment and messaging, were the two that moved the most in the whole product.",
     ],
   },
