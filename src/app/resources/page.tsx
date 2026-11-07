@@ -2,24 +2,23 @@ import type { Metadata } from "next";
 import type { IconType } from "react-icons";
 import { ArrowUpRight } from "lucide-react";
 import { RiOpenaiFill } from "react-icons/ri";
-import { SiBlender, SiClaude, SiFigma, SiFramer, SiNextdotjs, SiNotion, SiTailwindcss } from "react-icons/si";
+import { SiBlender, SiClaude, SiFigma, SiFramer, SiNotion } from "react-icons/si";
 import { profile } from "@/content/profile";
+import { ResourceThumb } from "@/components/v3/ResourceThumb";
 import { favouriteTools, resourceCards, resourceGroups } from "@/content/resources";
 
 export const metadata: Metadata = {
   title: "Resources",
-  description: "Templates, tools and books I use as a product designer.",
+  description: "Component libraries, vibe-coding tools, references and books I use as a product designer.",
 };
 
-const TOOL_ICONS: Record<(typeof favouriteTools)[number], { Icon: IconType; label: string }> = {
-  figma: { Icon: SiFigma, label: "Figma" },
-  framer: { Icon: SiFramer, label: "Framer" },
-  claude: { Icon: SiClaude, label: "Claude" },
-  chatgpt: { Icon: RiOpenaiFill, label: "ChatGPT" },
-  notion: { Icon: SiNotion, label: "Notion" },
-  blender: { Icon: SiBlender, label: "Blender" },
-  nextjs: { Icon: SiNextdotjs, label: "Next.js" },
-  tailwind: { Icon: SiTailwindcss, label: "Tailwind CSS" },
+const TOOL_ICONS: Record<(typeof favouriteTools)[number], { Icon: IconType; label: string; color: string }> = {
+  figma: { Icon: SiFigma, label: "Figma", color: "#F24E1E" },
+  framer: { Icon: SiFramer, label: "Framer", color: "#0099FF" },
+  claude: { Icon: SiClaude, label: "Claude", color: "#D97757" },
+  chatgpt: { Icon: RiOpenaiFill, label: "ChatGPT", color: "#10A37F" },
+  notion: { Icon: SiNotion, label: "Notion", color: "var(--v3-fg)" },
+  blender: { Icon: SiBlender, label: "Blender", color: "#E87D0D" },
 };
 
 /** An external link when there is an href, plain block otherwise. */
@@ -45,12 +44,23 @@ export default function ResourcesPage() {
             <li key={card.title}>
               <MaybeLink
                 href={card.href}
-                className="flex aspect-[4/5] flex-col justify-between rounded-2xl border border-v3-line bg-v3-surface p-5 transition-colors hover:border-v3-muted/50"
+                className="block"
               >
-                <h2 className="font-hero-serif text-xl font-light leading-snug tracking-[-0.01em] text-v3-fg">
-                  {card.title}
-                </h2>
-                <p className="text-[13px] leading-relaxed text-v3-muted">{card.note}</p>
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-v3-line bg-v3-surface transition-colors group-hover:border-v3-muted/50">
+                  <div className="relative z-10 flex items-start justify-between p-6">
+                    <h2 className="font-hero-serif text-2xl font-light leading-snug tracking-[-0.01em] text-v3-fg">
+                      {card.title}
+                    </h2>
+                    <ArrowUpRight aria-hidden className="mt-1.5 size-4 text-v3-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </div>
+                  <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:-translate-y-2">
+                    <div className="absolute inset-x-0 bottom-0 top-[22%]">
+                      <ResourceThumb kind={card.thumb} />
+                    </div>
+                  </div>
+                </div>
+                <p className="mt-3 text-[11px] uppercase tracking-[0.08em] text-v3-muted">{card.tag}</p>
+                <p className="mt-1 text-[13px] leading-relaxed text-v3-muted">{card.note}</p>
               </MaybeLink>
             </li>
           ))}
@@ -62,14 +72,14 @@ export default function ResourcesPage() {
         {/* A dock of app icons. */}
         <ul className="mt-6 inline-flex flex-wrap gap-2 rounded-2xl border border-v3-line bg-v3-surface p-2">
           {favouriteTools.map((key) => {
-            const { Icon, label } = TOOL_ICONS[key];
+            const { Icon, label, color } = TOOL_ICONS[key];
             return (
               <li key={key}>
                 <span
                   title={label}
                   className="flex size-12 items-center justify-center rounded-xl border border-v3-line bg-v3-bg text-v3-fg transition-transform duration-200 hover:-translate-y-1"
                 >
-                  <Icon aria-hidden className="size-6" />
+                  <Icon aria-hidden className="size-6" style={{ color }} />
                   <span className="sr-only">{label}</span>
                 </span>
               </li>

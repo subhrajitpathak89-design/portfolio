@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BuildTag } from "@/components/v3/BuildTag";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { FlowDiagram } from "@/components/v3/FlowDiagram";
+import { MarketStats } from "@/components/v3/MarketStats";
 import { ToolMarks } from "@/components/v3/ToolMarks";
 import { sparrowShots, type SparrowShotName } from "@/content/sparrow-shots";
 import type { Project } from "@/types";
@@ -55,6 +57,11 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
             Product Designer · B2B SaaS · Developer Tools
           </p>
 
+          {project.highlight && (
+            <div className="mt-6">
+              <BuildTag label={project.highlight} />
+            </div>
+          )}
           <h1
             data-reveal-item
             className="mt-5 max-w-[22ch] font-editorial-display text-[clamp(2rem,5.4vw,4.25rem)] font-normal leading-[1.02] tracking-[-0.025em] text-v3-fg"
@@ -145,6 +152,7 @@ export function SparrowCaseStudy({ project, next }: { project: Project; next: Pr
             collections, reusable configurations and shared workflows. And every
             one of those is a place work can get lost.
           </p>
+          {project.marketStats && <MarketStats stats={project.marketStats} className="mt-12" />}
         </Section>
 
         {/* ── 02 The design challenge ──────────────────────────────────── */}

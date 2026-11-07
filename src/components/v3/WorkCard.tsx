@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { BuildTag } from "@/components/v3/BuildTag";
 import { LoopVideo } from "@/components/v3/LoopVideo";
-import { ToolMarks } from "@/components/v3/ToolMarks";
 import type { Project } from "@/types";
 
 /**
@@ -15,13 +15,6 @@ import type { Project } from "@/types";
 export function WorkCard({ project, index }: { project: Project; index: number }) {
   const headline = project.results?.[0];
 
-  // The highlight leads, then the tags. Built as one list so the two-on-a-
-  // phone, three-from-`sm` rule below counts chips rather than having to know
-  // which kind each one is.
-  const chips = [
-    ...(project.highlight ? [{ label: project.highlight, accent: true }] : []),
-    ...project.tags.map((tag) => ({ label: tag, accent: false })),
-  ];
 
   // A card with nowhere to go is a plain container, not a link. Rendering an
   // anchor and then suppressing it would still put it in the tab order and the
@@ -158,6 +151,10 @@ export function WorkCard({ project, index }: { project: Project; index: number }
           )}
         </div>
 
+        {project.highlight && (
+          <BuildTag label={project.highlight} className="absolute left-3 top-3 sm:left-4 sm:top-4" />
+        )}
+
         {/* Outside the blurred wrapper, so the badge reads while the cover
             behind it does not. */}
         {project.comingSoon && (
@@ -169,7 +166,7 @@ export function WorkCard({ project, index }: { project: Project; index: number }
         )}
       </div>
 
-      <div className="relative flex flex-1 flex-col pt-5 sm:pt-6">
+      <div className="relative flex flex-1 flex-col pt-4">
         <div className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.18em]">
           <span className="text-v3-accent">{String(index + 1).padStart(2, "0")}</span>
           <span className="h-px w-6 bg-v3-line" aria-hidden />
@@ -178,7 +175,7 @@ export function WorkCard({ project, index }: { project: Project; index: number }
           </span>
         </div>
 
-        <h3 className="mt-4 font-editorial-display text-[clamp(1.25rem,2vw,1.75rem)] font-normal leading-[1.1] tracking-[-0.015em] text-v3-fg">
+        <h3 className="mt-3 font-editorial-display text-[clamp(1.1rem,1.6vw,1.35rem)] font-normal leading-[1.1] tracking-[-0.015em] text-v3-fg">
           {project.title}
         </h3>
 
@@ -188,9 +185,6 @@ export function WorkCard({ project, index }: { project: Project; index: number }
             clamp — a card is wide enough on a large monitor to fit 100
             characters on a line, which is well past readable no matter how
             few lines of it there are. */}
-        <p className="mt-3 line-clamp-2 max-w-[62ch] text-sm leading-relaxed text-v3-muted">
-          {project.summary}
-        </p>
 
         {/* Two chips on a phone, three from `sm`. Three fit on one line only
             just, and the moment one of them is a long label they wrap to a
@@ -200,24 +194,11 @@ export function WorkCard({ project, index }: { project: Project; index: number }
             A `highlight` takes the first slot and pushes a tag out of view
             rather than adding a row — it is meant to be read instead of the
             third tag, not as well as it. */}
-        <ul className="mt-4 flex flex-wrap gap-2 sm:mt-5">
-          {chips.slice(0, 3).map((chip, chipIndex) => (
-            <li
-              key={chip.label}
-              className={`rounded-md px-2.5 py-1 font-mono text-[11px] ${
-                chip.accent
-                  ? "bg-v3-accent text-v3-bg"
-                  : "border border-v3-line bg-v3-bg text-v3-muted"
-              }${chipIndex === 2 ? " hidden sm:block" : ""}`}
-            >
-              {chip.label}
-            </li>
-          ))}
-        </ul>
+
 
         {/* `mt-auto` against the stretched row height: the footers of two
             cards line up even when one title wraps and the other does not. */}
-        <div className="mt-auto flex items-center justify-between gap-4 pt-5 sm:pt-6">
+        <div className="mt-auto flex items-center justify-between gap-4 pt-4">
           {/* The tools strip is the first thing to go on a phone. Squeezed
               against the CTA it broke its own "Built with" label onto two
               lines and pushed "Read case study" onto two more — four lines of
@@ -225,11 +206,6 @@ export function WorkCard({ project, index }: { project: Project; index: number }
               phone. Hidden rather than dropped from the tree so the desktop
               row is unchanged; with it out of the flow, `justify-between`
               leaves the CTA at the start on one line. */}
-          {project.tools && project.tools.length > 0 && (
-            <div className="hidden sm:block">
-              <ToolMarks tools={project.tools} />
-            </div>
-          )}
 
           {/* `whitespace-nowrap` regardless of breakpoint: three words broken
               across two lines beside an arrow stops looking like a link. */}

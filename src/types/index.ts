@@ -16,6 +16,9 @@ export type ProjectSnapshot = {
 };
 
 /** A "before" number that defines the problem, shown large above the prose. */
+/** A sourced industry figure that sizes the problem (context, not a result). */
+export type ProjectMarketStat = { metric: string; label: string; source: string; href: string };
+
 export type ProjectBaseline = {
   metric: string;
   label: string;
@@ -100,6 +103,11 @@ export type Project = {
   /** Two-or-three-word label for tight spots — hero chips, nav, related cards. */
   shortName?: string;
   title: string;
+  /**
+   * The three lines a hiring manager skims on the card (NN/g: problem, your
+   * role, the effect on users and business). Facts only, one sentence each.
+   */
+  brief?: { problem: string; did: string; outcome: string };
   category: string;
   summary: string;
   description: string[];
@@ -178,6 +186,7 @@ export type Project = {
   duration?: string;
   snapshot?: ProjectSnapshot;
   baseline?: ProjectBaseline[];
+  marketStats?: ProjectMarketStat[];
   frictions?: ProjectFriction[];
   flowChange?: ProjectFlowChange;
   problem?: string;

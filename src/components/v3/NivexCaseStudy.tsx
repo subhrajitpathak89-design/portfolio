@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BuildTag } from "@/components/v3/BuildTag";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { FlowDiagram } from "@/components/v3/FlowDiagram";
 import { LoopVideo } from "@/components/v3/LoopVideo";
+import { MarketStats } from "@/components/v3/MarketStats";
 import { ToolMarks } from "@/components/v3/ToolMarks";
 import { nivexShots, type NivexShot } from "@/content/nivex-shots";
 import type { Project } from "@/types";
@@ -75,6 +77,11 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
             Lead Designer · Fintech · Product + Design System
           </p>
 
+          {project.highlight && (
+            <div className="mt-6">
+              <BuildTag label={project.highlight} />
+            </div>
+          )}
           <h1
             data-reveal-item
             className="mt-5 max-w-[24ch] font-editorial-display text-[clamp(2rem,5.4vw,4.25rem)] font-normal leading-[1.02] tracking-[-0.025em] text-v3-fg"
@@ -184,6 +191,7 @@ export function NivexCaseStudy({ project, next }: { project: Project; next: Proj
             understanding whether the investor&rsquo;s existing decisions were
             actually working.
           </p>
+          {project.marketStats && <MarketStats stats={project.marketStats} className="mt-12" />}
         </Section>
 
         {/* ── 03 The big idea ──────────────────────────────────────────── */}

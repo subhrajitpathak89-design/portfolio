@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { BuildTag } from "@/components/v3/BuildTag";
+import { MarketStats } from "@/components/v3/MarketStats";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { ImageSlot } from "@/components/v3/ImageSlot";
@@ -73,6 +75,11 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
             {project.category} · {project.year}
           </p>
 
+          {project.highlight && (
+            <div className="mt-6">
+              <BuildTag label={project.highlight} />
+            </div>
+          )}
           <h1 className="mt-5 max-w-[18ch] font-editorial-display text-[clamp(1.875rem,4.4vw,3.5rem)] font-normal leading-[1.03] tracking-[-0.02em] text-v3-fg">
             {project.title}
           </h1>
@@ -155,6 +162,7 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
         {/* ── Context ──────────────────────────────────────────────────── */}
         {project.snapshot && (
           <Section label="Context" className={PROSE}>
+            {project.marketStats && <MarketStats stats={project.marketStats} className="mb-10" />}
             <dl className="divide-y divide-v3-line border-y border-v3-line">
               {(
                 [

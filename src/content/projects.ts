@@ -7,6 +7,11 @@ export const projects: Project[] = [
     // platform, and the system is how three surfaces of it stayed coherent.
     // The old `nivex-design-platform` URL redirects (see `next.config.ts`).
     slug: "nivex-wealth-platform",
+    marketStats: [
+      { metric: "63% vs 9.5%", label: "of Indian households know at least one market product, but under 1 in 10 actually invest", source: "SEBI Investor Survey 2025, via Outlook Money", href: "https://www.outlookmoney.com/invest/equity/sebi-investor-survey-63-per-cent-households-aware-of-market-products-participation-lags-at-950-per-cent" },
+      { metric: "~80%", label: "of households would rather protect their capital than chase high returns", source: "SEBI Investor Survey 2025, via Angel One", href: "https://www.angelone.in/news/market-updates/sebi-report-reveals-low-household-participation-in-securities-at-9-5" },
+      { metric: "93%", label: "of individual F&O traders lost money between FY22 and FY24", source: "SEBI, Sep 2024", href: "https://www.sebi.gov.in/media-and-notifications/press-releases/sep-2024/updated-sebi-study-reveals-93-of-individual-traders-incurred-losses-in-equity-fando-between-fy22-and-fy24-aggregate-losses-exceed-1-8-lakh-crores-over-three-years_86906.html" },
+    ],
     tldr: [
       "Nivex is India's first prescription-based wealth platform: rather than selling a fund, it examines what someone actually holds, diagnoses it, and hands back a written prescription: numbered steps, each with a reason, in plain language.",
       "I led the design end to end: the information architecture, the five stages from financial data to diagnosis to prescription to execution to monitoring, and the diagnosis view that reads income, expenses, loans, insurance, goals and investments as one picture instead of six screens.",
@@ -72,6 +77,11 @@ export const projects: Project[] = [
     brand: "#434ce6",
     shortName: "Nivex",
     title: "Prescription, not product",
+    brief: {
+      problem: "Investors were sold more funds instead of being told what was wrong with what they already held.",
+      did: "Led design end to end: IA, the five-stage journey, the diagnosis view, and investor, advisor and admin surfaces as coded React prototypes.",
+      outcome: "One finishable path from data to prescription, on a 25-component, WCAG 2.1 AA system.",
+    },
     category: "Fintech",
     summary:
       "India's first prescription-based wealth platform: the journey, the diagnosis view and the whole clickable product (investor, advisor and admin) for a service that examines a portfolio instead of selling to it.",
@@ -196,6 +206,10 @@ export const projects: Project[] = [
   },
   {
     slug: "sparrow-api-workspace",
+    marketStats: [
+      { metric: "82%", label: "of organisations now work at least partly API-first", source: "Postman State of the API 2025, via Nordic APIs", href: "https://nordicapis.com/a-deep-dive-into-the-state-of-the-api-2025/" },
+      { metric: "93%", label: "of API teams report trouble collaborating on APIs", source: "Postman State of the API 2025, via Nordic APIs", href: "https://nordicapis.com/a-deep-dive-into-the-state-of-the-api-2025/" },
+    ],
     tone: "slate",
     // Sampled off Sparrow's own Send button. 4.38:1 raw, which the `v3-brand`
     // deepening in globals.css takes past AA for the body-sized links that use
@@ -203,6 +217,11 @@ export const projects: Project[] = [
     brand: "#316cf5",
     shortName: "Sparrow",
     title: "A clearer workspace for working with APIs",
+    brief: {
+      problem: "Requests, collections, flows and team sharing had no predictable place to live across four protocols.",
+      did: "Restructured the product around hubs and workspaces, designed the marketplace, and kept one design across desktop and web.",
+      outcome: "A dense developer tool that stays navigable as teams and workspaces grow.",
+    },
     category: "Developer Tools",
     summary:
       "An API platform for developers, organised around hubs and workspaces, with a marketplace so common API work starts from something that already exists.",
@@ -328,6 +347,11 @@ export const projects: Project[] = [
     tone: "slate",
     shortName: "RiseAngle",
     title: "11 steps to 4, conversion doubled",
+    brief: {
+      problem: "An 11-step creation flow lost most users before they ever reached the paywall.",
+      did: "Audited analytics first, then rebuilt creation as a 4-step mobile-first wizard with a live AI preview, a visual template gallery and a softer paywall.",
+      outcome: "Free-to-paid conversion 4.2% → 9.1%; flow completion 42% → 79%.",
+    },
     category: "SaaS",
     summary:
       "A redesign of an AI faceless-video SaaS that took free-to-paid conversion from 4.2% to 9.1% by rebuilding the creation flow mobile-first.",
@@ -477,6 +501,10 @@ export const projects: Project[] = [
   },
   {
     slug: "wizlo-form-builder",
+    marketStats: [
+      { metric: "2 hrs", label: "of EHR and desk work for every hour clinicians spend with patients", source: "Sinsky et al., Annals of Internal Medicine 2016, via Healio", href: "https://www.healio.com/primary-care/practice-management/news/online/%7B063320c8-6954-45b8-89dc-3b293772d441%7D/physicians-spend-nearly-50-of-their-time-on-ehr-desk-work" },
+      { metric: "49%", label: "of a physician's office day goes to EHR and desk work, vs 27% face to face", source: "Sinsky et al., Annals of Internal Medicine 2016, via Healio", href: "https://www.healio.com/primary-care/practice-management/news/online/%7B063320c8-6954-45b8-89dc-3b293772d441%7D/physicians-spend-nearly-50-of-their-time-on-ehr-desk-work" },
+    ],
     tldr: [
       "Wizlo is a clinical EMR for telehealth clinics running care paths like GLP-1 weight management, TRT and HRT. Its form builder is how a clinic encodes intake: the PHI a form collects, the eligibility gates that decide who can be treated, and the order it terminates in.",
       "I owned the 2.0 redesign end to end, in coded prototypes rather than static frames: the wizard-to-canvas foundation, the forms hub, and the whole logic and AI layer. Colleagues took the later refinement passes, the sprint-scoped template gallery and the Brand Studio integration.",
@@ -484,11 +512,11 @@ export const projects: Project[] = [
     ],
     snapshot: {
       business:
-        "Wizlo is a clinical and patient SaaS (EMR and telehealth) used by clinics running care paths like TRT, HRT, GLP-1 weight management and hair restoration, across a provider app and a patient portal. Forms are its front door: intake is the first clinical touchpoint, collecting PHI, medical and medication history, contraindications and consent before a patient ever speaks to a clinician.",
+        "Wizlo is an EMR for telehealth clinics (GLP-1, TRT, HRT). Its intake form is the first clinical touchpoint: PHI, medical history and consent, before a patient meets a clinician.",
       challenge:
-        "Forms 1.0 was a step-by-step wizard. Editing a field opened a popup; authoring a rule opened another, so the form was never on screen beside the thing being changed. That was merely slow for a ten-field form and actively risky for a fourteen-page branching intake, because conditional logic in a telehealth clinic is not cosmetic: a rule like \"history of thyroid carcinoma → disqualify\" is a clinical safety gate, and it was the most buried thing in the product.",
+        "Forms 1.0 was a wizard of popups: the form was never visible beside the edit. Eligibility rules, the clinical safety gates, were the most buried thing in the product.",
       solution:
-        "I replaced the wizard with a three-panel direct-manipulation canvas, then built the logic layer twice over: inline rule cards in the properties panel that read back as plain English, and a full-screen node canvas where every page is a node and every arrow a real condition, with a simulate mode that walks a branch as a patient would, before anything is published.",
+        "I replaced the wizard with a three-panel canvas, plain-English rule cards, and a node view that draws every branch and lets you walk it as a patient before publishing.",
       impact: [
         "Field and rule editing left dialogs entirely: the form stays visible while you change it, and edits render live on the canvas.",
         "A form's branching became visible and testable: the canvas draws every condition, and simulate mode evaluates them live without publishing.",
@@ -545,6 +573,11 @@ export const projects: Project[] = [
     brand: "#713add",
     shortName: "Wizlo",
     title: "Modal wizard to a visible decision tree",
+    brief: {
+      problem: "Clinics authored clinical intake, eligibility gates and checkout through a modal wizard that hid the logic.",
+      did: "Owned the Form Builder 2.0 redesign, exploring ~13 prototype variants to turn hidden logic into a visible decision tree.",
+      outcome: "Non-technical clinics can build and check an intake form without an engineer, with zero modal dialogs.",
+    },
     category: "Healthcare",
     summary:
       "Owned the Form Builder 2.0 redesign for a clinical EMR: the tool a non-technical clinic uses to author intake, encode its eligibility gates and take an order, without an engineer.",
@@ -583,58 +616,58 @@ export const projects: Project[] = [
     client: "Wizlo",
     duration: "~13 prototype variants across 8 tickets",
     problem:
-      "In async telehealth the intake form is not a CMS nicety, it is the clinical encounter. It collects PHI, medical and medication history and contraindications; it encodes the eligibility gates that decide whether a patient can be treated at all; it carries product, subscription and bundle fields; and it terminates in checkout and identity verification. Every clinic needs a different one, per care path, per state's regulations, per protocol, and clinics are not engineers. If authoring a form needs a developer, the platform does not scale, which puts this tool's usability directly on the critical path for onboarding a clinic. Around a quarter of users are tenant admins, and the internal onboarding team lives in this interface daily. Forms 1.0 was a step-by-step wizard: slow for the common case of a five-to-fifteen field form, modal-heavy so the form was never visible beside the field being edited, and with no spatial model at all for a fourteen-page branching intake. Its logic existed, show/hide, jump-to-page, required/optional, but was buried in popups, so clinics under-used it or got it wrong. The brief set targets to design against: halve median creation time, one-click field reordering, a ten-field intake published in under three minutes, and full parity with 1.0's logic. Those were the bar the work was reviewed against, not numbers measured after launch.",
+      "In async telehealth the intake form is the clinical encounter: it collects PHI, encodes the eligibility gates that decide who can be treated, and ends in checkout. Every clinic needs a different one, and clinics aren't engineers. Forms 1.0 hid all of that logic in popups, so clinics under-used it or got it wrong. The brief's targets (halve creation time, one-click reorder, a ten-field intake in under three minutes, full parity with 1.0) were the bar the design was reviewed against, not numbers measured after launch.",
     frictions: [
       {
         title: "The form was never on screen with the edit",
-        body: "Every field change happened in a dialog stacked on top of the thing it was changing. You made an edit, dismissed the popup, then looked to see what you had done: a loop that turns authoring into guess-and-check, and gets slower the longer the form gets.",
+        body: "Every edit happened in a popup on top of the form. Edit, close, look, repeat.",
       },
       {
         title: "A decision tree with no picture of itself",
-        body: "A branching intake is a graph, and the builder only ever showed it as a list. Nothing in the interface could answer whether a patient could reach a dead end, whether a disqualification gate actually fired, or whether a branch had orphaned a page. Those are the questions that matter most and were the hardest to ask.",
+        body: "A branching intake is a graph, shown as a list. Nothing could tell you if a branch dead-ended or a gate actually fired.",
       },
       {
         title: "The safety-critical part was the most buried",
-        body: "In a GLP-1 or TRT clinic the conditional rules are the eligibility gates: they decide who gets treated. That logic lived at the bottom of the deepest popup in the product, which is precisely backwards: the feature carrying clinical consequence had the worst access of anything in the tool.",
+        body: "The rules that decide who gets treated lived in the deepest popup in the product.",
       },
     ],
     constraints: [
-      "A multi-designer initiative. I authored the foundational redesign, the forms hub and the whole logic and AI layer; the later refinement passes, the sprint-scoped template gallery and the Brand Studio styling integration were colleagues' work.",
-      "Parity before expansion. The migration pass was explicitly forbidden from adding operators, because a clinician who already knew a 1.0 rule had to be able to author it in the new panel without training.",
-      "Checkout and identity verification are Gr4vy's and Vouched's interfaces at runtime, so the builder could only ever show placeholders for those pages, never a mockup that would not match production.",
-      "Clinical eligibility rides on the output. An authoring mistake here is not a cosmetic bug, so the tool had to make a wrong rule hard to write and easy to see.",
+      "Multi-designer team: I owned the redesign foundation, forms hub and the logic and AI layer; colleagues did later refinements, templates and Brand Studio.",
+      "Parity first: no new operators, so clinicians never had to relearn a rule.",
+      "Checkout and ID verification are third-party screens, shown only as placeholders.",
+      "A wrong rule is a clinical risk, so wrong rules had to be hard to write and easy to see.",
     ],
     pullQuote:
       "In a clinical context, an AI that confidently attaches an eligibility rule to the wrong question is worse than one that says it did not understand.",
     approach: [
       {
         title: "Wizard to three panels",
-        body: "Palette and page list on the left, the form as the patient will see it in the centre, contextual properties for whatever is selected on the right. Selecting a field on the canvas populates the right panel and edits render live; drag from the palette to add, drag within the canvas to reorder. This is the single change that converts filling in a wizard into editing a document, and it is what removed the dialogs rather than merely making them prettier.",
+        body: "Palette on the left, the live form in the centre, properties on the right. Select a field, edit it in place, watch it update. This is what removed the dialogs.",
         image: "/images/v3/wizlo/builder.6cb6d001.webp",
       },
       {
         title: "Rules that read back in plain English",
-        body: "Every field and page gets a Logic tab: numbered three-step cards of trigger, operator and value, with Show, Hide, Require, Jump to and Disqualify as actions, chained by an AND/OR toggle. Under each rule sits a live sentence restating it in plain language, so nobody has to mentally compile a condition. The value input is field-type aware: pick a radio field and it offers that field's own options, a date field gets a date picker, a checkbox defaults to \"is checked\", so a nonsense comparison cannot be authored in the first place.",
+        body: "Each field gets a Logic tab: trigger, operator, value, action. A live sentence reads the rule back in plain English, and inputs adapt to the field type so nonsense rules can't be written.",
         image: "/images/v3/wizlo/logic-rules.3227b263.webp",
       },
       {
         title: "Guardrails built into what the picker offers",
-        body: "A rule is three numbered steps (what question triggers this, when the answer is, this value), then an action: show, hide, jump to, disqualify. The guardrail is in the pickers. Choose Show and the \"which field?\" list only offers fields that come after the trigger, so a rule cannot reach backwards and depend on an answer the patient has not given yet. The constraint is enforced by what the interface hands you, not by a validation message after the fact.",
+        body: "The pickers only offer fields that come after the trigger, so a rule can never depend on an answer the patient hasn't given yet.",
         image: "/images/v3/wizlo/field-rule-editor.5086b15c.webp",
       },
       {
         title: "A canvas that shows the form's shape, and lets you walk it",
-        body: "A full-screen node view: each page a draggable node, each arrow a real condition. There is deliberately no separate \"default flow\" concept: sequential connections are seeded on first open and share the same code path as conditional ones, so grey means unconfigured sequence and violet means conditional, and the author holds one mental model instead of two. Nodes expand to show their fields with a badge counting the rules each carries, and one page can branch to several targets, evaluated in order, first match wins. Simulate mode is the payoff: walk the form as a patient from inside the canvas, with the active node highlighted and visibility evaluated live against the real conditions. You author an eligibility gate and confirm it fires without publishing to find out, which, for a rule that decides who gets treated, is the difference between a design and a safeguard.",
+        body: "Every page is a node, every arrow a real condition. Simulate mode walks the form as a patient, so you can confirm an eligibility gate fires before publishing.",
         image: "/images/v3/wizlo/logic-canvas.f01db6b1.webp",
       },
       {
         title: "AI that refuses to guess",
-        body: "The assistant can build a form from a description, add a field, add a page or author a condition. The part I would defend hardest is what it does when it cannot. Asked something it cannot parse, it says so and names what it does handle, rather than attaching a rule to the nearest question it can find. In a tool where a condition decides whether a patient is eligible for treatment, an AI that is confidently wrong is worse than one that admits it did not understand. Everything it does produce lands in the same editable primitives a human would have made, so nothing it touches is a black box.",
+        body: "The AI can build forms and rules from a description. When it can't understand a request, it says so instead of attaching a rule to the wrong question.",
         image: "/images/v3/wizlo/ai-refusal.1683a2b1.webp",
       },
       {
         title: "Parity as the migration plan, and rollback as a requirement",
-        body: "A dedicated pass mirrored 1.0's operators and actions into the new shell with no additions, so the redesign asked nobody to relearn a rule they already knew; it only removed the friction around it. Alongside it, version history keeps named snapshots of full form state with save, restore and rename, and takes an automatic backup of the current state before any restore. For a form that gates clinical eligibility, being able to undo a bad edit is a safety requirement rather than a convenience.",
+        body: "1.0's rules map across unchanged, and version history with auto-backup means any bad edit can be undone.",
         image: "/images/v3/wizlo/version-history.b93a1ca6.webp",
       },
     ],
@@ -657,21 +690,21 @@ export const projects: Project[] = [
       {
         metric: "0 dialogs",
         label:
-          "To edit a field or author a rule. Forms 1.0 opened a popup for each, so the form was never visible beside the change being made to it",
+          "To edit a field or write a rule. 1.0 opened a popup for each",
       },
       {
         metric: "8 operators",
         label:
-          "In the inline rule builder, with the value input adapting to the trigger field's type (a radio field offers its own options, a date field a date picker), so a nonsense comparison cannot be authored",
+          "In the rule builder, with inputs that adapt to each field type",
       },
       {
         metric: "99 fields",
         label:
-          "The deliberate stress-test template: 14 pages of branching, jump-to-page and disqualification, so the logic system could be walked end to end before any clinic had to build one",
+          "In a 14-page stress-test template, used to walk the whole logic system end to end",
       },
     ],
     outcome:
-      "Handed off dev-ready as coded prototypes rather than static frames: every variant is genuinely usable (the CTA opens the modal, the toast fires, the branch evaluates), and each is prefixed with the ticket it came from, so any prototype maps back to the story that asked for it. What I can report is the state of the work at handoff, not its effect in production. The brief set four targets, halve median form-creation time, reorder a field in one click, publish a ten-field intake in under three minutes, and full parity with 1.0's logic. Parity I can show you in the operator mapping. The other three were the bar the design was reviewed against, and I have no post-launch measurement to say whether it cleared them. When that data exists it belongs in this section; until then, claiming it would be fiction.",
+      "Handed off as working coded prototypes, each mapped to its ticket. These are results at handoff, not production metrics: parity with 1.0 is proven; the brief's speed targets haven't been measured after launch yet.",
     disagreement: {
       decision:
         "Making the AI flow builder return nothing when no field clears the match threshold, rather than falling back to the closest field it can find. An author who types a vague rule gets told it was not understood, instead of getting a rule attached to a question they did not mean.",
@@ -682,10 +715,141 @@ export const projects: Project[] = [
       result: "",
     },
     learnings: [
-      "There are no post-launch numbers here, and I would rather say so than invent them. The metrics in the brief were design targets; what I can evidence is the work itself: the operator set, the parity mapping, the stress-test template. A case study that presents a goal as a result makes the same mistake as a form that presents a guess as an answer.",
-      "The safety-critical feature was the buried one. Logic carried the clinical eligibility gates and lived in the deepest popup in the product, which taught me to read information architecture as a safety concern and not only a convenience one.",
-      "Parity is a feature. The instinct on a redesign is to improve everything, and the migration pass deliberately added no operators. Asking a clinician to relearn a rule they already knew would have cost more than the new capability was worth.",
-      "Refusing to guess is a design decision. The most defensible thing in the AI layer is what it declines to do, and that only reads as rigour rather than as a bug because the interface says plainly that it did not understand.",
+      "Say what you can prove. The brief's metrics were targets, so I report the work itself, not invented results.",
+      "Information architecture can be a safety issue: the most critical feature was the most hidden.",
+      "Parity is a feature. Not making clinicians relearn rules was worth more than new capability.",
+      "Refusing to guess is a design decision, as long as the UI says clearly that it didn't understand.",
+    ],
+  },
+  {
+    slug: "wizlo-async-video-consult",
+    tldr: [
+      "Some treatments need a provider consultation before prescribing, and booking a live appointment slows both sides down.",
+      "I designed an async video consult end to end as working React prototypes: patients record five short answers on their phone, and a licensed provider reviews them inside the existing encounter page and replies by video.",
+      "A human makes every clinical decision. 50+ prototype states cover the edge cases, from a blocked camera to an upload that fails offline.",
+    ],
+    snapshot: {
+      business:
+        "Wizlo is an EMR for telehealth clinics running care paths like GLP-1 weight management, TRT and HRT, across a patient portal and a clinic app.",
+      challenge:
+        "Some treatments need a provider to see the patient before prescribing. A live visit means finding a slot that suits both, so orders stall waiting on a calendar.",
+      solution:
+        "A consultation the patient records on their own time, as a task in My Care, and a provider reviews later inside the encounter they already use, replying by video for every outcome.",
+      impact: [],
+    },
+    flowChange: {
+      before: [
+        "Pay for treatment",
+        "Book a live visit",
+        "Wait for a shared slot",
+        "Meet the provider",
+        "Order moves forward",
+      ],
+      after: [
+        "Pay, then an eligibility check",
+        "Record 5 answers when it suits you",
+        "Provider reviews in the encounter",
+        "Video reply for every outcome",
+        "Approved orders release automatically",
+      ],
+    },
+    tone: "violet",
+    brand: "#713add",
+    shortName: "Wizlo Video Consult",
+    title: "Async video consults, no appointment needed",
+    highlight: "Vibe coded",
+    brief: {
+      problem: "Treatments that need a provider consultation stalled waiting for a live appointment slot.",
+      did: "Designed patient and provider flows end to end as coded prototypes, including 50+ states and edge cases.",
+      outcome: "Patients record on their own time; providers review and reply by video, and a human makes every decision.",
+    },
+    category: "Healthcare",
+    summary:
+      "An async video consultation for a telehealth EMR: patients record short answers on their phone, providers review and reply by video inside the encounter.",
+    description: [
+      "Patients record five short video answers on their own time; a licensed provider reviews them inside the existing encounter page and replies by video.",
+    ],
+    role: "Product Designer",
+    year: "2026",
+    tags: ["Healthcare", "Telehealth", "Mobile-First", "Video"],
+    tools: ["figma", "claude"],
+    featured: false,
+    coverImage: "/images/v3/wizlo-video/v-review.webp",
+    coverVideo: "/images/v3/wizlo-video/cover-loop.dbfef45b.mp4",
+    coverPoster: "/images/v3/wizlo-video/cover-loop-poster.3dbeb7eb.webp",
+    client: "Wizlo",
+    duration: "1 week, Nov 2026 · patient and provider flows",
+    problem:
+      "Some treatments need a provider to see the patient before prescribing. A live visit adds scheduling friction for both sides, and the consultation becomes the slowest step in the order.",
+    frictions: [
+      {
+        title: "A calendar in the way",
+        body: "Patient and provider both had to be free at the same moment, for a conversation that is mostly the patient answering standard questions.",
+      },
+      {
+        title: "Two very different users",
+        body: "Patients are on a phone, often recording for the first time. Providers are on desktop, reviewing many cases against a deadline.",
+      },
+      {
+        title: "Video fails in the real world",
+        body: "Blocked cameras, in-app browsers, dropped connections and failed uploads. Any of them could silently lose an answer.",
+      },
+    ],
+    constraints: [
+      "Built with Raman, who polished the provider queue and layout; I designed the flows and built most of the prototype.",
+      "A human provider makes every decision. AI never diagnoses.",
+      "Fit inside the existing patient portal and encounter page rather than adding new products.",
+      "Question, consent and status copy are placeholders until Clinical Ops and Legal sign off.",
+    ],
+    pullQuote: "The consultation is a task, not an appointment: no time slot, and no one waiting on the other.",
+    approach: [
+      {
+        title: "A task in My Care, not an appointment",
+        body: "After payment and an eligibility check, the consultation appears as the first action item, with the same link sent by SMS and email. Start now or do it later.",
+        image: "/images/v3/wizlo-video/p-myCare.webp",
+      },
+      {
+        title: "Consent and camera in one step",
+        body: "Ticking the recording consent triggers the browser's camera prompt right there, so there is no separate permissions screen to get lost on.",
+        image: "/images/v3/wizlo-video/p-consultIntro.webp",
+      },
+      {
+        title: "Five questions, one at a time",
+        body: "Each answer is up to two minutes, with unlimited retakes. Keeping an answer uploads it in the background and moves straight to the next question.",
+        image: "/images/v3/wizlo-video/p-record.webp",
+      },
+      {
+        title: "Nothing is lost when the network is",
+        body: "Offline answers stay on the device and upload on reconnect. Sending waits until every answer is stored, so a patient is never told 'you're all set' when they are not.",
+        image: "/images/v3/wizlo-video/p-offline.webp",
+      },
+      {
+        title: "Review inside the encounter providers already use",
+        body: "Video consults sit at the top of the queue with a small video icon. The encounter opens on a Video answers tab beside the chart, with transcript, captions and playback speed.",
+        image: "/images/v3/wizlo-video/v-review.webp",
+      },
+      {
+        title: "A video reply for every outcome",
+        body: "Approve, deny, ask for more information or book a live visit: the provider records a short reply each time, and the patient sees it in My Care with a clear status timeline.",
+        image: "/images/v3/wizlo-video/p-statusApproved.webp",
+      },
+    ],
+    gallery: [
+      "/images/v3/wizlo-video/v-queue.webp",
+      "/images/v3/wizlo-video/p-review.webp",
+      "/images/v3/wizlo-video/p-submitted.webp",
+    ],
+    results: [
+      { metric: "50+ states", label: "Designed and clickable, across patient and provider, edge cases included" },
+      { metric: "0 slots", label: "To book: the consultation happens on the patient's time, not a shared calendar" },
+      { metric: "4 outcomes", label: "Approve, deny, more info or live visit, each with a recorded provider reply" },
+    ],
+    outcome:
+      "Delivered as working coded prototypes for client review over two feedback rounds. It is not in production yet, so there are no usage numbers; the open decisions on copy, consent and identity sit with Clinical Ops and Legal.",
+    learnings: [
+      "Treat it as a task, not an appointment. That one reframe removed the calendar and shaped every screen after it.",
+      "Design the failures first. Most of the work was making sure a dropped connection could never lose an answer.",
+      "Client feedback reshaped the flow twice in a week, and coded prototypes made each round quick to show and test.",
     ],
   },
   {
@@ -742,6 +906,11 @@ export const projects: Project[] = [
     tone: "mist",
     shortName: "Saral Funding",
     title: "Spreadsheets and WhatsApp to one CRM",
+    brief: {
+      problem: "Loan leads lived in spreadsheets and WhatsApp, so follow-ups and deals slipped.",
+      did: "Designed a CRM end to end with separate action-first staff views and data-first admin views, plus an integrated WhatsApp inbox.",
+      outcome: "+5% sales soon after launch, with the whole pipeline in one system.",
+    },
     category: "Fintech",
     summary:
       "A purpose-built CRM for a fintech loan-consolidation sales team, unifying pipeline management with an integrated WhatsApp inbox.",
@@ -874,6 +1043,11 @@ export const projects: Project[] = [
     tone: "navy",
     shortName: "Mythic Boost",
     title: "Chat and checkout, rebuilt for trust",
+    brief: {
+      problem: "Players paid upfront to strangers, through the two weakest screens in the product: chat and checkout.",
+      did: "Redesigned chat and checkout so players can see what they are buying and what happens after they pay.",
+      outcome: "The two highest-stakes moments rebuilt for trust, without stranding orders already in flight.",
+    },
     category: "Gaming",
     summary:
       "Fixed chat and payments UX for a US game-boosting marketplace to rebuild trust and drive conversions.",

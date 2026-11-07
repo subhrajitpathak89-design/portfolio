@@ -43,12 +43,11 @@ function useLocalTime() {
     const fmt = new Intl.DateTimeFormat("en-US", {
       hour: "numeric",
       minute: "2-digit",
-      second: "2-digit",
       timeZone: "Asia/Kolkata",
     });
-    const tick = () => setTime(`${fmt.format(new Date())} IST`);
+    const tick = () => setTime(fmt.format(new Date()));
     tick();
-    const id = setInterval(tick, 1000);
+    const id = setInterval(tick, 15000);
     return () => clearInterval(id);
   }, []);
   return time;
@@ -101,41 +100,52 @@ export function Sidebar() {
         </nav>
       </div>
 
-      <div className="flex flex-col gap-3">
-        <p className="font-mono text-[11px] tabular-nums text-v3-muted" aria-live="off">
-          {time ?? " "}
-        </p>
-        <div className="flex items-center gap-3 text-v3-muted">
-          {socials.map(({ s, Icon }) => (
+      <div className="flex flex-col gap-2">
+        <div className="rounded-2xl border border-v3-line bg-v3-surface p-1.5">
+          <div className="flex items-center justify-between px-2 py-1.5">
+            <span className="inline-flex items-center gap-2 font-grotesk text-[12px] text-v3-muted">
+              <span className="relative flex size-1.5">
+                <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500 opacity-60" />
+                <span className="relative size-1.5 rounded-full bg-emerald-500" />
+              </span>
+              Local time
+            </span>
+            <span className="font-grotesk text-[12px] tabular-nums text-v3-fg" aria-live="off">
+              {time ? `${time} IST` : " "}
+            </span>
+          </div>
+          <div className="mt-1 grid grid-cols-4 gap-1 border-t border-v3-line pt-1.5">
+            {socials.map(({ s, Icon }) => (
+              <a
+                key={s.platform}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                title={s.label}
+                className="flex h-8 items-center justify-center rounded-lg text-v3-muted transition-colors duration-200 hover:bg-v3-chip hover:text-v3-fg"
+              >
+                <Icon aria-hidden className="size-[15px]" />
+                <span className="sr-only">{s.label}</span>
+              </a>
+            ))}
             <a
-              key={s.platform}
-              href={s.href}
-              target="_blank"
-              rel="noreferrer noopener"
-              title={s.label}
-              className="transition-colors duration-200 hover:text-v3-fg"
+              href={`mailto:${profile.email}`}
+              title="Email"
+              className="flex h-8 items-center justify-center rounded-lg text-v3-muted transition-colors duration-200 hover:bg-v3-chip hover:text-v3-fg"
             >
-              <Icon aria-hidden className="size-4" />
-              <span className="sr-only">{s.label}</span>
+              <Mail aria-hidden className="size-[15px]" strokeWidth={2} />
+              <span className="sr-only">Email</span>
             </a>
-          ))}
-          <a
-            href={`mailto:${profile.email}`}
-            title="Email"
-            className="transition-colors duration-200 hover:text-v3-fg"
-          >
-            <Mail aria-hidden className="size-4" strokeWidth={2} />
-            <span className="sr-only">Email</span>
-          </a>
+          </div>
         </div>
-        <div className="flex items-center gap-2 pt-1">
-          <ThemeToggle />
+        <div className="flex items-center gap-2">
           <a
             href={`mailto:${profile.email}`}
-            className="rounded-full bg-v3-accent px-4 py-2 font-grotesk text-[13px] font-medium tracking-[-0.005em] text-v3-bg transition-colors duration-200 hover:bg-v3-accent-bright"
+            className="flex h-10 flex-1 items-center justify-center rounded-full bg-v3-accent font-grotesk text-[13px] font-medium tracking-[-0.005em] text-v3-bg transition-colors duration-200 hover:bg-v3-accent-bright"
           >
             Get in touch
           </a>
+          <ThemeToggle />
         </div>
       </div>
     </aside>

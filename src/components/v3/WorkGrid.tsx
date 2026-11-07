@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BuildTag } from "@/components/v3/BuildTag";
 import { LoopVideo } from "@/components/v3/LoopVideo";
 import type { Project } from "@/types";
 
@@ -36,24 +37,18 @@ export function WorkGrid({ projects, total }: { projects: Project[]; total: numb
             >
               <Cover project={project} />
 
-              <div className="mt-4 flex items-baseline justify-between gap-4">
-                <h3 className="truncate font-hero-serif text-[26px] font-light leading-tight tracking-[-0.01em] text-v3-fg">
-                  {project.shortName ?? project.title}
-                </h3>
-                <p className="shrink-0 font-mono text-[11px] uppercase tracking-[0.06em] text-v3-fg">
-                  {project.category}
+              {/* Lead with what changed, not the client's name: a hiring
+                  manager skimming the grid is looking for the problem solved
+                  and the designer's part in it. The brand drops to context. */}
+              <div className="mt-4 flex items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.06em] text-v3-muted">
+                <p className="truncate">
+                  {project.category} · {project.year}
                 </p>
+                <span className="shrink-0 transition-colors duration-200 group-hover/cover:text-v3-fg">[View]</span>
               </div>
-
-              <div className="mt-2 flex items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.06em] text-v3-muted">
-                <p className="flex min-w-0 items-center gap-2">
-                  <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-v3-muted" />
-                  <span className="truncate">{project.tags.slice(0, 3).join(", ")}</span>
-                </p>
-                <span className="shrink-0 transition-colors duration-200 group-hover/cover:text-v3-fg">
-                  [View]
-                </span>
-              </div>
+              <h3 className="mt-1.5 font-hero-serif text-[20px] font-light leading-snug tracking-[-0.01em] text-v3-fg">
+                {project.title}
+              </h3>
             </Link>
           </li>
         ))}
@@ -70,6 +65,7 @@ function Cover({ project }: { project: Project }) {
       className="relative aspect-[16/10] overflow-hidden"
       style={{ background: project.brand ?? "var(--v3-chip)" }}
     >
+      {project.highlight && <BuildTag label={project.highlight} className="absolute left-3 top-3 z-10" />}
       {project.coverVideo ? (
         <LoopVideo
           src={project.coverVideo}
