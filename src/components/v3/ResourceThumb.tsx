@@ -47,41 +47,6 @@ export function ResourceThumb({ kind }: { kind: ResourceCard["thumb"] }) {
           </div>
         </Window>
       );
-    case "refero":
-      return (
-        <Window className="bg-[#111]">
-          <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
-            <span className="size-2 rounded-full bg-white" />
-            <div className="h-4 flex-1 rounded-md bg-white/10 px-2 text-[8px] leading-4 text-white/40">Search “onboarding”</div>
-          </div>
-          <div className="grid grid-cols-3 gap-2 p-3">
-            {["bg-[#f5f1ea]", "bg-[#1f3b2d]", "bg-[#e8ecff]", "bg-[#2a2a2a]", "bg-[#ffe7d6]", "bg-[#dfe8e1]"].map((c, i) => (
-              <div key={i} className={`aspect-[3/4] rounded-md ${c} p-1.5`}>
-                <Bar w="60%" className={i % 2 ? "bg-white/40" : "bg-black/20"} />
-                <div className={`mt-1.5 h-6 rounded ${i % 2 ? "bg-white/15" : "bg-black/10"}`} />
-              </div>
-            ))}
-          </div>
-        </Window>
-      );
-    case "mobbin":
-      return (
-        <div className="absolute inset-x-0 bottom-0 top-[16%] flex items-start justify-center gap-3 overflow-hidden">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="h-[260px] w-[110px] shrink-0 rounded-[20px] border-[3px] border-[#2a2a2a] bg-white p-2 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.6)]"
-              style={{ marginTop: Math.abs(i - 1) * 24 }}
-            >
-              <div className="mx-auto h-1.5 w-8 rounded-full bg-black/80" />
-              <Bar w="50%" className="mt-3 bg-black/70" />
-              <Bar w="80%" className="mt-1.5 bg-black/15" />
-              <div className={`mt-3 h-14 rounded-lg ${["bg-[#ffd8c2]", "bg-[#c9e4ff]", "bg-[#d8f5d0]"][i]}`} />
-              <div className="mt-2 h-5 rounded-full bg-black" />
-            </div>
-          ))}
-        </div>
-      );
     case "lawsofux":
       return (
         <Window className="bg-[#f2efe8] p-4">
@@ -153,6 +118,21 @@ export function ResourceThumb({ kind }: { kind: ResourceCard["thumb"] }) {
               </div>
             ))}
           </div>
+        </Window>
+      );
+    case "kryptonite":
+    case "curated":
+    case "refero":
+    case "mobbin":
+      return (
+        <Window className="bg-black">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`/images/v3/${kind}/home.png`}
+            alt=""
+            // Refero's capture has a sidebar and promo popup on the left; skip past them to the headline.
+            className={`h-full w-auto max-w-none object-cover object-left-top ${kind === "refero" ? "-ml-[125px]" : kind === "mobbin" ? "-ml-[135px]" : ""}`}
+          />
         </Window>
       );
     case "godly":

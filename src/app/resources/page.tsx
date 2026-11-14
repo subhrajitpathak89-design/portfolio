@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { RiOpenaiFill } from "react-icons/ri";
 import { SiBlender, SiClaude, SiFigma, SiFramer, SiNotion } from "react-icons/si";
 import { profile } from "@/content/profile";
-import { ResourceThumb } from "@/components/v3/ResourceThumb";
+import { ResourceCardItem } from "@/components/v3/ResourceCardItem";
 import { favouriteTools, resourceCards, resourceGroups } from "@/content/resources";
 
 export const metadata: Metadata = {
@@ -42,26 +42,7 @@ export default function ResourcesPage() {
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {resourceCards.map((card) => (
             <li key={card.title}>
-              <MaybeLink
-                href={card.href}
-                className="block"
-              >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-v3-line bg-v3-surface transition-colors group-hover:border-v3-muted/50">
-                  <div className="relative z-10 flex items-start justify-between p-6">
-                    <h2 className="font-hero-serif text-2xl font-light leading-snug tracking-[-0.01em] text-v3-fg">
-                      {card.title}
-                    </h2>
-                    <ArrowUpRight aria-hidden className="mt-1.5 size-4 text-v3-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </div>
-                  <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:-translate-y-2">
-                    <div className="absolute inset-x-0 bottom-0 top-[22%]">
-                      <ResourceThumb kind={card.thumb} />
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-3 text-[11px] uppercase tracking-[0.08em] text-v3-muted">{card.tag}</p>
-                <p className="mt-1 text-[13px] leading-relaxed text-v3-muted">{card.note}</p>
-              </MaybeLink>
+              <ResourceCardItem card={card} />
             </li>
           ))}
         </ul>

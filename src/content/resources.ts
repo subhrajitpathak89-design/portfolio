@@ -5,15 +5,15 @@
 export type ResourceItem = { title: string; note: string; href: string };
 export type ResourceCard = ResourceItem & {
   tag: string;
-  thumb: "reactbits" | "refero" | "mobbin" | "lawsofux" | "shadcn" | "magicui" | "v0" | "godly";
+  thumb: "kryptonite" | "curated" | "reactbits" | "refero" | "mobbin" | "lawsofux" | "shadcn" | "magicui" | "v0" | "godly";
 };
 export type ResourceGroup = { heading: string; items: ResourceItem[] };
 
 export const resourceCards: ResourceCard[] = [
-  { title: "React Bits", tag: "Components", thumb: "reactbits", href: "https://reactbits.dev", note: "Animated text, backgrounds and interactions you can paste into a React project." },
+  { title: "Kryptonite UI", tag: "My build · Components", thumb: "kryptonite", href: "https://kryptonite-ui.vercel.app/", note: "85+ free, open-source animated React components I designed and shipped." },
+  { title: "Curated", tag: "Inspiration", thumb: "curated", href: "https://curated.design/", note: "Hand-picked websites and real sections to pull from when starting a page." },
   { title: "Refero", tag: "References", thumb: "refero", href: "https://refero.design", note: "Searchable screens and flows from real web and mobile products." },
   { title: "Mobbin", tag: "Patterns", thumb: "mobbin", href: "https://mobbin.com", note: "Real-app pattern library I check before designing a flow." },
-  { title: "v0", tag: "Vibe coding", thumb: "v0", href: "https://v0.dev", note: "Describe a UI, get working React. Great for turning a sketch into a prototype." },
 ];
 
 /** Keys into the icon map on the resources page. */

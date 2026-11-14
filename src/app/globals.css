@@ -754,3 +754,13 @@ html[data-reveal] [data-reveal-item]:not(.is-revealed) {
   35% { transform: translate(-28px, -4px); }
   70% { transform: translate(-10px, 6px); }
 }
+
+/* Web design showcase: the active design's details fade up when they change. */
+@keyframes v3-webdesign-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.v3-webdesign-in { animation: v3-webdesign-in 0.45s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .v3-webdesign-in { animation: none; }
+}
