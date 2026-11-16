@@ -67,7 +67,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="flex size-9 items-center justify-center rounded-full border border-v3-line bg-v3-surface text-v3-muted transition-colors duration-200 hover:border-v3-muted hover:text-v3-fg"
+      className="flex size-8 shrink-0 items-center justify-center rounded-lg text-v3-muted transition-colors duration-150 hover:bg-v3-chip hover:text-v3-fg"
     >
       {/* Both icons are always mounted and the class hides one, rather than
           swapping the node: replacing the only child on click drops the focus

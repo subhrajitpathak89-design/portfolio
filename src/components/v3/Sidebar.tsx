@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import type { IconType } from "react-icons";
 import { RiLinkedinFill, RiTwitterXFill } from "react-icons/ri";
 import { SiGithub } from "react-icons/si";
@@ -18,16 +18,21 @@ import { profile } from "@/content/profile";
  * can tell a scroll from a route change before clicking.
  */
 const GROUPS = [
-  [
+  {
+    label: "Overview",
+    links: [
     { label: "Home", href: "/#home" },
     { label: "Resources", href: "/resources" },
-  ],
-  [
+    ],
+  },
+  {
+    label: "Work",
+    links: [
     { label: "About", href: "/about" },
-    { label: "Work", href: "/#work" },
     { label: "Case studies", href: "/case-studies" },
     { label: "Playground", href: "/playground" },
-  ],
+    ],
+  },
 ];
 
 const MARKS: Partial<Record<string, IconType>> = {
@@ -62,32 +67,96 @@ export function Sidebar() {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
+  // The active pill is one element that travels between links. Its leading
+  // edge springs ahead and the trailing edge catches up, so it stretches
+  // across the gap and settles — the "gooey" move.
+  const navRef = useRef<HTMLElement>(null);
+  const linkRefs = useRef(new Map<string, HTMLAnchorElement>());
+  const [pill, setPill] = useState<{ top: number; bottom: number; down: boolean; animate: boolean } | null>(null);
+  const activeHref = GROUPS.flatMap((g) => g.links).find((l) => isActive(l.href))?.href;
+
+  useLayoutEffect(() => {
+    const measure = (animate: boolean) => {
+      const nav = navRef.current;
+      const el = activeHref ? linkRefs.current.get(activeHref) : undefined;
+      if (!nav || !el) return setPill(null);
+      const n = nav.getBoundingClientRect();
+      const r = el.getBoundingClientRect();
+      const top = r.top - n.top;
+      const bottom = n.bottom - r.bottom;
+      setPill((prev) => ({ top, bottom, down: prev ? top > prev.top : true, animate: animate && !!prev }));
+    };
+    measure(true);
+    const onResize = () => measure(false);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [activeHref]);
+
+  const lead = "300ms cubic-bezier(0.34, 1.4, 0.64, 1)";
+  const trail = "520ms cubic-bezier(0.65, 0, 0.35, 1) 40ms";
+  const pillStyle = pill
+    ? {
+        top: pill.top,
+        bottom: pill.bottom,
+        transition: pill.animate
+          ? `top ${pill.down ? trail : lead}, bottom ${pill.down ? lead : trail}, opacity 200ms`
+          : "none",
+      }
+    : { opacity: 0 };
+
   const socials = profile.socials
     .filter((s) => s.href && s.href !== "#" && MARKS[s.platform])
     .map((s) => ({ s, Icon: MARKS[s.platform] as IconType }));
 
-  return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-[var(--sidebar-w)] flex-col border-r border-v3-line bg-v3-bg justify-between px-7 py-8 lg:flex">
-      <div>
-        <Link
-          href="/#home"
-          className="inline-block font-hero-serif text-xl leading-tight tracking-[-0.02em] text-v3-fg transition-opacity duration-200 hover:opacity-70"
-        >
-          {profile.name}
-        </Link>
+  const item =
+    "flex h-8 items-center rounded-lg px-2.5 font-grotesk text-[13.5px] tracking-[-0.005em] transition-colors duration-150";
+  const icon =
+    "flex size-8 items-center justify-center rounded-lg text-v3-muted transition-colors duration-150 hover:bg-v3-chip hover:text-v3-fg";
 
-        <nav aria-label="Site sections" className="mt-12 flex flex-col gap-6">
-          {GROUPS.map((group, i) => (
-            <ul key={i} className="flex flex-col gap-1">
-              {group.map((link) => {
+  return (
+    <aside className="fixed inset-y-0 left-0 z-40 hidden w-[var(--sidebar-w)] flex-col border-r border-v3-line bg-v3-bg px-4 py-6 lg:flex">
+      {/* Identity */}
+      <Link
+        href="/#home"
+        className="group mx-2.5 block rounded-lg transition-opacity duration-150 hover:opacity-80"
+      >
+        <span className="block font-hero-serif text-[19px] leading-tight tracking-[-0.02em] text-v3-fg">
+          {profile.name}
+        </span>
+        <span className="mt-1 flex items-center gap-1.5 font-grotesk text-[12px] text-v3-muted">
+          <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />
+          {profile.role}
+        </span>
+      </Link>
+
+      {/* Navigation */}
+      <nav ref={navRef} aria-label="Site sections" className="relative mt-10 flex flex-col gap-6">
+        <span
+          aria-hidden
+          className="v3-nav-pill pointer-events-none absolute inset-x-0 rounded-lg motion-reduce:!transition-none"
+          style={pillStyle}
+        />
+        {GROUPS.map((group) => (
+          <div key={group.label}>
+            <p className="mb-1.5 px-2.5 font-grotesk text-[11px] font-medium uppercase tracking-[0.08em] text-v3-muted/70">
+              {group.label}
+            </p>
+            <ul className="flex flex-col gap-0.5">
+              {group.links.map((link) => {
                 const active = isActive(link.href);
                 return (
                   <li key={link.href}>
                     <Link
+                      ref={(el) => {
+                        if (el) linkRefs.current.set(link.href, el);
+                        else linkRefs.current.delete(link.href);
+                      }}
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className={`inline-block py-0.5 font-grotesk text-[14px] tracking-[-0.005em] transition-colors duration-200 hover:text-v3-fg ${
-                        active ? "text-v3-fg" : "text-v3-muted"
+                      className={`relative ${item} ${
+                        active
+                          ? "text-v3-fg"
+                          : "text-v3-muted hover:text-v3-fg"
                       }`}
                     >
                       {link.label}
@@ -96,57 +165,48 @@ export function Sidebar() {
                 );
               })}
             </ul>
-          ))}
-        </nav>
-      </div>
+          </div>
+        ))}
 
-      <div className="flex flex-col gap-2">
-        <div className="rounded-2xl border border-v3-line bg-v3-surface p-1.5">
-          <div className="flex items-center justify-between px-2 py-1.5">
-            <span className="inline-flex items-center gap-2 font-grotesk text-[12px] text-v3-muted">
-              <span className="relative flex size-1.5">
-                <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500 opacity-60" />
-                <span className="relative size-1.5 rounded-full bg-emerald-500" />
-              </span>
-              Local time
-            </span>
-            <span className="font-grotesk text-[12px] tabular-nums text-v3-fg" aria-live="off">
-              {time ? `${time} IST` : " "}
-            </span>
-          </div>
-          <div className="mt-1 grid grid-cols-4 gap-1 border-t border-v3-line pt-1.5">
-            {socials.map(({ s, Icon }) => (
-              <a
-                key={s.platform}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                title={s.label}
-                className="flex h-8 items-center justify-center rounded-lg text-v3-muted transition-colors duration-200 hover:bg-v3-chip hover:text-v3-fg"
-              >
-                <Icon aria-hidden className="size-[15px]" />
-                <span className="sr-only">{s.label}</span>
-              </a>
-            ))}
+        <a
+          href={profile.resume}
+          download
+          className="flex h-9 items-center justify-between rounded-lg border border-v3-line px-2.5 font-grotesk text-[13.5px] text-v3-fg transition-colors duration-150 hover:bg-v3-chip"
+        >
+          Download resume
+          <ArrowDown aria-hidden className="size-[14px] text-v3-muted" strokeWidth={2} />
+        </a>
+      </nav>
+
+      {/* Footer */}
+      <div className="mt-auto flex flex-col gap-3 border-t border-v3-line pt-4">
+        <div className="flex items-center gap-0.5">
+          {socials.map(({ s, Icon }) => (
             <a
-              href={`mailto:${profile.email}`}
-              title="Email"
-              className="flex h-8 items-center justify-center rounded-lg text-v3-muted transition-colors duration-200 hover:bg-v3-chip hover:text-v3-fg"
+              key={s.platform}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer noopener"
+              title={s.label}
+              className={icon}
             >
-              <Mail aria-hidden className="size-[15px]" strokeWidth={2} />
-              <span className="sr-only">Email</span>
+              <Icon aria-hidden className="size-[15px]" />
+              <span className="sr-only">{s.label}</span>
             </a>
+          ))}
+          <div className="ml-auto">
+            <ThemeToggle />
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <a
-            href={`mailto:${profile.email}`}
-            className="flex h-10 flex-1 items-center justify-center rounded-full bg-v3-accent font-grotesk text-[13px] font-medium tracking-[-0.005em] text-v3-bg transition-colors duration-200 hover:bg-v3-accent-bright"
-          >
-            Get in touch
-          </a>
-          <ThemeToggle />
-        </div>
+        <a
+          href={`mailto:${profile.email}`}
+          className="flex h-9 items-center justify-center rounded-lg bg-v3-accent font-grotesk text-[13.5px] font-medium tracking-[-0.005em] text-v3-bg transition-colors duration-150 hover:bg-v3-accent-bright"
+        >
+          Get in touch
+        </a>
+        <p className="px-0.5 text-center font-grotesk text-[11.5px] tabular-nums text-v3-muted" aria-live="off">
+          Hyderabad · {time ? `${time} IST` : "IST"}
+        </p>
       </div>
     </aside>
   );

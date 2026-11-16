@@ -764,3 +764,6 @@ html[data-reveal] [data-reveal-item]:not(.is-revealed) {
 @media (prefers-reduced-motion: reduce) {
   .v3-webdesign-in { animation: none; }
 }
+
+/* Sidebar active pill: plain chip fill; only its motion is special. */
+.v3-nav-pill { background: var(--v3-chip); }
